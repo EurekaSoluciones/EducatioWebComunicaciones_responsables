@@ -1,0 +1,12 @@
+
+.ComunicacionAsuntoSinLeer
+{
+  font-weight: bold;
+}
+
+
+@media (max-width: 767px) {
+  .EureHideOnSmallDevices {
+    display: none;
+  }
+}
