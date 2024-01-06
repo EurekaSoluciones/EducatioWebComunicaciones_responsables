@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-  <p>Welcome to this beautiful admin panel. - responsables dsffdsa</p>
+  <p>Welcome to this beautiful admin panel. - responsables</p>
 
   <i class="far fa-chalkboard-teacher"></i>
 

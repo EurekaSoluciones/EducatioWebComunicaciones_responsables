@@ -2,6 +2,7 @@
 
 {{--@section('title', 'Educatio')--}}
 
+
 @section('content_header')
   <h6>&nbsp;</h6>
 
@@ -73,14 +74,31 @@
                     {{--                    Mas adelante meter la adminsitrativa? la automática? --}}
                     @if ($comunicacion->templateDestinatarios == "TODOS")
                       <div class="card d-inline mr-2 mb-2"><span class="p-1">Toda la institución</span></div>
-                    @else
+                    @endif
+
+                    @if ($comunicacion->templateDestinatarios == "TODOS")
                       @foreach($comunicacion->gruposSeleccion as $grupoSel)
                         @if ($grupoSel != "")
                           <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $grupoSel  }}</span></div>
                         @endif
                       @endforeach
-
                     @endif
+
+                    @if ($comunicacion->templateDestinatarios == "SELECCION")
+                      @foreach($comunicacion->destinatarios as $alumnoAux)
+                        <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $alumnoAux->nombreYApellido }}</span>
+                        </div>
+                      @endforeach
+                    @endif
+
+                    @if ($comunicacion->templateDestinatarios == "CURSO_SELECCION")
+                      @foreach($comunicacion->destinatarios as $alumnoAux)
+                        <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $alumnoAux->nombreYApellido }}</span>
+                        </div>
+                      @endforeach
+                    @endif
+
+
                   @endif
 
                 </div>
@@ -96,8 +114,6 @@
 
         <div class="">
           <div class="card-body box-profile p-lg-2 p-0">
-
-
             <div class="card card-light card-outline  ">
               <div class="card-header">
                 <div class="row">
@@ -203,11 +219,14 @@
 
                 <div class="card card-success card-outline">
                   <div class="card-header">
-                    <h5 class="card-title">Tags</h5>
+                    <h5 class="card-title">Etiquetas</h5>
                   </div>
 
                   <div class="card-body">
-                    Lista de tags
+                    @foreach($comunicacion->etiquetasA as $etiqueta)
+                      <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $etiqueta }}</span>
+                      </div>
+                    @endforeach
                   </div>
                 </div>
 

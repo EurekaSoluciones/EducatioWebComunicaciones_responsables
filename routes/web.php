@@ -4,7 +4,9 @@
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
+use App\Http\Controllers\CuentaCorrienteController;
 use App\Http\Controllers\DummyController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResponsableController;
 use Illuminate\Support\Facades\Route;
@@ -34,14 +36,13 @@ Route::post('/authenticate', [EureAuthController::class, 'authenticate'])->name(
 
 Route::group(['middleware' => 'auth'], function () {
 
+  Route::get('/', [HomeController::class,'index'])->name('home');
+  Route::get('/home', [HomeController::class,'index']);
+
   Route::get('/password', [EureAuthController::class,'password'])->name('auth.password');
   Route::post('/usuarios/password/update', [EureAuthController::class, 'passwordUpdate'])->name('auth.password.update');
 
-  Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');
-  Route::get('/dummy2', [DummyController::class, 'index2']);
-  Route::get('/dummy3', [DummyController::class, 'index3'])->name('dummy3');
-  Route::get('/dummy4', [DummyController::class, 'dropzone'])->name('dummy4');
-  Route::get('/dummy5', [DummyController::class, 'index5'])->name('dummy5');
+
 
   Route::get('notifications/show', [NotificationController::class, 'show'])->name('notificationes.show');
   Route::get('notifications/get', [NotificationController::class, 'get'])->name('notificationes.get');
@@ -56,12 +57,24 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/alumno/{alumno}/editPic', [AlumnoController::class, 'editPic'])->name('alumnos.editPic');
   Route::patch('/alumno/{alumno}/editPic', [AlumnoController::class, 'updatePic'])->name('alumnos.updatePic');
 
-
   Route::post('/upload-image', [AdjuntoController::class, 'fileStore']);
 
   Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [ComunicacionController::class, 'show'])->name('comunicaciones.show');
   Route::get('/comunicaciones/{alumno}', [ComunicacionController::class, 'indexA'])->name('comunicaciones.indexA');
   Route::post('/comunicaciones/{alumno}/filtrado', [ComunicacionController::class, 'indexAFiltered'])->name('comunicaciones.indexAFiltered');
+
+  Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
+  Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');
+
+  Route::get('/cc/{alumno}', [CuentaCorrienteController::class, 'indexA'])->name('cc.indexA');
 });
 
+Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');
+Route::get('/dummy2', [DummyController::class, 'index2']);
+Route::get('/dummy3', [DummyController::class, 'index3'])->name('dummy3');
+Route::get('/dummy4', [DummyController::class, 'dropzone'])->name('dummy4');
+Route::get('/dummy5', [DummyController::class, 'index5'])->name('dummy5');
+Route::get('/dummy/{any}', [DummyController::class, 'show', 'any']);
+
 //Route::get('/{any}', [\App\Http\Controllers\AdminGeneralController::class, 'show', 'any']);
+

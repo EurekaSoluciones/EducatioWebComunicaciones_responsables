@@ -20,6 +20,11 @@ class DummyController extends Controller
     return view('dummy.index', compact('a'));
   }
 
+  public function show($slug)
+  {
+    return view('dummy.' . $slug);
+  }
+
   public function index2()
   {
     dd(Str::slug('Presupuesto ESET + SDP-2023_230719_194604.pdf'));

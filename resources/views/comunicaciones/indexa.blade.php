@@ -3,7 +3,7 @@
 {{--@section('title', 'Educatio')--}}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 @section('content_header')
-  <h1><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 42px"> {{$alumno->Nombre}}</h1>
+  <h1><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 42px"> Comunicaciones de {{$alumno->Nombre}}</h1>
 
   {{--  @foreach ($profes as $profe)--}}
   {{-- {{dd($profe)}}--}}

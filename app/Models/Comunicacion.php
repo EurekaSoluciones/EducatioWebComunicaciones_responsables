@@ -24,6 +24,12 @@ class Comunicacion extends Model
     return str_pad($this->attributes['id'], $longitud_deseada, '0', STR_PAD_LEFT);
   }
 
+  public function getetiquetasAAttribute()
+  {
+    return explode(";", $this->etiquetas);
+  }
+
+
   public function remitente()
   {
     return $this->belongsTo(User::class, 'usuario_id');

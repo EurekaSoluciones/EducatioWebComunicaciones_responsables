@@ -8,6 +8,9 @@ use App\Models\Comunicacion;
 use App\Models\ComunicacionDestinatario;
 use App\Models\Responsable;
 use App\Models\User;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
@@ -28,9 +31,10 @@ class EureFunctions
   {
     $responsable = self::getLoggedResponsableAttribute();
 
-    foreach ($responsable->alumnos as $alumno) {
+    foreach ($responsable->alumnos as $alumno)
+    {
 
-      $hmComunicacionesSinLeerResponsableAlumno= Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
+      $hmComunicacionesSinLeerResponsableAlumno = Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
 
       $event->menu->addIn('AlumnosACargoRoot',
         [
@@ -54,9 +58,35 @@ class EureFunctions
           //'route' => 'dummy3',
           //  'icon' => 'fas fa-user',
           //'key' => 'Alumno_' . $alumno->id
-          'label' => ($hmComunicacionesSinLeerResponsableAlumno > 0)? $hmComunicacionesSinLeerResponsableAlumno : '',
+          'label' => ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '',
           'label_color' => self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno)
         ]);
+
+      // Comunicaciones del alumno
+      $event->menu->addIn('AlumnosACargoRoot',
+        [
+          'text' => "Pagos",
+          'url' => route('pagos.indexA', $alumno),
+          'icon' => 'fas fa-money-bill-wave-alt',
+          'color' => 'red',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
+
+      $event->menu->addIn('AlumnosACargoRoot',
+        [
+          'text' => "Cuenta Corriente",
+          'url' => route('cc.indexA', $alumno),
+          'icon' => 'fas fa-money-check-alt',
+          'color' => 'red',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
+
     }
 
   }
@@ -85,10 +115,16 @@ class EureFunctions
     return self::getLoggedUserAttribute()->responsable;
   }
 
+  public static function esUsuarioLogueadoEsResponsableDeAlumno(Alumno $a)
+  {
+    return self::esResponsableDeAlumno(self::getLoggedResponsableAttribute(), $a);
+  }
+
   public static function esResponsableDeAlumno(Responsable $r, Alumno $a)
   {
     return $a->Responsable1 == $r->id || $a->Responsable2 == $r->id;
   }
+
 
   public static function comunicacionPendienteDeLectura(Comunicacion $c, Responsable $r)
   {
@@ -113,6 +149,8 @@ class EureFunctions
 
     return true;
   }
+
+
 
   public static function crearUsuarioResponsable($login, $nombres, $apellidos, $desc, $cod_responsable, $password)
   {
@@ -156,6 +194,93 @@ class EureFunctions
 
     // Devolver la extensión en minúsculas (opcional)
     return strtolower($extension);
+  }
+
+  public static function hoy()
+  {
+    $f= Carbon::today();
+
+    return $f;
+  }
+
+  public static function ultimoDiaMes()
+  {
+    $f = Carbon::now();
+
+    // Obtiene el último día del mes actual
+    $udm = $f->endOfMonth();
+
+    return $udm;
+  }
+
+
+  public static function toCarbonDateFromYmd($ymd)
+  {
+    if ($ymd == null)
+      return null;
+
+    $ymd = substr($ymd, 0, 10);
+
+    $_4D = Carbon::createFromFormat('Y-m-d', $ymd)->startOfDay();
+
+//    dd($_4D->diffForHumans());
+
+    return $_4D;
+  }
+
+  public static function toStringFromFloat($f)
+  {
+    return number_format($f, 2, ',', '.');
+  }
+
+  public static function toMoneyFromFloat($f)
+  {
+    return "$ " . self::toStringFromFloat($f);
+  }
+
+  public static function obtenerPDF($rptFN, $fnPrefix, $fnMiddleInsert, $rptParams)
+  {
+    $url = getenv('EURE_PDF_PROVIDER_URL');
+
+
+    $clienteID = getenv('EURE_PDF_PROVIDER_CLIENTID');
+
+    $post_data = [
+      'clienteID' => $clienteID,
+      'rptFN' => $rptFN,
+      'fnPrefix' => $fnPrefix,
+      'fnMiddleInsert' => $fnMiddleInsert,
+      'rptParams' => $rptParams,
+    ];
+
+    $client = new Client();
+
+//    dd($data);|
+
+    $JPostData = json_encode($post_data);
+
+    try
+    {
+      $r = $client->request('POST', $url, [
+        'body' => $JPostData
+      ]);
+
+
+      // Procesar la respuesta aquí si es necesario
+      $body = $r->getBody()->getContents();
+
+      return json_decode($body);
+
+      //return response()->json(['data' => $body]);
+
+    } catch (\Exception $e)
+    {
+      // Hacer en el futuro una pantalla que maneje mejor esto
+      abort(500, $e->getMessage());
+
+      // Manejar cualquier excepción que ocurra durante la solicitud
+
+    }
   }
 
   // Intenté si esto se mantenia estático pero no
