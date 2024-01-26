@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\EureLib\EureFunctions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -60,7 +61,7 @@ class Profe extends Model
 
   public function MPGs()
   {
-    $al = env('EURE_AL');
+    $al = EureFunctions::al();
 
     return $this->hasMany(MateriaProfeGrupo::class, 'Cod_Profesor')
       ->whereHas('Grupo', function ($query) use ($al) {

@@ -4,6 +4,7 @@ namespace App\EureLib;
 
 class StaticArrays
 {
+
   public static $tiposCards = [
     'card-primary',
     'card-secondary',
@@ -87,5 +88,8 @@ class StaticArrays
     'xls' => 'XLS_file_icon.svg.png',
     'xlsx' => 'XLS_file_icon.svg.png',
   ];
+
+
+
 
 }

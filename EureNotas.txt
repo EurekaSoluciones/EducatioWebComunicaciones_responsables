@@ -1,0 +1,282 @@
+dni
+
+SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN @CodAlumno = 1571, @añolectivo= 2023
+
+SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_Ingles @CodAlumno = 1571, @añolectivo= 2023
+
+SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_Desempenio @CodAlumno = 1571, @añolectivo= 2023
+
+SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExCastellano @CodAlumno = 1571, @añolectivo= 2023
+
+SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExIngles @CodAlumno = 1571, @añolectivo= 2023
+
+SP_WEB_ConsultaConceptos @CodAlumno = 1571, @anioLect= 2023
+
+28558597
+
+
+
+            <table class="table table-hover table-bordered"
+                   id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
+              <tbody>
+              <tr class="table-head">
+                <th scope="col" class="tituloBoletinRow">Espacios Curriculares</th>
+                <th scope="col">1er Trim</th>
+                <th scope="col">2do Trim.</th>
+                <th scope="col">3er Trim.</th>
+                <th scope="col">.</th>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">MATEMÁTICA</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Construcción y Aplicación de los distintos campos
+                  numéricos
+                </td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Utilización de estrategias de razonamiento lógico
+                  para la resolución de situaciones problemáticas
+                </td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Operatoria numérica</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Construcción de Nociones geométricas y
+                  mediciones
+                </td>
+                <td align="center" style="width:50px;">NE</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Claridad y prolijidad en sus presentaciones</td>
+                <td align="center" style="width:50px;">C</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Actitud frente a la materia</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">LENGUA</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Dominio de la técnica lectora</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Comprensión de lo leído</td>
+                <td align="center" style="width:50px;">C</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Producción escrita y aplicación ortográfica</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Aplicación de los conceptos</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Claridad y prolijidad en sus presentaciones</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Actitud frente a la materia</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">CIENCIAS SOCIALES</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Comprensión y relación de conceptos</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Aporte de hipótesis frente a las distintas
+                  temáticas
+                </td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Organización de la presentación de trabajos</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Actitud frente a la materia</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">CIENCIAS NATURALES</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Comprensión y relación de conceptos</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Aporte de hipótesis frente a las distintas
+                  temáticas
+                </td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Organización en la presentación de trabajos</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Actitud frente a la materia</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">B</td>
+                <td align="center" style="width:50px;">A</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">HABILIDADES SOCIALES</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Respeto y colaboración con pares y adultos</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Aceptación y cumplimiento del Reglamento
+                  Interno
+                </td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Cuidado de materiales propios y ajenos</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Autonomía en la realización de actividades</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Uso adecuado del tiempo en clase</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="tituloBoletinRow">
+                <td class="tituloBoletin1erCelda" style="width:250px;">COMPENTENCIA PARA APRENDER A APRENDER</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Acepta el error como una instancia más de
+                  aprendizaje
+                </td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Reflexiona sobre qué y cómo ha aprendido</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              <tr class="notaBoletinRow">
+                <td class="notaBoletin1erCelda" style="width:250px;">Muestra interés por aprender a superarse</td>
+                <td align="center" style="width:50px;">F</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">S</td>
+                <td align="center" style="width:50px;">&nbsp;</td>
+              </tr>
+              </tbody>
+            </table>

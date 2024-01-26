@@ -19,6 +19,11 @@ use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
 class EureFunctions
 {
+  public static function al()
+  {
+    return env('EURE_AL');
+  }
+
   public static function crearMenus()
   {
     Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
@@ -87,6 +92,30 @@ class EureFunctions
           //'key' => 'Alumno_' . $alumno->id
         ]);
 
+      $event->menu->addIn('AlumnosACargoRoot',
+        [
+          'text' => "Notas",
+          'url' => route('notas.indexA', $alumno),
+          'icon' => 'fas fa-star',
+          'color' => 'red',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
+
+      $event->menu->addIn('AlumnosACargoRoot',
+        [
+          'text' => "Informes",
+          'url' => route('informes.indexA', $alumno),
+          'icon' => 'fas fa-info',
+          'color' => 'red',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
+      //el icono para notas tambien podria ser: fas fa-edit
     }
 
   }

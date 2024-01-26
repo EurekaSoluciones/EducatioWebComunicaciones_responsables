@@ -34,10 +34,14 @@
 {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
 
-          @if ($proximoVencimiento > \Carbon\Carbon::today())
-          <span class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
+          @if ($proximoVencimiento > \Carbon\Carbon::create(2049,1,1))
+            <span class="progress-description">&nbsp;</span>
           @else
-            <span class="progress-description">En este momento nada para este mes</span>
+            @if ($proximoVencimiento > \Carbon\Carbon::today())
+              <span class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
+            @else
+              <span class="progress-description">En este momento nada para este mes</span>
+            @endif
           @endif
 
         </div>
@@ -120,6 +124,7 @@
 
             <tbody>
             @foreach($ccitems as $item)
+{{--              {{dd($item)}}--}}
               @php
                 if ($item->Saldo == 0)
                 {
@@ -148,7 +153,8 @@
 
               <tr class="align-middle" style="background-color:{{$bgColor}}">
                 <td class="align-middle EureHideOnSmallDevices text-center">
-                  {{ $item->cod_factura }}
+
+                  {{ isset($item->cod_factura)? $item->cod_factura : '' }}
 
 
                   {{--              {{dd($item)}}--}}

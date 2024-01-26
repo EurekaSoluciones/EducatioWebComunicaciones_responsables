@@ -7,6 +7,8 @@ use App\Http\Controllers\ComunicacionController;
 use App\Http\Controllers\CuentaCorrienteController;
 use App\Http\Controllers\DummyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InformeController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResponsableController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');
 
   Route::get('/cc/{alumno}', [CuentaCorrienteController::class, 'indexA'])->name('cc.indexA');
+
+  Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
+
+  Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
+
 });
 
 Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');

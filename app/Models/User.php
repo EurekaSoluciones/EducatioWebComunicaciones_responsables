@@ -156,9 +156,13 @@ class User extends Authenticatable
           $AvatarIMG=  'https://robohash.org/' . $this->id . '.png?set=set4';
           break;
 
-        case 'avataroxro_Iniciales':
+        case 'avataroxro_Iniciales':  // este no anda más
           $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
+
+        case 'ui-avatars_Iniciales':
+          $AvatarIMG= "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->nombres}+{$this->apellidos}";
+        break;
 
         default:
           $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";

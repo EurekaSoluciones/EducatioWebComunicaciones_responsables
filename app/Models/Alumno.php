@@ -17,6 +17,11 @@ class Alumno extends Model
 
   protected $primaryKey = 'Cod_Alumno';
 
+  protected $casts = [
+    'Ciclo' => 'integer',
+  ];
+
+
   public function getapellidoAttribute($value)
   {
     return Str::title($value);
@@ -39,7 +44,7 @@ class Alumno extends Model
 
   public function getETipoResponsable1DescripcionAttribute()
   {
-    return $this->ETipoResponsable1 != null? $this->ETipoResponsable1->Descripcion : '';
+    return $this->ETipoResponsable1 != null ? $this->ETipoResponsable1->Descripcion : '';
   }
 
   public function EResponsable2()
@@ -54,7 +59,7 @@ class Alumno extends Model
 
   public function getETipoResponsable2DescripcionAttribute()
   {
-    return $this->ETipoResponsable2 != null? $this->ETipoResponsable2->Descripcion : '';
+    return $this->ETipoResponsable2 != null ? $this->ETipoResponsable2->Descripcion : '';
   }
 
   public function grupo()
@@ -67,7 +72,8 @@ class Alumno extends Model
     // Pregunto y si no hay entrada en web_alumnos la creo
     $alumnoWeb = AlumnoWeb::find($this->id);
 
-    if ($alumnoWeb == null) {
+    if ($alumnoWeb == null)
+    {
       // Lo creo
       $alumnoWeb = new AlumnoWeb();
 
@@ -104,16 +110,16 @@ class Alumno extends Model
   {
     // https://stackoverflow.com/questions/60411513/why-hasmanythrough-from-eloquent-documentation-not-work
 
-    $ComRaw= $this->hasManyThrough(Comunicacion::class, ComunicacionDestinatario::class,
+    $ComRaw = $this->hasManyThrough(Comunicacion::class, ComunicacionDestinatario::class,
       'Cod_Alumno', 'id', 'id', 'comunicacion_id');
 
     //   'Cod_Responsable', 'id', 'Cod_Responsable', 'comunicacion_id');
     if ($soloSinLeer)
-      $ComRaw= $ComRaw->whereNull('fhLeido');
+      $ComRaw = $ComRaw->whereNull('fhLeido');
 
 
     if ($responsable != null)
-      $ComRaw= $ComRaw->where('Cod_Responsable', '=', $responsable->id);
+      $ComRaw = $ComRaw->where('Cod_Responsable', '=', $responsable->id);
 
     return $ComRaw->orderBy('web_comunicaciones.id', 'desc')->distinct();;
   }
@@ -176,10 +182,37 @@ class Alumno extends Model
   public function avatar_image_withDefaults()
   {
     if (empty($this->avatar_image()))
-      $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->Nombre}+{$this->Apellido}";
+      $AvatarIMG = $this->avatar_image_default();
     else
-      $AvatarIMG= $this->avatar_image();
+      $AvatarIMG = $this->avatar_image();
 
     return $AvatarIMG;
+  }
+
+  public function avatar_image_default()
+  {
+    $DVP = env('EURE_DEFAULT_AVATAR_PROVIDER_ALUMNOS');
+
+    switch ($DVP)
+    {
+      case 'RobotoSet4':
+        $AvatarIMG = 'https://robohash.org/' . $this->id . '.png?set=set4';
+        break;
+
+      case 'avataroxro_Iniciales':  // este no anda más
+        $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->Nombre}+{$this->Apellido}";
+        break;
+
+      case 'ui-avatars_Iniciales':
+        $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->Nombre}+{$this->Apellido}";
+        break;
+
+      default:
+        $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->Nombre}+{$this->Apellido}";
+        break;
+    }
+
+    return $AvatarIMG;
+
   }
 }
