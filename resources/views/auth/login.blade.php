@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrusel de Imágenes</title>
+  <title>Login</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .carousel-item {
@@ -29,7 +29,7 @@
                       <div class="text-center">
                         <img src="../assets/images/institucional/LoginLogo.png" alt="logo" height="120">
                         <h2 class="text-muted mt-2">Tu Colegio</h2>
-                        <h4 class="text-muted mt-2">Módulo Papis y Responsables</h4>
+                        <h4 class="text-muted mt-2">Acceso Familias</h4>
                       </div>
 
                       <div class="mt-4">
@@ -50,7 +50,7 @@
                           </div>
 
                           <div class="mb-2">
-                            <label for="password" class="form-label font-weight-bold">Password</label>
+                            <label for="password" class="form-label font-weight-bold">Contraseña</label>
                             <div class="position-relative auth-pass-inputgroup mb-3">
                               <input type="password"
                                      class="form-control pe-5 password-input"

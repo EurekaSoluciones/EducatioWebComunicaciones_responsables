@@ -96,7 +96,7 @@ class EureFunctions
         [
           'text' => "Notas",
           'url' => route('notas.indexA', $alumno),
-          'icon' => 'fas fa-star',
+          'icon' => 'fas fa-book-open',
           'color' => 'red',
           'classes' => 'ml-2',
           //'route' => 'dummy3',

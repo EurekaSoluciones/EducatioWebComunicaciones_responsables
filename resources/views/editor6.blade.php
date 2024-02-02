@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Educatio Familias - Modulo de comunicaciones')
 
 @section('content_header')
-  <h1>Dashboard</h1>
+  <h1>Modulo de comunicaciones</h1>
   https://github.com/trinhtam/summernote-emoji
 
 

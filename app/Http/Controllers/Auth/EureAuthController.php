@@ -46,7 +46,7 @@ class EureAuthController extends Controller
 
     //
     return back()->withErrors([
-      'credentials' => 'No nos coincide el usuario con la contraseña.',
+      'credentials' => 'El nombre de Usuario o contraseña es incorrecto.',
     ])->withInput();
 
   }
