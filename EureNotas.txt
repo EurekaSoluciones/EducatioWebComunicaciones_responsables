@@ -14,6 +14,15 @@ SP_WEB_ConsultaConceptos @CodAlumno = 1571, @anioLect= 2023
 
 28558597
 
+18539194
+cod alumno 895
+
+
+23918570 - con un kinder
+cod alumno en kinder : 2133
+
+SP_WEB_ConsultaConceptos @CodAlumno = 2133, @anioLect= 2023
+
 
 
             <table class="table table-hover table-bordered"

@@ -2,6 +2,7 @@
 
 namespace App\EureLib;
 
+use App\EureLib\Enums\NivelesEnum;
 use App\Models\Alumno;
 use App\Models\AlumnoWeb;
 use App\Models\Comunicacion;
@@ -92,17 +93,20 @@ class EureFunctions
           //'key' => 'Alumno_' . $alumno->id
         ]);
 
-      $event->menu->addIn('AlumnosACargoRoot',
-        [
-          'text' => "Notas",
-          'url' => route('notas.indexA', $alumno),
-          'icon' => 'fas fa-book-open',
-          'color' => 'red',
-          'classes' => 'ml-2',
-          //'route' => 'dummy3',
-          //  'icon' => 'fas fa-user',
-          //'key' => 'Alumno_' . $alumno->id
-        ]);
+      // Esto solo ocurre si el alumno no es inicial.
+
+      if ($alumno->grupo->EPlan->Ciclo <> NivelesEnum::Inicial->value)
+        $event->menu->addIn('AlumnosACargoRoot',
+          [
+            'text' => "Notas",
+            'url' => route('notas.indexA', $alumno),
+            'icon' => 'fas fa-book-open',
+            'color' => 'red',
+            'classes' => 'ml-2',
+            //'route' => 'dummy3',
+            //  'icon' => 'fas fa-user',
+            //'key' => 'Alumno_' . $alumno->id
+          ]);
 
       $event->menu->addIn('AlumnosACargoRoot',
         [

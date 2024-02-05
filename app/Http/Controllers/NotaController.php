@@ -47,7 +47,7 @@ class NotaController extends Controller
         return $this->indexA_sunrise_primario($alumno);
 
       case NivelesEnum::Secundario->value:
-        return indexA_sunrise_secundario();
+        return $this->indexA_sunrise_secundario($alumno);
 
       default:
         return abort(400, 'Ciclo inesperado ' . $alumno->Ciclo);
@@ -63,11 +63,19 @@ class NotaController extends Controller
     $nexcastellano = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExCastellano @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
     $nexingles = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExIngles @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
 
-
-
     return view('notas.sunrise.primario', compact('alumno', 'nacademicas', 'ningles', 'ndesempenio', 'nexcastellano', 'nexingles'));
+  }
 
-    dd($notas);
+  public function indexA_sunrise_secundario(Alumno $alumno)
+  {
+
+    $nacademicas = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
+    $ningles = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_Ingles @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
+    $ndesempenio = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_Desempenio @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
+    $nexcastellano = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExCastellano @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
+    $nexingles = DB::select('exec SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExIngles @CodAlumno = ?, @añolectivo = ?', array($alumno->id, EureFunctions::al()));
+
+    return view('notas.sunrise.secundario', compact('alumno', 'nacademicas', 'ningles', 'ndesempenio', 'nexcastellano', 'nexingles'));
   }
 
 }

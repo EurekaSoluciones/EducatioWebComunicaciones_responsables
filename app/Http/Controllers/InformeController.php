@@ -41,17 +41,45 @@ class InformeController extends Controller
     switch ($alumno->Ciclo)
     {
       case NivelesEnum::Inicial->value:
-        return indexA_sunrise_inicial();
+        return $this->indexA_sunrise_inicial($alumno);
 
       case NivelesEnum::Primario->value:
         return $this->indexA_sunrise_primario($alumno);
 
       case NivelesEnum::Secundario->value:
-        return indexA_sunrise_secundario();
+        return $this->indexA_sunrise_secundario($alumno);
 
       default:
         return abort(400, 'Ciclo inesperado ' . $alumno->Ciclo);
     }
+  }
+
+  public function indexA_sunrise_inicial(Alumno $alumno)
+  {
+
+    $informesItems = DB::select('exec SP_WEB_ConsultaConceptos @CodAlumno = ?, @anioLect = ?', array($alumno->id, EureFunctions::al()));
+
+    $informeItems1er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '1_');
+    })->all();
+
+    $informeItems2do = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '2_');
+    })->all();
+
+    $informeItems3er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '3_');
+    })->all();
+
+
+
+//    dump($informeItems1er);
+//    dump($informeItems2do);
+//    dd($informeItems3er);
+
+    return view('informes.sunrise.inicial', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
+
+    //    dd($notas);
   }
 
   public function indexA_sunrise_primario(Alumno $alumno)
@@ -77,6 +105,33 @@ class InformeController extends Controller
 //    dd($informeItems3er);
 
     return view('informes.sunrise.primario', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_sunrise_secundario(Alumno $alumno)
+  {
+    $informesItems = DB::select('exec SP_WEB_ConsultaConceptos @CodAlumno = ?, @anioLect = ?', array($alumno->id, EureFunctions::al()));
+
+    $informeItems1er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '1_');
+    })->all();
+
+    $informeItems2do = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '2_');
+    })->all();
+
+    $informeItems3er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '3_');
+    })->all();
+
+
+
+//    dump($informeItems1er);
+//    dump($informeItems2do);
+//    dd($informeItems3er);
+
+    return view('informes.sunrise.secundario', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
 
     //    dd($notas);
   }

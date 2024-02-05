@@ -34,8 +34,8 @@
              aria-labelledby="custom-tabs-1erInforme-tab">
           <div class="card-body box-profile">
 
-            <table class="table table-hover table-bordered"
-                   id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
+            <table class="table table-hover table-bordered table-striped euretable-agrupar1era"
+                   id="t1erInforma" style="width:100%;border-collapse:collapse;">
 
               <thead>
               <tr class="table-head">
@@ -67,7 +67,7 @@
         <div class="tab-pane fade" id="custom-tabs-2doInforme" role="tabpanel"
              aria-labelledby="custom-tabs-2doInforme-tab">
           <div class="card-body box-profile">
-            <table class="table table-hover table-bordered"
+            <table class="table table-hover table-bordered table-striped euretable-agrupar1era"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
               <thead>
@@ -102,7 +102,7 @@
         <div class="tab-pane fade" id="custom-tabs-3erInforme" role="tabpanel"
              aria-labelledby="custom-tabs-3erInforme-tab">
           <div class="card-body box-profile">
-            <table class="table table-hover table-bordered"
+            <table class="table table-hover table-bordered table-striped euretable-agrupar1era"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
               <thead>
@@ -200,5 +200,26 @@
 @stop
 
 @section('js')
-  <script> console.log('Hi!'); </script>
+
+  <script src="{{asset('js/eure.js')}}"></script>
+
+
+  <script>
+
+
+    window.onload = function () {
+      var tablas = document.querySelectorAll('.euretable-agrupar1era');
+      tablas.forEach(function(tabla) {
+        agruparCeldasIguales1erColumnaEnTabla(tabla);
+      });
+    };
+
+
+
+    // Llama a la función después de cargar la página
+    // window.onload = function () {
+    //   agruparColumna1EnTablas();
+    // };
+  </script>
+
 @stop
