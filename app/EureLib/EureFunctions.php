@@ -41,20 +41,37 @@ class EureFunctions
     {
 
       $hmComunicacionesSinLeerResponsableAlumno = Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
+      $alumnoKey = 'Alumno_' . $alumno->id;
+      $labelComs = ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '';
+      $labelColor = self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno);
 
       $event->menu->addIn('AlumnosACargoRoot',
         [
           'text' => $alumno->Nombre,
-          'url' => route('alumnos.show', $alumno),
+          'url' => '',// route('alumnos.show', $alumno),
           //'route' => 'dummy3',
           'icon' => 'fas fa-user',
-          'key' => 'Alumno_' . $alumno->id,
-          'classes' => 'ml-1',
+          'key' => $alumnoKey,
+          'classes' => 'ml-1 ' . $alumno->bg,
+          'label' => $labelComs,
+          'label_color' => $labelColor,
 
         ]);
 
+      // Ficha
+      $event->menu->addIn($alumnoKey,
+        [
+          'text' => 'Ficha',
+          'url' => route('alumnos.show', $alumno),
+          //'route' => 'dummy3',
+          'icon' => 'fas fa-id-card-alt',
+          //     'key' => $alumnoKey,
+          'classes' => 'ml-2',
+        ]);
+
+
       // Comunicaciones del alumno
-      $event->menu->addIn('AlumnosACargoRoot',
+      $event->menu->addIn($alumnoKey,
         [
           'text' => "Comunicaciones",
           'url' => route('comunicaciones.indexA', $alumno),
@@ -64,12 +81,12 @@ class EureFunctions
           //'route' => 'dummy3',
           //  'icon' => 'fas fa-user',
           //'key' => 'Alumno_' . $alumno->id
-          'label' => ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '',
-          'label_color' => self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno)
+          'label' => $labelComs,
+          'label_color' => $labelColor,
         ]);
 
       // Comunicaciones del alumno
-      $event->menu->addIn('AlumnosACargoRoot',
+      $event->menu->addIn($alumnoKey,
         [
           'text' => "Pagos",
           'url' => route('pagos.indexA', $alumno),
@@ -81,7 +98,7 @@ class EureFunctions
           //'key' => 'Alumno_' . $alumno->id
         ]);
 
-      $event->menu->addIn('AlumnosACargoRoot',
+      $event->menu->addIn($alumnoKey,
         [
           'text' => "Cuenta Corriente",
           'url' => route('cc.indexA', $alumno),
@@ -96,7 +113,8 @@ class EureFunctions
       // Esto solo ocurre si el alumno no es inicial.
 
       if ($alumno->grupo->EPlan->Ciclo <> NivelesEnum::Inicial->value)
-        $event->menu->addIn('AlumnosACargoRoot',
+      {
+        $event->menu->addIn($alumnoKey,
           [
             'text' => "Notas",
             'url' => route('notas.indexA', $alumno),
@@ -107,8 +125,10 @@ class EureFunctions
             //  'icon' => 'fas fa-user',
             //'key' => 'Alumno_' . $alumno->id
           ]);
+        //el icono para notas tambien podria ser: fas fa-edit
+      }
 
-      $event->menu->addIn('AlumnosACargoRoot',
+      $event->menu->addIn($alumnoKey,
         [
           'text' => "Informes",
           'url' => route('informes.indexA', $alumno),
@@ -119,7 +139,19 @@ class EureFunctions
           //  'icon' => 'fas fa-user',
           //'key' => 'Alumno_' . $alumno->id
         ]);
-      //el icono para notas tambien podria ser: fas fa-edit
+
+      $event->menu->addIn($alumnoKey,
+        [
+          'text' => "Inasistencias",
+          'url' => route('asistencias.indexA', $alumno),
+          'icon' => 'fas fa-calendar-times',
+          'color' => 'info',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
+
     }
 
   }
@@ -184,7 +216,6 @@ class EureFunctions
   }
 
 
-
   public static function crearUsuarioResponsable($login, $nombres, $apellidos, $desc, $cod_responsable, $password)
   {
     $userNew = new User();
@@ -231,7 +262,7 @@ class EureFunctions
 
   public static function hoy()
   {
-    $f= Carbon::today();
+    $f = Carbon::today();
 
     return $f;
   }

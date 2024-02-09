@@ -52,6 +52,43 @@ class StaticArrays
     'bg-gradient-danger',
   ];
 
+  public static $colors = [
+    'primary',
+    'secondary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+    'light',
+    'dark',
+    'white',
+    'gradient-primary',
+    'gradient-secondary',
+    'gradient-success',
+    'gradient-info',
+    'gradient-warning',
+    'gradient-danger',
+  ];
+
+  public static $colorsNoWhite = [
+    'primary',
+    'secondary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+    'light',
+    'dark',
+ //   'white',
+    'gradient-primary',
+    'gradient-secondary',
+    'gradient-success',
+    'gradient-info',
+    'gradient-warning',
+    'gradient-danger',
+  ];
+
+
   public static $textSegunBackground = [
     'bg-primary' => 'text-light',
     'bg-secondary' => 'text-dark',

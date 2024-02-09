@@ -3,7 +3,7 @@
 {{--@section('title', 'Educatio')--}}
 
 @section('content_header')
-  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Notas {{$alumno->Nombre}}</h1>
+  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Informes {{$alumno->Nombre}}</h1>
 @stop
 
 @section('content')
@@ -34,7 +34,7 @@
              aria-labelledby="custom-tabs-1erInforme-tab">
           <div class="card-body box-profile">
 
-            <table class="table table-hover table-bordered"
+            <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
               <thead>
@@ -67,7 +67,7 @@
         <div class="tab-pane fade" id="custom-tabs-2doInforme" role="tabpanel"
              aria-labelledby="custom-tabs-2doInforme-tab">
           <div class="card-body box-profile">
-            <table class="table table-hover table-bordered"
+            <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
               <thead>
@@ -102,7 +102,7 @@
         <div class="tab-pane fade" id="custom-tabs-3erInforme" role="tabpanel"
              aria-labelledby="custom-tabs-3erInforme-tab">
           <div class="card-body box-profile">
-            <table class="table table-hover table-bordered"
+            <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
               <thead>

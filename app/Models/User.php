@@ -106,7 +106,7 @@ class User extends Authenticatable
 
   public function adminlte_profile_url()
   {
-    return '/resp/' . $this->Cod_Responsable;
+    return route('responsables.showLogged');
   }
 
   public function adminlte_desc()

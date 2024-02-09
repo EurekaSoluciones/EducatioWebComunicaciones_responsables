@@ -3,7 +3,7 @@
 {{--@section('title', 'Educatio')--}}
 
 @section('content_header')
-  <h1><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 42px"> Cuenta {{$alumno->Nombre}}</h1>
+  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Notas {{$alumno->Nombre}}</h1>
 
 
 

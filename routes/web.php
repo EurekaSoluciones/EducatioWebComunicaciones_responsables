@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
 use App\Http\Controllers\CuentaCorrienteController;
@@ -73,6 +74,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
 
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
+
+  Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
 
 });
 

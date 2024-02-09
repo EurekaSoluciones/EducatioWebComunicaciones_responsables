@@ -3,7 +3,7 @@
 {{--@section('title', 'Educatio')--}}
 
 @section('content_header')
-  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Notas {{$alumno->Nombre}}</h1>
+  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Informes {{$alumno->Nombre}}</h1>
 @stop
 
 @section('content')
@@ -34,6 +34,8 @@
              aria-labelledby="custom-tabs-1erInforme-tab">
           <div class="card-body box-profile">
 
+            @if(count($informeItems1er) > 0)
+
             <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
@@ -46,18 +48,22 @@
 
               <tbody>
               @foreach($informeItems1er as $iItem)
-
-
                 <tr>
                   <td>{{$iItem->Observaciones}}</td>
                   <td>{{$iItem->Detalle_Concepto}}</td>
-
-
                 </tr>
-
               @endforeach
+
+
               </tbody>
             </table>
+
+            @else
+              <div class="alert alert-info mt-3">
+                <h5><i class="icon fas fa-info"></i> No está el informe</h5>
+                <p>Este informe no está cargado en este momento.</p>
+              </div>
+            @endif
 
           </div>
         </div>
@@ -65,6 +71,8 @@
         <div class="tab-pane fade" id="custom-tabs-2doInforme" role="tabpanel"
              aria-labelledby="custom-tabs-2doInforme-tab">
           <div class="card-body box-profile">
+            @if(count($informeItems2do) > 0)
+
             <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
@@ -85,6 +93,13 @@
               </tbody>
             </table>
 
+            @else
+              <div class="alert alert-info mt-3">
+                <h5><i class="icon fas fa-info"></i> No está el informe</h5>
+                <p>Este informe no está cargado en este momento.</p>
+              </div>
+            @endif
+
           </div>
         </div>
 
@@ -93,6 +108,8 @@
         <div class="tab-pane fade" id="custom-tabs-3erInforme" role="tabpanel"
              aria-labelledby="custom-tabs-3erInforme-tab">
           <div class="card-body box-profile">
+            @if(count($informeItems3er) > 0)
+
             <table class="table table-hover table-bordered table-striped"
                    id="ctl00_ContentPlaceHolder1_gvNotas1" style="width:100%;border-collapse:collapse;">
 
@@ -117,6 +134,13 @@
               @endforeach
               </tbody>
             </table>
+
+            @else
+              <div class="alert alert-info mt-3">
+                <h5><i class="icon fas fa-info"></i> No está el informe</h5>
+                <p>Este informe no está cargado en este momento.</p>
+              </div>
+            @endif
           </div>
 
           <div class="d-flex flex-row-reverse">

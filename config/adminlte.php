@@ -305,33 +305,34 @@ return [
       'icon' => 'fas fa-user-friends',
       'label_color' => 'success',
       'key' => 'AlumnosACargoRoot',
+
     ],
     [
       'text' => 'profile',
       'route' => 'responsables.showLogged',
-      'icon' => 'fas fa-fw fa-user',
+      'icon' => 'fas fa-user-cog',
     ],
     [
       'text' => 'Salir',
       'route' => 'logout',
-      'icon' => 'fas fa-sign-out-alt',
+      'icon' => 'fas fa-power-off',
       'classes' => 'text-red'
     ],
 
 
     [
-      'type'         => 'navbar-notification',
-      'id'           => 'my-notification',      // An ID attribute (required).
-      'icon'         => 'fas fa-bell',          // A font awesome icon (required).
-      'icon_color'   => 'warning',              // The initial icon color (optional).
-      'label'        => '',                      // The initial label for the badge (optional).
-      'label_color'  => 'info',               // The initial badge color (optional).
-      'route'        => 'notificationes.show',       // The route to access all notifications/elements (required).
+      'type' => 'navbar-notification',
+      'id' => 'my-notification',      // An ID attribute (required).
+      'icon' => 'fas fa-bell',          // A font awesome icon (required).
+      'icon_color' => 'warning',              // The initial icon color (optional).
+      'label' => '',                      // The initial label for the badge (optional).
+      'label_color' => 'info',               // The initial badge color (optional).
+      'route' => 'notificationes.show',       // The route to access all notifications/elements (required).
       'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
-      'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
+      'dropdown_mode' => true,                // Enables the dropdown mode (optional).
       'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
       'update_cfg' => [
-        'route'  => ['notificationes.get', ['param' => 'val']],
+        'route' => ['notificationes.get', ['param' => 'val']],
         //'period' => 30,
         'period' => 30,
       ],

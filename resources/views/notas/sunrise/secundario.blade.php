@@ -73,7 +73,6 @@
                 <h5><i class="icon fas fa-info"></i> No hay notas cargadas</h5>
                 <p>Parece que no tienes notas almacenadas en este momento.</p>
               </div>
-
             @endif
 
           </div>

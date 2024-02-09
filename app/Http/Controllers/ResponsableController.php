@@ -14,9 +14,10 @@ class ResponsableController extends Controller
 {
   public function show(Responsable $responsable)
   {
-//    dd($responsable->alumnos);
-
     $user = User::where('Cod_Responsable', $responsable->id)->first();
+
+    if($user->id != Auth::id())
+      abort(403);
 
     return view('responsables.show', compact('user', 'responsable'));
   }
@@ -25,17 +26,12 @@ class ResponsableController extends Controller
   {
     $responsable= EureFunctions::getLoggedResponsableAttribute();
 
-
-
     return redirect()->route('responsables.show', ['responsable' => $responsable]);
   }
 
   public function edit(Responsable $responsable)
   {
     $user = User::where('Cod_Responsable', $responsable->id)->first();
-
-    if($user->id != Auth::id())
-      abort(403);
 
     return view('responsables.edit', compact('user'));
 

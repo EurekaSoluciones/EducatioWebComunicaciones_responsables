@@ -23,6 +23,15 @@ cod alumno en kinder : 2133
 
 SP_WEB_ConsultaConceptos @CodAlumno = 2133, @anioLect= 2023
 
+SP_WEB_TotalInasistencias @CodAlumno = 2133, @anioLect= 2023
+
+SP_WEB_ConsultaInasistencias @CodAlumno = 2133, @anioLect= 2023
+
+con alumnos en los 3 niveles
+28485467
+24330202
+27107180
+
 
 
             <table class="table table-hover table-bordered"
