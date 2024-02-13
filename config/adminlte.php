@@ -63,7 +63,7 @@ return [
   |
   */
 
-  'logo' => 'Tu Colegio<br><div class="h-100 text-center">Módulo Familias</div>',
+  'logo' => 'IFES<br><div class="h-100 text-center">Módulo Familias</div>',
   'logo_img' => 'assets/images/institucional/logo.png',
   // 'logo_img_class' => 'brand-image img-circle elevation-3',
   'logo_img_class' => 'mr-2 w-25 image-center',

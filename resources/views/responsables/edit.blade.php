@@ -28,7 +28,7 @@
               </div>
 
               <div class="form-group">
-                <label for="apellido">Email</label>
+                <label for="apellido">Apellido</label>
                 <input type="text" name="apellido" id="apellido" class="form-control" value="{{$user->apellidos}}" readonly>
               </div>
 
