@@ -28,7 +28,7 @@
                     <div class="p-lg-5 p-1">
                       <div class="text-center">
                         <img src="../assets/images/institucional/LoginLogo.png" alt="logo" height="120">
-                        <h2 class="text-muted mt-2">Tu Colegio</h2>
+                        <h2 class="text-muted mt-2">IFES</h2>
                         <h4 class="text-muted mt-2">Acceso Familias</h4>
                       </div>
 
