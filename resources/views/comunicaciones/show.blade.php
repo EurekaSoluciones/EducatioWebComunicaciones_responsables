@@ -10,7 +10,6 @@
   {{--  {{dd($comunicacion->remitente->profe->MPGs)}}--}}
   {{--  {{dd($comunicacion->tipo)}}--}}
 
-
 @stop
 
 @section('content')
@@ -65,11 +64,19 @@
                 </div>
 
                 <div class="card-body">
-                  @if ($comunicacion->tipo->id == \App\EureLib\Enums\ComunicacionTipoEnum::Aula)
-                    @foreach($comunicacion->destinatarios as $alumnoAux)
-                      <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $alumnoAux->nombreYApellido }}</span>
-                      </div>
-                    @endforeach
+                  @if ($comunicacion->tipo->id == \App\EureLib\Enums\ComunicacionTipoEnum::Aula->value)
+
+                    @if($comunicacion->templateDestinatarios == 'CURSO_COMPLETO')
+                      <div class="card d-inline mr-2 mb-2"><span class="p-1">Todo el curso</span></div>
+                    @endif
+
+                    @if($comunicacion->templateDestinatarios == 'CURSO_SELECCION')
+                      @foreach($comunicacion->destinatarios as $alumnoAux)
+                        <div class="card d-inline mr-2 mb-2"><span class="p-1">{{ $alumnoAux->nombreYApellido }}</span>
+                        </div>
+                      @endforeach
+                    @endif
+
                   @else
                     {{--                    Mas adelante meter la adminsitrativa? la automática? --}}
                     @if ($comunicacion->templateDestinatarios == "TODOS")
@@ -97,7 +104,6 @@
                         </div>
                       @endforeach
                     @endif
-
 
                   @endif
 

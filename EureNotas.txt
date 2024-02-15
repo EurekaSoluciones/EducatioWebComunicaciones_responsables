@@ -12,6 +12,8 @@ SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN_ExIngles @CodAlumno = 1571, @añolectivo= 
 
 SP_WEB_ConsultaConceptos @CodAlumno = 1571, @anioLect= 2023
 
+
+SUNRISE
 28558597
 
 18539194
@@ -32,6 +34,10 @@ con alumnos en los 3 niveles
 24330202
 27107180
 
+Servidor ifes
+eurevps03.ddns.net
+Educatio04DBUsr
+E04Pass*
 
 
             <table class="table table-hover table-bordered"
