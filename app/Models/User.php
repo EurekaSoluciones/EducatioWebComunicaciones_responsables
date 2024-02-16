@@ -214,6 +214,7 @@ class User extends Authenticatable
     // https://robohash.org/{identificador}.png
     //https://avatars.dicebear.com/api/avataaars/{identificador}.svg.
 
+   
     if (empty($this->avatar_image()))
     {
       $DVP= env('EURE_DEFAULT_AVATAR_PROVIDER_SECRETARIA');
