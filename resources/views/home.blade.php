@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-  <p>Panel principal</p>
+  <p>CARTELERA DE NOVEDADES</p>
 
 
 
