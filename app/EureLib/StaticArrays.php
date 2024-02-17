@@ -88,6 +88,17 @@ class StaticArrays
     'gradient-danger',
   ];
 
+  public static $textsColorsNoWhite = [
+      'text-primary',
+      'text-secondary',
+      'text-success',
+      'text-danger',
+      'text-warning',
+      'text-info',
+      'text-light',
+      'text-dark',
+      'text-muted',
+    ];
 
   public static $textSegunBackground = [
     'bg-primary' => 'text-light',

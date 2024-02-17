@@ -33,6 +33,9 @@ class ResponsableController extends Controller
   {
     $user = User::where('Cod_Responsable', $responsable->id)->first();
 
+    if($user->id != Auth::id())
+      abort(403);
+
     return view('responsables.edit', compact('user'));
 
   }

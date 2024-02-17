@@ -39,13 +39,11 @@ Route::post('/authenticate', [EureAuthController::class, 'authenticate'])->name(
 
 Route::group(['middleware' => 'auth'], function () {
 
-  Route::get('/', [HomeController::class,'index'])->name('home');
-  Route::get('/home', [HomeController::class,'index']);
+  Route::get('/', [HomeController::class,'index']);
+  Route::get('/home', [HomeController::class,'index'])->name('home');
 
   Route::get('/password', [EureAuthController::class,'password'])->name('auth.password');
   Route::post('/usuarios/password/update', [EureAuthController::class, 'passwordUpdate'])->name('auth.password.update');
-
-
 
   Route::get('notifications/show', [NotificationController::class, 'show'])->name('notificationes.show');
   Route::get('notifications/get', [NotificationController::class, 'get'])->name('notificationes.get');

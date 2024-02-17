@@ -299,13 +299,17 @@ return [
 //      'classes' => 'pl-2 h4 mt-3 bg-lightblue'
 //    ],
     // Sidebar items:
-
+    [
+      'text' => ' Principal',
+      'route' => 'home',
+      'icon' => 'fas fa-home',
+      //'label_color' => 'success',
+    ],
     [
       'text' => ' Alumnos',
       'icon' => 'fas fa-user-friends',
       'label_color' => 'success',
       'key' => 'AlumnosACargoRoot',
-
     ],
     [
       'text' => 'profile',
@@ -327,10 +331,11 @@ return [
       'icon_color' => 'warning',              // The initial icon color (optional).
       'label' => '',                      // The initial label for the badge (optional).
       'label_color' => 'info',               // The initial badge color (optional).
-      'route' => 'notificationes.show',       // The route to access all notifications/elements (required).
+     // 'route' => 'notificationes.show',       // The route to access all notifications/elements (required).
+      'url' => '#',       // The route to access all notifications/elements (required).
       'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
       'dropdown_mode' => true,                // Enables the dropdown mode (optional).
-      'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
+      'dropdown_flabel' => '', // The label for the dropdown footer link (optional).
       'update_cfg' => [
         'route' => ['notificationes.get', ['param' => 'val']],
         //'period' => 30,

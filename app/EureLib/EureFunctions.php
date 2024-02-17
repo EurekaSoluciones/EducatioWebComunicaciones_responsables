@@ -25,6 +25,10 @@ class EureFunctions
     return env('EURE_AL');
   }
 
+  public static function stringEsNullOrEmpty($st) {
+    return $st === null || empty($st);
+  }
+
   public static function crearMenus()
   {
     Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
@@ -85,7 +89,7 @@ class EureFunctions
           'label_color' => $labelColor,
         ]);
 
-      // Comunicaciones del alumno
+      //
       $event->menu->addIn($alumnoKey,
         [
           'text' => "Pagos",

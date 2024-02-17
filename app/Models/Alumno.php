@@ -135,9 +135,27 @@ class Alumno extends Model
     return Str::substr($this->Nombre, 0, 1) . Str::substr($this->Apellido, 0, 1);
   }
 
+
+
   public function getCardAttribute()
   {
     return StaticArrays::$tiposCards[$this->id % count(StaticArrays::$tiposCards)];
+  }
+
+  public function gettextColorNWAttribute()
+  {
+    return StaticArrays::$textsColorsNoWhite[$this->id % count(StaticArrays::$textsColorsNoWhite)];
+  }
+
+  public function textColorNWConOffset($offset)
+  {
+    return StaticArrays::$textsColorsNoWhite[($this->id + $offset) % count(StaticArrays::$textsColorsNoWhite)];
+  }
+
+
+  public function getcolorNWAttribute()
+  {
+    return StaticArrays::$colorsNoWhite[($this->id) % count(StaticArrays::$colorsNoWhite)];
   }
 
   public function getbgAttribute()

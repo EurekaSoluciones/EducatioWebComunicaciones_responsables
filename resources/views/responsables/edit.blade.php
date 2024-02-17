@@ -4,11 +4,12 @@
 {{--@section('title', 'Educatio')--}}
 
 @section('content_header')
-  <h1>Edición de datos</h1>
+  <h1></h1>
+{{--  <h1>Edición de datos</h1>--}}
 
- {{ empty($user->avatar_image()) ? url('assets/images/NoImage.svg.png'): $user->avatar_image() }}
+{{-- {{ empty($user->avatar_image()) ? url('assets/images/NoImage.svg.png'): $user->avatar_image() }}--}}
 
- <img src=" {{ empty($user->avatar_image()) ? url('assets/images/NoImage.svg.png'): $user->avatar_image() }}" height="50">
+{{-- <img src=" {{ empty($user->avatar_image()) ? url('assets/images/NoImage.svg.png'): $user->avatar_image() }}" height="50">--}}
 @stop
 
 @section('content')
