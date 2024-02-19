@@ -78,7 +78,7 @@ class EureFunctions
       $event->menu->addIn($alumnoKey,
         [
           'text' => "Comunicaciones",
-          'url' => route('comunicaciones.indexA', $alumno),
+          'url' => route('comunicaciones.indexa', $alumno),
           'icon' => 'fas fa-paper-plane',
           'color' => 'red',
           'classes' => 'ml-2',

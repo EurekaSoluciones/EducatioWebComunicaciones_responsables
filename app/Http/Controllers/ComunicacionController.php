@@ -28,7 +28,7 @@ class ComunicacionController extends Controller
     ];
 
 
-    return view('comunicaciones.indexA',compact( 'alumno', 'responsable', 'comunicaciones', 'remitentes', 'filtros'));
+    return view('comunicaciones.indexa',compact( 'alumno', 'responsable', 'comunicaciones', 'remitentes', 'filtros'));
   }
 
   public function indexAFiltered(Request $request, Alumno $alumno)
