@@ -99,7 +99,7 @@
 
         <div class="card-body">
 
-          se porto mall
+          tienen tarea para resolver en el hogar
           {{--          @foreach($responsable->comunicacionesDest->take(1) as $cd)--}}
           {{--            <div class="card">--}}
 
