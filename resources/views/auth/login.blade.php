@@ -15,6 +15,8 @@
 <body>
 <div class=""></div>
 
+{{dd(env('EURE_CLIENTE_ID'))}}
+
 <div class="account-pages">
   <div class="container">
     <div class="row justify-content-center">
