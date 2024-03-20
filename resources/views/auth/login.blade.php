@@ -27,7 +27,7 @@
                   <div class="col-lg-6">
                     <div class="p-lg-5 p-1">
                       <div class="text-center">
-                        <img src="../assets/images/institucional/LoginLogo.png" alt="logo" height="120">
+                        <img src="{{ url(\App\EureLib\EureFunctions::cliente_path_resources())}}/institucional/LoginLogo.png" alt="logo" height="120">
                         <h2 class="text-muted mt-2">IFES</h2>
                         <h4 class="text-muted mt-2">Acceso Familias</h4>
                       </div>
@@ -94,15 +94,18 @@
                       <div class="col-lg-10" style="margin:auto">
                         <div class="carousel-inner " style="height: 520px">
                           <div class="carousel-item active">
-                            <img src="../assets/images/institucional/LoginCarrusel01.jpg" class="d-block w-100"
+                            <img src="{{ url(\App\EureLib\EureFunctions::cliente_path_resources())}}/institucional/LoginCarrusel01.jpg"
+                                 class="d-block w-100"
                                  alt="Imagen 1">
                           </div>
                           <div class="carousel-item">
-                            <img src="../assets/images/institucional/LoginCarrusel02.jpg" class="d-block w-100"
+                            <img src="{{ url(\App\EureLib\EureFunctions::cliente_path_resources())}}/institucional/LoginCarrusel02.jpg"
+                                 class="d-block w-100"
                                  alt="Imagen 2">
                           </div>
                           <div class="carousel-item">
-                            <img src="../assets/images/institucional/LoginCarrusel03.jpg" class="d-block w-100"
+                            <img src="{{ url(\App\EureLib\EureFunctions::cliente_path_resources())}}/institucional/LoginCarrusel03.jpg"
+                                 class="d-block w-100"
                                  alt="Imagen 3">
                           </div>
                         </div>

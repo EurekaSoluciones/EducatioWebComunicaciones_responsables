@@ -100,7 +100,7 @@
       })
 
       //$('.table').DataTable(datatablesConfig).order([[0, 'desc']]).draw();
-      $('.table').DataTable(datatablesConfig);
+      $('.table').DataTable(datatablesConfig).order([[0, 'desc']]).draw();;
 
 
       // //Date and time picker

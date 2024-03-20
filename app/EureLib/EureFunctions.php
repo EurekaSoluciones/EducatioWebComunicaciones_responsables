@@ -29,6 +29,23 @@ class EureFunctions
     return $st === null || empty($st);
   }
 
+  public static function cliente_id()
+  {
+    return env('EURE_CLIENTE_ID');
+  }
+
+  public static function cliente_leyenda()
+  {
+    return env('EURE_CLIENTE_LEYENDA');
+  }
+
+
+  public static function cliente_path_resources()
+  {
+    return 'assets/C/' . self::cliente_id() . '/';
+  }
+
+
   public static function crearMenus()
   {
     Event::listen(BuildingMenu::class, function (BuildingMenu $event) {

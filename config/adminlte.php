@@ -63,8 +63,8 @@ return [
   |
   */
 
-  'logo' =>  env('EURE_CLIENTE_LEYENDA') . '<br><div class="h-100 text-center">Módulo Familias</div>',
-  'logo_img' => 'assets/images/institucional/Logo.png',
+  'logo' => \App\EureLib\EureFunctions::cliente_leyenda() . '<br><div class="h-100 text-center">Módulo Familias</div>',
+  'logo_img' => \App\EureLib\EureFunctions::cliente_path_resources().'/institucional/Logo.png',
   // 'logo_img_class' => 'brand-image img-circle elevation-3',
   'logo_img_class' => 'mr-2 w-25 image-center',
   'logo_img_xl' => null,
@@ -110,7 +110,7 @@ return [
   'preloader' => [
     'enabled' => true,
     'img' => [
-      'path' => 'assets/images/institucional/PreloaderLogo.png',
+      'path' => \App\EureLib\EureFunctions::cliente_path_resources() . '/institucional/Logo.png',
       'alt' => 'AdminLTE Preloader Image',
       'effect' => 'animation__shake',
       'width' => 60,
