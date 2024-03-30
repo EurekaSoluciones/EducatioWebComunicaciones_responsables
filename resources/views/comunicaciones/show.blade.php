@@ -151,6 +151,9 @@
 
             </div>
 
+
+            @include('comunicaciones.partials.respuesta')
+
             <div class="row">
               <div class="col-md-6">
                 <div class="card card-info card-outline">
@@ -239,79 +242,7 @@
 
               </div>
 
-              {{--      <div class="row">--}}
-              {{--        <div class="col">--}}
-              {{--          <div class="form-group">--}}
-              {{--            <label for="inputText">Comunicacion: </label>--}}
-              {{--            <div class="input-group">--}}
 
-              {{--              @if ($errors->has('msg'))--}}
-              {{--                <small class="text-danger">{{ $errors->first('msg') }}</small>--}}
-              {{--              @endif--}}
-
-              {{--              <textarea class="summernote" name="msg" id="msg">--}}
-              {{--                      {{ old('msg') }}--}}
-              {{--                    </textarea>--}}
-
-              {{--              <div class="alert alert-warning alert-dismissible p-2 mr-3" id="errorDestinatariosRequired"--}}
-              {{--                   name="errorDestinatariosRequired" style="display: none">--}}
-              {{--                <i class="icon fas fa-exclamation-triangle"></i> Faltan Datos! Ingresá al menos un destinatario!--}}
-              {{--              </div>--}}
-
-              {{--              <div class="alert alert-info alert-dismissible mr-3 p-2" id="errorAsuntoRequired"--}}
-              {{--                   name="errorAsuntoRequired" style="display: none">--}}
-              {{--                <i class="icon fas fa-exclamation-triangle"></i> Faltan Datos! Ingresá el asunto--}}
-              {{--              </div>--}}
-
-
-              {{--              <div class="alert alert-danger alert-dismissible  p-2" id="errorMsgRequired"--}}
-              {{--                   name="errorMsgRequired" style="display: none">--}}
-              {{--                <i class="icon fas fa-exclamation-triangle"></i> Faltan Datos! Ingresá la comunicacion--}}
-              {{--              </div>--}}
-
-
-              {{--            </div>--}}
-
-              {{--          </div>--}}
-              {{--        </div>--}}
-              {{--      </div>--}}
-              {{--    </div>--}}
-
-              {{--  </div>--}}
-
-              {{--      <div class="row">--}}
-              {{--        <div class="col-9">--}}
-
-              {{--          <div class=" pl-4 pr-4">--}}
-              {{--            <label for="exampleFormControlTextarea1" class="form-label text-muted">Adjuntos</label>--}}
-
-              {{--            <form method="post" action="{{route('uploads.comunicaciones.adjuntos.store')}}"--}}
-              {{--                  enctype="multipart/form-data"--}}
-              {{--                  class="dropzone" id="dropzone">--}}
-              {{--              @csrf--}}
-              {{--              <input type="hidden" name="tempId" id="TempId" value="{{ $TempId }}">--}}
-
-              {{--            </form>--}}
-
-
-              {{--          </div>--}}
-              {{--        </div>--}}
-              {{--        <div class="col-3  p-4">--}}
-              {{--          tags--}}
-              {{--        </div>--}}
-
-
-              {{--      </div>--}}
-              {{--      <div class="row mt-3">--}}
-              {{--        <div class="col">--}}
-              {{--          <div class="d-flex justify-content-center align-items-center">--}}
-              {{--            <button type="submit" form="comunicacionForm" class="btn btn-primary w-25"><i--}}
-              {{--                class="fas fa-paper-plane"></i>&nbsp;&nbsp;Enviar--}}
-              {{--            </button>--}}
-              {{--          </div>--}}
-              {{--        </div>--}}
-
-              {{--      </div>--}}
               <br>
             </div>
 
@@ -342,14 +273,10 @@
   <script>
     $(function () {
 
-      //Initialize Select2 Elements
-      //    $('.select2').select2()
 
-
-      $('.select2').select2({
-        'theme': 'bootstrap4'
-      })
-
+        $('.select2bs4').select2({
+          theme: 'bootstrap4'
+        })
 
     })
   </script>

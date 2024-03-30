@@ -15,7 +15,7 @@ class ComunicacionDestinatario extends Model
 
   protected $casts = [
     'fhLeido' => 'datetime',
-
+    'fhRespuesta' => 'datetime',
   ];
 
     public function getcarbonFHLeidoAttribute()

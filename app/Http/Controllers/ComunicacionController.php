@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EureLib\Enums\RespuestaTipoEnum;
 use App\EureLib\EureFunctions;
 use App\Models\Alumno;
 use App\Models\Comunicacion;
@@ -89,8 +90,78 @@ class ComunicacionController extends Controller
         ->where('comunicacion_id', '=', $comunicacion->id)
         ->update(['fhLeido' => Carbon::now()]);
 
-      return view('comunicaciones.show', compact('comunicacion', 'responsable', 'alumno'));
+      // Lo paso porque es necesario para la respuesta
+      $comunicacion_destinatario=
+        ComunicacionDestinatario
+          ::where('Cod_Responsable', '=', $responsable->id)
+          ->where('comunicacion_id', '=', $comunicacion->id)
+          ->first();
+
+      if ($comunicacion->tipo_respuesta_id == RespuestaTipoEnum::Fijas->value)
+      {
+        $respuestas_fijas = explode(";", $comunicacion->listas_respuestas_fijas);
+        $respuestas_fijas= array_map('trim', $respuestas_fijas);
+      }
+      else
+        $respuestas_fijas= [];
+
+      return
+        view
+        (
+          'comunicaciones.show',
+          compact('comunicacion', 'comunicacion_destinatario', 'responsable', 'alumno', 'respuestas_fijas')
+        );
     }
+
+    public function storeRespuestaLibre(Request $request)
+    {
+
+      // Algun pequeño control
+      $comunicacionDestinatario= ComunicacionDestinatario::find($request->conmunicacion_destinatario_id);
+
+      if ($comunicacionDestinatario->Cod_Responsable != EureFunctions::getLoggedResponsableAttribute()->Cod_Responsable)
+        abort(403);
+
+      $comunicacionDestinatario->respuesta= $request->respuestaLibre;
+      $comunicacionDestinatario->fhRespuesta= Carbon::now();
+      $comunicacionDestinatario->save();
+
+      return
+        redirect()->route
+        (
+          'comunicaciones.show',
+          [
+            'comunicacion' => $comunicacionDestinatario->comunicacion_id,
+            'alumno' => $comunicacionDestinatario->Cod_Alumno
+          ]
+        );
+    }
+
+  public function storeRespuestaFija(Request $request)
+  {
+
+    // Algun pequeño control
+    $comunicacionDestinatario= ComunicacionDestinatario::find($request->conmunicacion_destinatario_id);
+
+    if ($comunicacionDestinatario->Cod_Responsable != EureFunctions::getLoggedResponsableAttribute()->Cod_Responsable)
+      abort(403);
+
+//    dd($request->all());
+
+    $comunicacionDestinatario->respuesta= $request->respuestaFija;
+    $comunicacionDestinatario->fhRespuesta= Carbon::now();
+    $comunicacionDestinatario->save();
+
+    return
+      redirect()->route
+      (
+        'comunicaciones.show',
+        [
+          'comunicacion' => $comunicacionDestinatario->comunicacion_id,
+          'alumno' => $comunicacionDestinatario->Cod_Alumno
+        ]
+      );
+  }
 
 
 }

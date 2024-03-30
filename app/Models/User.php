@@ -214,7 +214,7 @@ class User extends Authenticatable
     // https://robohash.org/{identificador}.png
     //https://avatars.dicebear.com/api/avataaars/{identificador}.svg.
 
-   
+
     if (empty($this->avatar_image()))
     {
       $DVP= env('EURE_DEFAULT_AVATAR_PROVIDER_SECRETARIA');
@@ -249,10 +249,9 @@ class User extends Authenticatable
   public function background_image()
   {
     if (empty($this->bgImg))
-      return '/assets/images/usuarios/bgs/' . ($this->id % 8) . '.jpg';
+      return url(\App\EureLib\EureFunctions::cliente_path_resources() . '/bgs/' . ($this->id % 8) . '.jpg');
 
-
-      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1280px-Red_flag.svg.png';
+    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1280px-Red_flag.svg.png';
   }
 
   public function scopeEsRemitenteDeComunicacionA($query, $alumno)

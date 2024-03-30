@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [ComunicacionController::class, 'show'])->name('comunicaciones.show');
   Route::get('/comunicaciones/{alumno}', [ComunicacionController::class, 'indexA'])->name('comunicaciones.indexA');
   Route::post('/comunicaciones/{alumno}/filtrado', [ComunicacionController::class, 'indexAFiltered'])->name('comunicaciones.indexAFiltered');
+  Route::post('comunicaciones/{comunicaciondestinatario}/respuestalibre', [ComunicacionController::class, 'storeRespuestaLibre'])->name('comunicaciones.respuestas.libres.store');
+  Route::post('comunicaciones/{comunicaciondestinatario}/respuestafija', [ComunicacionController::class, 'storeRespuestaFija'])->name('comunicaciones.respuestas.fijas.store');
 
   Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
   Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');

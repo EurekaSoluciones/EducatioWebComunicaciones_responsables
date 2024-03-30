@@ -45,6 +45,11 @@ class Comunicacion extends Model
     return $this->belongsTo(Grupo::class, 'Cod_Grupo');
   }
 
+  public function tipo_respuesta()
+  {
+    return $this->belongsTo(RespuestaTipo::class, 'tipo_respuesta_id');
+  }
+
   public function destinatarios()
   {
     $dest =
