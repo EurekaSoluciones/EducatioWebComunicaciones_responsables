@@ -15,7 +15,7 @@
 
           {{--  Aca pueden pasar dos cosas, que ya haya habido respuesta, o que no haya habido--}}
           @if(empty($comunicacion_destinatario->respuesta))
-            <form method="POST"
+            <form method="POST" id="fRespuesta"
                   action="{{ route('comunicaciones.respuestas.libres.store', $comunicacion_destinatario) }}">
               @csrf
               <input type="hidden" name="conmunicacion_destinatario_id" value="{{$comunicacion_destinatario->id}}">
@@ -45,17 +45,14 @@
   <div class="row">
     <div class="col-12">
       <div class="card card-info card-outline">
-
-
-
-          @if(empty($comunicacion_destinatario->respuesta))
+        @if(empty($comunicacion_destinatario->respuesta))
 
           <div class="card-header">
             <h4 class="card-title">Elegí tu Respuesta</h4>
           </div>
           <div class="card-body">
 
-            <form method="POST"
+            <form method="POST" id="fRespuesta"
                   action="{{ route('comunicaciones.respuestas.fijas.store', $comunicacion_destinatario) }}">
               @csrf
               <input type="hidden" name="conmunicacion_destinatario_id" value="{{$comunicacion_destinatario->id}}">
@@ -63,7 +60,8 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-xl-10 p-1">
-                    <select class="form-control select2bs4" data-select2-id="27" id="respuestaFija" name="respuestaFija" required>
+                    <select class="form-control select2bs4" data-select2-id="27" id="respuestaFija" name="respuestaFija"
+                            required>
                       <option>&nbsp;</option>
 
                       @foreach ($respuestas_fijas as $rf)
@@ -81,30 +79,59 @@
               </div>
             </form>
 
-          @else
+            @else
               <div class="card-header">
                 <h4 class="card-title">Respuesta Elegida</h4>
               </div>
               <div class="card-body">
 
-            <select class="form-control select2bs4" data-select2-id="27" id="respuestaFija" name="respuestaFija" disabled>
-              <option>&nbsp;</option>
+                <select class="form-control select2bs4" data-select2-id="27" id="respuestaFija" name="respuestaFija"
+                        disabled>
+                  <option>&nbsp;</option>
 
-              @foreach ($respuestas_fijas as $rf)
-                @if($rf == $comunicacion_destinatario->respuesta)
-                  <option selected>{{ $rf }}</option>
-                @else
-                  <option>{{ $rf }}</option>
+                  @foreach ($respuestas_fijas as $rf)
+                    @if($rf == $comunicacion_destinatario->respuesta)
+                      <option selected>{{ $rf }}</option>
+                    @else
+                      <option>{{ $rf }}</option>
+                    @endif
+
+                  @endforeach
+                </select>
+                <h5 class="text-muted small text-right">{{$comunicacion->created_at->diffForHumans()}}</h5>
                 @endif
 
-              @endforeach
-            </select>
-                <h5 class="text-muted small text-right">{{$comunicacion->created_at->diffForHumans()}}</h5>
-          @endif
-
-        </div>
+              </div>
+          </div>
       </div>
     </div>
   </div>
 
-@endif
+    @endif
+
+    <script>
+      // Captura el evento submit del formulario
+      document.getElementById('fRespuesta').addEventListener('submit', function (event) {
+        // Previene el envío del formulario
+        event.preventDefault();
+
+        // Muestra un cuadro de confirmación
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: "Una vez enviado, no podrás deshacer esta acción.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, enviar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          // Si el usuario confirma, envía el formulario
+          if (result.isConfirmed) {
+            document.getElementById('fRespuesta').submit();
+          }
+        });
+      });
+    </script>
+
+
