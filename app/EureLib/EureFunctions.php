@@ -7,6 +7,7 @@ use App\Models\Alumno;
 use App\Models\AlumnoWeb;
 use App\Models\Comunicacion;
 use App\Models\ComunicacionDestinatario;
+use App\Models\ComunicacionE;
 use App\Models\Responsable;
 use App\Models\User;
 use GuzzleHttp\Client;
@@ -61,50 +62,82 @@ class EureFunctions
     foreach ($responsable->alumnos as $alumno)
     {
 
-      $hmComunicacionesSinLeerResponsableAlumno = Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
       $alumnoKey = 'Alumno_' . $alumno->id;
-      $labelComs = ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '';
-      $labelColor = self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno);
+
+      $hmComunicacionesSinLeerResponsableAlumno = Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
+      $hmRespuestasSinLeerResponsableAlumno= ComunicacionE::deResponsable($responsable)->deAlumno($alumno)->RespuestaSinLeer()->count();
+      $hmTotalCommsMasRespuestas= $hmComunicacionesSinLeerResponsableAlumno + $hmRespuestasSinLeerResponsableAlumno;
+      $labelComsRecibidas = ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '';
+      $labelComsRespuestasSinLeer= ($hmRespuestasSinLeerResponsableAlumno > 0) ? $hmRespuestasSinLeerResponsableAlumno : '';
+      $labelTotalCommsMasRespuestas= ($hmTotalCommsMasRespuestas > 0) ? $hmTotalCommsMasRespuestas : '';
+      $labelComsRecibidasColor = self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno);
+      $labelComsRespuestasSinLeerColor= self::devolverLabelStyleSegunCantidad($hmRespuestasSinLeerResponsableAlumno);
+      $labelColorSuma= self::devolverLabelStyleSegunCantidad($hmTotalCommsMasRespuestas);
 
       $event->menu->addIn('AlumnosACargoRoot',
-        [
-          'text' => $alumno->Nombre,
-          'url' => '',// route('alumnos.show', $alumno),
-          //'route' => 'dummy3',
-          'icon' => 'fas fa-user',
-          'key' => $alumnoKey,
-          'classes' => 'ml-1 ' . $alumno->bg,
-          'label' => $labelComs,
-          'label_color' => $labelColor,
-
-        ]);
+      [
+        'text' => $alumno->Nombre,
+        'url' => '',// route('alumnos.show', $alumno),
+        //'route' => 'dummy3',
+        'icon' => 'fas fa-user',
+        'key' => $alumnoKey,
+        'classes' => 'ml-1 ' . $alumno->bg,
+        'label' => $labelTotalCommsMasRespuestas,
+        'label_color' => $labelColorSuma,
+      ]);
 
       // Ficha
       $event->menu->addIn($alumnoKey,
-        [
-          'text' => 'Ficha',
-          'url' => route('alumnos.show', $alumno),
-          //'route' => 'dummy3',
-          'icon' => 'fas fa-id-card-alt',
-          //     'key' => $alumnoKey,
-          'classes' => 'ml-2',
-        ]);
+      [
+        'text' => 'Ficha',
+        'url' => route('alumnos.show', $alumno),
+        //'route' => 'dummy3',
+        'icon' => 'fas fa-id-card-alt',
+        //     'key' => $alumnoKey,
+        'classes' => 'ml-2',
+      ]);
+
+      $event->menu->addIn($alumnoKey,
+      [
+        'text' => 'Comunicaciones',
+        'url' => '',// route('alumnos.show', $alumno),
+        //'route' => 'dummy3',
+        'icon' => 'fas fa-paper-plane',
+        'key' => 'ComunicacionesA_' . $alumno->id,
+        'classes' => 'ml-2', // . $alumno->bg,
+        'label' => $labelTotalCommsMasRespuestas,
+        'label_color' => $labelColorSuma,
+      ]);
 
 
       // Comunicaciones del alumno
-      $event->menu->addIn($alumnoKey,
-        [
-          'text' => "Comunicaciones",
-          'url' => route('comunicaciones.indexA', $alumno),
-          'icon' => 'fas fa-paper-plane',
-          'color' => 'red',
-          'classes' => 'ml-2',
-          //'route' => 'dummy3',
-          //  'icon' => 'fas fa-user',
-          //'key' => 'Alumno_' . $alumno->id
-          'label' => $labelComs,
-          'label_color' => $labelColor,
-        ]);
+      $event->menu->addIn('ComunicacionesA_' . $alumno->id,
+      [
+        'text' => "Recibidas",
+        'url' => route('comunicaciones.indexA', $alumno),
+        'icon' => 'fas fa-arrow-down',
+        'color' => 'red',
+        'classes' => 'ml-3',
+        //'route' => 'dummy3',
+        //  'icon' => 'fas fa-user',
+        //'key' => 'Alumno_' . $alumno->id
+        'label' => $labelComsRecibidas, //sumarles las respuestas sin leer
+        'label_color' => $labelComsRecibidasColor,
+      ]);
+
+      $event->menu->addIn('ComunicacionesA_' . $alumno->id,
+      [
+        'text' => "Enviadas",
+        'url' => route('comunicaciones.e.indexA', $alumno),
+        'icon' => 'fas fa-arrow-up',
+        'color' => 'red',
+        'classes' => 'ml-3',
+        //'route' => 'dummy3',
+        //  'icon' => 'fas fa-user',
+        //'key' => 'Alumno_' . $alumno->id
+        'label' => $labelComsRespuestasSinLeer, //sumarles las respuestas sin leer
+        'label_color' => $labelComsRespuestasSinLeerColor,
+      ]);
 
       //
       $event->menu->addIn($alumnoKey,
@@ -224,6 +257,11 @@ class EureFunctions
     return $cd->leido == false;
   }
 
+  public static function comunicacionEPendienteDeLectura(ComunicacionE $c)
+  {
+    return $c->fhLeido == null;
+  }
+
   public static function esDestinatarioDeComunicacion(Comunicacion $c, Responsable $r)
   {
     $cd = ComunicacionDestinatario::where('comunicacion_id', '=', $c->id)->where('Cod_Responsable', $r->id)->first();
@@ -322,6 +360,15 @@ class EureFunctions
   {
     return "$ " . self::toStringFromFloat($f);
   }
+
+  public static function cleanFileName($fileName)
+  {
+    // Eliminar caracteres especiales y espacios excepto letras, números, guiones y puntos
+    $cleanedName = preg_replace('/[^A-Za-z0-9\_\.]/', '', $fileName);
+
+    return $cleanedName;
+  }
+
 
   public static function obtenerPDF($rptFN, $fnPrefix, $fnMiddleInsert, $rptParams)
   {

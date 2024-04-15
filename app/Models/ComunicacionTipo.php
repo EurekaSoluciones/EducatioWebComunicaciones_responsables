@@ -12,4 +12,6 @@ class ComunicacionTipo extends Model
   public $timestamps = false;
 
   protected $table = 'web_comunicaciones_tipos';
+
+
 }

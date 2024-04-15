@@ -13,7 +13,6 @@ class HomeController extends Controller
   {
     $responsable = EureFunctions::getLoggedResponsableAttribute();
 
-
     return view('home.index', compact('responsable'));
   }
 }

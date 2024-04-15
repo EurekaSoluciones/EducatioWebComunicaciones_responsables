@@ -18,7 +18,7 @@
 
     <div class="card card-info card-outline ">
       <div class="card-header">
-        <h1 class="card-title">Comunicación </h1>
+        <h1 class="card-title">Comunicación Recibida</h1>
       </div>
 
       <div class="card-body pb-0">
@@ -52,6 +52,8 @@
                       Inventar algo para poner acá
                     @endif
                   </div>
+
+
                 </div>
 
               </div>

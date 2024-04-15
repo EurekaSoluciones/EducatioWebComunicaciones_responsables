@@ -29,7 +29,7 @@
           @else
             <textarea class="form-control two-lines" id="respuestaLibre" name="respuestaLibre" rows="2" disabled>{{$comunicacion_destinatario->respuesta}}
         </textarea>
-            <h5 class="text-muted small text-right">{{$comunicacion->created_at->diffForHumans()}}</h5>
+            <h5 class="text-muted small text-right">{{$comunicacion_destinatario->fhRespuesta->diffForHumans()}}</h5>
           @endif
         </div>
       </div>

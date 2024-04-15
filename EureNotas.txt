@@ -1,3 +1,21 @@
+Preparación para el envio por parte de los padres
+
+docente: 24784660
+padres:
+- 27885245 GOBICH Gustavo
+- 21475665 TRIEMSTRA Claudio Andres
+- 21519357 MRAKOVICH Jorge
+
+
+
+
+
+
+
+
+
+
+
 dni
 
 SP_WEB_NOTASAGRUPADASPORALUMNOBOLETIN @CodAlumno = 1571, @añolectivo= 2023

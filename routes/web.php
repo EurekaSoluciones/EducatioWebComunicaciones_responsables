@@ -1,10 +1,12 @@
 <?php
 
 
+use App\Http\Controllers\AdjuntoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
+use App\Http\Controllers\ComunicacionEController;
 use App\Http\Controllers\CuentaCorrienteController;
 use App\Http\Controllers\DummyController;
 use App\Http\Controllers\HomeController;
@@ -65,6 +67,16 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/comunicaciones/{alumno}/filtrado', [ComunicacionController::class, 'indexAFiltered'])->name('comunicaciones.indexAFiltered');
   Route::post('comunicaciones/{comunicaciondestinatario}/respuestalibre', [ComunicacionController::class, 'storeRespuestaLibre'])->name('comunicaciones.respuestas.libres.store');
   Route::post('comunicaciones/{comunicaciondestinatario}/respuestafija', [ComunicacionController::class, 'storeRespuestaFija'])->name('comunicaciones.respuestas.fijas.store');
+
+  Route::get('/comunicaciones/e/{alumno}', [ComunicacionEController::class, 'indexA'])->name('comunicaciones.e.indexA');
+  Route::get('/comunicaciones/e/show/{comunicacione}', [ComunicacionEController::class, 'show'])->name('comunicaciones.e.show');
+  Route::get('/comunicaciones/e/{alumno}/create', [ComunicacionEController::class, 'createA'])->name('comunicaciones.e.create');
+  Route::post('/comunicaciones/e/{alumno}/store', [ComunicacionEController::class, 'store'])->name('comunicaciones.e.store');
+
+  Route::post('/uploads/comunicaciones/e/imagenes', [AdjuntoController::class, 'storeImagenComunicacione']);
+  Route::post('/uploads/comunicaciones/e/adjuntos', [AdjuntoController::class, 'storeAdjuntoComunicacione'])->name('uploads.comunicaciones.e.adjuntos.store');
+  Route::post('/uploads/adjuntos/e/delete/', [AdjuntoController::class, 'destroyAdjunto'])->name('uploads.adjuntos.delete');
+
 
   Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
   Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');

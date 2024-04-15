@@ -20,21 +20,23 @@
         <a href="{{route('alumnos.editPic', $alumno)}}">Editar foto</a>
 
         <div class="d-flex">
-          <div class="mt-1 bg-gray-light p-2" style="border-radius: 10px">
+          <div class="mt-1  p-2" style="border-radius: 10px;background-color: #ECEEED">
 
 
             <a href="{{route('comunicaciones.indexA', $alumno),}}"><i
                 class="fas fa-paper-plane text-xl {{$alumno->textColorNWConOffset(0)}}"></i></a>&nbsp;&nbsp;&nbsp;
+            <a href="{{route('comunicaciones.e.indexA', $alumno),}}"><i
+                class="fas fas fa-arrow-up text-xl {{$alumno->textColorNWConOffset(1)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('pagos.indexA', $alumno),}}"><i
-                class="fas fa-money-bill-wave-alt text-xl {{$alumno->textColorNWConOffset(1)}}"></i></a>&nbsp;&nbsp;&nbsp;
+                class="fas fa-money-bill-wave-alt text-xl {{$alumno->textColorNWConOffset(2)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('cc.indexA', $alumno),}}"><i
-                class="fas fa-money-check-alt text-xl {{$alumno->textColorNWConOffset(2)}}"></i></a>&nbsp;&nbsp;&nbsp;
+                class="fas fa-money-check-alt text-xl {{$alumno->textColorNWConOffset(3)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('notas.indexA', $alumno),}}"><i
-                class="fas fa-book-open text-xl {{$alumno->textColorNWConOffset(3)}}"></i></a>&nbsp;&nbsp;&nbsp;
+                class="fas fa-book-open text-xl {{$alumno->textColorNWConOffset(4)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('informes.indexA', $alumno),}}"><i
-                class="fas fa-info text-xl {{$alumno->textColorNWConOffset(4)}}"></i></a>&nbsp;&nbsp;&nbsp;
+                class="fas fa-info text-xl {{$alumno->textColorNWConOffset(5)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('asistencias.indexA', $alumno),}}"><i
-                class="fas fa-calendar-times text-xl {{$alumno->textColorNWConOffset(5)}}"></i></a>
+                class="fas fa-calendar-times text-xl {{$alumno->textColorNWConOffset(6)}}"></i></a>
 
           </div>
         </div>

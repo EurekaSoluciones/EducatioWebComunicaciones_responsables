@@ -92,8 +92,6 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card card-info card-outline">
-
-
         @if (session('success'))
           <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
             {{ session('success') }}
