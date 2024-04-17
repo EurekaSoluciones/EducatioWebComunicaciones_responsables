@@ -28,7 +28,7 @@
                     <div class="p-lg-5 p-1">
                       <div class="text-center">
                         <img src="{{ url(\App\EureLib\EureFunctions::cliente_path_resources())}}/institucional/LoginLogo.png" alt="logo" height="120">
-                        <h2 class="text-muted mt-2">IFES</h2>
+                        <h2 class="text-muted mt-2">{{env('EURE_CLIENTE_LEYENDA')}}</h2>
                         <h4 class="text-muted mt-2">Acceso Familias</h4>
                       </div>
 
