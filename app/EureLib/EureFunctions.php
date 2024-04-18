@@ -166,33 +166,33 @@ class EureFunctions
 
       // Esto solo ocurre si el alumno no es inicial.
 
-      if ($alumno->grupo->EPlan->Ciclo <> NivelesEnum::Inicial->value)
-      {
-        $event->menu->addIn($alumnoKey,
-          [
-            'text' => "Notas",
-            'url' => route('notas.indexA', $alumno),
-            'icon' => 'fas fa-book-open',
-            'color' => 'red',
-            'classes' => 'ml-2',
-            //'route' => 'dummy3',
-            //  'icon' => 'fas fa-user',
-            //'key' => 'Alumno_' . $alumno->id
-          ]);
-        //el icono para notas tambien podria ser: fas fa-edit
-      }
+//      if ($alumno->grupo->EPlan->Ciclo <> NivelesEnum::Inicial->value)
+//      {
+//        $event->menu->addIn($alumnoKey,
+//          [
+//            'text' => "Notas",
+//            'url' => route('notas.indexA', $alumno),
+//            'icon' => 'fas fa-book-open',
+//            'color' => 'red',
+//            'classes' => 'ml-2',
+//            //'route' => 'dummy3',
+//            //  'icon' => 'fas fa-user',
+//            //'key' => 'Alumno_' . $alumno->id
+//          ]);
+//        //el icono para notas tambien podria ser: fas fa-edit
+//      }
 
-      $event->menu->addIn($alumnoKey,
-        [
-          'text' => "Informes",
-          'url' => route('informes.indexA', $alumno),
-          'icon' => 'fas fa-info',
-          'color' => 'red',
-          'classes' => 'ml-2',
-          //'route' => 'dummy3',
-          //  'icon' => 'fas fa-user',
-          //'key' => 'Alumno_' . $alumno->id
-        ]);
+//      $event->menu->addIn($alumnoKey,
+//        [
+//          'text' => "Informes",
+//          'url' => route('informes.indexA', $alumno),
+//          'icon' => 'fas fa-info',
+//          'color' => 'red',
+//          'classes' => 'ml-2',
+//          //'route' => 'dummy3',
+//          //  'icon' => 'fas fa-user',
+//          //'key' => 'Alumno_' . $alumno->id
+//        ]);
 
       $event->menu->addIn($alumnoKey,
         [
