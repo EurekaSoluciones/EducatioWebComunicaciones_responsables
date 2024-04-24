@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="card-body">
-              <table>
+           {{--   <table>
                 <tr>
                   <td><h4><i class="fas fa-video"></i></h4></td>
                   <td><h5><a href="#">&nbsp;Instrucciones para el uso del sitio</a></h5></td>
@@ -71,7 +71,7 @@
                 </tr>
 
 
-              </table>
+              </table>--}}
 
 
             </div>
