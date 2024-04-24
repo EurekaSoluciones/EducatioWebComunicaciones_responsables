@@ -391,6 +391,8 @@ class EureFunctions
 
     $JPostData = json_encode($post_data);
 
+//    dd($JPostData);
+
     try
     {
       $r = $client->request('POST', $url, [
