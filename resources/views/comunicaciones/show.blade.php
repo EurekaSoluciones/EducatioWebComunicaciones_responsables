@@ -49,7 +49,7 @@
                         @endif
                       @endforeach
                     @else
-                      Inventar algo para poner acá
+                      
                     @endif
                   </div>
 
