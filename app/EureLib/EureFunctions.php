@@ -292,14 +292,13 @@ class EureFunctions
 
   public static function getIconByFileType($filename)
   {
-    $filename = strtolower($filename);
-
     $extension = self::getFileExtension($filename);
+    $extension = strtolower($extension);
 
     $extImagenes = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 
     if (in_array($extension, $extImagenes))
-      return "/storage/$filename";
+      return url("/storage/$filename");
 
 
     $iconFilename = StaticArrays::$imageMap[$extension] ?? 'GEN_file_icon.svg.png';
