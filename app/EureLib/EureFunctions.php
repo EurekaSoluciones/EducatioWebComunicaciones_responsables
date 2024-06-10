@@ -170,7 +170,7 @@ class EureFunctions
 //      {
 //        $event->menu->addIn($alumnoKey,
 //          [
-//            'text' => "Notas",
+//            'text' => "Informes",
 //            'url' => route('notas.indexA', $alumno),
 //            'icon' => 'fas fa-book-open',
 //            'color' => 'red',
@@ -182,17 +182,17 @@ class EureFunctions
 //        //el icono para notas tambien podria ser: fas fa-edit
 //      }
 
-//      $event->menu->addIn($alumnoKey,
-//        [
-//          'text' => "Informes",
-//          'url' => route('informes.indexA', $alumno),
-//          'icon' => 'fas fa-info',
-//          'color' => 'red',
-//          'classes' => 'ml-2',
-//          //'route' => 'dummy3',
-//          //  'icon' => 'fas fa-user',
-//          //'key' => 'Alumno_' . $alumno->id
-//        ]);
+      $event->menu->addIn($alumnoKey,
+        [
+          'text' => "Informes",
+          'url' => route('informes.indexA', $alumno),
+          'icon' => 'fas fa-book-open',
+          'color' => 'red',
+          'classes' => 'ml-2',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+        ]);
 
       $event->menu->addIn($alumnoKey,
         [

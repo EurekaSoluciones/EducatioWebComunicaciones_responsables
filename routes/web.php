@@ -83,7 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/cc/{alumno}', [CuentaCorrienteController::class, 'indexA'])->name('cc.indexA');
 
-  Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
+ // Notas lo sacamos
+ // Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
 
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
 
