@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
  // Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
 
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
+  Route::get('/informes/{alumno}/duco', [InformeController::class, 'descargarDUCO'])->name('informes.descargarDUCO');
 
   Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
 
