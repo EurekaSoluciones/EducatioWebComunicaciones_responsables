@@ -16,7 +16,7 @@
     </div>
     <div class="card-body">
       <a href="{{ route('informes.descargarDUCO', $alumno) }}">
-        Documento Unico De Comunicación (DUCO)
+        BOLETIN
       </a>
     </div>
 {{--    <div class="card-footer">--}}

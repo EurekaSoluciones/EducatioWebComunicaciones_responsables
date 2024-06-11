@@ -13,6 +13,8 @@ class InformeController extends Controller
 {
   public function indexA(Alumno $alumno)
   {
+//dd(EureFunctions::cliente_id());
+
     if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
       abort(403, 'No permitido');
 
@@ -28,7 +30,7 @@ class InformeController extends Controller
         return $this->indexA_sunrise($alumno);
 
       default:
-        return "Visualizador de informes estandar";
+        return "Visualizador de informes estandar - DEFAULT SWITCH";
 
     }
   }
@@ -146,7 +148,7 @@ class InformeController extends Controller
   {
 //    dd($alumno->Ciclo);
 
-    //dd( NivelesEnum::Inicial);
+
 
 
     // Y ojo ahora cambia todo según el nivel
