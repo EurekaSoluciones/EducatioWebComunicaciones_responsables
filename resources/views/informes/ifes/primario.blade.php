@@ -12,7 +12,7 @@
 
   <div class="card card-primary card-outline">
     <div class="card-header ">
-      <h3 class="card-title">Descarga de Informes</h3>
+      <h3 class="card-title">Descarga de Informes / DUCO</h3>
     </div>
     <div class="card-body">
       <a href="{{ route('informes.descargarDUCO', $alumno) }}">

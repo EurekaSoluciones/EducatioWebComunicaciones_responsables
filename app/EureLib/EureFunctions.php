@@ -184,7 +184,7 @@ class EureFunctions
 
       $event->menu->addIn($alumnoKey,
         [
-          'text' => "Informes",
+          'text' => "Informes / DUCO",
           'url' => route('informes.indexA', $alumno),
           'icon' => 'fas fa-book-open',
           'color' => 'red',
