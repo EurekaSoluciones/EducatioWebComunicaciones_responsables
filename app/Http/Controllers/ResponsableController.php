@@ -41,6 +41,8 @@ class ResponsableController extends Controller
   }
   public function update(Request $request, User $user)
   {
+//    dd($request->all());
+
     if ($request->chSinImagen == 'on')
     {
       $user->avatarImg = '';
@@ -48,25 +50,21 @@ class ResponsableController extends Controller
     }
     else
     {
-      if ($request->hasFile('imagenAvatar'))
-      {
-        $validator = Validator::make($request->all(), [
-          'imagenAvatar' => 'required|image',
-        ]);
+      // La imagen viene cropeada ahora
+      $data = $request->input('cropped_image');
 
-        if ($validator->fails()) {
-          // La validación falló
-          return redirect()->back()->withErrors($validator)->withInput();
-        }
+      list($type, $data) = explode(';', $data);
+      list(, $data)      = explode(',', $data);
+      $data = base64_decode($data);
 
-        $archivo = $request->file('imagenAvatar');
-        $nombreArchivo = 'AVResp_' . date('ymdHis') . '_' . $archivo->getClientOriginalName();
-        Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo));
+      $nombreArchivo = 'AVResp_' . date('ymdHis') . '_' . rand(100, 999);
+      Storage::disk('public')->put($nombreArchivo, $data);
 
-        $user->avatarImg = $nombreArchivo;
-        $user->save();
+    //  Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo));
+
+      $user->avatarImg = $nombreArchivo;
+      $user->save();
       }
-    }
 
     return redirect()->route('responsables.show', ['responsable' => $user->responsable])->with('success', 'Perfil Actualizado.');
 

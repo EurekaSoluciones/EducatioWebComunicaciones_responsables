@@ -45,6 +45,8 @@ class AlumnoController extends Controller
 
   public function updatePic(Request $request, Alumno $alumno)
   {
+//    dd($request->all());
+
     if ($request->chSinImagen == 'on')
     {
       $alumno->web->avatarImg = '';
@@ -52,27 +54,22 @@ class AlumnoController extends Controller
     }
     else
     {
-      if ($request->hasFile('imagenAvatar'))
-      {
-        $validator = Validator::make($request->all(), [
-          'imagenAvatar' => 'required|image',
-        ]);
+      // La imagen viene cropeada ahora
+      $data = $request->input('cropped_image');
 
-        if ($validator->fails()) {
-          // La validación falló
-          return redirect()->back()->withErrors($validator)->withInput();
-        }
+      list($type, $data) = explode(';', $data);
+      list(, $data)      = explode(',', $data);
+      $data = base64_decode($data);
 
-        $archivo = $request->file('imagenAvatar');
-        $nombreArchivo = 'AVAlumno_' . date('ymdHis') . '_' . $archivo->getClientOriginalName();
-        Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo));
+      $nombreArchivo = 'AVAlumno_' . date('ymdHis') . '_' . rand(100, 999);
+      Storage::disk('public')->put($nombreArchivo, $data);
 
-        $alumno->web->avatarImg = $nombreArchivo;
-        $alumno->web->save();
-      }
+      //  Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo));
+
+      $alumno->web->avatarImg = $nombreArchivo;
+      $alumno->web->save();
     }
 
     return redirect()->route('alumnos.show', compact('alumno'))->with('success', 'Perfil Actualizado.');
-
   }
 }

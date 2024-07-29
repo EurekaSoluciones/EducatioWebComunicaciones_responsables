@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/resp/logged', [ResponsableController::class, 'showLogged'])->name('responsables.showLogged');
   Route::get('/resp/{responsable}', [ResponsableController::class, 'show'])->name('responsables.show');
   Route::get('/resp/{responsable}/edit', [ResponsableController::class, 'edit'])->name('responsables.edit');
-  Route::patch('/resp/{user}/edit', [ResponsableController::class, 'update'])->name('responsables.update');
+  Route::post('/resp/{user}/edit', [ResponsableController::class, 'update'])->name('responsables.update');
 
   Route::get('/alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumnos.show')->middleware('auth');
   Route::get('/alumno/{alumno}/editPic', [AlumnoController::class, 'editPic'])->name('alumnos.editPic');
@@ -76,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/uploads/comunicaciones/e/imagenes', [AdjuntoController::class, 'storeImagenComunicacione']);
   Route::post('/uploads/comunicaciones/e/adjuntos', [AdjuntoController::class, 'storeAdjuntoComunicacione'])->name('uploads.comunicaciones.e.adjuntos.store');
   Route::post('/uploads/adjuntos/e/delete/', [AdjuntoController::class, 'destroyAdjunto'])->name('uploads.adjuntos.delete');
-
 
   Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
   Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');
