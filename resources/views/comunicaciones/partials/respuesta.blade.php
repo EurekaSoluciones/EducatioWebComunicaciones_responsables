@@ -98,7 +98,7 @@
 
                   @endforeach
                 </select>
-                <h5 class="text-muted small text-right">{{$comunicacion->created_at->diffForHumans()}}</h5>
+                <h5 class="text-muted small text-right">{{$comunicacion_destinatario->fhRespuesta->diffForHumans()}}</h5>
                 @endif
 
               </div>
