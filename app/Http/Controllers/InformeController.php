@@ -25,9 +25,12 @@ class InformeController extends Controller
       case 'ifesplottier':
         return $this->indexA_ifes($alumno);
 
-
       case 'sunrise':
         return $this->indexA_sunrise($alumno);
+
+      case 'demo':
+        return $this->indexA_gen($alumno);
+
 
       default:
         return "Visualizador de informes estandar - DEFAULT SWITCH";
@@ -246,6 +249,112 @@ class InformeController extends Controller
 //    dd($informeItems3er);
 
     return view('informes.ifes.secundario', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_gen(Alumno $alumno)
+  {
+//    dd($alumno->Ciclo);
+
+
+
+
+    // Y ojo ahora cambia todo según el nivel
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        return $this->indexA_gen_inicial($alumno);
+
+      case NivelesEnum::Primario->value:
+        return $this->indexA_gen_primario($alumno);
+
+      case NivelesEnum::Secundario->value:
+        return $this->indexA_gen_secundario($alumno);
+
+      default:
+        return abort(400, 'Ciclo inesperado ' . $alumno->Ciclo);
+    }
+  }
+
+  public function indexA_gen_inicial(Alumno $alumno)
+  {
+
+    $informesItems = DB::select('exec SP_WEB_ConsultaConceptos @CodAlumno = ?, @anioLect = ?', array($alumno->id, EureFunctions::al()));
+
+    $informeItems1er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '1_');
+    })->all();
+
+    $informeItems2do = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '2_');
+    })->all();
+
+    $informeItems3er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '3_');
+    })->all();
+
+
+
+//    dump($informeItems1er);
+//    dump($informeItems2do);
+//    dd($informeItems3er);
+
+    return view('informes.gen.inicial', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_gen_primario(Alumno $alumno)
+  {
+    $informesItems = DB::select('exec SP_WEB_ConsultaConceptos @CodAlumno = ?, @anioLect = ?', array($alumno->id, EureFunctions::al()));
+
+    $informeItems1er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '1_');
+    })->all();
+
+    $informeItems2do = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '2_');
+    })->all();
+
+    $informeItems3er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '3_');
+    })->all();
+
+
+
+//    dump($informeItems1er);
+//    dump($informeItems2do);
+//    dd($informeItems3er);
+
+    return view('informes.gen.primario', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_gen_secundario(Alumno $alumno)
+  {
+    $informesItems = DB::select('exec SP_WEB_ConsultaConceptos @CodAlumno = ?, @anioLect = ?', array($alumno->id, EureFunctions::al()));
+
+    $informeItems1er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '1_');
+    })->all();
+
+    $informeItems2do = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '2_');
+    })->all();
+
+    $informeItems3er = collect($informesItems)->filter(function ($item) {
+      return str_starts_with($item->Pestania, '3_');
+    })->all();
+
+
+
+//    dump($informeItems1er);
+//    dump($informeItems2do);
+//    dd($informeItems3er);
+
+    return view('informes.gen.secundario', compact('alumno', 'informeItems1er', 'informeItems2do', 'informeItems3er'));
 
     //    dd($notas);
   }

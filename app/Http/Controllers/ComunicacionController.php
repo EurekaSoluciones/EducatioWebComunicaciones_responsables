@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 
 class ComunicacionController extends Controller
 {
+
   public function indexA(Alumno $alumno)
   {
     $responsable= EureFunctions::getLoggedResponsableAttribute();
