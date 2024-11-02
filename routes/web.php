@@ -5,6 +5,7 @@ use App\Http\Controllers\AdjuntoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\Auth\EureAuthController;
+use App\Http\Controllers\CarteleraController;
 use App\Http\Controllers\ComunicacionController;
 use App\Http\Controllers\ComunicacionEController;
 use App\Http\Controllers\CuentaCorrienteController;
@@ -87,6 +88,10 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
   Route::get('/informes/{alumno}/duco', [InformeController::class, 'descargarDUCO'])->name('informes.descargarDUCO');
+
+  Route::get('/carteleras/GENERAL', [CarteleraController::class, 'show_cartelera_general_st'])->name('carteleras.general.show');
+  Route::get('/carteleras/{cartelera}', [CarteleraController::class, 'show'])->name('carteleras.show');
+
 
   Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
 

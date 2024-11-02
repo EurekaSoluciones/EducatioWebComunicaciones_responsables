@@ -306,6 +306,13 @@ return [
       //'label_color' => 'success',
     ],
     [
+      'text' => 'Carteleras',
+      'icon' => 'fas fa-chalkboard',
+      'label_color' => 'success',
+      'key' => 'CartelerasRoot',
+    ],
+
+    [
       'text' => ' Alumnos',
       'icon' => 'fas fa-user-friends',
       'label_color' => 'success',

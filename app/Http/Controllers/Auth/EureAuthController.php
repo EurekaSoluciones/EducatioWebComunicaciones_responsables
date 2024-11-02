@@ -36,9 +36,8 @@ class EureAuthController extends Controller
 
     $B = Auth::attempt(['login' => $request->login, 'password' => $request->password, 'tipo' => 'Responsable']);
 
-    if ($B) {
-
-
+    if ($B)
+    {
       $request->session()->regenerate();
 
       return redirect()->intended('/');

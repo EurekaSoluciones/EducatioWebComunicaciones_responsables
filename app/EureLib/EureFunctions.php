@@ -5,6 +5,7 @@ namespace App\EureLib;
 use App\EureLib\Enums\NivelesEnum;
 use App\Models\Alumno;
 use App\Models\AlumnoWeb;
+use App\Models\Cartelera;
 use App\Models\Comunicacion;
 use App\Models\ComunicacionDestinatario;
 use App\Models\ComunicacionE;
@@ -21,6 +22,17 @@ use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
 class EureFunctions
 {
+  public static function loggedUser()
+  {
+    return User::find(Auth::id());
+  }
+
+  public static function loggedUserId()
+  {
+    return Auth::id();
+  }
+
+
   public static function al()
   {
     return env('EURE_AL');
@@ -46,6 +58,10 @@ class EureFunctions
     return 'assets/C/' . self::cliente_id() . '/';
   }
 
+  public static function getCarteleraGeneral()
+  {
+    return Cartelera::where('tipo', 'GENERAL')->where('activa', true)->first();
+  }
 
   public static function crearMenus()
   {
@@ -59,6 +75,22 @@ class EureFunctions
   {
     $responsable = self::getLoggedResponsableAttribute();
 
+    // Carteleras
+    $carteleras = Cartelera::where('activa', true)->get();
+
+    foreach ($carteleras as $cartelera)
+    {
+      $event->menu->addIn('CartelerasRoot',
+        [
+          'text' => $cartelera->nombre,
+          'url' => route('carteleras.show', $cartelera),
+          'icon' => 'fas fa-dot-circle',
+          'key' => 'Cartelera_' . $cartelera->id,
+          'classes' => 'ml-1',
+        ]);
+    }
+
+    // Alumnos a cargo
     foreach ($responsable->alumnos as $alumno)
     {
 

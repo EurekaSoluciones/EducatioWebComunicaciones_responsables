@@ -14,7 +14,7 @@
     <div class="col-12 col-lg-10">
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="card {{$responsable->card}} card-outline">
             <div class="card-header">
               <h3 class="card-title">Perfil</h3>
@@ -45,10 +45,10 @@
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="card col-md-6">
+        <div class="col-md-7">
+          <div class="card ">
             <div class="card-header">
-              <h3 class="card-title">Cartelera</h3>
+              <h3 class="card-title">Cartelera General <a href="{{route('carteleras.general.show')}}">[Ir a cartelera completa]</a></h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                   <i class="fas fa-minus"></i>
@@ -58,21 +58,12 @@
                 </button>
               </div>
             </div>
-            <div class="card-body">
-           {{--   <table>
-                <tr>
-                  <td><h4><i class="fas fa-video"></i></h4></td>
-                  <td><h5><a href="#">&nbsp;Instrucciones para el uso del sitio</a></h5></td>
-                </tr>
 
-                <tr>
-                  <td><h4><i class="fas fa-file-pdf text-red"></i></td>
-                  <td><h5><a href="#">Reglamento</a></h5></td>
-                </tr>
+            <div class="card-body  rounded"  >
+              <div class="scrollable-ddiv overflow-auto bg-light rounded border-primary p-2" style="max-height: 240px" >
+                {!! $carteleraG->cartelera !!}
 
-
-              </table>--}}
-
+              </div>
 
             </div>
 
@@ -105,6 +96,8 @@
 
 @section('css')
   <link rel="stylesheet" href="/css/admin_custom.css">
+
+
 @stop
 
 @section('js')

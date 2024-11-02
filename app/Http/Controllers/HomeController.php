@@ -13,6 +13,19 @@ class HomeController extends Controller
   {
     $responsable = EureFunctions::getLoggedResponsableAttribute();
 
-    return view('home.index', compact('responsable'));
+    $carteleraG = EureFunctions::getCarteleraGeneral();
+
+
+    if ($carteleraG != null)
+    {
+      if
+      (
+        $responsable->web_user->fh_visualizacion_cartelera_general == null ||
+        $responsable->web_user->fh_visualizacion_cartelera_general < $carteleraG->updated_at
+      )
+        return redirect()->route('carteleras.show', $carteleraG);
+    }
+
+    return view('home.index', compact('responsable', 'carteleraG'));
   }
 }

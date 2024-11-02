@@ -10,3 +10,15 @@
     display: none;
   }
 }
+
+
+.scrollable-div {
+
+  /*height: 200px; !* Altura limitada *!*/
+  overflow-y: auto; /* Permitir desplazamiento vertical */
+  /*border: 1px solid #ccc; !* Opcional: para visualizar el contenedor *!*/
+  padding: 10px; /* Opcional: agregar espacio interno */
+  box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho y la altura total */
+}
+
+
