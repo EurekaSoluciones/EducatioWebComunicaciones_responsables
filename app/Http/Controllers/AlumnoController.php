@@ -61,7 +61,7 @@ class AlumnoController extends Controller
       list(, $data)      = explode(',', $data);
       $data = base64_decode($data);
 
-      $nombreArchivo = 'AVAlumno_' . date('ymdHis') . '_' . rand(100, 999);
+      $nombreArchivo = 'AVAlumno_' . date('ymdHis') . '_' . rand(100, 999) . '.png';
       Storage::disk('public')->put($nombreArchivo, $data);
 
       //  Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo));
