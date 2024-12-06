@@ -29,6 +29,10 @@ class Comunicacion extends Model
     return explode(";", $this->etiquetas);
   }
 
+  public function leido(Responsable $responsable)
+  {
+    return \App\EureLib\EureFunctions::comunicacionPendienteDeLectura($this, $responsable);
+  }
 
   public function remitente()
   {

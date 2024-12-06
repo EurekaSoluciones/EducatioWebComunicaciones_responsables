@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\ComunicacionDestinatario;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
@@ -40,6 +41,31 @@ class APIController extends Controller
       {
         $dummy_comunicacion_remitente= $comunicacion->remitente;
         $comunicacion->remitente->avatar_img= $comunicacion->remitente->avatar_image_withDefaults();
+
+        $comunicacion_destinatario=
+          ComunicacionDestinatario
+            ::where('comunicacion_id', $comunicacion->id)
+            ->where('Cod_Alumno', $alumno->id)
+            ->where('Cod_Responsable', $responsable->id)
+            ->first();
+
+        $comunicacion->leido= (bool) $comunicacion_destinatario->leido;
+        $comunicacion->leidoInfo= $comunicacion_destinatario;
+
+        $comunicacion->leidoInfo->fhLeido4Humans = $comunicacion->leidoInfo->fhLeido != null
+          ? $comunicacion->leidoInfo->fhLeido->diffForHumans()
+          : null;
+
+        $comunicacion->leidoInfo->fhRespuesta4Humans = $comunicacion->leidoInfo->fhRespuesta
+          ? $comunicacion->leidoInfo->fhRespuesta->diffForHumans()
+          : null;
+
+        $comunicacion->leidoInfo->fhReaccion4Humans = $comunicacion->leidoInfo->fhReaccion
+          ? $comunicacion->leidoInfo->fhReaccion->diffForHumans()
+          : null;
+
+
+
 
         $dummy_comunicacion_tipo= $comunicacion->tipo;
         $dummy_comunicacion_tipo_respuesta= $comunicacion->tipo_respuesta;
