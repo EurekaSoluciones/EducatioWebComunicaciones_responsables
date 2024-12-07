@@ -32,6 +32,28 @@ class APIController extends Controller
       $web= $alumno->web;
       $web->avatar_img= $alumno->avatar_image_withDefaults();
 
+      if ($alumno->Responsable1 != null)
+      {
+        $R1 = $alumno->EResponsable1()->first();
+        $R1->avatar_img= $R1->webuser->SafeAvatarImg;
+        $R1->web_user = $R1->webuser;
+        $alumno->Responsable1 = $R1;
+
+        $alumno->Tipo_Responsable1 = $alumno->ETipoResponsable1()->first();
+      }
+
+      if ($alumno->Responsable2 != null)
+      {
+        $R2= $alumno->EResponsable2()->first();
+        $R2->avatar_img= $R2->webuser->SafeAvatarImg;
+        $R2->web_user = $R2->webuser;
+        $alumno->Responsable2 = $R2;
+
+        $alumno->Tipo_Responsable2 = $alumno->ETipoResponsable2()->first();
+      }
+
+//      dd($alumno->Responsable11);
+
       $eCurso= $grupo->ECurso;
       $eDivision= $grupo->EDivision;
       $eTurno= $grupo->ETurno;
@@ -73,6 +95,7 @@ class APIController extends Controller
 
       }
 
+
     }
 
 
@@ -84,6 +107,7 @@ class APIController extends Controller
         'alumnos' => $responsable->alumnos,
 
       ];
+
 
 
 
