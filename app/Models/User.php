@@ -144,20 +144,20 @@ class User extends Authenticatable
   // Esto es porque el RN no maneja bien el tema de los svgs
   public function avatar_image_withDefaults4API()
   {
-    // Complicadito el diseño eh.
+    if(!empty($this->avatar_image()))
+      return $this->avatar_image();
+
+    // Complicadito el diseño eh. Por ahora sencillo
     switch ($this->tipo)
     {
       case 'Responsable':
-        return $this->avatar_image_withDefaults_Responsable4API();
-        break;
+        return  url('assets/images/perfil_generico.png');
 
       case 'Profe':
-        return $this->avatar_image_withDefaults_Profe4API();
-        break;
+        return  url('assets/images/perfil_generico.png');
 
       case 'Secretaria':  // Secretaria, académica? decidite
-        return $this->avatar_image_withDefaults_Secretaria4API();
-        break;
+        return  url('assets/images/perfil_generico.png');
     }
   }
 

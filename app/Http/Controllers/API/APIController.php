@@ -20,7 +20,7 @@ class APIController extends Controller
     // Estas variables no se usar después. Es para levantar las lazys. Si no, no se devuelen
     $responsable = $user->responsable;
 
-    $user->avatarImg= $user->avatar_image_withDefaults();
+    $user->avatarImg= $user->avatar_image_withDefaults4API();
     $user->bgImg= $user->background_image();
 
     $alumnos = $responsable->alumnos;
@@ -35,7 +35,7 @@ class APIController extends Controller
       if ($alumno->Responsable1 != null)
       {
         $R1 = $alumno->EResponsable1()->first();
-        $R1->avatar_img= $R1->webuser->SafeAvatarImg;
+        $R1->avatar_img= $R1->webuser->avatar_image_withDefaults4API();
         $R1->web_user = $R1->webuser;
         $alumno->Responsable1 = $R1;
 
@@ -45,7 +45,7 @@ class APIController extends Controller
       if ($alumno->Responsable2 != null)
       {
         $R2= $alumno->EResponsable2()->first();
-        $R2->avatar_img= $R2->webuser->SafeAvatarImg;
+        $R2->avatar_img= $R2->webuser->avatar_image_withDefaults4API();
         $R2->web_user = $R2->webuser;
         $alumno->Responsable2 = $R2;
 
@@ -62,7 +62,7 @@ class APIController extends Controller
       foreach ($comunicaciones as $comunicacion)
       {
         $dummy_comunicacion_remitente= $comunicacion->remitente;
-        $comunicacion->remitente->avatar_img= $comunicacion->remitente->avatar_image_withDefaults();
+        $comunicacion->remitente->avatar_img= $comunicacion->remitente->avatar_image_withDefaults4API();
 
         $comunicacion_destinatario=
           ComunicacionDestinatario
