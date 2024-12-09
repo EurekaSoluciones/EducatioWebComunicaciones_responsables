@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\EureLib\EducatioCommFunctions;
 use App\Http\Controllers\Controller;
 use App\Models\ComunicacionDestinatario;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class APIController extends Controller
       $comunicaciones = $alumno->comunicaciones;
       $grupo = $alumno->grupo;
       $web= $alumno->web;
-      $web->avatar_img= $alumno->avatar_image_withDefaults4API();
+//      $web->avatar_img= $alumno->avatar_image_withDefaults4API();
+      $web->avatar_img= $alumno->avatar_image_withDefaults();
 
       if ($alumno->Responsable1 != null)
       {
@@ -94,6 +96,8 @@ class APIController extends Controller
         $dummy_comunicacion_adjuntos= $comunicacion->adjuntos;
 
       }
+
+      $alumno->cc= EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
 
 
     }

@@ -121,7 +121,7 @@
             </thead>
 
             <tbody>
-            @foreach($ccitems as $item)
+            @foreach($ccItems as $item)
 {{--              {{dd($item)}}--}}
               @php
                 if ($item->Saldo == 0)

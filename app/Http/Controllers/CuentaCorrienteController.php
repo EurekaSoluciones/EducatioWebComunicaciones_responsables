@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EureLib\EureFunctions;
+use App\EureLib\EducatioCommFunctions;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -17,56 +18,17 @@ class CuentaCorrienteController extends Controller
     if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
       abort(403, 'No permitido');
 
-    $hoy = EureFunctions::hoy();
-    $udm= EureFunctions::ultimoDiaMes();
-    $hasta= EureFunctions::ultimoDiaMes()->addMonth();
+    $venceEsteMes = 0.0;
+    $venceHoy = 0;
+    $deudaVencida = 0;
+    $proximoVencimiento = Carbon::create(2050, 1, 1, 12, 0, 0);
 
-    $ccitems= DB::select('exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = ?', array($alumno->id, null, $hasta));
 
-    $ccitems = array_map(function ($fila) {
-      $fila->Fecha_Venc = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Venc);
-      $fila->Monto = (float)$fila->Monto;
-      $fila->Saldo= (float)$fila->Saldo;
-
-      return $fila;
-    }, $ccitems);
-
-//    dd($ccitems);
-
-    // Vamos a tener que hacer fuerza bruta acá. Después agregar los intereses
-
-    $venceEsteMes= 0.0;
-    $venceHoy= 0;
-    $deudaVencida= 0;
-    $proximoVencimiento= Carbon::create(2050, 1, 1, 12, 0, 0);
-
-    foreach ($ccitems as $item)
-    {
-      // Básicamente ver si es deuda, si es este mes, etc etc
-      if ($item->Saldo > 0)
-      {
-        if ($item->Fecha_Venc > $hoy)
-        {
-          if ($item->Fecha_Venc <= $udm)
-          {
-            $venceEsteMes += $item->Saldo;
-
-            if ($item->Fecha_Venc < $proximoVencimiento)
-              $proximoVencimiento = $item->Fecha_Venc;
-          }
-        }
-
-        if ($item->Fecha_Venc < $hoy)
-          $deudaVencida+= $item->Saldo;
-
-        if ($item->Fecha_Venc == $hoy)
-          $venceHoy+= $item->Saldo;
-      }
-    }
+    $ccItems = EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
 
 //    dd($venceEsteMes);
 
-    return view('cuentascorrientes.indexa', compact('ccitems', 'alumno', 'venceEsteMes', 'venceHoy', 'proximoVencimiento', 'deudaVencida' ));
+    return view('cuentascorrientes.indexa', compact('ccItems', 'alumno', 'venceEsteMes', 'venceHoy', 'proximoVencimiento', 'deudaVencida' ));
   }
 
   public function pagosA(Alumno $alumno)
