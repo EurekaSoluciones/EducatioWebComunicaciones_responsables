@@ -233,4 +233,15 @@ class Alumno extends Model
     return $AvatarIMG;
 
   }
+
+  public function avatar_image_withDefaults4API()
+  {
+
+    if (empty($this->avatar_image()))
+      $AvatarIMG = url('assets/images/perfil_generico.png');
+    else
+      $AvatarIMG = $this->avatar_image();
+
+    return $AvatarIMG;
+  }
 }

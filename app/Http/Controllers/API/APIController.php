@@ -30,7 +30,7 @@ class APIController extends Controller
       $comunicaciones = $alumno->comunicaciones;
       $grupo = $alumno->grupo;
       $web= $alumno->web;
-      $web->avatar_img= $alumno->avatar_image_withDefaults();
+      $web->avatar_img= $alumno->avatar_image_withDefaults4API();
 
       if ($alumno->Responsable1 != null)
       {

@@ -66,17 +66,17 @@ class User extends Authenticatable
 
   public function getnombreYApellidoAttribute()
   {
-    return  $this->nombres . ' ' . $this->apellidos;
+    return $this->nombres . ' ' . $this->apellidos;
   }
 
   public function getapellidoComaNombresAttribute()
   {
-    return  $this->apellidos . ', ' . $this->nombres;
+    return $this->apellidos . ', ' . $this->nombres;
   }
 
   public function getNombreCompletoAttribute()
   {
-    return  $this->nombres . ' ' . $this->apellidos;
+    return $this->nombres . ' ' . $this->apellidos;
   }
 
   public function getSafeAvatarImgAttribute()
@@ -125,7 +125,7 @@ class User extends Authenticatable
   public function avatar_image_withDefaults()
   {
     // Complicadito el diseño eh.
-    switch($this->tipo)
+    switch ($this->tipo)
     {
       case 'Responsable':
         return $this->avatar_image_withDefaults_Responsable();
@@ -141,6 +141,27 @@ class User extends Authenticatable
     }
   }
 
+  // Esto es porque el RN no maneja bien el tema de los svgs
+  public function avatar_image_withDefaults4API()
+  {
+    // Complicadito el diseño eh.
+    switch ($this->tipo)
+    {
+      case 'Responsable':
+        return $this->avatar_image_withDefaults_Responsable4API();
+        break;
+
+      case 'Profe':
+        return $this->avatar_image_withDefaults_Profe4API();
+        break;
+
+      case 'Secretaria':  // Secretaria, académica? decidite
+        return $this->avatar_image_withDefaults_Secretaria4API();
+        break;
+    }
+  }
+
+
   public function avatar_image_withDefaults_Responsable()
   {
     // https://robohash.org/{identificador}.png
@@ -148,30 +169,29 @@ class User extends Authenticatable
 
     if (empty($this->avatar_image()))
     {
-      $DVP= env('EURE_DEFAULT_AVATAR_PROVIDER_RESPONSABLES');
+      $DVP = env('EURE_DEFAULT_AVATAR_PROVIDER_RESPONSABLES');
 
-      switch($DVP)
+      switch ($DVP)
       {
         case 'RobotoSet4':
-          $AvatarIMG=  'https://robohash.org/' . $this->id . '.png?set=set4';
+          $AvatarIMG = 'https://robohash.org/' . $this->id . '.png?set=set4';
           break;
 
         case 'avataroxro_Iniciales':  // este no anda más
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
 
         case 'ui-avatars_Iniciales':
-          $AvatarIMG= "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->nombres}+{$this->apellidos}";
-        break;
+          $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->nombres}+{$this->apellidos}";
+          break;
 
         default:
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
       }
 
-    }
-    else
-      $AvatarIMG= $this->avatar_image();
+    } else
+      $AvatarIMG = $this->avatar_image();
 
 
     return $AvatarIMG;
@@ -184,26 +204,25 @@ class User extends Authenticatable
 
     if (empty($this->avatar_image()))
     {
-      $DVP= env('EURE_DEFAULT_AVATAR_PROVIDER_PROFES');
+      $DVP = env('EURE_DEFAULT_AVATAR_PROVIDER_PROFES');
 
-      switch($DVP)
+      switch ($DVP)
       {
         case 'RobotoSet4':
-          $AvatarIMG=  'https://robohash.org/' . $this->id . '.png?set=set4';
+          $AvatarIMG = 'https://robohash.org/' . $this->id . '.png?set=set4';
           break;
 
         case 'avataroxro_Iniciales':
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
 
         default:
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
       }
 
-    }
-    else
-      $AvatarIMG= $this->avatar_image();
+    } else
+      $AvatarIMG = $this->avatar_image();
 
 
     return $AvatarIMG;
@@ -217,34 +236,34 @@ class User extends Authenticatable
 
     if (empty($this->avatar_image()))
     {
-      $DVP= env('EURE_DEFAULT_AVATAR_PROVIDER_SECRETARIA');
+      $DVP = env('EURE_DEFAULT_AVATAR_PROVIDER_SECRETARIA');
 
-      switch($DVP)
+      switch ($DVP)
       {
         case 'RobotoDefault':
-          $AvatarIMG=  'https://robohash.org/' . $this->id . '.png';
+          $AvatarIMG = 'https://robohash.org/' . $this->id . '.png';
           break;
 
         case 'RobotoSet4':
-          $AvatarIMG=  'https://robohash.org/' . $this->id . '.png?set=set4';
+          $AvatarIMG = 'https://robohash.org/' . $this->id . '.png?set=set4';
           break;
 
         case 'avataroxro_Iniciales':
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
 
         default:
-          $AvatarIMG= "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
           break;
       }
 
-    }
-    else
-      $AvatarIMG= $this->avatar_image();
+    } else
+      $AvatarIMG = $this->avatar_image();
 
 
     return $AvatarIMG;
   }
+
 
   public function background_image()
   {
@@ -271,8 +290,9 @@ class User extends Authenticatable
 
   public function scopeRemitentesDe($query, $comunicaciones)
   {
-    if ($comunicaciones != null) {
-      $ids= $comunicaciones->pluck('usuario_id');
+    if ($comunicaciones != null)
+    {
+      $ids = $comunicaciones->pluck('usuario_id');
 
       $query->whereIn('id', $ids);
     }
