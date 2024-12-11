@@ -61,6 +61,18 @@ class EducatioCommFunctions
 
   }
 
+public static function Pagos_Obtener(Alumno $alumno, $fDesde, $fHasta)
+  {
+    $pagos = DB::select('exec SP_WEB_PagosEfectuados @CodAlumno = ?, @FDesde = ?, @FHasta = ?', array($alumno->id, $fDesde, $fHasta));
 
+    $pagos = array_map(function ($fila) {
+      $fila->Fecha_Pago = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Pago);
+      $fila->Total = (float)$fila->Total;
+
+      return $fila;
+    }, $pagos);
+
+    return $pagos;
+  }
 
 }

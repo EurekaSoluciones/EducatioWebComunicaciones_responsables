@@ -37,14 +37,16 @@ class CuentaCorrienteController extends Controller
     if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
       abort(403, 'No permitido');
 
-    $pagos = DB::select('exec SP_WEB_PagosEfectuados @CodAlumno = ?, @FDesde = ?, @FHasta = ?', array($alumno->id, null, null));
+    $pagos= EducatioCommFunctions::Pagos_Obtener($alumno, null, null);
 
-    $pagos = array_map(function ($fila) {
-      $fila->Fecha_Pago = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Pago);
-      $fila->Total = (float)$fila->Total;
-
-      return $fila;
-    }, $pagos);
+//    $pagos = DB::select('exec SP_WEB_PagosEfectuados @CodAlumno = ?, @FDesde = ?, @FHasta = ?', array($alumno->id, null, null));
+//
+//    $pagos = array_map(function ($fila) {
+//      $fila->Fecha_Pago = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Pago);
+//      $fila->Total = (float)$fila->Total;
+//
+//      return $fila;
+//    }, $pagos);
 
 //dd($pagos);
 
