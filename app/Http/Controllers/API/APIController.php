@@ -99,6 +99,7 @@ class APIController extends Controller
 
       $alumno->cc= EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
 
+      $alumno->pagos= EducatioCommFunctions::Pagos_Obtener($alumno, null, null);
 
     }
 
