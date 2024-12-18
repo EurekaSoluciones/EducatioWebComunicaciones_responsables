@@ -101,6 +101,9 @@ class APIController extends Controller
 
       $alumno->pagos= EducatioCommFunctions::Pagos_Obtener($alumno, null, null);
 
+      $alumno->inasistencias= EducatioCommFunctions::Inasistencias_Obtener($alumno);
+
+      //dd($alumno->inasistencias);
     }
 
 

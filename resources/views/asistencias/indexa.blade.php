@@ -5,7 +5,7 @@
 @section('content_header')
   <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Inasistencias {{$alumno->Nombre}}</h1>
 
-
+{{--{{dd($inasistencias)}}--}}
 
   @php
     $config = ['format' => 'L'];
@@ -29,7 +29,7 @@
         <span class="info-box-icon"><i class="fas fa-calendar-times"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Totales</span>
-          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toStringFromFloat($cantidadTotal) }}</span>
+          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toStringFromFloat($inasistencias->cantidadTotal) }}</span>
           <div class="progress">
             {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
@@ -43,7 +43,7 @@
         <span class="info-box-icon"><i class="fas fa-calendar-alt"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Del mes</span>
-          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($cantidadMes) }}</span>
+          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($inasistencias->cantidadMes) }}</span>
           <div class="progress">
             {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
@@ -59,7 +59,7 @@
         <span class="info-box-icon"><i class="fas fa-calendar-week"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">De la Semana</span>
-          <span class="info-box-number" style="font-size:28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($cantidadSemana) }}</span>
+          <span class="info-box-number" style="font-size:28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($inasistencias->cantidadSemana) }}</span>
           <div class="progress">
             {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
@@ -97,7 +97,7 @@
             </thead>
 
             <tbody>
-            @foreach($inasistencias as $i)
+            @foreach($inasistencias->lista as $i)
 
 
               <tr class="align-middle" ">
