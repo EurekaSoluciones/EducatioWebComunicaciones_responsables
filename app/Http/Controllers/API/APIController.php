@@ -89,8 +89,6 @@ class APIController extends Controller
           : null;
 
 
-
-
         $dummy_comunicacion_tipo= $comunicacion->tipo;
         $dummy_comunicacion_tipo_respuesta= $comunicacion->tipo_respuesta;
         $dummy_comunicacion_adjuntos= $comunicacion->adjuntos;

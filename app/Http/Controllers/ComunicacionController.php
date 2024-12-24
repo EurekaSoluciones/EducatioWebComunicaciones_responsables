@@ -11,6 +11,7 @@ use App\Models\Profe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class ComunicacionController extends Controller
 {
@@ -164,8 +165,11 @@ class ComunicacionController extends Controller
       );
   }
 
-  public function appshow (Comunicacion $comunicacion)
+  public function appshow (Comunicacion $comunicacion, $token)
   {
+    if ($token != 'M4D' && $token != hash('sha256', 'M4D' . $comunicacion->id))
+      abort(403);
+
     return view ('comunicaciones.appshow', compact('comunicacion'));
 
   }
