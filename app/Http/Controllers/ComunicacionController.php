@@ -164,5 +164,11 @@ class ComunicacionController extends Controller
       );
   }
 
+  public function appshow (Comunicacion $comunicacion)
+  {
+    return view ('comunicaciones.appshow', compact('comunicacion'));
+
+  }
+
 
 }

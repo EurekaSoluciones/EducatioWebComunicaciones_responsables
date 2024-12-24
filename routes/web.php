@@ -94,8 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
   Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
-
 });
+
+Route::get('/comunicaciones/{comunicacion}/app', [ComunicacionController::class, 'appshow']);
 
 Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');
 Route::get('/dummy2', [DummyController::class, 'index2']);
