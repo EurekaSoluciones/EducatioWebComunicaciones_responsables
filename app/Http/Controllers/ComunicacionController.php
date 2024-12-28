@@ -8,6 +8,7 @@ use App\Models\Alumno;
 use App\Models\Comunicacion;
 use App\Models\ComunicacionDestinatario;
 use App\Models\Profe;
+use App\Models\Responsable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -165,13 +166,32 @@ class ComunicacionController extends Controller
       );
   }
 
-  public function appshow (Comunicacion $comunicacion, $token)
+  public function appshow (Comunicacion $comunicacion, Responsable $responsable,  $token)
   {
+    // Más adelante recibir el idreponsable y marcarlo como leido
+
     if ($token != 'M4D' && $token != hash('sha256', 'M4D' . $comunicacion->id))
       abort(403);
 
-    return view ('comunicaciones.appshow', compact('comunicacion'));
+    // A ver si la comunicación es para el responsable
+    $cd=
+      ComunicacionDestinatario
+        ::where('comunicacion_id', $comunicacion->id)
+        ->where('Cod_Responsable', $responsable->id)
+        ->first();
 
+    if ($cd == null)
+      abort(403);
+
+    // A marcar como leido. no me acuerdo como era
+    if ($cd->leido == 0)
+    {
+      $cd->fhLeido= 1;
+      $cd->fhLeido= Carbon::now();
+      $cd->save();
+    }
+
+    return view ('comunicaciones.appshow', compact('comunicacion'));
   }
 
 

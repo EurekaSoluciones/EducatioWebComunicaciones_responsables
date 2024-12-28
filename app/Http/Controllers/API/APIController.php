@@ -93,6 +93,8 @@ class APIController extends Controller
         $dummy_comunicacion_tipo_respuesta= $comunicacion->tipo_respuesta;
         $dummy_comunicacion_adjuntos= $comunicacion->adjuntos;
 
+        $comunicacion->msg= ''; // no lo mando mas
+
       }
 
       $alumno->cc= EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
