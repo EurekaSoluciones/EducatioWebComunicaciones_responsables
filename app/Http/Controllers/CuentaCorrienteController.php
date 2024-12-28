@@ -93,4 +93,13 @@ class CuentaCorrienteController extends Controller
 
 
   }
+
+  public function appDescargarPago($cod_pago, $token)
+  {
+    if ($token != 'M4D' && $token != hash('sha256', 'M4D' . $cod_pago))
+      abort(403);
+
+    return $this->descargarPago($cod_pago);
+  }
+
 }

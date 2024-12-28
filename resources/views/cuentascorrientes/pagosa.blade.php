@@ -39,7 +39,6 @@
       <table class="table mt-4" id="tComs">
         <thead>
         <tr>
-
           <th>Comprobante</th>
           <th class="EureHideOnSmallDevices">Forma de Pago</th>
           <th class="text-center">Importe</th>
