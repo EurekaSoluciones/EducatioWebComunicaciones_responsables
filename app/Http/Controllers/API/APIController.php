@@ -88,10 +88,15 @@ class APIController extends Controller
           ? $comunicacion->leidoInfo->fhReaccion->diffForHumans()
           : null;
 
-
+        // Esto es para forzar a que lo cargue
         $dummy_comunicacion_tipo= $comunicacion->tipo;
         $dummy_comunicacion_tipo_respuesta= $comunicacion->tipo_respuesta;
+
         $dummy_comunicacion_adjuntos= $comunicacion->adjuntos;
+
+        $comunicacion->adjuntos->each(function ($adjunto) {
+          $adjunto->url= url("/storage/$adjunto->filename");
+        });
 
         $comunicacion->msg= ''; // no lo mando mas
 
