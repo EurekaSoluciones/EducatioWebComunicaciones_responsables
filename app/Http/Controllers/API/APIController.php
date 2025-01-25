@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\EureLib\EducatioCommFunctions;
+use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
 use App\Models\ComunicacionDestinatario;
 use Illuminate\Http\Request;
@@ -96,6 +97,7 @@ class APIController extends Controller
 
         $comunicacion->adjuntos->each(function ($adjunto) {
           $adjunto->url= url("/storage/$adjunto->filename");
+          $adjunto->filetypeicon= url(EureFunctions::getIconByFileType($adjunto->filename));
         });
 
         $comunicacion->msg= ''; // no lo mando mas
