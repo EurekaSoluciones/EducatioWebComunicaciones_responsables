@@ -144,4 +144,9 @@ class APIController extends Controller
 
 
   }
+
+  public function auth_check()
+  {
+    return response()->json(['message' => 'Token OK'], 200);
+  }
 }

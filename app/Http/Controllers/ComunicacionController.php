@@ -194,5 +194,12 @@ class ComunicacionController extends Controller
     return view ('comunicaciones.appshow', compact('comunicacion'));
   }
 
+  public function api_responderComunicacion(Request $request)
+  {
+    $user = auth()->user();
+
+    dd($user, $request->all());
+
+  }
 
 }

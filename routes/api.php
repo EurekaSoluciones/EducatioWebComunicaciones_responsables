@@ -34,8 +34,12 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
     return response()->json(['message' => 'Hello World!']);
   });
 
+  Route::get('/auth-check', [APIController::class, 'auth_check']);
   Route::get('/info-responsable', [APIController::class, 'info_responsable']);
 
+
   Route::get('/carteleras', [CarteleraController::class, 'carteleras']);
+
+  Route::post('/comunicaciones/responder',  [CarteleraController::class, 'api_responderComunicacion']);
 
 });
