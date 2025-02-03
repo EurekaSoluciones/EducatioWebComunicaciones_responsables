@@ -79,8 +79,73 @@ class EureAuthController extends Controller
     $user->password = Hash::make($request->newPassword);
     $user->save();
 
+    Auth::logoutOtherDevices($request->current_password);
+
     // Redirige a la página de éxito o donde sea necesario
     return redirect()->route('home')->with('success', '¡Contraseña cambiada con éxito!');
+  }
+
+  public function api_login(Request $request)
+  {
+    // Validamos las credenciales del usuario
+    $credentials = $request->validate([
+      'login' => 'required',       // Se asume que 'login' es el campo de nombre de usuario
+      'password' => 'required',
+    ]);
+
+    // Intentamos autenticar al usuario
+    if (Auth::attempt(['login' => $request->login, 'password' => $request->password]))
+    {
+      // Si la autenticación es exitosa, obtenemos al usuario y generamos un token
+      $user = Auth::user();
+
+      if($user->tipo != 'Responsable') {
+        return response()->json([
+          'message' => 'Invalid user type'
+        ], 401);
+      }
+
+      $token = $user->createToken('API Token')->plainTextToken;
+
+      // Retornamos el token en la respuesta
+      return response()->json([
+        'token' => $token,
+        'message' => 'Login successful'
+      ]);
+    }
+
+    // Si las credenciales no son válidas
+    return response()->json([
+      'message' => 'Invalid credentials'
+    ], 401);
+  }
+
+  public function api_passwordUpdate(Request $request)
+  {
+    $user = Auth::user(); // Obtener el usuario autenticado
+
+    // Validaciones
+    $request->validate([
+      'current_password' => ['required'],
+      'new_password' => ['required', 'min:6', 'confirmed'],
+    ]);
+
+    // Verificar si la contraseña actual es correcta
+    if (!Hash::check($request->current_password, $user->password)) {
+      throw ValidationException::withMessages([
+        'current_password' => ['La contraseña actual es incorrecta.'],
+      ]);
+    }
+
+    // Actualizar la contraseña
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    Auth::logoutOtherDevices($request->current_password);
+
+    return response()->json(['message' => 'Contraseña actualizada correctamente'], 200);
+
+
   }
 
 //    return back()->withErrors([

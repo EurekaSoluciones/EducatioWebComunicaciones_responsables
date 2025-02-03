@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\API\CarteleraController;
-use App\Http\Controllers\API\EureAuthController;
+use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +27,7 @@ Route::get('/hello-world', function () {
 });
 
 
-Route::post('login', [EureAuthController::class, 'login']);
+Route::post('login', [EureAuthController::class, 'api_login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function ()
 {
@@ -45,4 +45,7 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
 
   Route::post('/comunicaciones/responder',  [ComunicacionController::class, 'api_responderComunicacion']);
 
+  Route::post('/passw', [EureAuthController::class, 'apipasswordUpdate']);
+
+  Route::post('/password-update',  [EureAuthController::class, 'api_passwordUpdate']);
 });
