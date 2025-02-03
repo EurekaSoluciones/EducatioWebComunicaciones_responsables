@@ -32,6 +32,10 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth')->name('home');;
 
+Route::get('/hello-world', [DummyController::class,'hello_world']);
+
+
+
 // RutaS de autenticación
 Route::get('/login', [EureAuthController::class,'login'])->name('login');
 Route::get('/logout', [EureAuthController::class,'logout'])->name('logout');

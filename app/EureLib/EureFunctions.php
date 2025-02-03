@@ -55,7 +55,9 @@ class EureFunctions
 
   public static function cliente_path_resources()
   {
-    return 'assets/C/' . self::cliente_id() . '/';
+    $LL= self::cliente_id();
+
+    return 'assets/C/' . $LL . '/';
   }
 
   public static function getCarteleraGeneral()

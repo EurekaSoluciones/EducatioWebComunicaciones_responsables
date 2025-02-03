@@ -268,9 +268,11 @@ class User extends Authenticatable
   public function background_image()
   {
     if (empty($this->bgImg))
-      return url(\App\EureLib\EureFunctions::cliente_path_resources() . '/bgs/' . ($this->id % 8) . '.jpg');
+      $_4Debug= url(\App\EureLib\EureFunctions::cliente_path_resources() . '/bgs/' . ($this->id % 8) . '.jpg');
+    else
+      $_4Debug= 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1280px-Red_flag.svg.png';
 
-    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1280px-Red_flag.svg.png';
+    return $_4Debug;
   }
 
   public function scopeEsRemitenteDeComunicacionA($query, $alumno)

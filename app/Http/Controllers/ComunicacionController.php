@@ -168,7 +168,7 @@ class ComunicacionController extends Controller
 
   public function appshow (Comunicacion $comunicacion, Responsable $responsable,  $token)
   {
-    // Más adelante recibir el idreponsable y marcarlo como leido
+    // Más adelante recibir el idresponsable y marcarlo como leido
 
     if ($token != 'M4D' && $token != hash('sha256', 'M4D' . $comunicacion->id))
       abort(403);
@@ -198,8 +198,13 @@ class ComunicacionController extends Controller
   {
     $user = auth()->user();
 
-    dd($user, $request->all());
+    $comunicacionDestinatario= ComunicacionDestinatario::find($request->comunicacion_destinatario_id);
 
+    if ($comunicacionDestinatario->Cod_Responsable != $user->Cod_Responsable)
+      abort(403);
+
+    $comunicacionDestinatario->respuesta= $request->respuesta;
+    $comunicacionDestinatario->fhRespuesta= Carbon::now();
+    $comunicacionDestinatario->save();
   }
-
 }
