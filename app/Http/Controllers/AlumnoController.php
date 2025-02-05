@@ -72,4 +72,61 @@ class AlumnoController extends Controller
 
     return redirect()->route('alumnos.show', compact('alumno'))->with('success', 'Perfil Actualizado.');
   }
+
+  public function api_update_foto(Request $request)
+  {
+    $request->validate([
+      'Cod_Alumno' => 'required',
+      'foto' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+    ]);
+
+    $user = Auth::user();
+    $alumno= Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
+
+    if ($alumno == null)
+      return response()->json(['message' => 'Alumno no encontrado'], 401);
+
+    $responsable= Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
+
+    if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
+      abort(403, 'Acceso no permitido');
+
+    $nombreArchivo = 'AVAlumno_' . date('ymdHis') . '_' . rand(100, 999) . '.png';
+
+    $path = $request->file('foto')->storeAs('', $nombreArchivo, 'public');
+
+    // Guardar la nueva ruta en la base de datos
+    $alumno->web->avatarImg = $nombreArchivo;
+    $alumno->web->save();
+
+
+    return response()->json([
+      'message' => 'Foto de perfil actualizada',
+      'foto_url' => asset("storage/$path")
+    ]);
+  }
+
+  public function api_update_foto_remover(Request $request)
+  {
+    $user = Auth::user();
+    $alumno= Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
+
+    if ($alumno == null)
+      return response()->json(['message' => 'Alumno no encontrado'], 401);
+
+    $responsable= Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
+
+    if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
+      abort(403, 'Acceso no permitido');
+
+    $alumno->web->avatarImg = '';
+    $alumno->web->save();
+
+
+    return response()->json([
+      'message' => 'Foto de perfil actualizada',
+    ]);
+  }
+
+
 }

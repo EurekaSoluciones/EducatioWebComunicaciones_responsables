@@ -69,4 +69,31 @@ class ResponsableController extends Controller
     return redirect()->route('responsables.show', ['responsable' => $user->responsable])->with('success', 'Perfil Actualizado.');
 
   }
+
+  public function api_update(Request $request)
+  {
+   $request->validate([
+      'foto' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+    ]);
+
+    $user = Auth::user();
+
+    $nombreArchivo = 'AVResp_' . date('ymdHis') . '_' . rand(100, 999) . '.png';
+
+    $path = $request->file('foto')->storeAs('', $nombreArchivo, 'public');
+
+    // Guardar la nueva ruta en la base de datos
+    $user->avatarImg = $nombreArchivo;
+    $user->save();
+
+
+
+    return response()->json([
+      'message' => 'Foto de perfil actualizada',
+      'foto_url' => asset("storage/$path")
+    ]);
+  }
+
+
+
 }

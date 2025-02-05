@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\API\CarteleraController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
+use App\Http\Controllers\ResponsableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +50,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::post('/passw', [EureAuthController::class, 'apipasswordUpdate']);
 
   Route::post('/password-update',  [EureAuthController::class, 'api_passwordUpdate']);
+
+  Route::post('/responsable-update',  [ResponsableController::class, 'api_update']);
+  Route::post('/alumno-update-foto',  [AlumnoController::class, 'api_update_foto']);
+  Route::post('/alumno-update-foto-remover',  [AlumnoController::class, 'api_update_foto_remover']);
 });
