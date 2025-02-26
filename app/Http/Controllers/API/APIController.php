@@ -6,13 +6,21 @@ use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
 use App\Models\ComunicacionDestinatario;
+use App\Models\ComunicacionE;
+use App\Models\ExpoToken;
+use App\Models\NotificacionPush;
+use App\Models\UsuarioGrupo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Nette\Utils\Random;
 
 class APIController extends Controller
 {
   public function info_responsable(Request $request)
   {
+//$all= $request->all();
+//$ex= $request->expoPushToken;
+
     $user = auth('sanctum')->user();
 
     // Un santy
@@ -32,6 +40,8 @@ class APIController extends Controller
     foreach ($alumnos as $alumno)
     {
       $comunicaciones = $alumno->comunicaciones;
+      $comunicacionesE= ComunicacionE::DeAlumno($alumno)->DeResponsable($responsable)->orderBy('id', 'desc')->get();
+      $alumno->comunicacionesE= $comunicacionesE;
       $grupo = $alumno->grupo;
       $web = $alumno->web;
 //      $web->avatar_img= $alumno->avatar_image_withDefaults4API();
@@ -106,13 +116,73 @@ class APIController extends Controller
 
       }
 
+      foreach ($comunicacionesE as $comunicacionE)
+      {
+        $comunicacionE->msg= "";
+        $comunicacionE->hello= "world";
+        $comunicacionE->destinatario= $comunicacionE->destinatario_web_user();
+        $comunicacionE->destinatario->avatar_img = $comunicacionE->destinatario->avatar_image_withDefaults4API();
+//        $comunicacionE->remitente->web_user = $comunicacionE->remitente->webuser;
+      }
+
+
+
       $alumno->cc = EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
 
       $alumno->pagos = EducatioCommFunctions::Pagos_Obtener($alumno, null, null);
 
       $alumno->inasistencias = EducatioCommFunctions::Inasistencias_Obtener($alumno);
 
+      $alumno->comunicacionesE_destinatarios= UsuarioGrupo::DeGrupo($alumno->grupo)->get();
+
+      foreach ($alumno->comunicacionesE_destinatarios as $dest)
+      {
+        $dest->usuario= $dest->usuario;
+      }
+
+      //$alumno->Nombre= rand(1,1000);
+
       //dd($alumno->inasistencias);
+    }
+
+    // Fin de alumnos
+    // Notificaciones.
+    $notificacionesSinMostrar =
+      NotificacionPush
+        ::DeResponsable($responsable)
+        ->SinMostrar()
+        ->NoDescartado()
+        ->Ultimos60Dias()
+        ->get();
+
+    $notificacionesMostradas=
+      NotificacionPush
+        ::DeResponsable($responsable)
+        ->Mostrados()
+        ->NoDescartado()
+        ->Ultimos30Dias()
+        ->get();
+
+    $notificaciones= $notificacionesSinMostrar->merge($notificacionesMostradas);
+
+    $notificaciones= $notificaciones->sortByDesc('created_at');
+
+    $user->hmNotificacionesSinMostrar = $notificacionesSinMostrar->count();
+    $user->notificaciones = $notificaciones;
+
+    // Bueno, tengo que guardar el token en la tabla de tokenss
+    $expoTokenExistente=
+      ExpoToken
+        ::where('user_id', $user->id)
+        ->where('expo_push_token', $request->expoPushToken)
+        ->exists();
+
+    if (!$expoTokenExistente)
+    {
+      ExpoToken::create([
+        'user_id' => $user->id,
+        'expo_push_token' => $request->expoPushToken,
+      ]);
     }
 
 

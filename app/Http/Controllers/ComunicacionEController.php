@@ -6,7 +6,9 @@ use App\EureLib\Enums\ComunicacionTipoEnum;
 use App\EureLib\EureFunctions;
 use App\Models\Alumno;
 use App\Models\Comunicacion;
+use App\Models\ComunicacionDestinatario;
 use App\Models\ComunicacionE;
+use App\Models\Responsable;
 use App\Models\User;
 use App\Models\UsuarioGrupo;
 use Illuminate\Http\Request;
@@ -71,6 +73,8 @@ class ComunicacionEController extends Controller
       abort(403, 'Acceso no permitido');
 
     // Y acá tengo el tema de los destinatarios
+  //  dd($alumno->grupo);
+
     $destinarios= UsuarioGrupo::DeGrupo($alumno->grupo)->get();
 
 //    dd($destinarios[0]->usuario);
@@ -121,4 +125,88 @@ class ComunicacionEController extends Controller
 
     return redirect()->route('comunicaciones.e.indexA', ['alumno' => $alumno]);
   }
+
+  public function appshow (ComunicacionE $comunicacionE, Responsable $responsable,  $token)
+  {
+    // Más adelante recibir el idresponsable y marcarlo como leido
+
+    if ($token != 'M4D' && $token != hash('sha256', 'M4D' . $comunicacionE->id))
+      abort(403);
+
+    if ($comunicacionE->Cod_Responsable != $responsable->Cod_Responsable)
+      abort(403);
+
+    return view ('comunicacionese.appshow', compact('comunicacionE'));
+  }
+
+  public function api_store(Request $request)
+  {
+    $lctm= $request->all();
+
+    try {
+      $user = auth()->user();
+
+      if (!$user) {
+        return response()->json(['success' => false, 'message' => 'Usuario no autenticado'], 401);
+      }
+
+      $alumno = Alumno::find($request->Cod_Alumno);
+
+      if (!$alumno) {
+        return response()->json(['success' => false, 'message' => 'Alumno no encontrado'], 404);
+      }
+
+      $responsable = $user->responsable;
+
+      // Verificamos si el responsable tiene acceso al alumno
+      if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno)) {
+        return response()->json(['success' => false, 'message' => 'Acceso no permitido'], 403);
+      }
+
+      DB::beginTransaction();
+
+      try {
+        $comunicacionENew = new ComunicacionE();
+        $comunicacionENew->tipo_id = ComunicacionTipoEnum::Entrante->value;
+        $comunicacionENew->Cod_Responsable = $responsable->Cod_Responsable;
+        $comunicacionENew->Cod_Alumno = $alumno->Cod_Alumno;
+        $comunicacionENew->Cod_Usuario = $request->destinatario;
+        $comunicacionENew->asunto = $request->asunto;
+        $comunicacionENew->msg = $request->msg;
+
+        $comunicacionENew->save();
+
+        DB::commit();
+
+        return response()->json(['success' => true]);
+      } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['success' => false, 'message' => 'Error al guardar la comunicación', 'error' => $e->getMessage()], 500);
+      }
+    } catch (\Exception $e) {
+      return response()->json(['success' => false, 'message' => 'Error interno del servidor', 'error' => $e->getMessage()], 500);
+    }
+
+  }
+
+
+
+  public function api_marcarRespuestaLeida(Request $request)
+  {
+    $user = auth()->user();
+
+    $comunicacionE= ComunicacionE::find($request->comunicacionE_id);
+
+    if ($comunicacionE->Cod_Responsable != $user->Cod_Responsable)
+      abort(403);
+
+    if ($comunicacionE->fhRespuesta != null && $comunicacionE->fhRespuestaLeida == null)
+    {
+      $comunicacionE->fhRespuestaLeida= Carbon::now();
+      $comunicacionE->save();
+    }
+
+    return response()->json(['success' => true]);
+  }
+
 }

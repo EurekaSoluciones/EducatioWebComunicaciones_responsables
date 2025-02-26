@@ -135,8 +135,6 @@ class Alumno extends Model
     return Str::substr($this->Nombre, 0, 1) . Str::substr($this->Apellido, 0, 1);
   }
 
-
-
   public function getCardAttribute()
   {
     return StaticArrays::$tiposCards[$this->id % count(StaticArrays::$tiposCards)];
