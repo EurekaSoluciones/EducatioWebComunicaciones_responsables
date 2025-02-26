@@ -168,7 +168,7 @@ class APIController extends Controller
     $notificaciones= $notificaciones->sortByDesc('created_at');
 
     $user->hmNotificacionesSinMostrar = $notificacionesSinMostrar->count();
-    $user->notificaciones = $notificaciones;
+    $user->notificaciones = $notificaciones->values()->toArray();
 
     // Bueno, tengo que guardar el token en la tabla de tokenss
     $expoTokenExistente=

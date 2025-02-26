@@ -98,6 +98,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
   Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
+
+
 });
 
 Route::get('/comunicaciones/app/{comunicacion}/{responsable}/{token}', [ComunicacionController::class, 'appshow']);
