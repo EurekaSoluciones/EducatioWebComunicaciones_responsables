@@ -104,7 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/comunicaciones/app/{comunicacion}/{responsable}/{token}', [ComunicacionController::class, 'appshow']);
 Route::get('/comunicaciones/e/app/{comunicacionE}/{responsable}/{token}', [ComunicacionEController::class, 'appshow']);
-Route::get('/pagos/app/{cod_recibo}/{token}', [CuentaCorrienteController::class, 'appDescargarPago']);
+//Route::get('/pagos/app/{cod_recibo}/{token}', [CuentaCorrienteController::class, 'appDescargarPago']);
 
 Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');
 Route::get('/dummy2', [DummyController::class, 'index2']);

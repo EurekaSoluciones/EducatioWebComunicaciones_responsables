@@ -6,6 +6,7 @@ use App\Http\Controllers\API\CarteleraController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\ComunicacionController;
 use App\Http\Controllers\ComunicacionEController;
+use App\Http\Controllers\CuentaCorrienteController;
 use App\Http\Controllers\ExpoNotificationController;
 use App\Http\Controllers\ResponsableController;
 use Illuminate\Http\Request;
@@ -50,6 +51,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::post('/comunicaciones/responder',  [ComunicacionController::class, 'api_responderComunicacion']);
   Route::post('/comunicaciones/e/marcar-respuesta-leida',  [ComunicacionEController::class, 'api_marcarRespuestaLeida']);
   Route::post('/comunicaciones/e/store',  [ComunicacionEController::class, 'api_store']);
+
+  Route::get('/pagos/{cod_recibo}',  [CuentaCorrienteController::class, 'api_descargarPago']);
 
   Route::post('/passw', [EureAuthController::class, 'apipasswordUpdate']);
 

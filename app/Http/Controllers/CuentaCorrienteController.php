@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\EureLib\EureFunctions;
 use App\EureLib\EducatioCommFunctions;
 use App\Models\Alumno;
+use App\Models\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Event\TestRunner\ExecutionAborted;
 
@@ -57,6 +59,23 @@ class CuentaCorrienteController extends Controller
   {
     $responsable = EureFunctions::getLoggedResponsableAttribute();
 
+    $urlPDF= $this->descargarPagoInner($cod_pago, $responsable);
+
+    return redirect()->away($urlPDF);
+  }
+
+  public function api_descargarPago($cod_pago)
+  {
+    $user = Auth::user();
+    $responsable = $user->responsable;
+
+    $urlPDF= $this->descargarPagoInner($cod_pago, $responsable);
+
+    return response()->json(['url' => $urlPDF]);
+  }
+
+  public function descargarPagoInner($cod_pago, Responsable $responsable)
+  {
     // Controlamos que sea legit la descarga.
     $subconsulta = DB::table('alumnos as A')
       ->select('A.Cod_ResponsableCobro')
@@ -87,10 +106,10 @@ class CuentaCorrienteController extends Controller
     if (!$resultado->RequestsStatusOK)
       abort(400, $resultado->RequestsStatusObs);
 
-    return redirect()->away($resultado->pdf_URL);
+
 
     // Acá tendria que descargar el pdf que genera automáticamente el módulo que queda de los ws viejos
-
+    return $resultado->pdf_URL;
 
   }
 
