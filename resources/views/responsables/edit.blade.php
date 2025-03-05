@@ -92,7 +92,7 @@
 
 @section('css')
   <link rel="stylesheet" href="/css/admin_custom.css">
-  <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+  <link href="/css/cropper.min.css" rel="stylesheet"/>
 @stop
 
 @section('js')
@@ -128,7 +128,7 @@
 
   </script>
 
-  <script src="https://unpkg.com/cropperjs"></script>
+  <script src="/js/cropper.min.js"></script>
   <script>
     let cropper;
     const imageInput = document.getElementById('imageInput');

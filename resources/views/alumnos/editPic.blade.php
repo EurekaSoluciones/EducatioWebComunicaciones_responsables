@@ -88,43 +88,13 @@
 
 @section('css')
   <link rel="stylesheet" href="/css/admin_custom.css">
-  <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+  <link href="/css/cropper.min.css" rel="stylesheet"/>
 @stop
 
 @section('js')
-{{--  <script>--}}
-{{--    document.getElementById("imagenAvatar").addEventListener("change", function () {--}}
-{{--      var reader = new FileReader();--}}
-
-{{--      // alert("si")--}}
-
-{{--      reader.onload = function (e) {--}}
-{{--        document.getElementById("imgAvatarPreview").src = e.target.result;--}}
-{{--        document.getElementById("imgAvatarPreview").style.display = "block";--}}
-{{--      };--}}
-
-{{--      var selectedFile = this.files[0];--}}
-{{--      reader.readAsDataURL(selectedFile);--}}
-{{--    });--}}
-
-{{--    var checkbox = document.getElementById("chSinImagen");--}}
-{{--    var imagen = document.getElementById("imgAvatarPreview");--}}
-{{--    var inputImagenAvatar= document.getElementById("imagenAvatar");--}}
-
-{{--    checkbox.addEventListener("click", function() {--}}
-{{--      if (this.checked) {--}}
-{{--        inputImagenAvatar.disabled= true;--}}
-{{--        imagen.style.display = "none";--}}
-{{--      } else {--}}
-{{--        inputImagenAvatar.disabled= false;--}}
-{{--        imagen.style.display = "block";--}}
-{{--      }--}}
-{{--    });--}}
 
 
-{{--  </script>--}}
-
-<script src="https://unpkg.com/cropperjs"></script>
+<script src="/js/cropper.min.js"></script>
 <script>
   let cropper;
   const imageInput = document.getElementById('imageInput');
