@@ -55,7 +55,7 @@ class DummyController extends Controller
 
   public function al()
   {
-    EureFunctions::al();
+   return EureFunctions::al();
   }
 
 }
