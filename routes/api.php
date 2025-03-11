@@ -64,3 +64,5 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
 
   Route::get('/expo-notificaciones/marcar-mostradas',  [ExpoNotificationController::class, 'api_marcarMostrado']);
 });
+
+Route::get('/al',  [\App\Http\Controllers\DummyController::class, 'al']);

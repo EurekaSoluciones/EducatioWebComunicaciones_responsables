@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -50,6 +51,11 @@ class DummyController extends Controller
 
 
     return view('dummy.index5');
+  }
+
+  public function al()
+  {
+    EureFunctions::al();
   }
 
 }
