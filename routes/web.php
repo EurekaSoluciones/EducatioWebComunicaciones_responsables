@@ -113,5 +113,7 @@ Route::get('/dummy4', [DummyController::class, 'dropzone'])->name('dummy4');
 Route::get('/dummy5', [DummyController::class, 'index5'])->name('dummy5');
 Route::get('/dummy/{any}', [DummyController::class, 'show', 'any']);
 
+Route::get('/dummy/al',  [DummyController::class, 'al']);
+
 //Route::get('/{any}', [\App\Http\Controllers\AdminGeneralController::class, 'show', 'any']);
 
