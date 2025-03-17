@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/hello-world', function () {
-  return response()->json(['message' => 'Hello World' . env('EURE_CLIENTE_ID') . 'asdsad']);
+  return response()->json(['message' => 'Hello World' . env('EURE_CLIENTE_ID') . rand(1, 1000)]);
 });
 
 

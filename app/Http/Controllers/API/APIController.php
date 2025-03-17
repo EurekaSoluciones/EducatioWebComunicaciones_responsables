@@ -171,18 +171,23 @@ class APIController extends Controller
     $user->notificaciones = $notificaciones->values()->toArray();
 
     // Bueno, tengo que guardar el token en la tabla de tokenss
-    $expoTokenExistente=
-      ExpoToken
-        ::where('user_id', $user->id)
-        ->where('expo_push_token', $request->expoPushToken)
-        ->exists();
+    $EXP= $request->expoPushToken;
 
-    if (!$expoTokenExistente)
+    if ($EXP != null)
     {
-      ExpoToken::create([
-        'user_id' => $user->id,
-        'expo_push_token' => $request->expoPushToken,
-      ]);
+      $expoTokenExistente =
+        ExpoToken
+          ::where('user_id', $user->id)
+          ->where('expo_push_token', $EXP)
+          ->exists();
+
+      if (!$expoTokenExistente)
+      {
+        ExpoToken::create([
+          'user_id' => $user->id,
+          'expo_push_token' => $EXP,
+        ]);
+      }
     }
 
 
