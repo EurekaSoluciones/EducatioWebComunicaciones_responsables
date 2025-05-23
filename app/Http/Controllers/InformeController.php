@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EureLib\EducatioCommFunctions;
 use App\EureLib\Enums\NivelesEnum;
 use App\EureLib\EureFunctions;
 use App\Models\Alumno;
@@ -27,6 +28,10 @@ class InformeController extends Controller
 
       case 'sunrise':
         return $this->indexA_sunrise($alumno);
+
+      case 'belgrano':
+        // usamos el gen. Ahora el gen usa el nombre del cliente para la view
+        return $this->indexA_gen_tagInst($alumno);
 
       case 'demo':
         return $this->indexA_gen($alumno);
@@ -242,8 +247,6 @@ class InformeController extends Controller
       return str_starts_with($item->Pestania, '3_');
     })->all();
 
-
-
 //    dump($informeItems1er);
 //    dump($informeItems2do);
 //    dd($informeItems3er);
@@ -253,12 +256,11 @@ class InformeController extends Controller
     //    dd($notas);
   }
 
+
+
   public function indexA_gen(Alumno $alumno)
   {
 //    dd($alumno->Ciclo);
-
-
-
 
     // Y ojo ahora cambia todo según el nivel
     switch ($alumno->Ciclo)
@@ -321,8 +323,6 @@ class InformeController extends Controller
       return str_starts_with($item->Pestania, '3_');
     })->all();
 
-
-
 //    dump($informeItems1er);
 //    dump($informeItems2do);
 //    dd($informeItems3er);
@@ -358,6 +358,52 @@ class InformeController extends Controller
 
     //    dd($notas);
   }
+
+  public function indexA_gen_tagInst(Alumno $alumno)
+  {
+//    dd($alumno->Ciclo);
+
+    // Y ojo ahora cambia todo según el nivel
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        return $this->indexA_gen_tagInst_inicial($alumno);
+
+      case NivelesEnum::Primario->value:
+        return $this->indexA_gen_tagInst_primario($alumno);
+
+      case NivelesEnum::Secundario->value:
+        return $this->indexA_gen_tagInst_secundario($alumno);
+
+      default:
+        return abort(400, 'Ciclo inesperado ' . $alumno->Ciclo);
+    }
+  }
+
+  public function indexA_gen_tagInst_inicial(Alumno $alumno)
+  {
+
+    return view('informes.' . EureFunctions::cliente_id() . '.inicial', compact('alumno'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_gen_tagInst_primario(Alumno $alumno)
+  {
+
+    return view('informes.' . EureFunctions::cliente_id() . '.primario', compact('alumno'));
+
+    //    dd($notas);
+  }
+
+  public function indexA_gen_tagInst_secundario(Alumno $alumno)
+  {
+    return view('informes.' . EureFunctions::cliente_id() . '.secundario', compact('alumno'));
+
+    //    dd($notas);
+  }
+
+
 
   public function descargarDUCO(Alumno $alumno)
   {
@@ -408,6 +454,50 @@ class InformeController extends Controller
   }
 
 
+  public function informeConceptual(Alumno $alumno)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
 
+
+    // El duco va a ser genérico para todos. Separo nomás por nivel, pero para todos los
+    // colegios lo mismo
+
+    $rptParams =
+      [
+        [
+          'nombre' => '@CodAlumno',
+          'valor' => $alumno->Cod_Alumno,
+        ],
+        [
+          'nombre' => '@anioLectivo',
+          'valor' => EureFunctions::al(),
+        ],
+      ];
+
+
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_INICIAL.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Primario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_PRIMARIA.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Secundario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_MEDIA.rpt', 'Informe_', '', $rptParams);
+        break;
+
+    }
+
+    if (!$resultado->RequestsStatusOK)
+      abort(400, $resultado->RequestsStatusObs);
+
+    return redirect()->away($resultado->pdf_URL);
+
+  }
 
 }

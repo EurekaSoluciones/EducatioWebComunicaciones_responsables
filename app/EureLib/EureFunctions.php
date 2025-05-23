@@ -216,6 +216,9 @@ class EureFunctions
 //        //el icono para notas tambien podria ser: fas fa-edit
 //      }
 
+
+
+
       $event->menu->addIn($alumnoKey,
         [
           'text' => "Informes / DUCO",
@@ -417,6 +420,8 @@ class EureFunctions
       'fnMiddleInsert' => $fnMiddleInsert,
       'rptParams' => $rptParams,
     ];
+
+  //  dd($post_data);
 
     $client = new Client();
 

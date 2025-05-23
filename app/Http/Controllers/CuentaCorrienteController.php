@@ -99,6 +99,8 @@ class CuentaCorrienteController extends Controller
         'valor' => $cod_pago,
       ],];
 
+    //dd( json_encode($rptParams));
+
     $resultado= EureFunctions::obtenerPDF('facturaFE.rpt', 'Factura', '', $rptParams);
 
 
