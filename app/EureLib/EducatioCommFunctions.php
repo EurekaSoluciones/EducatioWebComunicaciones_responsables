@@ -3,11 +3,14 @@
 namespace App\EureLib;
 
 use App\Models\Alumno;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class EducatioCommFunctions
 {
+
   public static function CC_Obtener(Alumno $alumno, &$venceEsteMes, &$venceHoy, &$deudaVencida, &$proximoVencimiento)
   {
     $hoy = EureFunctions::hoy();
@@ -61,6 +64,17 @@ class EducatioCommFunctions
 
   }
 
+  public static function pagosTic()
+  {
+    return strtolower(env('EURE_PAGOS_TIC', '')) === 's';
+  }
+
+  public static function pagosOnline()
+  {
+    return self::pagosTic() || false;
+
+  }
+
   public static function Pagos_Obtener(Alumno $alumno, $fDesde, $fHasta)
   {
     $pagos = DB::select('exec SP_WEB_PagosEfectuados @CodAlumno = ?, @FDesde = ?, @FHasta = ?', array($alumno->id, $fDesde, $fHasta));
@@ -74,42 +88,6 @@ class EducatioCommFunctions
 
     return $pagos;
   }
-
-//  public static function Inasistencias_Obtener(Alumno $alumno, &$cantidadTotal, &$cantidadSemana, &$cantidadMes)
-//  {
-//    $inasistencias = DB::select(
-//      'exec SP_WEB_ConsultaInasistencias @CodAlumno = ?, @anioLect = ?',
-//      [$alumno->id, EureFunctions::al()]
-//    );
-//
-//    // Agregamos la propiedad fechaCarbon a cada registro
-//    collect($inasistencias)->map(function ($i) {
-//      $i->fechaCarbon = \Carbon\Carbon::parse($i->fecha);
-//    });
-//
-//    // Inicializamos las variables por referencia
-//    $cantidadTotal = 0;
-//    $cantidadSemana = 0;
-//    $cantidadMes = 0;
-//
-//    // Fechas de comparación
-//    $semanaPasada = \Carbon\Carbon::now()->subDays(7);
-//    $mesPasado = \Carbon\Carbon::now()->subMonth();
-//
-//    foreach ($inasistencias as $i) {
-//      $cantidadTotal += $i->imputar;
-//
-//      if ($i->fechaCarbon >= $semanaPasada) {
-//        $cantidadSemana += $i->imputar;
-//      }
-//
-//      if ($i->fechaCarbon >= $mesPasado) {
-//        $cantidadMes += $i->imputar;
-//      }
-//    }
-//
-//    return $inasistencias;
-//  }
 
   public static function Inasistencias_Obtener(Alumno $alumno)
   {
@@ -132,14 +110,17 @@ class EducatioCommFunctions
     $semanaPasada = \Carbon\Carbon::now()->subDays(7);
     $mesPasado = \Carbon\Carbon::now()->subMonth();
 
-    foreach ($inasistencias as $i) {
+    foreach ($inasistencias as $i)
+    {
       $cantidadTotal += $i->imputar;
 
-      if ($i->fechaCarbon >= $semanaPasada) {
+      if ($i->fechaCarbon >= $semanaPasada)
+      {
         $cantidadSemana += $i->imputar;
       }
 
-      if ($i->fechaCarbon >= $mesPasado) {
+      if ($i->fechaCarbon >= $mesPasado)
+      {
         $cantidadMes += $i->imputar;
       }
     }
@@ -154,5 +135,128 @@ class EducatioCommFunctions
     return $resultado;
   }
 
+  // Este está acá porque tiene cantidad de cosas específicas
+  public static function PTIC_ObtenerLinkIntencionPago
+  (
+    $accessToken,
+    $importe,
+    Alumno $alumno
+  )
+  {
+    $urlPTIC_IP = 'https://api.paypertic.com/pagos';
+    $external_transaction_id =
+      implode
+      (
+        ';',
+        [$alumno->Cod_Alumno, $alumno->DNI, now()->format('YmdHisv'), str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT)]
+      );
 
+
+    $nurl = config('app.url') . '/api/tercerizados-cobranza/ptic/notificacion-pago';
+    $backURL = config('app.url') . '/alumno/' . $alumno->Cod_Alumno;
+    $RL = EureFunctions::getLoggedResponsableAttribute();
+    $email = EureFunctions::primerEmailValido($RL->Email);
+
+
+    $ip_Details = [[
+      'external_reference' => $alumno->Cod_Alumno,
+      'concept_id' => 1,
+      'concept_description' => "(" . $alumno->DNI . ") " . $alumno->Apellido . ", " . $alumno->Nombre,
+      'amount' => $importe,
+    ]];
+
+    $ip_Payer =
+      [
+        'name' => $alumno->Nombre . ' ' . $alumno->Apellido,
+        'email' => $email,
+        'identification' => [
+          'type' => 'DNI_ARG',
+          'number' => $alumno->DNI,
+          'country' => 'ARG'
+        ]
+      ];
+
+    $pIntencionPago = [
+      'currency_id' => 'ARS',
+      'external_transaction_id' => $external_transaction_id,
+      'due_date' => now()->format('Y-m-d') . 'T00:00:00-0300',
+      'last_due_date' => now()->addDay()->format('Y-m-d') . 'T00:00:00-0300',
+      'notification_url' => $nurl, // URL de notificación
+      'ip_details' => $ip_Details, // Detalles de la intencion de pago
+      'nurl' => $nurl, // URL de notificación
+      'back_url' => $backURL, // URL de retorno después del pago
+      'importe' => $importe,
+      'payer' => $ip_Payer, // Detalles del pagador
+      'details' => $ip_Details,
+    ];
+
+    // Enviar solicitud
+    $HTTPPost = Http::withToken($accessToken)->acceptJson();
+
+    if (getenv('EURE_PAGOS_TIC_AMBIENTE') == "DESARROLLO")
+      $HTTPPost = $HTTPPost->withOptions(['verify' => false]);
+
+    $response = $HTTPPost->post('https://api.paypertic.com/pagos', $pIntencionPago);
+
+    if ($response->successful())
+    {
+      return $response->json(); // ← Devuelve los datos como el link de pago
+    }
+
+    throw new \Exception("Error al crear intención de pago: " . $response->status() . ' - ' . $response->body());
+
+
+  }
+
+  static public function PTIC_ImputarPago(
+    int           $cod_alumno,
+    Carbon|string $fecha,
+    float         $importe,
+    string        $external_transaction_id,
+    string        $ptic_id
+  ): JsonResponse
+  {
+    try
+    {
+      if (!$fecha instanceof Carbon)
+      {
+        $fecha = Carbon::parse($fecha);
+      }
+
+      DB::statement(
+        'EXEC SP_WEB_CobroPagosTIC @codAlumno = ?, @fecha = ?, @Monto = ?, @Cadena = ?, @idPagosTic = ?',
+        [
+          $cod_alumno,
+          $fecha->format('Y-m-d H:i:s'),
+          $importe,
+          $external_transaction_id,
+          $ptic_id
+        ]
+      );
+
+      return response()->json([
+        'message' => 'Pago imputado correctamente',
+        'ptic_id' => $ptic_id
+      ], 200);
+
+    }
+    catch (\Exception $e)
+    {
+      EureFunctions::PTIC_PostLog("ERROR", json_encode([
+        'nota' => 'en PTIC_ImputarPago',
+        'cod_alumno' => $cod_alumno,
+        'fecha' => $fecha,
+        'importe' => $importe,
+        'external_transaction_id' => $external_transaction_id,
+        'ptic_id' => $ptic_id,
+        'error' => $e->getMessage()
+      ]));
+
+
+      return response()->json([
+        'message' => 'Error al imputar pago',
+        'error' => $e->getMessage()
+      ], 500); // Podés cambiar a 400 si preferís
+    }
+  }
 }

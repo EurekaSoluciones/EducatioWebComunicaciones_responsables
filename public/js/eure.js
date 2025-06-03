@@ -26,6 +26,32 @@ var datatablesConfig = {
   // Otras opciones de configuración que desees establecer
 };
 
+var inputMoneyConfig = {
+  numeric: {
+    alias: 'numeric',
+    groupSeparator: '.',
+    radixPoint: ',',
+    autoGroup: true,
+    digits: 2,
+    digitsOptional: false,
+    placeholder: '0',
+    rightAlign: false,
+    removeMaskOnSubmit: true
+  },
+  currency: {
+    alias: 'currency',
+    groupSeparator: '.',
+    radixPoint: ',',
+    autoGroup: true,
+    digits: 2,
+    digitsOptional: false,
+    prefix: '$ ',
+    placeholder: '0',
+    rightAlign: false,
+    removeMaskOnSubmit: true
+  }
+}
+
 function agruparCeldasIguales1erColumnaEnTabla(table)
 {
 

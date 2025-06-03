@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');
 
   Route::get('/cc/{alumno}', [CuentaCorrienteController::class, 'indexA'])->name('cc.indexA');
+  Route::post('/cc/pagar', [CuentaCorrienteController::class, 'pagar'])->name('cc.pagar');
 
  // Notas lo sacamos
  // Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');
@@ -103,6 +104,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 });
+
+
 
 Route::get('/comunicaciones/app/{comunicacion}/{responsable}/{token}', [ComunicacionController::class, 'appshow']);
 Route::get('/comunicaciones/e/app/{comunicacionE}/{responsable}/{token}', [ComunicacionEController::class, 'appshow']);

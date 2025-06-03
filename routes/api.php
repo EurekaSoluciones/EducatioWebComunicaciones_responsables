@@ -65,4 +65,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::get('/expo-notificaciones/marcar-mostradas',  [ExpoNotificationController::class, 'api_marcarMostrado']);
 });
 
+// Recepción de notificaciones de organismos de pago
+Route::post('/tercerizados-cobranza/ptic/logtest', [CuentaCorrienteController::class, 'api_tc_PTIC_logTest']);
+Route::post('/tercerizados-cobranza/ptic/notificacion-pago', [CuentaCorrienteController::class, 'api_tc_PTIC_notificacionPago']);
+
 

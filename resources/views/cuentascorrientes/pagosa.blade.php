@@ -43,6 +43,7 @@
           <th class="EureHideOnSmallDevices">Forma de Pago</th>
           <th class="text-center">Importe</th>
           <th class="">Fecha</th>
+          <th class="">Estado</th>
           <th class="text-center">&nbsp;</th>
         </tr>
         </thead>
@@ -68,6 +69,14 @@
               {{$pago->Fecha_Pago->format('d/m/y')  }}
               <hr class="text-muted m-1">
               {{ $pago->Fecha_Pago->diffForHumans() }}
+            </td>
+
+            <td class="" style="vertical-align: middle !important;">
+              @if($pago->Pendiente == 1)
+                <span class="badge badge-warning">Pendiente</span>
+              @else
+                <span class="badge badge-success">Confirmado</span>
+              @endif
             </td>
 
             <td class="align-middle text-center">

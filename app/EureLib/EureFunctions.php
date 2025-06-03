@@ -17,11 +17,14 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Illuminate\Support\Facades\File;
 
 
 class EureFunctions
 {
+  // Muchas de las funciones de acá deberian estar en EducatioCommFunctions. Pero bueno
   public static function loggedUser()
   {
     return User::find(Auth::id());
@@ -38,7 +41,9 @@ class EureFunctions
     return env('EURE_AL');
   }
 
-  public static function stringEsNullOrEmpty($st) {
+
+  public static function stringEsNullOrEmpty($st)
+  {
     return $st === null || empty($st);
   }
 
@@ -55,7 +60,7 @@ class EureFunctions
 
   public static function cliente_path_resources()
   {
-    $LL= self::cliente_id();
+    $LL = self::cliente_id();
 
     return 'assets/C/' . $LL . '/';
   }
@@ -99,79 +104,79 @@ class EureFunctions
       $alumnoKey = 'Alumno_' . $alumno->id;
 
       $hmComunicacionesSinLeerResponsableAlumno = Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno)->count();
-      $hmRespuestasSinLeerResponsableAlumno= ComunicacionE::deResponsable($responsable)->deAlumno($alumno)->RespuestaSinLeer()->count();
-      $hmTotalCommsMasRespuestas= $hmComunicacionesSinLeerResponsableAlumno + $hmRespuestasSinLeerResponsableAlumno;
+      $hmRespuestasSinLeerResponsableAlumno = ComunicacionE::deResponsable($responsable)->deAlumno($alumno)->RespuestaSinLeer()->count();
+      $hmTotalCommsMasRespuestas = $hmComunicacionesSinLeerResponsableAlumno + $hmRespuestasSinLeerResponsableAlumno;
       $labelComsRecibidas = ($hmComunicacionesSinLeerResponsableAlumno > 0) ? $hmComunicacionesSinLeerResponsableAlumno : '';
-      $labelComsRespuestasSinLeer= ($hmRespuestasSinLeerResponsableAlumno > 0) ? $hmRespuestasSinLeerResponsableAlumno : '';
-      $labelTotalCommsMasRespuestas= ($hmTotalCommsMasRespuestas > 0) ? $hmTotalCommsMasRespuestas : '';
+      $labelComsRespuestasSinLeer = ($hmRespuestasSinLeerResponsableAlumno > 0) ? $hmRespuestasSinLeerResponsableAlumno : '';
+      $labelTotalCommsMasRespuestas = ($hmTotalCommsMasRespuestas > 0) ? $hmTotalCommsMasRespuestas : '';
       $labelComsRecibidasColor = self::devolverLabelStyleSegunCantidad($hmComunicacionesSinLeerResponsableAlumno);
-      $labelComsRespuestasSinLeerColor= self::devolverLabelStyleSegunCantidad($hmRespuestasSinLeerResponsableAlumno);
-      $labelColorSuma= self::devolverLabelStyleSegunCantidad($hmTotalCommsMasRespuestas);
+      $labelComsRespuestasSinLeerColor = self::devolverLabelStyleSegunCantidad($hmRespuestasSinLeerResponsableAlumno);
+      $labelColorSuma = self::devolverLabelStyleSegunCantidad($hmTotalCommsMasRespuestas);
 
       $event->menu->addIn('AlumnosACargoRoot',
-      [
-        'text' => $alumno->Nombre,
-        'url' => '',// route('alumnos.show', $alumno),
-        //'route' => 'dummy3',
-        'icon' => 'fas fa-user',
-        'key' => $alumnoKey,
-        'classes' => 'ml-1 ' . $alumno->bg,
-        'label' => $labelTotalCommsMasRespuestas,
-        'label_color' => $labelColorSuma,
-      ]);
+        [
+          'text' => $alumno->Nombre,
+          'url' => '',// route('alumnos.show', $alumno),
+          //'route' => 'dummy3',
+          'icon' => 'fas fa-user',
+          'key' => $alumnoKey,
+          'classes' => 'ml-1 ' . $alumno->bg,
+          'label' => $labelTotalCommsMasRespuestas,
+          'label_color' => $labelColorSuma,
+        ]);
 
       // Ficha
       $event->menu->addIn($alumnoKey,
-      [
-        'text' => 'Ficha',
-        'url' => route('alumnos.show', $alumno),
-        //'route' => 'dummy3',
-        'icon' => 'fas fa-id-card-alt',
-        //     'key' => $alumnoKey,
-        'classes' => 'ml-2',
-      ]);
+        [
+          'text' => 'Ficha',
+          'url' => route('alumnos.show', $alumno),
+          //'route' => 'dummy3',
+          'icon' => 'fas fa-id-card-alt',
+          //     'key' => $alumnoKey,
+          'classes' => 'ml-2',
+        ]);
 
       $event->menu->addIn($alumnoKey,
-      [
-        'text' => 'Comunicaciones',
-        'url' => '',// route('alumnos.show', $alumno),
-        //'route' => 'dummy3',
-        'icon' => 'fas fa-paper-plane',
-        'key' => 'ComunicacionesA_' . $alumno->id,
-        'classes' => 'ml-2', // . $alumno->bg,
-        'label' => $labelTotalCommsMasRespuestas,
-        'label_color' => $labelColorSuma,
-      ]);
+        [
+          'text' => 'Comunicaciones',
+          'url' => '',// route('alumnos.show', $alumno),
+          //'route' => 'dummy3',
+          'icon' => 'fas fa-paper-plane',
+          'key' => 'ComunicacionesA_' . $alumno->id,
+          'classes' => 'ml-2', // . $alumno->bg,
+          'label' => $labelTotalCommsMasRespuestas,
+          'label_color' => $labelColorSuma,
+        ]);
 
 
       // Comunicaciones del alumno
       $event->menu->addIn('ComunicacionesA_' . $alumno->id,
-      [
-        'text' => "Recibidas",
-        'url' => route('comunicaciones.indexA', $alumno),
-        'icon' => 'fas fa-arrow-down',
-        'color' => 'red',
-        'classes' => 'ml-3',
-        //'route' => 'dummy3',
-        //  'icon' => 'fas fa-user',
-        //'key' => 'Alumno_' . $alumno->id
-        'label' => $labelComsRecibidas, //sumarles las respuestas sin leer
-        'label_color' => $labelComsRecibidasColor,
-      ]);
+        [
+          'text' => "Recibidas",
+          'url' => route('comunicaciones.indexA', $alumno),
+          'icon' => 'fas fa-arrow-down',
+          'color' => 'red',
+          'classes' => 'ml-3',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+          'label' => $labelComsRecibidas, //sumarles las respuestas sin leer
+          'label_color' => $labelComsRecibidasColor,
+        ]);
 
       $event->menu->addIn('ComunicacionesA_' . $alumno->id,
-      [
-        'text' => "Enviadas",
-        'url' => route('comunicaciones.e.indexA', $alumno),
-        'icon' => 'fas fa-arrow-up',
-        'color' => 'red',
-        'classes' => 'ml-3',
-        //'route' => 'dummy3',
-        //  'icon' => 'fas fa-user',
-        //'key' => 'Alumno_' . $alumno->id
-        'label' => $labelComsRespuestasSinLeer, //sumarles las respuestas sin leer
-        'label_color' => $labelComsRespuestasSinLeerColor,
-      ]);
+        [
+          'text' => "Enviadas",
+          'url' => route('comunicaciones.e.indexA', $alumno),
+          'icon' => 'fas fa-arrow-up',
+          'color' => 'red',
+          'classes' => 'ml-3',
+          //'route' => 'dummy3',
+          //  'icon' => 'fas fa-user',
+          //'key' => 'Alumno_' . $alumno->id
+          'label' => $labelComsRespuestasSinLeer, //sumarles las respuestas sin leer
+          'label_color' => $labelComsRespuestasSinLeerColor,
+        ]);
 
       //
       $event->menu->addIn($alumnoKey,
@@ -215,8 +220,6 @@ class EureFunctions
 //          ]);
 //        //el icono para notas tambien podria ser: fas fa-edit
 //      }
-
-
 
 
       $event->menu->addIn($alumnoKey,
@@ -397,6 +400,24 @@ class EureFunctions
     return "$ " . self::toStringFromFloat($f);
   }
 
+  public static function toNumericFromString_Argentina($valor)
+  {
+    if (!is_string($valor) && !is_numeric($valor))
+    {
+      return null;
+    }
+
+    // Limpia espacios
+    $valor = trim($valor);
+
+    // Le saqué el sep de miles. no tiene que vernir
+    // $valor = str_replace('.', '', $valor);   // saca puntos de miles
+    $valor = str_replace(',', '.', $valor); // cambia coma por punto decimal
+
+    // Si sigue sin ser numérico, devuelvo null
+    return is_numeric($valor) ? (float)$valor : null;
+  }
+
   public static function cleanFileName($fileName)
   {
     // Eliminar caracteres especiales y espacios excepto letras, números, guiones y puntos
@@ -404,6 +425,34 @@ class EureFunctions
 
     return $cleanedName;
   }
+
+  public static function primerEmailValido($emailList): string
+  {
+    if (!$emailList) {
+      return '';
+    }
+
+    if (empty($emailList)) {
+      return '';
+    }
+
+    // Expresión regular similar a la de C#
+    $emailPattern = '/^[^@\s]+@[^@\s]+\.[^@\s]+$/';
+
+    // Separar la lista por ';'
+    $emails = explode(';', $emailList);
+
+    foreach ($emails as $email) {
+      $email = trim($email);
+      if (preg_match($emailPattern, $email)) {
+        return $email;
+      }
+    }
+
+    // Si no se encuentra un email válido, retornar string vacío
+    return '';
+  }
+
 
 
   public static function obtenerPDF($rptFN, $fnPrefix, $fnMiddleInsert, $rptParams)
@@ -421,7 +470,7 @@ class EureFunctions
       'rptParams' => $rptParams,
     ];
 
-  //  dd($post_data);
+    //  dd($post_data);
 
     $client = new Client();
 
@@ -455,29 +504,43 @@ class EureFunctions
     }
   }
 
-  // Intenté si esto se mantenia estático pero no
-  //  private static $initialized = false;
-//  public static $loggedUser;
-//  public static $loggedUserResponsable;
-//
-//  public static function initialize()
-//  {
-//    if (!self::$initialized) {
-//      // Tareas de inicialización aquí
-//      self::$loggedUser= User::find(Auth::id());
-//      self::$loggedUserResponsable= self::$loggedUser->responsable;
-//
-//      self::$initialized = true;
-//    }
-//  }
-//
-//  public static function getMyStaticAttribute()
-//  {
-//    $A= self::$loggedUser;
-//
-//   // dd($A);
-//
-//    return $A;
-//  }
+  public static function PTIC_ObtenerToken($ambiente)
+  {
+    $urlPTIC_Token = 'https://a.paypertic.com/auth/realms/entidades/protocol/openid-connect/token';
+    $parametros = [
+      'username' => env('EURE_PAGOS_TIC_USERNAME'),
+      'password' => env('EURE_PAGOS_TIC_PASSWORD'),
+      'grant_type' => env('EURE_PAGOS_TIC_GRANT_TYPE', 'password'), // opcional, por si lo querés hardcodear
+      'client_id' => env('EURE_PAGOS_TIC_CLIENT_ID'),
+      'client_secret' => env('EURE_PAGOS_TIC_CLIENT_SECRET'),
+    ];
 
+    if ($ambiente == "DESARROLLO")
+      $response = Http::asForm()->withOptions(['verify' => false])->post($urlPTIC_Token, $parametros);
+    else
+      $response = Http::asForm()->post($urlPTIC_Token, $parametros);
+
+    if ($response->successful())
+    {
+      return $response->json(); // contiene access_token, expires_in, etc.
+    } else
+    {
+      throw new \Exception('Error al obtener token PagosTIC: ' . $response->status() . ' - ' . $response->body());
+    }
+  }
+
+  public static function PTIC_PostLog($fn, $text)
+  {
+    $timestamp = now()->format('Ymd_His');
+    $nombreArchivo = "LogPagosTIC_{$timestamp}_{$fn}.txt";
+
+    $rutaLogs = storage_path('logs/pagostic'); // crea carpeta si no existe
+
+    if (!File::exists($rutaLogs))
+    {
+      File::makeDirectory($rutaLogs, 0755, true);
+    }
+
+    File::put($rutaLogs . '/' . $nombreArchivo, $text);
+  }
 }

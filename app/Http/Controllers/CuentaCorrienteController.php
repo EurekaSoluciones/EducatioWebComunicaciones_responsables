@@ -41,6 +41,7 @@ class CuentaCorrienteController extends Controller
 
     $pagos= EducatioCommFunctions::Pagos_Obtener($alumno, null, null);
 
+
 //    $pagos = DB::select('exec SP_WEB_PagosEfectuados @CodAlumno = ?, @FDesde = ?, @FHasta = ?', array($alumno->id, null, null));
 //
 //    $pagos = array_map(function ($fila) {
@@ -122,5 +123,115 @@ class CuentaCorrienteController extends Controller
 
     return $this->descargarPago($cod_pago);
   }
+
+  public function pagar(Request $request)
+  {
+    $importeRAW = $request->input('importe');
+    $metodo = $request->input('metodo');
+    $cod_alumno= $request->input('alumno');
+    $alumno = Alumno::find($cod_alumno);
+
+    if (!$alumno) {
+      abort(404, 'Alumno no encontrado');
+    }
+
+    $importe = EureFunctions::toNumericFromString_Argentina($importeRAW);
+
+    if (!$importe)
+      abort(400, 'Importe inválido');
+
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
+
+    if (!$importe || !$metodo || !$alumno || !is_numeric($importe) || $importe <= 0)
+    {
+      abort(400, 'Faltan datos para procesar el pago');
+    };
+
+    switch ($metodo) {
+      case 'pagostic':
+        return $this->pagar_PTIC($importe, $alumno);
+
+//      case 'mercadopago':
+//        return redirect()->route('pago.mp', ['importe' => $importe]);
+//
+//        case 'transferencia':
+//        return view('pago.transferencia')->with('importe', $importe);
+
+      default:
+        abort(400, 'Método de pago no reconocido');
+    }
+  }
+
+  function pagar_PTIC($importe, Alumno $alumno)
+  {
+    // Son 3 cosas PTIC. Autenticarse:
+    $token= EureFunctions::PTIC_ObtenerToken(getenv('EURE_PAGOS_TIC_AMBIENTE'), getenv('PTIC_PASSWORD'));
+
+   $iPago= EducatioCommFunctions::PTIC_ObtenerLinkIntencionPago($token['access_token'], $importe, $alumno);
+
+    //dd($iPago);
+    return redirect()->away($iPago['form_url']);
+
+//    if (!$iPago || !$iPago->url)
+//      abort(400, 'Error al obtener el link de pago');
+//
+//    // Redirigir a la URL de pago
+//    return redirect()->away($iPago->url);
+
+
+
+ //   return response()->json(['message' => 'Pago realizado con éxito', 'url' => $resultado->pdf_URL]);
+  }
+
+
+
+  function api_tc_PTIC_logTest(Request $request)
+  {
+
+    $raw = $request->getContent();
+
+    // Log de prueba para PTIC
+    EureFunctions::PTIC_PostLog("Test", $raw);
+  }
+
+  function api_tc_PTIC_notificacionPago(Request $request)
+  {
+    $raw = $request->getContent();
+
+    // Log de prueba para PTIC
+    EureFunctions::PTIC_PostLog("NotificacionPago", $raw);
+
+    try
+    {
+
+      // Procesar la notificación de pago
+      $pago = json_decode($raw, true);
+
+      if ($pago['status'] != "approved")
+        return;
+
+      $componentes = explode(';', $pago['external_transaction_id']);
+      $codAlumno = isset($componentes[0]) ? (int) $componentes[0] : null;
+
+      return
+        EducatioCommFunctions
+          ::PTIC_ImputarPago(
+            $codAlumno,
+            Carbon::parse($pago['paid_date']),
+            $pago['final_amount'],
+            $pago['external_transaction_id'],
+            $pago['id']
+          );
+    } catch (\Exception $e)
+    {
+      EureFunctions::PTIC_PostLog("ERROR", json_encode([
+        'nota ' => 'Error en api_tc_PTIC_notificacionPago',
+        'error' => $e->getMessage()
+      ]));
+
+    }
+  }
+
 
 }

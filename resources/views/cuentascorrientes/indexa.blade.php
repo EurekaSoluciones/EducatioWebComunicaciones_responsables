@@ -3,7 +3,8 @@
 {{--@section('title', 'Educatio')--}}
 
 @section('content_header')
-  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Cuenta Corriente {{$alumno->Nombre}}</h1>
+  <h1 class="ml-3"><img class="img-circle" src="{{$alumno->SafeAvatarImg}}" style="height: 64px"> Cuenta
+    Corriente {{$alumno->Nombre}}</h1>
 
 
 
@@ -29,16 +30,18 @@
         <span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">A vencer este mes</span>
-          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($venceEsteMes + $venceHoy) }}</span>
+          <span class="info-box-number"
+                style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($venceEsteMes + $venceHoy) }}</span>
           <div class="progress">
-{{--            <div class="progress-bar" style="width: 70%"></div>--}}
+            {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
 
           @if ($proximoVencimiento > \Carbon\Carbon::create(2049,1,1))
             <span class="progress-description">&nbsp;</span>
           @else
             @if ($proximoVencimiento > \Carbon\Carbon::today())
-              <span class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
+              <span
+                class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
             @else
               <span class="progress-description">En este momento nada para este mes</span>
             @endif
@@ -54,9 +57,10 @@
         <span class="info-box-icon"><i class="fas fa-hourglass"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">¡Vence hoy!</span>
-          <span class="info-box-number" style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($venceHoy) }}</span>
+          <span class="info-box-number"
+                style="font-size: 28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($venceHoy) }}</span>
           <div class="progress">
-{{--            <div class="progress-bar" style="width: 70%"></div>--}}
+            {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
           @if ($venceHoy > 0)
             <span class="progress-description">¡Pagá hoy para que no haya recargos!</span>
@@ -74,9 +78,10 @@
         <span class="info-box-icon"><i class="fas fa-calendar-times"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Vencido</span>
-          <span class="info-box-number" style="font-size:28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($deudaVencida) }}</span>
+          <span class="info-box-number"
+                style="font-size:28px">{{ \App\EureLib\EureFunctions::toMoneyFromFloat($deudaVencida) }}</span>
           <div class="progress">
-{{--            <div class="progress-bar" style="width: 70%"></div>--}}
+            {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
           @if ($deudaVencida > 0)
             <span class="progress-description">Podrían haber recargos adicionales</span>
@@ -122,7 +127,7 @@
 
             <tbody>
             @foreach($ccItems as $item)
-{{--              {{dd($item)}}--}}
+              {{--              {{dd($item)}}--}}
               @php
                 if ($item->Saldo == 0)
                 {
@@ -193,8 +198,63 @@
           </table>
         </div>
       </div>
+
+
+      @if (\app\EureLib\EducatioCommFunctions::pagosOnline())
+        {{--          Ver si esto deberia ir en un partials eventualmente--}}
+        <form method="POST" action="{{ route('cc.pagar') }}" id="formPago">
+          @csrf
+
+          <div class="row justify-content-end">
+
+            <input type="hidden" value="{{$alumno->Cod_Alumno}}" name="alumno" id="alumno">
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5">
+
+              <div class="card card-lightblue card-outline ">
+                <div class="card-header text-center">
+                  <h3 class="card-title">Pagar en línea</h3>
+                </div>
+
+                <div class="card-body">
+                  <div class="row">
+
+                    <div class="form-group">
+                      <label for="importe">Importe a pagar</label>
+
+                      <div class="d-flex justify-content-center gap-2">
+                        <input class="form-control text-right mr-3" id="importe" name="importe"
+                               placeholder="Importe"
+                               value="{{$venceEsteMes + $deudaVencida + $venceHoy}}"
+                               style="max-width: 200px;height: 44px;font-size: 28px">
+
+                        @if (\app\EureLib\EducatioCommFunctions::pagosTic())
+                          <button type="submit" name="metodo" value="pagostic"
+                                  class="btn btn-info d-flex align-items-center p-1" style="height: 42px;">
+                            <img src="{{ asset('assets/images/PTIC.png') }}" alt="PagosTIC" style="height: 26px;">
+                          </button>
+                        @endif
+
+                        {{--                      mas adelante meter mp, etcet--}}
+                      </div>
+
+                      <div class="text-muted text-right" style="font-size: 0.9rem;">
+                        Pagar con PagosTIC
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      @endif
+
     </div>
+
   </div>
+
 
 @stop
 
@@ -204,6 +264,14 @@
 
 @section('js')
   <script src="{{asset('js/eure.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+  <script>
+    $(function () {
+      // $('#importe').inputmask(inputMoneyConfig);
+      Inputmask(inputMoneyConfig.currency).mask('#importe');
+    })
+  </script>
 
   <script>
     $(function () {
@@ -213,7 +281,7 @@
       })
 
       $('.table').DataTable(datatablesConfig).order([[3, 'desc']]).draw();
-     // $('.table').DataTable(datatablesConfig);
+      // $('.table').DataTable(datatablesConfig);
 
 
       // //Date and time picker
