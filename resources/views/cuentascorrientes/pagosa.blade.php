@@ -80,8 +80,12 @@
             </td>
 
             <td class="align-middle text-center">
+              @if($pago->Pendiente == 0)
               <a href="{{ route('pagos.descargar', [$pago->cod_recibo]) }}"><h1><i
                     class="fas fa-file-pdf text-red"></i></h1></a>
+              @else
+                &nbsp;
+              @endif
             </td>
 
           </tr>
@@ -108,7 +112,7 @@
       })
 
       //$('.table').DataTable(datatablesConfig).order([[0, 'desc']]).draw();
-      $('.table').DataTable(datatablesConfig).order([[0, 'desc']]).draw();;
+      $('.table').DataTable(datatablesConfig).order([[3, 'desc']]).draw();;
 
 
       // //Date and time picker
