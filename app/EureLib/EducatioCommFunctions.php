@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Http;
 
 class EducatioCommFunctions
 {
+  public static function MENU_leyenda_Boletin()
+  {
+    switch (EureFunctions::cliente_id())
+    {
+      case 'rainbow':
+        return 'Informes';
+
+      default:
+        return 'Informes / DUCO';
+    }
+  }
 
   public static function CC_Obtener(Alumno $alumno, &$venceEsteMes, &$venceHoy, &$deudaVencida, &$proximoVencimiento)
   {

@@ -41,12 +41,6 @@ class EureFunctions
     return env('EURE_AL');
   }
 
-
-  public static function stringEsNullOrEmpty($st)
-  {
-    return $st === null || empty($st);
-  }
-
   public static function cliente_id()
   {
     return env('EURE_CLIENTE_ID');
@@ -56,6 +50,13 @@ class EureFunctions
   {
     return env('EURE_CLIENTE_LEYENDA');
   }
+
+  public static function stringEsNullOrEmpty($st)
+  {
+    return $st === null || empty($st);
+  }
+
+
 
 
   public static function cliente_path_resources()
@@ -224,7 +225,7 @@ class EureFunctions
 
       $event->menu->addIn($alumnoKey,
         [
-          'text' => "Informes / DUCO",
+          'text' => EducatioCommFunctions::MENU_leyenda_Boletin(),
           'url' => route('informes.indexA', $alumno),
           'icon' => 'fas fa-book-open',
           'color' => 'red',

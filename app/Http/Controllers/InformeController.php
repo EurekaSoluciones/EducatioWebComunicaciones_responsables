@@ -33,8 +33,13 @@ class InformeController extends Controller
         // usamos el gen. Ahora el gen usa el nombre del cliente para la view
         return $this->indexA_gen_tagInst($alumno);
 
+        case 'rainbow':
+          return $this->indexA_gen_tagInst($alumno);
+
       case 'demo':
         return $this->indexA_gen($alumno);
+
+
 
 
       default:
