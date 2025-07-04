@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
   Route::get('/informes/{alumno}/duco', [InformeController::class, 'descargarDUCO'])->name('informes.descargarDUCO');
   Route::get('/informes/{alumno}/informeConceptual', [InformeController::class, 'informeConceptual'])->name('informes.conceptual.descargar');
+  Route::get('/informes/{alumno}/boletin', [InformeController::class, 'descargarBoletin'])->name('informes.descargarBoletin');
 
 
   Route::get('/carteleras/GENERAL', [CarteleraController::class, 'show_cartelera_general_st'])->name('carteleras.general.show');

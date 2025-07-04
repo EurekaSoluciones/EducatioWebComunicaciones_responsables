@@ -14,10 +14,18 @@
     <div class="card-header ">
       <h3 class="card-title">Descarga de Informes</h3>
     </div>
-    <div class="card-body">
+
+     <div class="card-body" style="font-size: 24px;">
       <a href="{{ route('informes.conceptual.descargar', $alumno) }}">
         Informe
       </a>
+
+      <br><br>
+
+      <a href="{{ route('informes.descargarBoletin', $alumno) }}">
+        Boletín
+      </a>
+
     </div>
 {{--    <div class="card-footer">--}}
 {{--      <a href="#" class="btn btn-primary">Go to Dashboard</a>--}}

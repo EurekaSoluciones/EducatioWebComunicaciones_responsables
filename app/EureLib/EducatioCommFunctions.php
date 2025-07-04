@@ -17,6 +17,9 @@ class EducatioCommFunctions
       case 'rainbow':
         return 'Informes';
 
+      case 'belgrano':
+        return 'Informes / Boletín';
+
       default:
         return 'Informes / DUCO';
     }

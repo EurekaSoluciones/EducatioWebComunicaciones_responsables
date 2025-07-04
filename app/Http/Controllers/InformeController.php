@@ -433,8 +433,6 @@ class InformeController extends Controller
     ];
 
 
-
-
     switch ($alumno->Ciclo)
     {
       case NivelesEnum::Inicial->value:
@@ -504,5 +502,53 @@ class InformeController extends Controller
     return redirect()->away($resultado->pdf_URL);
 
   }
+
+  public function descargarBoletin(Alumno $alumno)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
+
+
+    // El duco va a ser genérico para todos. Separo nomás por nivel, pero para todos los
+    // colegios lo mismo
+
+    $rptParams =
+      [
+        [
+          'nombre' => '@CodAlumno',
+          'valor' => $alumno->Cod_Alumno,
+        ],
+        [
+          'nombre' => '@anioLectivo',
+          'valor' => EureFunctions::al(),
+        ],
+      ];
+
+
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        $resultado= EureFunctions::obtenerPDF('Boletin_INICIAL.rpt', 'Boletin_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Primario->value:
+        $resultado= EureFunctions::obtenerPDF('Boletin_PRIMARIA.rpt', 'Boletin_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Secundario->value:
+        $resultado= EureFunctions::obtenerPDF('Boletin_MEDIA.rpt', 'Boletin_', '', $rptParams);
+        break;
+
+    }
+
+    if (!$resultado->RequestsStatusOK)
+      abort(400, $resultado->RequestsStatusObs);
+
+
+    return redirect()->away($resultado->pdf_URL);
+
+  }
+
 
 }

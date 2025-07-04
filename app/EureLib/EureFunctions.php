@@ -475,11 +475,11 @@ class EureFunctions
 
     $client = new Client();
 
-//    dd($data);|
+    //dd($data);|
 
     $JPostData = json_encode($post_data);
 
-//    dd($JPostData);
+    //dd($JPostData);
 
     try
     {
