@@ -16,8 +16,13 @@
     </div>
     <div class="card-body">
       <a href="{{ route('informes.descargarDUCO', $alumno) }}">
-        INFORME
+        INFORME 1er Periodo
       </a>
+      <br /><br />
+      <a href="{{ route('informes.descargarDUCO2', $alumno) }}">
+        INFORME 2do Periodo
+      </a>
+
     </div>
 {{--    <div class="card-footer">--}}
 {{--      <a href="#" class="btn btn-primary">Go to Dashboard</a>--}}
