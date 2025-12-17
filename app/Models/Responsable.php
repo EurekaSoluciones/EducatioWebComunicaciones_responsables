@@ -38,14 +38,14 @@ class Responsable extends Model
 
   public function alumnosPorR1()
   {
-   // return $this->hasMany(Alumno::class, 'Responsable1');
-    return $this->hasMany(Alumno::class, 'Responsable1')->where('fecha_baja', null);
+   return $this->hasMany(Alumno::class, 'Responsable1');
+    // return $this->hasMany(Alumno::class, 'Responsable1')->where('fecha_baja', null);
   }
 
   public function alumnosPorR2()
   {
-  //  return $this->hasMany(Alumno::class, 'Responsable2');
-    return $this->hasMany(Alumno::class, 'Responsable2')->where('fecha_baja', null);
+   return $this->hasMany(Alumno::class, 'Responsable2');
+    // return $this->hasMany(Alumno::class, 'Responsable2')->where('fecha_baja', null);
   }
 
   public function alumnos()
