@@ -133,6 +133,4 @@ class NotaController extends Controller
   }
 
 
-
-
 }

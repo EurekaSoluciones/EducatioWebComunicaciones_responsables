@@ -403,7 +403,11 @@ class InformeController extends Controller
 
   public function indexA_gen_tagInst_secundario(Alumno $alumno)
   {
-    return view('informes.' . EureFunctions::cliente_id() . '.secundario', compact('alumno'));
+    $bloqueoCertificado = EducatioCommFunctions::MensajeBloqueoCertificado($alumno);
+    $bloqueo1Informe = EducatioCommFunctions::MensajeBloqueo1Informe($alumno);
+    $bloqueo2Informe = EducatioCommFunctions::MensajeBloqueo2Informe($alumno);
+    $bloqueoInformeFinal = EducatioCommFunctions::MensajeBloqueoInformeFinal($alumno);
+    return view('informes.' . EureFunctions::cliente_id() . '.secundario', compact('alumno', 'bloqueoCertificado', 'bloqueo1Informe','bloqueo2Informe', 'bloqueoInformeFinal'));
 
     //    dd($notas);
   }
@@ -453,6 +457,152 @@ class InformeController extends Controller
       abort(400, $resultado->RequestsStatusObs);
 
     return redirect()->away($resultado->pdf_URL);
+
+  }
+
+
+  public function descargarDUCO2(Alumno $alumno)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
+
+
+    // El duco va a ser genérico para todos. Separo nomás por nivel, pero para todos los
+    // colegios lo mismo
+
+    $rptParams =
+    [
+      [
+        'nombre' => '@CodAlumno',
+        'valor' => $alumno->Cod_Alumno,
+      ],
+      [
+        'nombre' => '@anioLectivo',
+        'valor' => EureFunctions::al(),
+      ],
+    ];
+
+
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_INICIAL.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Primario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_PRIMARIA.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Secundario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_MEDIA2.rpt', 'Informe_', '', $rptParams);
+        break;
+
+    }
+
+    if (!$resultado->RequestsStatusOK)
+      abort(400, $resultado->RequestsStatusObs);
+
+    return redirect()->away($resultado->pdf_URL);
+
+  }
+
+
+
+  public function descargarExamenFinal(Alumno $alumno)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
+
+
+    // El duco va a ser genérico para todos. Separo nomás por nivel, pero para todos los
+    // colegios lo mismo
+
+    $rptParams =
+    [
+      [
+        'nombre' => '@CodAlumno',
+        'valor' => $alumno->Cod_Alumno,
+      ],
+      [
+        'nombre' => '@anioLectivo',
+        'valor' => EureFunctions::al(),
+      ],
+    ];
+
+
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_Final.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Primario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_Final.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Secundario->value:
+        $resultado= EureFunctions::obtenerPDF('Informe_Final.rpt', 'Informe_', '', $rptParams);
+        break;
+
+    }
+
+    if (!$resultado->RequestsStatusOK)
+      abort(400, $resultado->RequestsStatusObs);
+
+    return redirect()->away($resultado->pdf_URL);
+
+  }
+
+
+
+  public function descargarCertificado(Alumno $alumno)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+      abort(403, 'No permitido');
+
+    // El duco va a ser genérico para todos. Separo nomás por nivel, pero para todos los
+    // colegios lo mismo
+    
+    $rptParams =
+    [
+      [
+        'nombre' => '@CodAlumno',
+        'valor' => $alumno->Cod_Alumno,
+      ],
+      [
+        'nombre' => '@anioLectivo',
+        'valor' => EureFunctions::al(),
+      ],
+    ];
+
+
+    switch ($alumno->Ciclo)
+    {
+      case NivelesEnum::Inicial->value:
+        $resultado= EureFunctions::obtenerPDF('Certificado.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Primario->value:
+        $resultado= EureFunctions::obtenerPDF('Certificado.rpt', 'Informe_', '', $rptParams);
+        break;
+
+      case NivelesEnum::Secundario->value:
+        $resultado= EureFunctions::obtenerPDF('Certificado.rpt', 'Informe_', '', $rptParams);
+        break;
+
+    }
+
+
+    if (!$resultado->RequestsStatusOK)
+      abort(400, $resultado->RequestsStatusObs);
+
+    
+      return redirect()->away($resultado->pdf_URL);
+
+    
 
   }
 

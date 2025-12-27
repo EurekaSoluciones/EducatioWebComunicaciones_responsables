@@ -12,16 +12,72 @@
 
   <div class="card card-primary card-outline">
     <div class="card-header ">
-      <h3 class="card-title">Descarga de Informes</h3>
+      <h3 class="card-title">Descarga de Informes/Certificado</h3>
     </div>
     <div class="card-body">
-      <a href="{{ route('informes.descargarDUCO', $alumno) }}">
-        INFORME
-      </a>
+      @if($bloqueo1Informe['cumple'])
+        <a href="{{ route('informes.descargarDUCO', $alumno) }}">
+          INFORME 1er Periodo
+        </a>
+      @else
+        <span class="text-danger font-weight-bold">
+          PRIMER INFORME
+        </span>
+        <br />
+        <small class="text-danger">
+          {{ $bloqueo1Informe['mensaje'] }}
+        </small>
+      @endif
+      <br /><br />
+      @if($bloqueo2Informe['cumple'])
+        <a href="{{ route('informes.descargarDUCO2', $alumno) }}">
+          INFORME 2do Periodo
+        </a>
+      @else
+        <span class="text-danger font-weight-bold">
+          SEGUNDO INFORME
+        </span>
+        <br />
+        <small class="text-danger">
+          {{ $bloqueo1Informe['mensaje'] }}
+        </small>
+      @endif
+      <br /><br />
+      @if($bloqueoInformeFinal['cumple'])
+        <a href="{{ route('informes.descargarExamenFinal', $alumno) }}">
+          INFORME Examen Final
+        </a>
+      @else
+        <span class="text-danger font-weight-bold">
+          INFORME EXAMEN FINAL
+        </span>
+        <br />
+        <small class="text-danger">
+          {{ $bloqueoInformeFinal['mensaje'] }}
+        </small>
+      @endif
+      <br /><br />
+
+
+    {{--  <a href="{{ route('informes.descargarCertificado', $alumno) }}">
+        CERTIFICADO
+      </a>--}}
+      @if($bloqueoCertificado['cumple'])
+        <a href="{{ route('informes.descargarCertificado', $alumno) }}">
+          CERTIFICADO
+        </a>
+      @else
+        <span class="text-danger font-weight-bold">
+          CERTIFICADO
+        </span>
+        <br />
+        <small class="text-danger">
+          {{ $bloqueoCertificado['mensaje'] }}
+        </small>
+      @endif
+
+
     </div>
-{{--    <div class="card-footer">--}}
-{{--      <a href="#" class="btn btn-primary">Go to Dashboard</a>--}}
-{{--    </div>--}}
   </div>
 
 @stop

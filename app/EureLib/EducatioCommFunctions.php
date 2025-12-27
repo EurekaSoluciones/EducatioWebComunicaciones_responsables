@@ -78,6 +78,58 @@ class EducatioCommFunctions
 
   }
 
+public static function MensajeBloqueoCertificado(Alumno $alumno): array
+{
+    $resultado = DB::select(
+        'EXEC SP_WEB_MensajeBloqueoCertificado ?, ?',
+        [$alumno->id, EureFunctions::al()]
+    );
+
+    return [
+        'cumple'  => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
+        'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el certificado',
+    ];
+}
+
+public static function MensajeBloqueo1Informe(Alumno $alumno): array
+{
+    $resultado = DB::select(
+        'EXEC SP_WEB_MensajeBloqueo1Informe ?, ?',
+        [$alumno->id, EureFunctions::al()]
+    );
+
+    return [
+        'cumple'  => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
+        'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el primer informe',
+    ];
+}
+
+public static function MensajeBloqueo2Informe(Alumno $alumno): array
+{
+    $resultado = DB::select(
+        'EXEC SP_WEB_MensajeBloqueo2Informe ?, ?',
+        [$alumno->id, EureFunctions::al()]
+    );
+
+    return [
+        'cumple'  => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
+        'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el segundo informe',
+    ];
+}
+
+public static function MensajeBloqueoInformeFinal(Alumno $alumno): array
+{
+    $resultado = DB::select(
+        'EXEC SP_WEB_MensajeBloqueoInformeFinal ?, ?',
+        [$alumno->id, EureFunctions::al()]
+    );
+
+    return [
+        'cumple'  => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
+        'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el informe final',
+    ];
+}
+
   public static function pagosTic()
   {
     return strtolower(env('EURE_PAGOS_TIC', '')) === 's';
