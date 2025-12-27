@@ -36,6 +36,9 @@ class InformeController extends Controller
         case 'rainbow':
           return $this->indexA_gen_tagInst($alumno);
 
+      case 'amancay':
+        return $this->indexA_gen_tagInst($alumno);
+
       case 'demo':
         return $this->indexA_gen($alumno);
 
