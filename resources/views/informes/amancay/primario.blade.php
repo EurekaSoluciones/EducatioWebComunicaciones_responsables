@@ -12,12 +12,22 @@
 
   <div class="card card-primary card-outline">
     <div class="card-header ">
-      <h3 class="card-title">Descarga de Informes / DUCO</h3>
+      <h3 class="card-title">Descarga de Informes</h3>
     </div>
     <div class="card-body">
+      @if($bloqueo1Informe['cumple'])
       <a href="{{ route('informes.descargarDUCO', $alumno) }}">
-        Documento Unico De Comunicación (DUCO)
+        INFORME PEDAGÓGICO 
       </a>
+       @else
+        <span class="text-danger font-weight-bold">
+          INFORME PEDAGÓGICO 
+        </span>
+        <br />
+        <small class="text-danger">
+          {{ $bloqueo1Informe['mensaje'] }}
+        </small>
+      @endif
     </div>
 {{--    <div class="card-footer">--}}
 {{--      <a href="#" class="btn btn-primary">Go to Dashboard</a>--}}
