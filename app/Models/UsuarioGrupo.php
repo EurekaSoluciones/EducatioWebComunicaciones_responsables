@@ -19,7 +19,15 @@ class UsuarioGrupo extends Model
 
   public function usuario()
   {
-    return $this->belongsTo(User::class, 'cod_usuario', 'cod_usuario');
+    if($this->tipo == "Profe"){
+      $users = $this->belongsTo(User::class, 'cod_usuario', 'Cod_Profesor');
+    } else if($this->tipo == "Secretaria"){
+      $users = $this->belongsTo(User::class, 'cod_usuario', 'cod_usuario');
+    } else {
+      $users = [];
+    }
+    
+    return $users; 
   }
 
   public function scopeDeGrupo($query, $grupo)
