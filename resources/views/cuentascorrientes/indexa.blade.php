@@ -36,13 +36,15 @@
             {{--            <div class="progress-bar" style="width: 70%"></div>--}}
           </div>
 
-          @if ($proximoVencimiento > \Carbon\Carbon::create(2049,1,1))
-            <span class="progress-description">&nbsp;</span>
+          @if ($proximoVencimiento >= \Carbon\Carbon::create(2049,1,1))
+          {{-- este if es cuando el vencimiento es mentira, por eso no sale ninguno de los mensajes, le agregue que muestre un mensaje igual  --}}
+            <span class="progress-description">No hay vencimientos en este mes</span>
           @else
             @if ($proximoVencimiento > \Carbon\Carbon::today())
               <span
                 class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
             @else
+            {{-- no creo en este else --}}
               <span class="progress-description">En este momento nada para este mes</span>
             @endif
           @endif

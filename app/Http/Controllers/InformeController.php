@@ -390,16 +390,16 @@ class InformeController extends Controller
 
   public function indexA_gen_tagInst_inicial(Alumno $alumno)
   {
-
-    return view('informes.' . EureFunctions::cliente_id() . '.inicial', compact('alumno'));
+    $bloqueo1Informe = EducatioCommFunctions::MensajeBloqueo1Informe($alumno);
+    return view('informes.' . EureFunctions::cliente_id() . '.inicial', compact('alumno', 'bloqueo1Informe'));
 
     //    dd($notas);
   }
 
   public function indexA_gen_tagInst_primario(Alumno $alumno)
   {
-
-    return view('informes.' . EureFunctions::cliente_id() . '.primario', compact('alumno'));
+    $bloqueo1Informe = EducatioCommFunctions::MensajeBloqueo1Informe($alumno);
+    return view('informes.' . EureFunctions::cliente_id() . '.primario', compact('alumno', 'bloqueo1Informe'));
 
     //    dd($notas);
   }

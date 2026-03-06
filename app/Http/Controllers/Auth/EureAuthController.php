@@ -79,7 +79,7 @@ class EureAuthController extends Controller
     $user->password = Hash::make($request->newPassword);
     $user->save();
 
-    Auth::logoutOtherDevices($request->current_password);
+    Auth::logoutOtherDevices($request->newPassword);
 
     // Redirige a la página de éxito o donde sea necesario
     return redirect()->route('home')->with('success', '¡Contraseña cambiada con éxito!');

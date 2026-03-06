@@ -70,7 +70,7 @@
                         <option value="">&nbsp;</option>
 
                         @foreach($destinarios as $destinario)
-                          <option value="{{$destinario->cod_usuario}}">{{$destinario->usuario->nombreYApellido}} ({{$destinario->tipo}})</option>
+                          <option value="{{$destinario->cod_usuario}}">{{$destinario->usuario->nombreYApellido}} ({{$destinario->usuario->desc}})</option>
                         @endforeach
 
 

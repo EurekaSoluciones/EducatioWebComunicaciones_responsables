@@ -20,6 +20,9 @@ class EducatioCommFunctions
       case 'belgrano':
         return 'Informes / Boletín';
 
+      case 'amancay':
+        return 'Informe Pedagógico';
+
       default:
         return 'Informes / DUCO';
     }
