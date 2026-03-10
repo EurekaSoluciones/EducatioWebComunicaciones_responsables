@@ -311,20 +311,25 @@ class CuentaCorrienteController extends Controller
       Log::channel('mercadopago')->info("Pago consultado ID {$id}", $payment);
 
       // Si la tasa del ipn no me coincide con el external esta todo mal
-      $componentes = explode(';', $payment['external_transaction_id']);
+      $componentes = explode(';', $payment['external_reference']);
       $codAlumno = isset($componentes[0]) ? (int)$componentes[0] : null;
 
 
       if ($payment['status'] === 'approved') {
         DB::statement(
-          'EXEC SP_WEB_CobroPagosTIC @codAlumno = ?, @fecha = ?, @Monto = ?, @Cadena = ?, @idPagosTic = ?',
+          'EXEC SP_WEB_CobroMercadoPago @codAlumno = ?, @fecha = ?, @Monto = ?, @Cadena = ?',
           [
             $codAlumno,
-            Carbon::parse($payment['paid_date']),
-            $payment['final_amount'],
-            $payment['external_transaction_id'],
+            Carbon::parse($payment['date_approved']),
+            $payment['transaction_amount'],
+            $payment['external_reference'],
             $payment['id']
           ]);
+
+        return response()->json([
+          'message' => 'Pago imputado correctamente',
+          'id' => $payment['id']
+        ], 200);
 
       }
     } catch (\Throwable $e) {
