@@ -117,6 +117,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+      // Agregado por Daniel para loguear MP
+      'mercadopago' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/mercadopago.log'),
+        'level' => 'info',
+      ],
     ],
 
 ];

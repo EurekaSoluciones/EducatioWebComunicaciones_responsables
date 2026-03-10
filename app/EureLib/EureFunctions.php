@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\Facades\File;
 
@@ -544,4 +545,6 @@ class EureFunctions
 
     File::put($rutaLogs . '/' . $nombreArchivo, $text);
   }
+
+
 }

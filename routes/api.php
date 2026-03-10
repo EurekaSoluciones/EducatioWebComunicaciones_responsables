@@ -69,4 +69,6 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
 Route::post('/tercerizados-cobranza/ptic/logtest', [CuentaCorrienteController::class, 'api_tc_PTIC_logTest']);
 Route::post('/tercerizados-cobranza/ptic/notificacion-pago', [CuentaCorrienteController::class, 'api_tc_PTIC_notificacionPago']);
 
+Route::post('/tercerizados-cobranza/mp/logtest', [CuentaCorrienteController::class, 'api_tc_MP_logTest']);
+Route::post('/tercerizados-cobranza/mp/notificacion-pago', [CuentaCorrienteController::class, 'api_tc_MP_notificacionPago']);
 

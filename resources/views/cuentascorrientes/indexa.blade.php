@@ -37,14 +37,14 @@
           </div>
 
           @if ($proximoVencimiento >= \Carbon\Carbon::create(2049,1,1))
-          {{-- este if es cuando el vencimiento es mentira, por eso no sale ninguno de los mensajes, le agregue que muestre un mensaje igual  --}}
+            {{-- este if es cuando el vencimiento es mentira, por eso no sale ninguno de los mensajes, le agregue que muestre un mensaje igual  --}}
             <span class="progress-description">No hay vencimientos en este mes</span>
           @else
             @if ($proximoVencimiento > \Carbon\Carbon::today())
               <span
-                class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
+                  class="progress-description">Tenés tiempo para pagar hasta el {{ $proximoVencimiento->format('d/m/Y') }}</span>
             @else
-            {{-- no creo en este else --}}
+              {{-- no creo en este else --}}
               <span class="progress-description">En este momento nada para este mes</span>
             @endif
           @endif
@@ -228,21 +228,38 @@
                         <input class="form-control text-right mr-3" id="importe" name="importe"
                                placeholder="Importe"
                                value="{{$venceEsteMes + $deudaVencida + $venceHoy}}"
-                               style="max-width: 200px;height: 44px;font-size: 28px">
+                               style="max-width: 200px;height: 64px;font-size: 28px">
 
                         @if (\app\EureLib\EducatioCommFunctions::pagosTic())
-                          <button type="submit" name="metodo" value="pagostic"
-                                  class="btn btn-info d-flex align-items-center p-1" style="height: 42px;">
-                            <img src="{{ asset('assets/images/PTIC.png') }}" alt="PagosTIC" style="height: 26px;">
-                          </button>
+                          <div>
+                            <button type="submit" name="metodo" value="pagostic"
+                                    class="btn btn-info d-flex align-items-center p-1" style="height: 42px;">
+                              <img src="{{ asset('assets/images/PTIC.png') }}" alt="PagosTIC" style="height: 26px;">
+                            </button>
+
+                            <div class="text-muted text-right" style="font-size: 0.9rem;">
+                              Pagar con PagosTIC
+                            </div>
+                          </div>
+                        @endif
+
+                        @if (\app\EureLib\EducatioCommFunctions::mercadoPago())
+                          <div class="ml-2">
+                            <button type="submit" name="metodo" value="mercadopago"
+                                    class="btn btn-info d-flex align-items-center p-1" style="height: 42px;width: 160px;background-color: #FDC700">
+                              <img src="{{ asset('assets/images/MP_ImagoTipo.png') }}" alt="Mercado Pago" style="height: 26px;">
+                            </button>
+
+                            <div class="text-muted text-right" style="font-size: 0.9rem;">
+                              Pagar con Mercado Pago
+                            </div>
+                          </div>
                         @endif
 
                         {{--                      mas adelante meter mp, etcet--}}
                       </div>
 
-                      <div class="text-muted text-right" style="font-size: 0.9rem;">
-                        Pagar con PagosTIC
-                      </div>
+
                     </div>
 
                   </div>
@@ -257,7 +274,6 @@
 
   </div>
 
-
 @stop
 
 @section('css')
@@ -269,29 +285,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
 
   <script>
-    $(function () {
-      // $('#importe').inputmask(inputMoneyConfig);
-      Inputmask(inputMoneyConfig.currency).mask('#importe');
-    })
+      $(function () {
+          // $('#importe').inputmask(inputMoneyConfig);
+          Inputmask(inputMoneyConfig.currency).mask('#importe');
+      })
   </script>
 
   <script>
-    $(function () {
+      $(function () {
 
-      $('.EureSelect2').select2({
-        'theme': 'bootstrap4'
+          $('.EureSelect2').select2({
+              'theme': 'bootstrap4'
+          })
+
+          $('.table').DataTable(datatablesConfig).order([[3, 'desc']]).draw();
+          // $('.table').DataTable(datatablesConfig);
+
+
+          // //Date and time picker
+          // $('#fechadesdedatetime').datetimepicker({ locale: 'es' , format: 'DD/MM/YYYY' });
+          // $('#fechahastadatetime').datetimepicker({ locale: 'es' , format: 'DD/MM/YYYY' });
+
+
       })
-
-      $('.table').DataTable(datatablesConfig).order([[3, 'desc']]).draw();
-      // $('.table').DataTable(datatablesConfig);
-
-
-      // //Date and time picker
-      // $('#fechadesdedatetime').datetimepicker({ locale: 'es' , format: 'DD/MM/YYYY' });
-      // $('#fechahastadatetime').datetimepicker({ locale: 'es' , format: 'DD/MM/YYYY' });
-
-
-    })
 
   </script>
 @stop

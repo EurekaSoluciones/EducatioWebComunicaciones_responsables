@@ -138,9 +138,14 @@ public static function MensajeBloqueoInformeFinal(Alumno $alumno): array
     return strtolower(env('EURE_PAGOS_TIC', '')) === 's';
   }
 
+  public static function mercadoPago()
+  {
+    return strtolower(env('EURE_MERCADO_PAGO', '')) === 's';
+  }
+
   public static function pagosOnline()
   {
-    return self::pagosTic() || false;
+    return self::pagosTic() || self::mercadoPago();
 
   }
 
