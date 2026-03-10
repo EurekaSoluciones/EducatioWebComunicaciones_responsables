@@ -546,5 +546,22 @@ class EureFunctions
     File::put($rutaLogs . '/' . $nombreArchivo, $text);
   }
 
+  public static function MP_ObtenerAccessToken(): string
+  {
+    return (string) env('EURE_MERCADO_PAGO_ACCESS_TOKEN', '');
+  }
+
+  public static function MP_BaseUrl(): string
+  {
+    return app()->environment('local')
+      ? (string) env('NGROK', config('app.url'))
+      : (string) config('app.url');
+  }
+
+  public static function MP_Log(string $level, string $message, array $context = []): void
+  {
+    Log::channel('mercadopago')->log($level, $message, $context);
+  }
+
 
 }

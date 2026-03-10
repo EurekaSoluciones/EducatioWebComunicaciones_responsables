@@ -210,6 +210,192 @@ public static function MensajeBloqueoInformeFinal(Alumno $alumno): array
   }
 
   // Este está acá porque tiene cantidad de cosas específicas
+  public static function MP_ObtenerLinkIntencionPago($importe, Alumno $alumno): string
+  {
+    EureFunctions::MP_Log(
+      'info',
+      "Redirigiendo a MercadoPago para pago de alumno ID {$alumno->id} por importe {$importe}"
+    );
+
+    $baseUrl = EureFunctions::MP_BaseUrl();
+    $externalReference = implode(
+      ';',
+      [$alumno->Cod_Alumno, $alumno->DNI, now()->format('YmdHisv'), str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT)]
+    );
+
+    $payload = [
+      'items' => [
+        [
+          'title' => $alumno->nombreYApellido,
+          'quantity' => 1,
+          'unit_price' => $importe,
+          'currency_id' => 'ARS',
+        ],
+      ],
+      'payer' => [
+        'name' => $alumno->nombre,
+        'surname' => $alumno->apellido,
+        'email' => $alumno->email ?? 'test_user@test.com',
+        'identification' => [
+          'type' => 'DNI',
+          'number' => $alumno->dni,
+        ],
+      ],
+      'external_reference' => $externalReference,
+      'back_urls' => [
+        'success' => $baseUrl . route('pagos.indexA', ['alumno' => $alumno->id], false),
+      ],
+      'auto_return' => 'approved',
+      'notification_url' => $baseUrl . '/api/tercerizados-cobranza/mp/notificacion-pago',
+    ];
+
+    $http = Http::withToken(EureFunctions::MP_ObtenerAccessToken());
+    if (app()->environment('local'))
+      $http = $http->withoutVerifying();
+
+    $response = $http->post('https://api.mercadopago.com/checkout/preferences', $payload);
+
+    if (!$response->successful())
+    {
+      EureFunctions::MP_Log(
+        'error',
+        "Error al solicitar preferencia de pago a MercadoPago para alumno ID {$alumno->id}",
+        [
+          'status' => $response->status(),
+          'body' => $response->body(),
+        ]
+      );
+
+      throw new \Exception('Error al crear preferencia de MercadoPago: ' . $response->status());
+    }
+
+    $data = $response->json();
+    $initPoint = $data['init_point'] ?? null;
+    if (!$initPoint)
+      throw new \Exception('Respuesta de MercadoPago sin init_point');
+
+    EureFunctions::MP_Log(
+      'info',
+      "Preferencia de pago creada exitosamente para alumno ID {$alumno->id}",
+      [
+        'alumno_id' => $alumno->id,
+        'importe' => $importe,
+        'preference_id' => $data['id'] ?? null,
+        'init_point' => $initPoint,
+        'status' => $response->status(),
+        'external_reference' => $externalReference,
+      ]
+    );
+
+    return $initPoint;
+  }
+
+  public static function MP_LogTest($raw): void
+  {
+    EureFunctions::MP_Log('info', 'Log de prueba recibido para MercadoPago', ['raw' => $raw]);
+  }
+
+  public static function MP_ProcesarNotificacionPago(array $payload): JsonResponse
+  {
+    EureFunctions::MP_Log('info', 'IPN recibido', $payload);
+
+    $type = $payload['topic'] ?? null;
+    if ($type !== 'payment')
+      return response()->json(['ignored' => true]);
+
+    $id = $payload['id'] ?? null;
+    if (!$id)
+      return response()->json(['error' => 'ID de pago no recibido'], 400);
+
+    try
+    {
+      $payment = self::MP_ObtenerPagoPorId($id);
+      EureFunctions::MP_Log('info', "Pago consultado ID {$id}", $payment);
+
+      if (($payment['status'] ?? null) === 'approved')
+        return self::MP_ImputarPago($payment);
+
+      return response()->json(['ignored' => true, 'status' => $payment['status'] ?? null]);
+    }
+    catch (\Throwable $e)
+    {
+      if ((int) $e->getCode() === 404)
+        return response()->json(['status' => 'not_found'], 404);
+
+      EureFunctions::MP_Log('error', 'Error al procesar IPN', [
+        'msg' => $e->getMessage(),
+        'trace' => $e->getTraceAsString(),
+      ]);
+
+      return response()->json(['error' => 'Error al procesar IPN'], 500);
+    }
+  }
+
+  public static function MP_ObtenerPagoPorId($id): array
+  {
+    $http = Http::withHeaders([
+      'Authorization' => 'Bearer ' . EureFunctions::MP_ObtenerAccessToken(),
+      'Accept' => 'application/json',
+    ]);
+
+    if (app()->environment('local'))
+      $http = $http->withoutVerifying();
+
+    $response = $http->get("https://api.mercadopago.com/v1/payments/{$id}");
+
+    if ($response->failed())
+    {
+      if ($response->status() === 404)
+      {
+        EureFunctions::MP_Log('warning', "Pago no encontrado ID {$id}", $response->json());
+        throw new \RuntimeException("Pago no encontrado ID {$id}", 404);
+      }
+
+      throw new \RuntimeException('Fallo al consultar pago: ' . $response->body(), $response->status());
+    }
+
+    return $response->json();
+  }
+
+  public static function MP_ImputarPago(array $payment): JsonResponse
+  {
+    try
+    {
+      $componentes = explode(';', $payment['external_reference'] ?? '');
+      $codAlumno = isset($componentes[0]) ? (int) $componentes[0] : null;
+      $fechaPago=
+        Carbon::parse($payment['date_approved'] ?? now())->setTimezone('America/Argentina/Buenos_Aires')->format('Y-m-d H:i:s');;
+
+      DB::statement(
+        'EXEC SP_WEB_CobroMercadoPago @codAlumno = ?, @fecha = ?, @Monto = ?, @Cadena = ?',
+        [
+          $codAlumno,
+          $fechaPago,
+          $payment['transaction_amount'],
+          $payment['external_reference'],
+          $payment['id'],
+        ]
+      );
+
+      return response()->json([
+        'message' => 'Pago imputado correctamente',
+        'id' => $payment['id'] ?? null,
+      ], 200);
+    }
+    catch (\Throwable $e)
+    {
+      EureFunctions::MP_Log('error', 'Error al imputar pago MercadoPago', [
+        'msg' => $e->getMessage(),
+        'payment' => $payment,
+      ]);
+
+      return response()->json([
+        'message' => 'Error al imputar pago',
+        'error' => $e->getMessage(),
+      ], 500);
+    }
+  }
+
   public static function PTIC_ObtenerLinkIntencionPago
   (
     $accessToken,

@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use PHPUnit\Event\TestRunner\ExecutionAborted;
 
 class CuentaCorrienteController extends Controller
@@ -164,181 +162,21 @@ class CuentaCorrienteController extends Controller
 
   function pagar_MercadoPago($importe, Alumno $alumno)
   {
-//    dd($alumno);
-
-    Log::channel('mercadopago')->info("Redirigiendo a MercadoPago para pago de alumno ID {$alumno->id} por importe {$importe}");
-
-    $accessToken = env('EURE_MERCADO_PAGO_ACCESS_TOKEN');
-
-    $baseUrl = app()->environment('local')
-      ? env('NGROK')
-      : config('app.url');
-
-    $external_reference=
-      implode
-      (
-        ';',
-        [$alumno->Cod_Alumno, $alumno->DNI, now()->format('YmdHisv'), str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT)]
-      );
-
-    $payload = [
-      'items' => [
-        [
-          'title' => $alumno->nombreYApellido,
-          'quantity' => 1,
-          'unit_price' => $importe,
-          'currency_id' => 'ARS',
-        ]
-      ],
-      'payer' => [
-        'name' => $alumno->nombre,
-        'surname' => $alumno->apellido,
-        'email' => $alumno->email ?? 'test_user@test.com',
-        'identification' => [
-          'type' => 'DNI',
-          'number' => $alumno->dni,
-        ],
-      ],
-      // esto es CLAVE para vincular pago con tu sistema
-      'external_reference' => $external_reference,
-
-      'back_urls' => [
-        'success' => $baseUrl . route('cc.indexA', ['alumno' => $alumno->id], false),
-//      'failure' => $baseUrl . route('mp.error', [], false),
-//      'pending' => $baseUrl . route('mp.pendiente', [], false),
-      ],
-      'auto_return' => 'approved',
-      'notification_url' => $baseUrl . '/api/tercerizados-cobranza/mp/notificacion-pago',
-    ];
-
-    try {
-
-      $http = Http::withToken($accessToken);
-
-      if (app()->environment('local')) {
-        $http = $http->withoutVerifying();
-      }
-
-      $response = $http->post(
-        'https://api.mercadopago.com/checkout/preferences',
-        $payload
-      );
-
-      if (!$response->successful()) {
-
-        Log::channel('mercadopago')->error("Error al solicitar preferencia de pago a MercadoPago para alumno ID {$alumno->id}", [
-          'status' => $response->status(),
-          'body' => $response->body(),
-        ]);
-
-        return response()->json([
-          'ok' => false,
-          'status' => $response->status(),
-          'body' => $response->json(),
-        ], 500);
-      }
-
-      Log::channel('mercadopago')->info(
-        "Preferencia de pago creada exitosamente para alumno ID {$alumno->id}",
-        [
-          'alumno_id' => $alumno->id,
-          'importe' => $importe,
-          'preference_id' => $response->json('id'),
-          'init_point' => $response->json('init_point'),
-          'status' => $response->status(),
-          'external_reference' => $external_reference,
-        ]
-      );
-
-      $data = $response->json();
-
-      return redirect($data['init_point']);
-    } catch (\Exception $e) {
-      Log::channel('mercadopago')->error("Error al crear preferencia de pago {$alumno->id}", [
-        'exception' => $e->getMessage(),
-      ]);
-
-      throw $e;
-
-    }
+    $initPoint = EducatioCommFunctions::MP_ObtenerLinkIntencionPago($importe, $alumno);
+    return redirect()->away($initPoint);
   }
 
 
   function api_tc_MP_logTest(Request $request)
   {
     $raw = $request->getContent();
-
-    Log::channel('mercadopago')->info("Log de prueba recibido para MercadoPago", ['raw' => $raw]);
+    EducatioCommFunctions::MP_LogTest($raw);
+    return response()->json(['ok' => true]);
   }
 
   function api_tc_MP_notificacionPago(Request $request)
   {
-    Log::channel('mercadopago')->info("IPN recibido", $request->all());
-
-    $type = $request->input('topic');
-    if ($type !== 'payment')
-      return response()->json(['ignored' => true]);
-
-    try {
-      $accessToken = env('EURE_MERCADO_PAGO_ACCESS_TOKEN');
-
-      $id = $request->input('id');
-      if (!$id)
-        throw new \Exception('ID de pago no recibido');
-
-      $http = Http::withHeaders([
-        'Authorization' => 'Bearer ' . $accessToken,
-        'Accept' => 'application/json',
-      ]);
-
-      //  Solo en local, desactivar SSL
-      if (app()->environment('local'))
-        $http = $http->withoutVerifying();
-
-      $response = $http->get("https://api.mercadopago.com/v1/payments/{$id}");
-
-      if ($response->failed()) {
-        if ($response->status() === 404) {
-          Log::channel('mercadopago')->warning("Pago no encontrado ID {$id}", $response->json());
-          return response()->json(['status' => 'not_found'], 404);
-        } else
-          throw new \Exception('Fallo al consultar pago: ' . $response->body());
-      }
-
-      $paymentRAW = $response;
-      $payment = $paymentRAW->json();
-
-      Log::channel('mercadopago')->info("Pago consultado ID {$id}", $payment);
-
-      // Si la tasa del ipn no me coincide con el external esta todo mal
-      $componentes = explode(';', $payment['external_reference']);
-      $codAlumno = isset($componentes[0]) ? (int)$componentes[0] : null;
-
-
-      if ($payment['status'] === 'approved') {
-        DB::statement(
-          'EXEC SP_WEB_CobroMercadoPago @codAlumno = ?, @fecha = ?, @Monto = ?, @Cadena = ?',
-          [
-            $codAlumno,
-            Carbon::parse($payment['date_approved']),
-            $payment['transaction_amount'],
-            $payment['external_reference'],
-            $payment['id']
-          ]);
-
-        return response()->json([
-          'message' => 'Pago imputado correctamente',
-          'id' => $payment['id']
-        ], 200);
-
-      }
-    } catch (\Throwable $e) {
-
-      Log::channel('mercadopago')->error('Error al procesar IPN', [
-        'msg' => $e->getMessage(),
-        'trace' => $e->getTraceAsString()
-      ]);
-    }
+    return EducatioCommFunctions::MP_ProcesarNotificacionPago($request->all());
   }
 
 
