@@ -74,8 +74,8 @@ class ComunicacionEController extends Controller
 
         $destinarios = UsuarioGrupo::DeGrupo($alumno->grupo)->get();
 
-        // dd($destinarios[0]);
-        // dd($destinarios[1]->usuario);
+        // dd($destinarios);
+        // dd($destinarios[7]);
 
         // UUID para adjuntos
         $TempId = Str::uuid()->toString();
