@@ -65,10 +65,10 @@
 
                     <div class="user-block mb-3">
                       <img class="img-circle img-bordered-sm"
-                           src="{{ url($ce->destinatario_web_user()->SafeAvatarImg) }}"
+                           src="{{ url($ce->destinatario_web_user->SafeAvatarImg) }}"
                            alt="user image">
                       <span class="username">
-                            {{ $ce->destinatario_web_user()->nombreYApellido }}
+                            {{ $ce->destinatario_web_user->nombreYApellido }}
                         </span>
                       @if ($ce->fhLeido == null)
                         <span class="description font-italic">Sin leer</span><br>

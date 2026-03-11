@@ -74,7 +74,7 @@
 
                                                 @foreach ($destinarios as $destinario)
                                                     @if ($destinario->usuario != null)
-                                                        <option value="{{ $destinario->cod_usuario }}">
+                                                        <option value="{{ $destinario->tipo }}|{{ $destinario->cod_usuario }}">
                                                             {{ $destinario->usuario->nombreYApellido }}
                                                             ({{ $destinario->usuario->desc }})
                                                         </option>

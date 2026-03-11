@@ -31,7 +31,7 @@ class ComunicacionEController extends Controller
                 ->DeResponsable($responsable)
                 ->orderBy('id', 'desc')->get();
 
-        //    dd($remitentes);
+        //    dd($comunicacionese[0]->destinatario_web_user);
         $filtros = [
             'filtrado' => 0,
         ];
@@ -100,15 +100,19 @@ class ComunicacionEController extends Controller
             abort(403, 'Acceso no permitido');
         }
 
+        // dd($request->destinatario);
+        [$tipoDestinatario, $cod_Destinatario] = explode('|', $request->destinatario);
+
         DB::beginTransaction();
 
         $comunicacionENew = new ComunicacionE();
         $comunicacionENew->tipo_id = ComunicacionTipoEnum::Entrante->value;
         $comunicacionENew->Cod_Responsable = $responsable->Cod_Responsable;
         $comunicacionENew->Cod_Alumno = $alumno->Cod_Alumno;
-        $comunicacionENew->Cod_Usuario = $request->destinatario;
+        $comunicacionENew->Cod_Usuario = $cod_Destinatario;
         $comunicacionENew->asunto = $request->asunto;
         $comunicacionENew->msg = $request->msg;
+        $comunicacionENew->tipo = $tipoDestinatario;
 
         $comunicacionENew->save();
 

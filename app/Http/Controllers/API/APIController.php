@@ -120,7 +120,7 @@ class APIController extends Controller
       {
         $comunicacionE->msg= "";
         $comunicacionE->hello= "world";
-        $comunicacionE->destinatario= $comunicacionE->destinatario_web_user();
+        $comunicacionE->destinatario= $comunicacionE->destinatario_web_user;
         $comunicacionE->destinatario->avatar_img = $comunicacionE->destinatario->avatar_image_withDefaults4API();
 //        $comunicacionE->remitente->web_user = $comunicacionE->remitente->webuser;
       }
