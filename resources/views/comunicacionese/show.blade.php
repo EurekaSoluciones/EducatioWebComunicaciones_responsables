@@ -46,7 +46,7 @@
 
                   <div class="text-center" style="clear: both">
                     <h5 class="lead"> Alumno Relacionado</h5>
-                    {{$ce->alumno->Nombre}}
+                    {{$ce->alumno->descripcion}}
                   </div>
                 </div>
 
