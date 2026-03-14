@@ -195,7 +195,7 @@ class EureFunctions
 
       $event->menu->addIn($alumnoKey,
         [
-          'text' => "Cuenta Corriente",
+          'text' => EducatioCommFunctions::MENU_leyenda_cuentaCorriente(),
           'url' => route('cc.indexA', $alumno),
           'icon' => 'fas fa-money-check-alt',
           'color' => 'red',
