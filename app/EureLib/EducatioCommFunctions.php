@@ -23,6 +23,12 @@ class EducatioCommFunctions
       case 'amancay':
         return 'Informe Pedagógico';
 
+      case 'culturalnqn':
+        return 'Boletines';
+      
+      case 'culturalcentenario':
+        return 'Boletines';
+
       default:
         return 'Informes / DUCO';
     }
