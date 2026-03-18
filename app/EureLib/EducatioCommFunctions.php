@@ -37,13 +37,27 @@ class EducatioCommFunctions
     {
         switch (EureFunctions::cliente_id()) {
             case 'culturalnqn':
+                return 'Pagos';
+
+            case 'culturalcentenario':
+                return 'Pagos';
+
+            default:
+                return 'Cuenta Corriente';
+        }
+    }
+
+    public static function MENU_leyenda_pagos()
+    {
+        switch (EureFunctions::cliente_id()) {
+            case 'culturalnqn':
                 return 'Recibos';
 
             case 'culturalcentenario':
                 return 'Recibos';
 
             default:
-                return 'Cuenta Corriente';
+                return 'Pagos';
         }
     }
 
@@ -100,17 +114,17 @@ class EducatioCommFunctions
     }
 
     public static function MensajeBloqueoBoletin(Alumno $alumno): array
-{
-    $resultado = DB::select(
-        'EXEC SP_WEB_MensajeBloqueoBoletin ?, ?',
-        [$alumno->id, EureFunctions::al()]
-    );
+    {
+        $resultado = DB::select(
+            'EXEC SP_WEB_MensajeBloqueoBoletin ?, ?',
+            [$alumno->id, EureFunctions::al()]
+        );
 
-    return [
-        'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
-        'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el primer informe',
-    ];
-}
+        return [
+            'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
+            'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el primer informe',
+        ];
+    }
 
 public static function MensajeBloqueoCertificado(Alumno $alumno): array
 {

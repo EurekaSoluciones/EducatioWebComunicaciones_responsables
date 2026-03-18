@@ -183,7 +183,7 @@ class EureFunctions
       //
       $event->menu->addIn($alumnoKey,
         [
-          'text' => "Pagos",
+          'text' => EducatioCommFunctions::MENU_leyenda_pagos(),
           'url' => route('pagos.indexA', $alumno),
           'icon' => 'fas fa-money-bill-wave-alt',
           'color' => 'red',
