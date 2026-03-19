@@ -35,6 +35,15 @@ class Alumno extends Model
       return $this->attributes['Cod_Alumno'];
   }
 
+    public function datos()
+    {
+        return $this->hasOne(
+            DatosAlumno::class,
+            'Cod_Alumno',
+            'Cod_Alumno'
+        );
+    }
+
   public function EResponsable1()
   {
       return $this->belongsTo(Responsable::class, 'Responsable1');
