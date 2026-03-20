@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class EureAuthController extends Controller
 {
@@ -122,7 +123,7 @@ class EureAuthController extends Controller
 
   public function api_passwordUpdate(Request $request)
   {
-    $user = Auth::user(); // Obtener el usuario autenticado
+    $user = $request->user();
 
     // Validaciones
     $request->validate([
@@ -141,7 +142,13 @@ class EureAuthController extends Controller
     $user->password = Hash::make($request->new_password);
     $user->save();
 
-    Auth::logoutOtherDevices($request->current_password);
+    $currentToken = $user->currentAccessToken();
+
+    if ($currentToken != null) {
+      $user->tokens()->where('id', '!=', $currentToken->id)->delete();
+    } else {
+      Auth::guard('web')->logoutOtherDevices($request->new_password);
+    }
 
     return response()->json(['message' => 'Contraseña actualizada correctamente'], 200);
 

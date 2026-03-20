@@ -44,7 +44,7 @@ Route::post('/logout', [EureAuthController::class,'logout'])->name('logout');
 
 Route::post('/authenticate', [EureAuthController::class, 'authenticate'])->name('authenticate');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'auth.session']], function () {
 
   Route::get('/', [HomeController::class,'index']);
   Route::get('/home', [HomeController::class,'index'])->name('home');
