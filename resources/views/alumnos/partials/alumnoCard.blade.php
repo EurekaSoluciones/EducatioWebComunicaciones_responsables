@@ -16,7 +16,8 @@
         <p class="text-muted text-sm"><b>Grado: </b> {{ $alumno->grupo->ECurso->Descripcion }} </p>
         <p class="text-muted text-sm"><b>División: </b> {{ $alumno->grupo->EDivision->Descripcion }} </p>
         <p class="text-muted text-sm"><b>Turno: </b> {{ $alumno->grupo->ETurno->Descripcion }} </p>
-        <p class="text-muted text-sm"><b>Plan: </b> {{ $alumno->grupo->EPlan->Descripcion }} </p>
+        <p class="text-muted text-sm">{{ $alumno->datos->responsableAcademico}} </p>
+       
         <a href="{{route('alumnos.editPic', $alumno)}}">Editar foto</a>
 
         <div class="d-flex">

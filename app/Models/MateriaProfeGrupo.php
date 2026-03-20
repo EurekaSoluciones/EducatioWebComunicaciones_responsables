@@ -7,31 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class MateriaProfeGrupo extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $table = 'Materia-Profe-Grupo';
+    protected $table = 'Materia-Profe-Grupo';
 
-  protected $primaryKey = 'Cod_MPG';
+    protected $primaryKey = 'Cod_MPG';
 
-  public function grupo()
-  {
-    return $this->belongsTo(Grupo::class, 'Cod_Grupo');
-  }
+    public function grupo()
+    {
+        return $this->belongsTo(Grupo::class, 'Cod_Grupo');
+    }
 
-  public function materia()
-  {
-    return $this->belongsTo(Materia::class, 'Cod_Materia');
-  }
+    public function materia()
+    {
+        return $this->belongsTo(Materia::class, 'Cod_Materia');
+    }
 
+    public function profesor()
+    {
+        return $this->belongsTo(Materia::class, 'Cod_Profesor');
+    }
 
-
-  public static function devolverMPGsDeProfesorYAL(Profe $profe, int $al)
-  {
-    return MateriaProfeGrupo::where('Cod_Profesor', $profe->id)
-      ->whereHas('Grupo', function ($query) use ($al) {
-        $query->where('año_lectivo', $al);
-      })
-      ->get();
-  }
-
+    public static function devolverMPGsDeProfesorYAL(Profe $profe, int $al)
+    {
+        return MateriaProfeGrupo::where('Cod_Profesor', $profe->id)
+            ->whereHas('Grupo', function ($query) use ($al) {
+                $query->where('año_lectivo', $al);
+            })
+            ->get();
+    }
 }

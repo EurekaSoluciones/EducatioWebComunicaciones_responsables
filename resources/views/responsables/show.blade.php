@@ -63,7 +63,7 @@
                                 </p>
 
                                 <p class="text-muted text-sm">
-                                  {{$alumno->grupo->ETurno->Descripcion}} - {{$alumno->grupo->EPlan->Descripcion}}
+                                  {{$alumno->grupo->ETurno->Descripcion}} - {{$alumno->datos->plan}}
                                 </p>
 
 

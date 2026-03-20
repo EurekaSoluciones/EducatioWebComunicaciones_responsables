@@ -60,7 +60,10 @@ class Grupo extends Model
     // return Profe::where
   }
 
-
+  public function MPG(){
+    return $this->hasMany(MateriaProfeGrupo::class, 'Cod_Grupo');
+  }
+  
   public static function DevolverGruposDeProfesor(Profe $profe, $al)
   {
     return Grupo::where('año_lectivo', $al)->get();
