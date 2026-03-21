@@ -133,6 +133,8 @@ class APIController extends Controller
 
       $alumno->inasistencias = EducatioCommFunctions::Inasistencias_Obtener($alumno);
 
+      $alumno->documentos= EducatioCommFunctions::Documentos_Obtener($alumno);
+
       $alumno->comunicacionesE_destinatarios= UsuarioGrupo::DeGrupo($alumno->grupo)->get();
 
       foreach ($alumno->comunicacionesE_destinatarios as $dest)
@@ -181,8 +183,12 @@ class APIController extends Controller
           ->where('expo_push_token', $EXP)
           ->exists();
 
+
       if (!$expoTokenExistente)
       {
+        // Podria pasar otra cosa. que el token exista pero con otro usuario. Esto pasaria muy poco. dale copilot
+        ExpoToken::where('expo_push_token', $EXP)->delete();
+
         ExpoToken::create([
           'user_id' => $user->id,
           'expo_push_token' => $EXP,

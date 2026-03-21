@@ -8,6 +8,7 @@ use App\Http\Controllers\ComunicacionController;
 use App\Http\Controllers\ComunicacionEController;
 use App\Http\Controllers\CuentaCorrienteController;
 use App\Http\Controllers\ExpoNotificationController;
+use App\Http\Controllers\InformeController;
 use App\Http\Controllers\ResponsableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::post('/comunicaciones/e/store',  [ComunicacionEController::class, 'api_store']);
 
   Route::get('/pagos/{cod_recibo}',  [CuentaCorrienteController::class, 'api_descargarPago']);
+
+  Route::post('/documentos/pdf-url',  [InformeController::class, 'api_documento_pdf_url']);
 
   Route::post('/passw', [EureAuthController::class, 'apipasswordUpdate']);
 
