@@ -3,7 +3,7 @@
 
 
 <?php
-$html = $cartelera->$cartelera;
+$html = $cartelera->cartelera;
 
 $html = preg_replace_callback(
   '/<img[^>]*style=["\'][^"\'>]*width:\s*([0-9]+)px[^"\'>]*["\'][^>]*>/i', // Buscar imágenes con width en píxeles
