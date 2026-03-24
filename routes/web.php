@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
 
 Route::get('/comunicaciones/app/{comunicacion}/{responsable}/{token}', [ComunicacionController::class, 'appshow']);
 Route::get('/comunicaciones/e/app/{comunicacionE}/{responsable}/{token}', [ComunicacionEController::class, 'appshow']);
+Route::get('/carteleras/app/{cartelera}', [CarteleraController::class, 'appshow'])->name('carteleras.appshow');
 //Route::get('/pagos/app/{cod_recibo}/{token}', [CuentaCorrienteController::class, 'appDescargarPago']);
 
 

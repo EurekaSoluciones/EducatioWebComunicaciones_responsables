@@ -20,6 +20,8 @@ class CarteleraController extends Controller
     return view('carteleras.show', compact('cartelera'));
   }
 
+
+
   public function show_cartelera_general(Cartelera $cartelera)
   {
     if (!$cartelera->tipo == 'GENERAL')
@@ -39,4 +41,14 @@ class CarteleraController extends Controller
     if ($carteleraG != null)
       return $this->show_cartelera_general($carteleraG);
   }
+
+  public function appshow(Cartelera $cartelera)
+  {
+    if (!$cartelera->activa)
+      abort(400, 'Cartelera inactiva');
+
+    return view('carteleras.appshow', compact('cartelera'));
+  }
+
+
 }
