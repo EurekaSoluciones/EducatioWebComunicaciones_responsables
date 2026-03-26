@@ -21,12 +21,12 @@ class ComunicacionController extends Controller
 
     $responsable = EureFunctions::getLoggedResponsableAttribute();
 
-    $inicioAnio = date('Y-01-01');
-    $inicioAnio = date('d/m/Y', strtotime($inicioAnio));
-    // Después controlar la autorización
-    $comunicaciones = Comunicacion::Alumno($alumno)
-      ->Desde($inicioAnio)
-      ->orderBy('id', 'desc')->get();
+        $inicioAnio = date('Y-01-01');
+        $inicioAnio = date('d/m/Y', strtotime('-2 months', strtotime($inicioAnio)));
+        // Después controlar la autorización
+        $comunicaciones = Comunicacion::Alumno($alumno)
+            ->Desde($inicioAnio)
+            ->orderBy('id', 'desc')->get();
 
     $remitentes = User::RemitentesDe($comunicaciones)->orderBy('apellidos')->orderBy('nombres')->get();
     //    dd($remitentes);
