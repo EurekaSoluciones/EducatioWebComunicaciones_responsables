@@ -14,6 +14,9 @@ class AsistenciaController extends Controller
 // haceme un metodo indexA igual al del controller NotaController puede ser?
     public function indexA(Alumno $alumno)
     {
+      if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno))
+        abort(403, 'No permitido');
+
       $inasistencias = EducatioCommFunctions::Inasistencias_Obtener($alumno);
 
     //  dd($inasistencias, $cantidadTotal, $cantidadSemana, $cantidadMes);

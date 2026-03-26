@@ -44,7 +44,7 @@ Route::post('/logout', [EureAuthController::class,'logout'])->name('logout');
 
 Route::post('/authenticate', [EureAuthController::class, 'authenticate'])->name('authenticate');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'auth.session']], function () {
 
   Route::get('/', [HomeController::class,'index']);
   Route::get('/home', [HomeController::class,'index'])->name('home');
@@ -94,8 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/informes/{alumno}', [InformeController::class, 'indexA'])->name('informes.indexA');
   Route::get('/informes/{alumno}/duco', [InformeController::class, 'descargarDUCO'])->name('informes.descargarDUCO');
   Route::get('/informes/{alumno}/duco2', [InformeController::class, 'descargarDUCO2'])->name('informes.descargarDUCO2');
- Route::get('/informes/{alumno}/examenfinal', [InformeController::class, 'descargarExamenFinal'])->name('informes.descargarExamenFinal');
- Route::get('/informes/{alumno}/certificado', [InformeController::class, 'descargarCertificado'])->name('informes.descargarCertificado');
+  Route::get('/informes/{alumno}/examenfinal', [InformeController::class, 'descargarExamenFinal'])->name('informes.descargarExamenFinal');
+  Route::get('/informes/{alumno}/certificado', [InformeController::class, 'descargarCertificado'])->name('informes.descargarCertificado');
 
 
 
@@ -108,15 +108,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 
   Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
-
-
 });
 
 
 
 Route::get('/comunicaciones/app/{comunicacion}/{responsable}/{token}', [ComunicacionController::class, 'appshow']);
 Route::get('/comunicaciones/e/app/{comunicacionE}/{responsable}/{token}', [ComunicacionEController::class, 'appshow']);
+Route::get('/carteleras/app/{cartelera}', [CarteleraController::class, 'appshow'])->name('carteleras.appshow');
 //Route::get('/pagos/app/{cod_recibo}/{token}', [CuentaCorrienteController::class, 'appDescargarPago']);
+
+
+
+
 
 Route::get('/dummy', [DummyController::class, 'index'])->middleware('auth');
 Route::get('/dummy2', [DummyController::class, 'index2']);
