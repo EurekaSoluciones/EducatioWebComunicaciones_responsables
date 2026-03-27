@@ -140,7 +140,11 @@ class APIController extends Controller
 
       foreach ($alumno->comunicacionesE_destinatarios as $dest)
       {
-        $dest->usuario= $dest->usuario;
+        $dest->usuario = $dest->usuario;
+
+        if ($dest->usuario != null) {
+          $dest->usuario->avatar_img = $dest->usuario->avatar_image_withDefaults4API();
+        }
       }
 
       //$alumno->Nombre= rand(1,1000);
@@ -237,3 +241,4 @@ class APIController extends Controller
     return response()->json(['message' => 'Token OK'], 200);
   }
 }
+
