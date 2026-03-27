@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
+use App\Models\Cartelera;
 use App\Models\ComunicacionDestinatario;
 use App\Models\ComunicacionE;
 use App\Models\ExpoToken;
@@ -171,6 +172,9 @@ class APIController extends Controller
 
     $user->hmNotificacionesSinMostrar = $notificacionesSinMostrar->count();
     $user->notificaciones = $notificaciones->values()->toArray();
+    $user->carteleras = Cartelera::where('activa', true)
+      ->orderBy('nombre')
+      ->get(['id', 'nombre']);
 
     // Bueno, tengo que guardar el token en la tabla de tokenss
     $EXP= $request->expoPushToken;
