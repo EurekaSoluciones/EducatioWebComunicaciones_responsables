@@ -245,7 +245,7 @@
                     url: '{{ route('uploads.adjuntos.delete') }}',
                     data: {
                         filename: file.serverFilename,
-                        tempId: $('#tempIdMain').val()
+                        tempId: $('#tempId').val()
                     },
                     success: function(data) {
                         console.log("Archivo eliminado correctamente");
