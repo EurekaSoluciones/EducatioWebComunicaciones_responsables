@@ -35,7 +35,7 @@ class ComunicacionEController extends Controller
             'filtrado' => 0,
         ];
 
-         dd($comunicacionese[0]->destinatario_web_user);
+        //  dd($comunicacionese[0]->destinatario_web_user);
 
         return view('comunicacionese.indexa', compact('alumno', 'responsable', 'comunicacionese', 'filtros'));
     }
