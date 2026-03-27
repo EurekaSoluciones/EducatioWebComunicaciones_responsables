@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
   Route::post('/upload-image', [AdjuntoController::class, 'fileStore']);
 
   Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [ComunicacionController::class, 'show'])->name('comunicaciones.show');
+  Route::post('/comunicaciones/{comunicacion}/alumno/{alumno}/respuestaAdjunto', [ComunicacionController::class, 'storeAdjuntoEnRespuesta'])->name('comunicaciones.show.respuestaAdjunto.store');
   Route::get('/comunicaciones/{alumno}', [ComunicacionController::class, 'indexA'])->name('comunicaciones.indexA');
   Route::post('/comunicaciones/{alumno}/filtrado', [ComunicacionController::class, 'indexAFiltered'])->name('comunicaciones.indexAFiltered');
   Route::post('comunicaciones/{comunicaciondestinatario}/respuestalibre', [ComunicacionController::class, 'storeRespuestaLibre'])->name('comunicaciones.respuestas.libres.store');
@@ -80,6 +81,7 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
 
   Route::post('/uploads/comunicaciones/e/imagenes', [AdjuntoController::class, 'storeImagenComunicacione']);
   Route::post('/uploads/comunicaciones/e/adjuntos', [AdjuntoController::class, 'storeAdjuntoComunicacione'])->name('uploads.comunicaciones.e.adjuntos.store');
+  Route::post('/uploads/comunicaciones/respuestas/adjuntos', [AdjuntoController::class, 'storeAdjuntoRespuesta'])->name('uploads.comunicaciones.respuestas.adjuntos.store')->middleware('auth');
   Route::post('/uploads/adjuntos/e/delete/', [AdjuntoController::class, 'destroyAdjunto'])->name('uploads.adjuntos.delete');
 
   Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
