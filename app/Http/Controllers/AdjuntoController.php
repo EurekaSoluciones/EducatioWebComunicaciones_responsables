@@ -39,7 +39,7 @@ class AdjuntoController extends Controller
     return response()->json(['originalFN' => $file->getClientOriginalName(),  'newFN' => $fileName]);
   }
 
-  public function destroyAdjunto()
+  public function destroyAdjunto(Request $request)
   {
     $filename=  $request->get('filename');
     $tempId=  $request->get('tempId');
@@ -51,6 +51,25 @@ class AdjuntoController extends Controller
       Storage::disk('public')->delete($filename);
 
     return $filename;
+  }
+
+  public function storeAdjuntoRespuesta(Request $request)
+  {
+    $file = $request->file('file');
+
+    $safeClientOriginalName= EureFunctions::cleanFileName($file->getClientOriginalName());
+    $fileName = 'CommRespAdj_' . date('ymdHis') . '_' . $safeClientOriginalName;
+
+    Storage::disk('public')->put($fileName, file_get_contents($file));
+
+    $adjuntoNew= new Adjunto();
+    $adjuntoNew->filename = $fileName;
+    $adjuntoNew->originalFilename = $file->getClientOriginalName();
+    $adjuntoNew->tempId= $request->tempId;
+    $adjuntoNew->entity= "comunicaciond";
+    $adjuntoNew->save();
+
+    return response()->json(['originalFN' => $file->getClientOriginalName(),  'newFN' => $fileName]);
   }
 
 }

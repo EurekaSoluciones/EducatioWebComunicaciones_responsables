@@ -145,8 +145,6 @@ class ComunicacionEController extends Controller
   {
     $lctm = $request->all();
 
-//    dd($lctm);
-
     try {
       $user = auth()->user();
 
@@ -175,7 +173,7 @@ class ComunicacionEController extends Controller
         $comunicacionENew->Cod_Responsable = $responsable->Cod_Responsable;
         $comunicacionENew->Cod_Alumno = $alumno->Cod_Alumno;
         $comunicacionENew->Cod_Usuario = $request->destinatario;
-        $comunicacionENew->tipo= $request->tipoDestinatario;
+        $comunicacionENew->tipo = $request->tipoDestinatario;
         $comunicacionENew->asunto = $request->asunto;
         $comunicacionENew->msg = $request->msg;
 
