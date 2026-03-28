@@ -102,6 +102,12 @@ class APIController extends Controller
           ? $comunicacion->leidoInfo->fhReaccion->diffForHumans()
           : null;
 
+        $dummy_comunicacion_respuesta_adjuntos = $comunicacion->leidoInfo->adjuntos;
+        $comunicacion->leidoInfo->adjuntos->each(function ($adjunto) {
+          $adjunto->url = url("/storage/$adjunto->filename");
+          $adjunto->filetypeicon = url(EureFunctions::getIconByFileType($adjunto->filename));
+        });
+
         // Esto es para forzar a que lo cargue
         $dummy_comunicacion_tipo = $comunicacion->tipo;
         $dummy_comunicacion_tipo_respuesta = $comunicacion->tipo_respuesta;

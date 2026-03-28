@@ -69,6 +69,10 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::post('/adjunto/comunicaciones/e/upload',  [AdjuntoController::class, 'api_storeAdjuntoComunicacione']);
   Route::post('/adjunto/comunicaciones/e/delete',  [AdjuntoController::class, 'api_destroyAdjuntoComunicacione']);
 
+  Route::post('/adjunto/comunicaciones/respuesta/upload',  [AdjuntoController::class, 'api_storeAdjuntoRespuesta']);
+  Route::post('/adjunto/comunicaciones/respuesta/delete',  [AdjuntoController::class, 'api_destroyAdjuntoRespuesta']);
+
+
   Route::get('/expo-notificaciones/marcar-mostradas',  [ExpoNotificationController::class, 'api_marcarMostrado']);
 });
 

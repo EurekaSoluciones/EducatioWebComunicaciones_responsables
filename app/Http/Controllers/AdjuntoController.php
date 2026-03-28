@@ -69,6 +69,26 @@ class AdjuntoController extends Controller
     ], 201);
   }
 
+  public function api_storeAdjuntoRespuesta(Request $request)
+  {
+    $request->validate([
+      'file' => 'required|file',
+      'tempId' => 'required|string|max:100',
+      'Cod_Alumno' => 'required|integer',
+    ]);
+
+    $authResponse = $this->autorizarAlumnoApi($request->Cod_Alumno);
+
+    if ($authResponse !== null) {
+      return $authResponse;
+    }
+
+    return response()->json([
+      'success' => true,
+      'adjunto' => $this->guardarAdjunto($request->file('file'), $request->tempId, 'comunicaciond', 'CommRespAdj_'),
+    ], 201);
+  }
+
   public function api_destroyAdjuntoComunicacione(Request $request)
   {
     $request->validate([
@@ -86,6 +106,39 @@ class AdjuntoController extends Controller
     $adjunto = Adjunto::where('filename', $request->filename)
       ->where('tempId', $request->tempId)
       ->where('entity', 'comunicacione')
+      ->whereNull('entityId')
+      ->first();
+
+    if ($adjunto == null) {
+      return response()->json(['success' => false, 'message' => 'Adjunto no encontrado'], 404);
+    }
+
+    $adjunto->delete();
+
+    if (Storage::disk('public')->exists($request->filename)) {
+      Storage::disk('public')->delete($request->filename);
+    }
+
+    return response()->json(['success' => true, 'filename' => $request->filename]);
+  }
+
+  public function api_destroyAdjuntoRespuesta(Request $request)
+  {
+    $request->validate([
+      'filename' => 'required|string|max:255',
+      'tempId' => 'required|string|max:100',
+      'Cod_Alumno' => 'required|integer',
+    ]);
+
+    $authResponse = $this->autorizarAlumnoApi($request->Cod_Alumno);
+
+    if ($authResponse !== null) {
+      return $authResponse;
+    }
+
+    $adjunto = Adjunto::where('filename', $request->filename)
+      ->where('tempId', $request->tempId)
+      ->where('entity', 'comunicaciond')
       ->whereNull('entityId')
       ->first();
 
