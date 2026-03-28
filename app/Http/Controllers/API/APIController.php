@@ -123,6 +123,11 @@ class APIController extends Controller
         $comunicacionE->hello= "world";
         $comunicacionE->destinatario= $comunicacionE->destinatario_web_user;
         $comunicacionE->destinatario->avatar_img = $comunicacionE->destinatario->avatar_image_withDefaults4API();
+        $dummy_comunicacionE_adjuntos = $comunicacionE->adjuntos;
+        $comunicacionE->adjuntos->each(function ($adjunto) {
+          $adjunto->url = url("/storage/$adjunto->filename");
+          $adjunto->filetypeicon = url(EureFunctions::getIconByFileType($adjunto->filename));
+        });
 //        $comunicacionE->remitente->web_user = $comunicacionE->remitente->webuser;
       }
 

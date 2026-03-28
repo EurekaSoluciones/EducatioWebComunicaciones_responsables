@@ -143,9 +143,16 @@ class ComunicacionEController extends Controller
 
   public function api_store(Request $request)
   {
-    $lctm = $request->all();
-
     try {
+      $request->validate([
+        'Cod_Alumno' => 'required|integer',
+        'destinatario' => 'required',
+        'tipoDestinatario' => 'required|string',
+        'asunto' => 'required|string',
+        'msg' => 'required|string',
+        'tempId' => 'nullable|string|max:100',
+      ]);
+
       $user = auth()->user();
 
       if (!$user) {
@@ -179,9 +186,17 @@ class ComunicacionEController extends Controller
 
         $comunicacionENew->save();
 
+        if ($request->filled('tempId')) {
+          DB::table('web_adjuntos')
+            ->where('tempId', '=', $request->tempId)
+            ->where('entity', '=', 'comunicacione')
+            ->whereNull('entityId')
+            ->update(['entityId' => $comunicacionENew->id]);
+        }
+
         DB::commit();
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'comunicacionE_id' => $comunicacionENew->id]);
       } catch (\Exception $e) {
         DB::rollBack();
 
