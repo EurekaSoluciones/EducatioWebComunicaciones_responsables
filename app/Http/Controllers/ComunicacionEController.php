@@ -36,7 +36,7 @@ class ComunicacionEController extends Controller
     ];
 
     //dd($comunicacionese[0]->tipo);
-    dd('hola'); 
+    // dd('hola'); 
 
     return view('comunicacionese.indexa', compact('alumno', 'responsable', 'comunicacionese', 'filtros'));
   }
