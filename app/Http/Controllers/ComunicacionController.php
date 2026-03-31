@@ -237,6 +237,12 @@ class ComunicacionController extends Controller
 
     public function api_responderComunicacion(Request $request)
     {
+        $request->validate([
+            'comunicacion_destinatario_id' => 'required|integer',
+            'respuesta' => 'nullable|string',
+            'tempId' => 'nullable|string|max:100',
+        ]);
+
         $user = auth()->user();
 
         $comunicacionDestinatario = ComunicacionDestinatario::find($request->comunicacion_destinatario_id);
@@ -245,9 +251,33 @@ class ComunicacionController extends Controller
             abort(403);
         }
 
-        $comunicacionDestinatario->respuesta = $request->respuesta;
-        $comunicacionDestinatario->fhRespuesta = Carbon::now();
-        $comunicacionDestinatario->save();
+        DB::beginTransaction();
+
+        try {
+            $comunicacionDestinatario->respuesta = $request->respuesta;
+            $comunicacionDestinatario->fhRespuesta = Carbon::now();
+            $comunicacionDestinatario->save();
+
+            if ($request->filled('tempId')) {
+                DB::table('web_adjuntos')
+                    ->where('tempId', '=', $request->tempId)
+                    ->where('entity', '=', 'comunicaciond')
+                    ->whereNull('entityId')
+                    ->update(['entityId' => $comunicacionDestinatario->id]);
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al guardar la respuesta',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function storeAdjuntoEnRespuesta(Request $request, Comunicacion $com, Alumno $alumno)

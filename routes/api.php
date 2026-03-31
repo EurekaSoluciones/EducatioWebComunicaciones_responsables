@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdjuntoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\API\CarteleraController;
@@ -64,6 +65,13 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   Route::post('/responsable-update',  [ResponsableController::class, 'api_update']);
   Route::post('/alumno-update-foto',  [AlumnoController::class, 'api_update_foto']);
   Route::post('/alumno-update-foto-remover',  [AlumnoController::class, 'api_update_foto_remover']);
+
+  Route::post('/adjunto/comunicaciones/e/upload',  [AdjuntoController::class, 'api_storeAdjuntoComunicacione']);
+  Route::post('/adjunto/comunicaciones/e/delete',  [AdjuntoController::class, 'api_destroyAdjuntoComunicacione']);
+
+  Route::post('/adjunto/comunicaciones/respuesta/upload',  [AdjuntoController::class, 'api_storeAdjuntoRespuesta']);
+  Route::post('/adjunto/comunicaciones/respuesta/delete',  [AdjuntoController::class, 'api_destroyAdjuntoRespuesta']);
+
 
   Route::get('/expo-notificaciones/marcar-mostradas',  [ExpoNotificationController::class, 'api_marcarMostrado']);
 });
