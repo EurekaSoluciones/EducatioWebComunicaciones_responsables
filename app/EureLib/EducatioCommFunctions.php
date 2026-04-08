@@ -89,8 +89,6 @@ class EducatioCommFunctions
     foreach ($ccItems as $item) {
       // Básicamente ver si es deuda, si es este mes, etc etc
       if ($item->Saldo > 0) {
-        $item->Fecha_Venc = Carbon::parse($item->Fecha_Venc)->endOfMonth();
-
         if ($item->Fecha_Venc > $hoy) {
           if ($item->Fecha_Venc <= $udm) {
             $venceEsteMes += $item->Saldo;

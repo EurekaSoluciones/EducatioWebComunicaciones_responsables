@@ -59,12 +59,12 @@ class ComunicacionE extends Model
 
     public function destinatario_web_user()
     {
-        if ($this->tipo == 'Secretaria') {
+        if ($this->tipo == 'Secretaria' || $this->tipo == null) {
             $web_user = $this->belongsTo(User::class, 'Cod_Usuario', 'cod_usuario');
         } else {
             $web_user = $this->belongsTo(User::class, 'Cod_Usuario', 'Cod_Profesor');
         }
-
+        
         return $web_user;
     }
 
