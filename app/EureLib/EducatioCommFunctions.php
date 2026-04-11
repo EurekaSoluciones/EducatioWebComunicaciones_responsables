@@ -64,15 +64,14 @@ class EducatioCommFunctions
   public static function CC_Obtener(Alumno $alumno, &$venceEsteMes, &$venceHoy, &$deudaVencida, &$proximoVencimiento)
   {
     $hoy = EureFunctions::hoy();
-    $udm = EureFunctions::ultimoDiaMes();
     $hasta = EureFunctions::ultimoDiaMes()->addMonth();
 
     $ccItems = DB::select('exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = ?', [$alumno->id, null, $hasta]);
 
     $ccItems = array_map(function ($fila) {
       $fila->Fecha_Venc = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Venc);
-      $fila->Monto = (float)$fila->Monto;
-      $fila->Saldo = (float)$fila->Saldo;
+      $fila->Monto = (float) $fila->Monto;
+      $fila->Saldo = (float) $fila->Saldo;
 
       return $fila;
     }, $ccItems);
@@ -88,23 +87,26 @@ class EducatioCommFunctions
 
     foreach ($ccItems as $item) {
       // Básicamente ver si es deuda, si es este mes, etc etc
-      if ($item->Saldo > 0) {
-        if ($item->Fecha_Venc > $hoy) {
-          if ($item->Fecha_Venc <= $udm) {
-            $venceEsteMes += $item->Saldo;
 
-            if ($item->Fecha_Venc < $proximoVencimiento) {
-              $proximoVencimiento = $item->Fecha_Venc;
-            }
-          }
-        }
+      $verdaderoVencimiento = $item->Fecha_Venc->copy()->endOfMonth();
+      $inicioMesDeLaCuota = $item->Fecha_Venc->copy()->startOfMonth();
 
-        if ($item->Fecha_Venc < $hoy) {
-          $deudaVencida += $item->Saldo;
-        }
+      if ($item->Saldo != 0) {
 
-        if ($item->Fecha_Venc == $hoy) {
+        //Si hay saldo para pagar
+        if ($item->Fecha_Venc->isSameDay($hoy) || $verdaderoVencimiento->isSameDay($hoy)) {
+          //HOY
           $venceHoy += $item->Saldo;
+        } elseif ($inicioMesDeLaCuota < $hoy && $verdaderoVencimiento > $hoy) {
+          //Es el mes para pagar
+          $venceEsteMes += $item->Saldo;
+          if ($item->Fecha_Venc < $proximoVencimiento) {
+            $proximoVencimiento = $item->Fecha_Venc;
+          }
+
+        } elseif ($verdaderoVencimiento < $hoy) {
+          //Vencido, se paso el mes y todo
+          $deudaVencida += $item->Saldo;
         }
       }
     }
@@ -112,6 +114,58 @@ class EducatioCommFunctions
     return $ccItems;
 
   }
+
+  // public static function CC_Obtener(Alumno $alumno, &$venceEsteMes, &$venceHoy, &$deudaVencida, &$proximoVencimiento)
+  // {
+  //   $hoy = EureFunctions::hoy();
+  //   $udm = EureFunctions::ultimoDiaMes();
+  //   $hasta = EureFunctions::ultimoDiaMes()->addMonth();
+
+  //   $ccItems = DB::select('exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = ?', [$alumno->id, null, $hasta]);
+
+  //   $ccItems = array_map(function ($fila) {
+  //     $fila->Fecha_Venc = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Venc);
+  //     $fila->Monto = (float)$fila->Monto;
+  //     $fila->Saldo = (float)$fila->Saldo;
+
+  //     return $fila;
+  //   }, $ccItems);
+
+  //   //    dd($ccitems);
+
+  //   // Vamos a tener que hacer fuerza bruta acá. Después agregar los intereses
+
+  //   $venceEsteMes = 0.0;
+  //   $venceHoy = 0;
+  //   $deudaVencida = 0;
+  //   $proximoVencimiento = Carbon::create(2050, 1, 1, 12, 0, 0);
+
+  //   foreach ($ccItems as $item) {
+  //     // Básicamente ver si es deuda, si es este mes, etc etc
+  //     if ($item->Saldo > 0) {
+  //       if ($item->Fecha_Venc > $hoy) {
+  //         if ($item->Fecha_Venc <= $udm) {
+  //           $venceEsteMes += $item->Saldo;
+
+  //           if ($item->Fecha_Venc < $proximoVencimiento) {
+  //             $proximoVencimiento = $item->Fecha_Venc;
+  //           }
+  //         }
+  //       }
+
+  //       if ($item->Fecha_Venc < $hoy) {
+  //         $deudaVencida += $item->Saldo;
+  //       }
+
+  //       if ($item->Fecha_Venc == $hoy) {
+  //         $venceHoy += $item->Saldo;
+  //       }
+  //     }
+  //   }
+
+  //   return $ccItems;
+
+  // }
 
   public static function MensajeBloqueoBoletin(Alumno $alumno): array
   {
@@ -121,7 +175,7 @@ class EducatioCommFunctions
     );
 
     return [
-      'cumple' => isset($resultado[0]) ? (bool)$resultado[0]->Cumple : false,
+      'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
       'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el primer informe',
     ];
   }
@@ -134,7 +188,7 @@ class EducatioCommFunctions
     );
 
     return [
-      'cumple' => isset($resultado[0]) ? (bool)$resultado[0]->Cumple : false,
+      'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
       'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el certificado',
     ];
   }
@@ -147,7 +201,7 @@ class EducatioCommFunctions
     );
 
     return [
-      'cumple' => isset($resultado[0]) ? (bool)$resultado[0]->Cumple : false,
+      'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
       'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el primer informe',
     ];
   }
@@ -160,7 +214,7 @@ class EducatioCommFunctions
     );
 
     return [
-      'cumple' => isset($resultado[0]) ? (bool)$resultado[0]->Cumple : false,
+      'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
       'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el segundo informe',
     ];
   }
@@ -173,7 +227,7 @@ class EducatioCommFunctions
     );
 
     return [
-      'cumple' => isset($resultado[0]) ? (bool)$resultado[0]->Cumple : false,
+      'cumple' => isset($resultado[0]) ? (bool) $resultado[0]->Cumple : false,
       'mensaje' => $resultado[0]->Mensaje ?? 'No es posible descargar el informe final',
     ];
   }
@@ -200,7 +254,7 @@ class EducatioCommFunctions
 
     $pagos = array_map(function ($fila) {
       $fila->Fecha_Pago = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Pago);
-      $fila->Total = (float)$fila->Total;
+      $fila->Total = (float) $fila->Total;
 
       return $fila;
     }, $pagos);
@@ -251,10 +305,9 @@ class EducatioCommFunctions
     return $resultado;
   }
 
-
   public static function Documentos_Obtener(Alumno $alumno)
   {
-//    dd(EureFunctions::al());
+    //    dd(EureFunctions::al());
 
     $documentos = DB::select(
       'exec SP_WEB_Documentos @CodAlumno = ?, @aniolectivo = ?',
@@ -263,7 +316,6 @@ class EducatioCommFunctions
 
     return $documentos;
   }
-
 
   // Este está acá porque tiene cantidad de cosas específicas
   public static function MP_ObtenerLinkIntencionPago($importe, Alumno $alumno): string
@@ -299,10 +351,10 @@ class EducatioCommFunctions
       ],
       'external_reference' => $externalReference,
       'back_urls' => [
-        'success' => $baseUrl . route('pagos.indexA', ['alumno' => $alumno->id], false),
+        'success' => $baseUrl.route('pagos.indexA', ['alumno' => $alumno->id], false),
       ],
       'auto_return' => 'approved',
-      'notification_url' => $baseUrl . '/api/tercerizados-cobranza/mp/notificacion-pago',
+      'notification_url' => $baseUrl.'/api/tercerizados-cobranza/mp/notificacion-pago',
     ];
 
     $http = Http::withToken(EureFunctions::MP_ObtenerAccessToken());
@@ -312,7 +364,7 @@ class EducatioCommFunctions
 
     $response = $http->post('https://api.mercadopago.com/checkout/preferences', $payload);
 
-    if (!$response->successful()) {
+    if (! $response->successful()) {
       EureFunctions::MP_Log(
         'error',
         "Error al solicitar preferencia de pago a MercadoPago para alumno ID {$alumno->id}",
@@ -322,12 +374,12 @@ class EducatioCommFunctions
         ]
       );
 
-      throw new \Exception('Error al crear preferencia de MercadoPago: ' . $response->status());
+      throw new \Exception('Error al crear preferencia de MercadoPago: '.$response->status());
     }
 
     $data = $response->json();
     $initPoint = $data['init_point'] ?? null;
-    if (!$initPoint) {
+    if (! $initPoint) {
       throw new \Exception('Respuesta de MercadoPago sin init_point');
     }
 
@@ -362,7 +414,7 @@ class EducatioCommFunctions
     }
 
     $id = $payload['id'] ?? null;
-    if (!$id) {
+    if (! $id) {
       return response()->json(['error' => 'ID de pago no recibido'], 400);
     }
 
@@ -376,7 +428,7 @@ class EducatioCommFunctions
 
       return response()->json(['ignored' => true, 'status' => $payment['status'] ?? null]);
     } catch (\Throwable $e) {
-      if ((int)$e->getCode() === 404) {
+      if ((int) $e->getCode() === 404) {
         return response()->json(['status' => 'not_found'], 404);
       }
 
@@ -392,7 +444,7 @@ class EducatioCommFunctions
   public static function MP_ObtenerPagoPorId($id): array
   {
     $http = Http::withHeaders([
-      'Authorization' => 'Bearer ' . EureFunctions::MP_ObtenerAccessToken(),
+      'Authorization' => 'Bearer '.EureFunctions::MP_ObtenerAccessToken(),
       'Accept' => 'application/json',
     ]);
 
@@ -408,7 +460,7 @@ class EducatioCommFunctions
         throw new \RuntimeException("Pago no encontrado ID {$id}", 404);
       }
 
-      throw new \RuntimeException('Fallo al consultar pago: ' . $response->body(), $response->status());
+      throw new \RuntimeException('Fallo al consultar pago: '.$response->body(), $response->status());
     }
 
     return $response->json();
@@ -418,7 +470,7 @@ class EducatioCommFunctions
   {
     try {
       $componentes = explode(';', $payment['external_reference'] ?? '');
-      $codAlumno = isset($componentes[0]) ? (int)$componentes[0] : null;
+      $codAlumno = isset($componentes[0]) ? (int) $componentes[0] : null;
       $fechaPago =
         Carbon::parse($payment['date_approved'] ?? now())->setTimezone('America/Argentina/Buenos_Aires')->format('Y-m-d H:i:s');
 
@@ -454,8 +506,7 @@ class EducatioCommFunctions
     $accessToken,
     $importe,
     Alumno $alumno
-  )
-  {
+  ) {
     $urlPTIC_IP = 'https://api.paypertic.com/pagos';
     $external_transaction_id =
       implode(
@@ -463,21 +514,21 @@ class EducatioCommFunctions
         [$alumno->Cod_Alumno, $alumno->DNI, now()->format('YmdHisv'), str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT)]
       );
 
-    $nurl = config('app.url') . '/api/tercerizados-cobranza/ptic/notificacion-pago';
-    $backURL = config('app.url') . '/alumno/' . $alumno->Cod_Alumno;
+    $nurl = config('app.url').'/api/tercerizados-cobranza/ptic/notificacion-pago';
+    $backURL = config('app.url').'/alumno/'.$alumno->Cod_Alumno;
     $RL = EureFunctions::getLoggedResponsableAttribute();
     $email = EureFunctions::primerEmailValido($RL->Email);
 
     $ip_Details = [[
       'external_reference' => $alumno->Cod_Alumno,
       'concept_id' => 1,
-      'concept_description' => '(' . $alumno->DNI . ') ' . $alumno->Apellido . ', ' . $alumno->Nombre,
+      'concept_description' => '('.$alumno->DNI.') '.$alumno->Apellido.', '.$alumno->Nombre,
       'amount' => $importe,
     ]];
 
     $ip_Payer =
       [
-        'name' => $alumno->Nombre . ' ' . $alumno->Apellido,
+        'name' => $alumno->Nombre.' '.$alumno->Apellido,
         'email' => $email,
         'identification' => [
           'type' => 'DNI_ARG',
@@ -489,8 +540,8 @@ class EducatioCommFunctions
     $pIntencionPago = [
       'currency_id' => 'ARS',
       'external_transaction_id' => $external_transaction_id,
-      'due_date' => now()->format('Y-m-d') . 'T00:00:00-0300',
-      'last_due_date' => now()->addDay()->format('Y-m-d') . 'T00:00:00-0300',
+      'due_date' => now()->format('Y-m-d').'T00:00:00-0300',
+      'last_due_date' => now()->addDay()->format('Y-m-d').'T00:00:00-0300',
       'notification_url' => $nurl, // URL de notificación
       'ip_details' => $ip_Details, // Detalles de la intencion de pago
       'nurl' => $nurl, // URL de notificación
@@ -513,19 +564,18 @@ class EducatioCommFunctions
       return $response->json(); // ← Devuelve los datos como el link de pago
     }
 
-    throw new \Exception('Error al crear intención de pago: ' . $response->status() . ' - ' . $response->body());
+    throw new \Exception('Error al crear intención de pago: '.$response->status().' - '.$response->body());
   }
 
   public static function PTIC_ImputarPago(
-    int           $cod_alumno,
+    int $cod_alumno,
     Carbon|string $fecha,
-    float         $importe,
-    string        $external_transaction_id,
-    string        $ptic_id
-  ): JsonResponse
-  {
+    float $importe,
+    string $external_transaction_id,
+    string $ptic_id
+  ): JsonResponse {
     try {
-      if (!$fecha instanceof Carbon) {
+      if (! $fecha instanceof Carbon) {
         $fecha = Carbon::parse($fecha);
       }
 

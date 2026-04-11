@@ -12,8 +12,9 @@ class ComunicacionDestinatario extends Model
     protected $table = 'web_comunicaciones_destinatarios';
 
     protected $casts = [
-        'fhLeido' => 'datetime',
-        'fhRespuesta' => 'datetime',
+      'fhLeido' => 'datetime',
+      'fhRespuesta' => 'datetime',
+      'leido' => 'boolean',
     ];
 
     public function getcarbonFHLeidoAttribute()

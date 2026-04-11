@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
+use App\Models\Comunicacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -35,9 +36,9 @@ class DummyController extends Controller
 
   public function index2()
   {
-    dd(Str::slug('Presupuesto ESET + SDP-2023_230719_194604.pdf'));
+    $responsable = self::getLoggedResponsableAttribute();
 
-    return view('dummy.index2');
+    $a= Comunicacion::NoLeidosPorAlumno(true, $responsable, $alumno);
   }
   public function index3()
   {

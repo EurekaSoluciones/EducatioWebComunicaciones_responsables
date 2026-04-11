@@ -6,6 +6,7 @@ use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
 use App\Models\Cartelera;
+use App\Models\Comunicacion;
 use App\Models\ComunicacionDestinatario;
 use App\Models\ComunicacionE;
 use App\Models\ExpoToken;
@@ -40,9 +41,12 @@ class APIController extends Controller
 
     foreach ($alumnos as $alumno)
     {
-      $comunicaciones = $alumno->comunicaciones;
+      $comunicaciones = Comunicacion::Alumno($alumno)->ParaResponsable($responsable)->get();
+      $alumno->comunicaciones = $comunicaciones;
+
       $comunicacionesE= ComunicacionE::DeAlumno($alumno)->DeResponsable($responsable)->orderBy('id', 'desc')->get();
       $alumno->comunicacionesE= $comunicacionesE;
+
       $grupo = $alumno->grupo;
       $web = $alumno->web;
 //      $web->avatar_img= $alumno->avatar_image_withDefaults4API();

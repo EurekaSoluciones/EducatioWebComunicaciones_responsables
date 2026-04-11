@@ -107,6 +107,18 @@ class Comunicacion extends Model
         });
   }
 
+  public function scopeParaResponsable($query, $responsable)
+  {
+    if ($responsable != "")
+      $query
+        ->whereIn('id', function ($subquery) use ($responsable) {
+          $subquery->from('web_comunicaciones_destinatarios')
+            ->select('comunicacion_id')
+            ->where('Cod_Responsable', '=', $responsable->id);
+
+        });
+  }
+
   public function scopeDesde($query, $desde)
   {
     if ($desde != null)

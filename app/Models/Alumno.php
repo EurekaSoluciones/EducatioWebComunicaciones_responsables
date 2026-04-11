@@ -181,13 +181,13 @@ class Alumno extends Model
 
   public function TipoResponsableSegunResponsable(Responsable $responsable)
   {
-      if ($responsable->id == $this->Responsable1) {
-          return $this->ETipoResponsable1;
-      }
+    if ($responsable->id == $this->Responsable1) {
+      return $this->ETipoResponsable1;
+    }
 
-      if ($responsable->id == $this->Responsable2) {
-          return $this->ETipoResponsable2;
-      }
+    if ($responsable->id == $this->Responsable2) {
+      return $this->ETipoResponsable2;
+    }
 
       return null;
   }

@@ -214,9 +214,9 @@
   <script>
     $(function () {
 
-      $('.EureSelect2').select2({
-        'theme': 'bootstrap4'
-      })
+      // $('.EureSelect2').select2({
+      //   'theme': 'bootstrap4'
+      // })
 
       $('.table').DataTable(datatablesConfig).order([[0, 'desc']]).draw();
 
