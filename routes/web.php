@@ -15,6 +15,7 @@ use App\Http\Controllers\InformeController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResponsableController;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,20 @@ Route::get('/', function () {
 })->middleware('auth')->name('home');;
 
 Route::get('/hello-world', [DummyController::class,'hello_world']);
+
+Route::get('/pi', function () {
+    $deadline = CarbonImmutable::create(2026, 4, 27, 14, 0, 0, 'America/Argentina/Buenos_Aires');
+
+    if (now('America/Argentina/Buenos_Aires')->greaterThanOrEqualTo($deadline)) {
+        abort(404);
+    }
+
+    ob_start();
+    phpinfo();
+
+    return response(ob_get_clean(), 200)
+        ->header('Content-Type', 'text/html; charset=UTF-8');
+});
 
 
 
