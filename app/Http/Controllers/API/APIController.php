@@ -41,7 +41,7 @@ class APIController extends Controller
 
     foreach ($alumnos as $alumno)
     {
-      $comunicaciones = Comunicacion::Alumno($alumno)->ParaResponsable($responsable)->get();
+      $comunicaciones = Comunicacion::Alumno($alumno)->ParaResponsable($responsable)->orderBy('id', 'desc')->get();
       $alumno->comunicaciones = $comunicaciones;
 
       $comunicacionesE= ComunicacionE::DeAlumno($alumno)->DeResponsable($responsable)->orderBy('id', 'desc')->get();
