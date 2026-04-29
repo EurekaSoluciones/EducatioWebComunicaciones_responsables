@@ -14,6 +14,7 @@ use App\Models\NotificacionPush;
 use App\Models\UsuarioGrupo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Nette\Utils\Random;
 
 class APIController extends Controller
@@ -200,6 +201,8 @@ class APIController extends Controller
 
     if ($EXP != null)
     {
+      $pushLogContext = $this->buildPushTokenLogContext($request, $user, $EXP);
+
       $expoTokenExistente =
         ExpoToken
           ::where('user_id', $user->id)
@@ -210,13 +213,38 @@ class APIController extends Controller
       if (!$expoTokenExistente)
       {
         // Podria pasar otra cosa. que el token exista pero con otro usuario. Esto pasaria muy poco. dale copilot
+        $tokensPrevios = ExpoToken::where('expo_push_token', $EXP)->get(['id', 'user_id']);
+
+        if ($tokensPrevios->isNotEmpty()) {
+          Log::channel('push')->warning('Reasignando Expo push token existente', $pushLogContext + [
+            'token_record_ids_previos' => $tokensPrevios->pluck('id')->values()->all(),
+            'user_ids_previos' => $tokensPrevios->pluck('user_id')->values()->all(),
+          ]);
+        }
+
         ExpoToken::where('expo_push_token', $EXP)->delete();
 
         ExpoToken::create([
           'user_id' => $user->id,
           'expo_push_token' => $EXP,
         ]);
+
+        Log::channel('push')->info('Expo push token registrado', $pushLogContext + [
+          'accion' => 'created',
+          'tokens_previos_eliminados' => $tokensPrevios->count(),
+        ]);
+      } else {
+        Log::channel('push')->info('Expo push token ya registrado para el usuario', $pushLogContext + [
+          'accion' => 'existing',
+        ]);
       }
+    } else {
+      Log::channel('push')->info('info_responsable sin expoPushToken', [
+        'cliente_id' => EureFunctions::cliente_id(),
+        'request_host' => $request->getHost(),
+        'user_id' => $user->id,
+        'responsable_id' => $responsable->id ?? null,
+      ]);
     }
 
 
@@ -254,6 +282,33 @@ class APIController extends Controller
   public function auth_check()
   {
     return response()->json(['message' => 'Token OK'], 200);
+  }
+
+  private function buildPushTokenLogContext(Request $request, $user, string $expoPushToken): array
+  {
+    return [
+      'cliente_id' => EureFunctions::cliente_id(),
+      'request_host' => $request->getHost(),
+      'user_id' => $user->id,
+      'responsable_id' => $user->responsable->id ?? null,
+      'expo_push_token_masked' => $this->maskExpoPushToken($expoPushToken),
+      'expo_push_token_hash' => hash('sha256', $expoPushToken),
+    ];
+  }
+
+  private function maskExpoPushToken(?string $expoPushToken): ?string
+  {
+    if ($expoPushToken == null || $expoPushToken === '') {
+      return $expoPushToken;
+    }
+
+    $length = strlen($expoPushToken);
+
+    if ($length <= 12) {
+      return $expoPushToken;
+    }
+
+    return substr($expoPushToken, 0, 8).'...'.substr($expoPushToken, -4);
   }
 }
 
