@@ -70,7 +70,7 @@
                         <textarea class="form-control two-lines" id="respuestaLibre" name="respuestaLibre" rows="2" disabled>{{ $comunicacion_destinatario->respuesta }}
                         </textarea>
                         <h5 class="text-muted small text-right">
-                            {{ $comunicacion_destinatario->fhRespuesta->diffForHumans() }}</h5>
+                            {{ $comunicacion_destinatario->fhRespuesta->format('d/m/Y H:i')  }}</h5>
 
                         <table class="">
 
