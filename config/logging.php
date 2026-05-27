@@ -70,6 +70,13 @@ return [
             'days' => 14,
         ],
 
+        'push' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/push.log'),
+            'level' => env('LOG_LEVEL', 'info'),
+            'days' => 60,
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
