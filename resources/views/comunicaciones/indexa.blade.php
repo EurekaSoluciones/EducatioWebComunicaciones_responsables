@@ -152,8 +152,8 @@
             </td>
 
             <td class="align-middle">
-              <img src="{{$comunicacion->remitente->safeAvatarImg}}" class="img-circle mr-2" style="height: 42px">
-              {{ $comunicacion->remitente->NombreCompleto }}
+              <img src="{{$comunicacion->remitente?->safeAvatarImg}}" class="img-circle mr-2" style="height: 42px">
+              {{ $comunicacion->remitente?->NombreCompleto }}
             </td>
 
             <td class="align-middle EureHideOnSmallDevices">
