@@ -28,7 +28,7 @@ class CuentaCorrienteController extends Controller
 
     $ccItems = EducatioCommFunctions::CC_Obtener($alumno, $venceEsteMes, $venceHoy, $deudaVencida, $proximoVencimiento);
 
-//    dd($venceEsteMes);
+  //  dd($ccItems);
 
     return view('cuentascorrientes.indexa', compact('ccItems', 'alumno', 'venceEsteMes', 'venceHoy', 'proximoVencimiento', 'deudaVencida'));
   }

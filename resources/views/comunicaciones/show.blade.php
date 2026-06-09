@@ -28,13 +28,13 @@
             <div class="col-3 d-flex justify-content-center align-items-center ">
               <div class="card card-widget widget-user ">
                 <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">De: {{$comunicacion->remitente->NombreCompleto}}</h3>
+                  <h3 class="widget-user-username">De: {{$comunicacion->remitente?->NombreCompleto}}</h3>
                 </div>
 
                 <div class="card-body">
 
                   <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="{{$comunicacion->remitente->SafeAvatarImg}}"
+                    <img class="img-circle elevation-2" src="{{$comunicacion->remitente?->SafeAvatarImg}}"
                          alt="User Avatar">
                   </div>
 
@@ -43,7 +43,7 @@
                   <div class="text-center" style="clear: both">
                     @if ($comunicacion->tipo->id == \App\EureLib\Enums\ComunicacionTipoEnum::Aula)
                       <h5 class="lead"> Profe de</h5>
-                      @foreach($comunicacion->remitente->profe->MPGs as $MPG)
+                      @foreach($comunicacion->remitente?->profe->MPGs as $MPG)
                         @if ($MPG->grupo->id == $alumno->grupo->id)
                           <span class="text-muted text-sm">{{ $MPG->materia->Descripcion }}</span>&nbsp;
                         @endif
