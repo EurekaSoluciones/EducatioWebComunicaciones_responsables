@@ -19,7 +19,7 @@ class ResponsableController extends Controller
     if($user->id != Auth::id())
       abort(403);
 
-    return view('responsables.show', compact('user', 'responsable'));
+    return view('responsables.show', compact('responsable'));
   }
 
   public function showLogged()
