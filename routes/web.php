@@ -4,6 +4,7 @@
 use App\Http\Controllers\AdjuntoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\CarteleraController;
 use App\Http\Controllers\ComunicacionController;
@@ -34,6 +35,8 @@ Route::get('/', function () {
 })->middleware('auth')->name('home');;
 
 Route::get('/hello-world', [DummyController::class,'hello_world']);
+
+Route::get('/avatar/initials', [AvatarController::class, 'initials'])->name('avatar.initials');
 
 Route::get('/pi', function () {
     $deadline = CarbonImmutable::create(2026, 4, 27, 14, 0, 0, 'America/Argentina/Buenos_Aires');

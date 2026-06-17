@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\EureLib\InitialAvatar;
 use App\EureLib\StaticArrays;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -178,15 +179,14 @@ class User extends Authenticatable
           break;
 
         case 'avataroxro_Iniciales':  // este no anda más
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+        case 'ui-avatars_Iniciales':
+        case 'local_Iniciales':
+          $AvatarIMG = InitialAvatar::url($this->nombres . ' ' . $this->apellidos);
           break;
 
-        case 'ui-avatars_Iniciales':
-          $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->nombres}+{$this->apellidos}";
-          break;
 
         default:
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
           break;
       }
 
@@ -213,11 +213,13 @@ class User extends Authenticatable
           break;
 
         case 'avataroxro_Iniciales':
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+        case 'ui-avatars_Iniciales':
+        case 'local_Iniciales':
+          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
           break;
 
         default:
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
           break;
       }
 
@@ -249,11 +251,13 @@ class User extends Authenticatable
           break;
 
         case 'avataroxro_Iniciales':
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+        case 'ui-avatars_Iniciales':
+        case 'local_Iniciales':
+          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
           break;
 
         default:
-          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombres}+{$this->apellidos}";
+          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
           break;
       }
 

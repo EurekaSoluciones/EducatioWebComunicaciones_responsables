@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\EureLib\InitialAvatar;
 use App\EureLib\StaticArrays;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -227,15 +228,13 @@ class Alumno extends Model
               break;
 
           case 'avataroxro_Iniciales':  // este no anda más
-              $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->Nombre}+{$this->Apellido}";
-              break;
-
           case 'ui-avatars_Iniciales':
-              $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->Nombre}+{$this->Apellido}";
+          case 'local_Iniciales':
+              $AvatarIMG = InitialAvatar::url($this->nombreYApellido);
               break;
 
           default:
-              $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name=&name={$this->Nombre}+{$this->Apellido}";
+              $AvatarIMG = InitialAvatar::url($this->nombreYApellido);
               break;
       }
 
