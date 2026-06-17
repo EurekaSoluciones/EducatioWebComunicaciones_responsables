@@ -227,8 +227,14 @@ class Alumno extends Model
               $AvatarIMG = 'https://robohash.org/'.$this->id.'.png?set=set4';
               break;
 
-          case 'avataroxro_Iniciales':  // este no anda más
+          case 'avataroxro_Iniciales':
+              $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->nombreYApellido}";
+              break;
+
           case 'ui-avatars_Iniciales':
+              $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name={$this->nombreYApellido}";
+              break;
+
           case 'local_Iniciales':
               $AvatarIMG = InitialAvatar::url($this->nombreYApellido);
               break;

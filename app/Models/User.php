@@ -178,15 +178,21 @@ class User extends Authenticatable
           $AvatarIMG = 'https://robohash.org/' . $this->id . '.png?set=set4';
           break;
 
-        case 'avataroxro_Iniciales':  // este no anda más
+        case 'avataroxro_Iniciales':
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->default_avatar_name()}";
+          break;
+
         case 'ui-avatars_Iniciales':
+          $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name={$this->default_avatar_name()}";
+          break;
+
         case 'local_Iniciales':
-          $AvatarIMG = InitialAvatar::url($this->nombres . ' ' . $this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
 
 
         default:
-          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
       }
 
@@ -213,13 +219,19 @@ class User extends Authenticatable
           break;
 
         case 'avataroxro_Iniciales':
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->default_avatar_name()}";
+          break;
+
         case 'ui-avatars_Iniciales':
+          $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name={$this->default_avatar_name()}";
+          break;
+
         case 'local_Iniciales':
-          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
 
         default:
-          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
       }
 
@@ -251,13 +263,19 @@ class User extends Authenticatable
           break;
 
         case 'avataroxro_Iniciales':
+          $AvatarIMG = "https://avatar.oxro.io/avatar.svg?name={$this->default_avatar_name()}";
+          break;
+
         case 'ui-avatars_Iniciales':
+          $AvatarIMG = "https://ui-avatars.com/api/?background=random&size=512&bold=true&name={$this->default_avatar_name()}";
+          break;
+
         case 'local_Iniciales':
-          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
 
         default:
-          $AvatarIMG = InitialAvatar::url($this->nombres.' '.$this->apellidos);
+          $AvatarIMG = InitialAvatar::url($this->default_avatar_name());
           break;
       }
 
@@ -266,6 +284,15 @@ class User extends Authenticatable
 
 
     return $AvatarIMG;
+  }
+
+  private function default_avatar_name()
+  {
+    if ($this->tipo === 'Responsable' && $this->responsable != null) {
+      return trim($this->responsable->Nombre.' '.$this->responsable->Apellido);
+    }
+
+    return trim($this->nombres.' '.$this->apellidos);
   }
 
 
