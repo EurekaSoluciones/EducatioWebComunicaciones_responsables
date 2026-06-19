@@ -88,7 +88,6 @@ class ComunicacionController extends Controller
 
     public function show(Comunicacion $comunicacion, Alumno $alumno)
     {
-
         // Primero echarle flit a si el muchacho quiere ver una comm que no es de él
         $responsable = EureFunctions::getLoggedResponsableAttribute();
 
