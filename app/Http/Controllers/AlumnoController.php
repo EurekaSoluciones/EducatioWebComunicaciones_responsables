@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class AlumnoController extends Controller
@@ -17,21 +19,21 @@ class AlumnoController extends Controller
   {
     // Obtengo el Responsable
 
-    $responsable= EureFunctions::getLoggedResponsableAttribute();
+    $responsable = EureFunctions::getLoggedResponsableAttribute();
 
     // Ahora vemos si este responsable deberia ver a este alumno o no
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
       abort(403, 'Acceso no permitido');
 
 
-  //  dd($responsable);
+    //  dd($responsable);
 
     return view('alumnos.show', compact('alumno', 'responsable'));
   }
 
   public function editPic(Alumno $alumno)
   {
-    $responsable= EureFunctions::getLoggedResponsableAttribute();
+    $responsable = EureFunctions::getLoggedResponsableAttribute();
 
     // Ahora vemos si este responsable deberia ver a este alumno o no
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
@@ -45,15 +47,12 @@ class AlumnoController extends Controller
 
   public function updatePic(Request $request, Alumno $alumno)
   {
-//    dd($request->all());
+    //    dd($request->all());
 
-    if ($request->chSinImagen == 'on')
-    {
+    if ($request->chSinImagen == 'on') {
       $alumno->web->avatarImg = '';
       $alumno->web->save();
-    }
-    else
-    {
+    } else {
       // La imagen viene cropeada ahora
       $data = $request->input('cropped_image');
 
@@ -81,12 +80,12 @@ class AlumnoController extends Controller
     ]);
 
     $user = Auth::user();
-    $alumno= Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
+    $alumno = Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
 
     if ($alumno == null)
       return response()->json(['message' => 'Alumno no encontrado'], 401);
 
-    $responsable= Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
+    $responsable = Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
 
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
       abort(403, 'Acceso no permitido');
@@ -109,12 +108,12 @@ class AlumnoController extends Controller
   public function api_update_foto_remover(Request $request)
   {
     $user = Auth::user();
-    $alumno= Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
+    $alumno = Alumno::where('Cod_Alumno', $request->Cod_Alumno)->first();
 
     if ($alumno == null)
       return response()->json(['message' => 'Alumno no encontrado'], 401);
 
-    $responsable= Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
+    $responsable = Responsable::where('Cod_Responsable', $user->Cod_Responsable)->first();
 
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
       abort(403, 'Acceso no permitido');
@@ -127,6 +126,68 @@ class AlumnoController extends Controller
       'message' => 'Foto de perfil actualizada',
     ]);
   }
+  
+  public function createAdjunto(Alumno $alumno)
+  {
+    // Control de si realmente este docente tiene asuntos con este alumno
+    $user = User::find(Auth::id());
+    try {
+      // $profe = Profe::findOrFail($user->Cod_Profesor);
 
+      // if (! ($profe->MPGs->pluck('Cod_Grupo')->contains($alumno->Cod_Grupo))) {
+      //   abort(403);
+      // }
 
+      // UUID para adjuntos
+      $TempId = Str::uuid()->toString();
+
+      // Hacky
+      // $grupo = $alumno->grupo;
+      // $etiquetas = Etiqueta::Activos()->get();
+      // $modalidadDest = 'individual';
+      // $tipos_respuestas = RespuestaTipo::All();
+
+      return
+        view(
+          'alumnos.adjuntoCreate',
+          compact('alumno', 'user', 'TempId')
+        );
+    } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+      abort(403);
+    }
+  }
+
+  public function storeAdjunto(Request $request, Alumno $alumno)
+  {
+
+    // dd($request->all());
+
+    // Primero los datos obligatorios
+    // $request->validate([
+    //     'destinatario' => 'required|array|min:1',
+    // ]);
+
+    // Por ahora el tipo es fijo
+
+    DB::beginTransaction();
+
+    try {
+      // Adjuntos. El entity tambien se podria actualziar aca y seria mejor
+      DB::table('web_adjuntos')
+        ->where('tempId', '=', $request->tempId4DZ)
+        ->where('entity', '=', 'alumno')
+        ->update(['entityId' => $alumno->id]);
+
+      DB::commit();
+
+      return redirect()->route('alumnos.show', $alumno->id);
+    } catch (\Exception $e) {
+      // Si ocurre algún error, se revierte la transacción
+      DB::rollback();
+
+      throw $e;
+      // Aquí puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje de error
+      // o registrar el error en algún lugar para su posterior revisión
+    }
+  }
 }

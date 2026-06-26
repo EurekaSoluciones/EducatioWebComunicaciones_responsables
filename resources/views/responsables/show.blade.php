@@ -15,36 +15,34 @@
             <div class="card profile-card">
                 <div class="profile-cover"></div>
                 <div class="text-center">
-                    <img src="{{ $user->SafeAvatarImg }}" alt="Foto de perfil" class="profile-picture" height="160">
+                    <img src="{{ $responsable->web_user->SafeAvatarImg }}" alt="Foto de perfil" class="profile-picture" height="160">
                     <div class="subime100">
-                        <h1 class="">{{ $user->NombreCompleto }}</h1>
-                        <h2>{{ $user->login }}</h2>
+                        <h1 class="">{{ $responsable->NombreCompleto }}</h1>
+                        <h2>{{ $responsable->web_user->login }}</h2>
                         <br />
                         <table class="table table-striped table-bordered table-hover w-50 mx-auto">
                             <tr>
                                 <td>Email:</td>
-                                <td>{{ $user->responsable->Email }}</td>
+                                <td>{{ $responsable->Email }}</td>
                             </tr>
                             <tr>
                                 <td>Teléfono:</td>
-                                <td>{{ $user->responsable->Telefono }}</td>
+                                <td>{{ $responsable->Telefono }}</td>
                             </tr>
                             <tr>
                                 <td>Celular:</td>
-                                <td>{{ $user->responsable->Celular }}</td>
+                                <td>{{ $responsable->Celular }}</td>
                             </tr>
                             <tr>
                                 <td>DNI:</td>
-                                <td>{{ $user->responsable->dni }}</td>
+                                <td>{{ $responsable->dni }}</td>
                             </tr>
                         </table>
-                        @if ($user->id == Auth::id())
+                        @if ($responsable->web_user->id == Auth::id())
                             <a href="{{ route('responsables.edit', $responsable) }}">Editar Perfil</a>
                             <br />
                             <a href="{{ route('auth.password') }}">Cambiar Contraseña</a>
                         @endif
-
-
 
                         <h3 class="mt-5">Responsable de</h3>
 
@@ -118,7 +116,7 @@
     <style>
         .profile-cover {
             height: 240px;
-            background-image: url({{ $user->SafeBgImg }});
+            background-image: url({{ $responsable->web_user->SafeBgImg }});
             background-size: cover;
             background-position: center;
             position: relative;

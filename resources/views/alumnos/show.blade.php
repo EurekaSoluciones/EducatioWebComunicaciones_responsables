@@ -1,159 +1,166 @@
 @extends('adminlte::page')
 
-{{--@section('title', 'Educatio')--}}
+{{-- @section('title', 'Educatio') --}}
 
 @section('content_header')
-  <h4>{{$alumno->Nombre}}</h4>
+    <h4>{{ $alumno->Nombre }}</h4>
 
-  {{--  {{dd($alumno->EResponsable1)}}--}}
-  {{--    {{dd($alumno->obtenerComunicaciones(true, $responsable)->get())}}--}}
-  {{--  {{ dd($alumno->comunicaciones()->get()->take(10)) }}--}}
+    {{--  {{dd($alumno->EResponsable1)}} --}}
+    {{--    {{dd($alumno->obtenerComunicaciones(true, $responsable)->get())}} --}}
+    {{--  {{ dd($alumno->comunicaciones()->get()->take(10)) }} --}}
 @stop
 
 @section('content')
 
-  @include('alumnos.partials.alumnoCard', compact('alumno'))
+    @include('alumnos.partials.alumnoCard', compact('alumno'))
 
 
 
-  <div class="row">
-    <div class=" col-md-6">
+    <div class="row">
+        <div class=" col-md-6">
 
-      <div class="card card-info">
-        <div class="card-header"><a href="#">
-            <h4 class="card-title"><i class="fas fa-paper-plane"></i> Últimas Comunicaciones</h4></a>
-        </div>
+            <div class="card card-info">
+                <div class="card-header"><a href="#">
+                        <h4 class="card-title"><i class="fas fa-paper-plane"></i> Últimas Comunicaciones</h4>
+                    </a>
+                </div>
 
-        <div class="card-body">
-          @foreach($alumno->comunicaciones()->get()->take(5) as $comunicacion)
+                <div class="card-body">
+                    @foreach ($alumno->comunicaciones()->get()->take(5) as $comunicacion)
+                        <div class="card">
 
-            <div class="card">
-
-              <div class="card-body p-1">
-                <table style="width: 100%">
-                  <tr>
-                    <td><img src="{{ $comunicacion->remitente->SafeAvatarImg }}" class="img-circle "
-                             style="height: 3em"></td>
-                    <td style="width: 100%">
-                      <div class="row ml-2">
-                        <div class="col-9 ">
-                          {{--                  @if (\App\EureLib\EureFunctions::comunicacionPendienteDeLectura($comunicacion, $responsable))--}}
-                          {{--                    <span class="ComunicacionAsuntoSinLeer">--}}
-                          {{--                @else--}}
-                          {{--                        <span>--}}
-                          {{--                @endif--}}
+                            <div class="card-body p-1">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td><img src="{{ $comunicacion->remitente->SafeAvatarImg }}" class="img-circle "
+                                                style="height: 3em"></td>
+                                        <td style="width: 100%">
+                                            <div class="row ml-2">
+                                                <div class="col-9 ">
+                                                    {{--                  @if (\App\EureLib\EureFunctions::comunicacionPendienteDeLectura($comunicacion, $responsable)) --}}
+                                                    {{--                    <span class="ComunicacionAsuntoSinLeer"> --}}
+                                                    {{--                @else --}}
+                                                    {{--                        <span> --}}
+                                                    {{--                @endif --}}
 
 
-                          <span
-                            @if (\App\EureLib\EureFunctions::comunicacionPendienteDeLectura($comunicacion, $responsable))
-                              class="ComunicacionAsuntoSinLeer"
-                              @endif
-                              >
+                                                    <span
+                                                        @if (\App\EureLib\EureFunctions::comunicacionPendienteDeLectura($comunicacion, $responsable)) class="ComunicacionAsuntoSinLeer" @endif>
 
-                            <a href="{{route('comunicaciones.show', [$comunicacion, $alumno])}}">
-                            {{$comunicacion->asunto}}
-                            </a>
+                                                        <a
+                                                            href="{{ route('comunicaciones.show', [$comunicacion, $alumno]) }}">
+                                                            {{ $comunicacion->asunto }}
+                                                        </a>
 
-                          </span>
-                          <hr class="my-0" style="border-color: #e9ecef;">
-                          <small>{{$comunicacion->remitente->NombreCompleto}}</small>
+                                                    </span>
+                                                    <hr class="my-0" style="border-color: #e9ecef;">
+                                                    <small>{{ $comunicacion->remitente->NombreCompleto }}</small>
+
+
+                                                </div>
+
+                                                <div class="col-3 align-self-center text-center">
+                                                    <span
+                                                        class="ml-4">{{ $comunicacion->created_at->diffForHumans() }}</span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                </table>
+
+
+                            </div>
 
 
                         </div>
-
-                        <div class="col-3 align-self-center text-center">
-                          <span class="ml-4">{{ $comunicacion->created_at->diffForHumans()}}</span>
-
-                        </div>
-
-                      </div>
-
-                    </td>
-
-                  </tr>
+                    @endforeach
 
 
-                </table>
-
-
-              </div>
-
+                </div>
 
             </div>
-
-          @endforeach
-
-
         </div>
 
-      </div>
-    </div>
+
+        <div class=" col-md-6">
+
+            <div class="card card-info">
+                <div class="card-header container-fluid d-flex align-items-center">
+                    <h4 class="card-title"><i class="fas fa-paper-plane"></i> Legajo</h4>
+                    <a href="{{ route('alumnos.adjunto.create', $alumno->id) }}" class="btn btn-primary ml-auto mr-2">
+                        Nuevo adjunto
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    {{-- Este espacio es para subir la documentación en PDF del estudiante --}}
+
+                    <table class="">
+
+                        @foreach ($alumno->adjuntos as $adjunto)
+                            <tr style="border-bottom: 1px solid #ddd">
+                                <td class="p-2" style="text-align: center">
 
 
-    <div class=" col-md-6">
+                                    <img src="{{ url(\App\EureLib\EureFunctions::getIconByFileType($adjunto->filename)) }}"
+                                        height="32">
 
-      <div class="card card-info">
-        <div class="card-header"><a href="#">
-            <h4 class="card-title"><i class="fas fa-paper-plane"></i> Últimos conceptos</h4></a>
+                                </td>
+                                <td style="vertical-align: middle" class="p-2">
+                                    <a href="{{ url("/storage/$adjunto->filename") }}" target="_blank"><span
+                                            class="p-1">{{ $adjunto->originalFilename }}</span></a>
+                                    <br>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    </table>
+                </div>
+
+            </div>
         </div>
 
-        <div class="card-body">
+    @stop
 
-{{--          tienen tarea para resolver en el hogar--}}
-          {{--          @foreach($responsable->comunicacionesDest->take(1) as $cd)--}}
-          {{--            <div class="card">--}}
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css" />
 
+        <style>
+            /* Estilos para dispositivos pequeños */
+            @media (max-width: 576px) {
+                .img-size {
+                    width: 240px;
 
+                }
+            }
 
-          {{--              <div class="card-body">--}}
-          {{--                lala--}}
-          {{--              </div>--}}
+            /* Estilos para dispositivos medianos */
+            @media (min-width: 577px) and (max-width: 992px) {
+                .img-size {
+                    width: 260px;
 
+                }
+            }
 
-          {{--            </div>--}}
+            /* Estilos para dispositivos grandes */
+            @media (min-width: 993px) {
+                .img-size {
+                    width: 300px;
 
-          {{--          @endforeach--}}
+                }
+            }
+        </style>
 
+    @stop
 
-        </div>
-
-      </div>
-    </div>
-
-@stop
-
-@section('css')
-  <link rel="stylesheet" href="/css/admin_custom.css"/>
-
-  <style>
-    /* Estilos para dispositivos pequeños */
-    @media (max-width: 576px) {
-      .img-size {
-        width: 240px;
-
-      }
-    }
-
-    /* Estilos para dispositivos medianos */
-    @media (min-width: 577px) and (max-width: 992px) {
-      .img-size {
-        width: 260px;
-
-      }
-    }
-
-    /* Estilos para dispositivos grandes */
-    @media (min-width: 993px) {
-      .img-size {
-        width: 300px;
-
-      }
-    }
-
-  </style>
-
-@stop
-
-@section('js')
-  <script> console.log('Hi!'); </script>
-@stop
+    @section('js')
+        <script>
+            console.log('Hi!');
+        </script>
+    @stop

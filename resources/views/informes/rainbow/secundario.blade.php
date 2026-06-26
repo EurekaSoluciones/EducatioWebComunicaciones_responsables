@@ -39,7 +39,7 @@
         </span>
         <br />
         <small class="text-danger">
-          {{ $bloqueo1Informe['mensaje'] }}
+          {{ $bloqueo2Informe['mensaje'] }}
         </small>
       @endif
       <br /><br />
