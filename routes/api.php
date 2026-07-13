@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
   });
 
   Route::get('/auth-check', [APIController::class, 'auth_check']);
+  Route::post('/logout', [EureAuthController::class, 'api_logout']);
   Route::post('/info-responsable', [APIController::class, 'info_responsable']);
 
 

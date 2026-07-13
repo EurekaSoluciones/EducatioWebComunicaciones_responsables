@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
+use App\Models\ExpoToken;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -119,6 +120,32 @@ class EureAuthController extends Controller
     return response()->json([
       'message' => 'Invalid credentials'
     ], 401);
+  }
+
+  public function api_logout(Request $request)
+  {
+    $user = $request->user();
+    $expoPushToken = $request->input('expoPushToken');
+    $expoTokensEliminados = 0;
+
+    if ($expoPushToken != null && $expoPushToken !== '') {
+      $expoTokensEliminados =
+        ExpoToken
+          ::where('user_id', $user->id)
+          ->where('expo_push_token', $expoPushToken)
+          ->delete();
+    }
+
+    $currentToken = $user->currentAccessToken();
+
+    if ($currentToken != null) {
+      $currentToken->delete();
+    }
+
+    return response()->json([
+      'message' => 'Logout successful',
+      'expoTokensEliminados' => $expoTokensEliminados,
+    ]);
   }
 
   public function api_passwordUpdate(Request $request)
