@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AdjuntoController extends Controller
 {
-    //
+  //
   public function storeImagenComunicacione(Request $request)
   {
     $image = $request->file('file');
@@ -30,11 +30,11 @@ class AdjuntoController extends Controller
 
   public function destroyAdjunto(Request $request)
   {
-    $filename=  $request->get('filename');
-    $tempId=  $request->get('tempId');
+    $filename =  $request->get('filename');
+    $tempId =  $request->get('tempId');
 
     // Si no hago esto pueden forgear el nombre de un archivo y borrar
-    Adjunto::where('filename',$filename)->where('tempId', $tempId)->delete();
+    Adjunto::where('filename', $filename)->where('tempId', $tempId)->delete();
 
     if (Storage::disk('public')->exists($filename))
       Storage::disk('public')->delete($filename);
@@ -157,16 +157,16 @@ class AdjuntoController extends Controller
 
   private function guardarAdjunto($file, $tempId, $entity, $prefix)
   {
-    $safeClientOriginalName= EureFunctions::cleanFileName($file->getClientOriginalName());
+    $safeClientOriginalName = EureFunctions::cleanFileName($file->getClientOriginalName());
     $fileName = $prefix . date('ymdHis') . '_' . $safeClientOriginalName;
 
     Storage::disk('public')->put($fileName, file_get_contents($file));
 
-    $adjuntoNew= new Adjunto();
+    $adjuntoNew = new Adjunto();
     $adjuntoNew->filename = $fileName;
     $adjuntoNew->originalFilename = $file->getClientOriginalName();
-    $adjuntoNew->tempId= $tempId;
-    $adjuntoNew->entity= $entity;
+    $adjuntoNew->tempId = $tempId;
+    $adjuntoNew->entity = $entity;
     $adjuntoNew->save();
 
     return [
@@ -199,5 +199,43 @@ class AdjuntoController extends Controller
     return null;
   }
 
+  public function storeAdjunto(Request $request, $entity)
+  {
+    $file = $request->file('file');
 
+    $safeClientOriginalName = EureFunctions::cleanFileName($file->getClientOriginalName());
+    $fileName = 'CommAdj_' . date('ymdHis') . '_' . $safeClientOriginalName;
+
+    Storage::disk('public')->put($fileName, file_get_contents($file));
+
+    $adjuntoNew = new Adjunto();
+    $adjuntoNew->filename = $fileName;
+    $adjuntoNew->originalFilename = $file->getClientOriginalName();
+    // Agregado para desarrollar para cemhec
+    // $adjuntoNew->comentarios= $request->commentAttach;
+    $adjuntoNew->tempId = $request->tempId;
+    $adjuntoNew->entity = $entity;
+    $adjuntoNew->save();
+
+    return response()->json(['originalFN' => $file->getClientOriginalName(),  'newFN' => $fileName]);
+  }
+
+  public function storeAdjuntoAlumno(Request $request)
+  {
+    $file = $request->file('file');
+
+    $safeClientOriginalName = EureFunctions::cleanFileName($file->getClientOriginalName());
+    $fileName = 'CommAdj_' . date('ymdHis') . '_' . $safeClientOriginalName;
+
+    Storage::disk('public')->put($fileName, file_get_contents($file));
+
+    $adjuntoNew = new Adjunto();
+    $adjuntoNew->filename = $fileName;
+    $adjuntoNew->originalFilename = $file->getClientOriginalName();
+    $adjuntoNew->tempId = $request->tempId;
+    $adjuntoNew->entity = 'alumno';
+    $adjuntoNew->save();
+
+    return response()->json(['originalFN' => $file->getClientOriginalName(),  'newFN' => $fileName]);
+  }
 }

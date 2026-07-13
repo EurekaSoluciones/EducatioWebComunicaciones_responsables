@@ -28,23 +28,26 @@ class Responsable extends Model
   {
     return $this->Apellido . ', ' . $this->Nombre;
   }
-
+  
+  public function getnombreCompletoAttribute()
+  {
+    return $this->Nombre . ' ' . $this->Apellido;
+  }
 
   public function getCardAttribute()
   {
     return StaticArrays::$tiposCards[$this->id % count(StaticArrays::$tiposCards)];
   }
 
-
   public function alumnosPorR1()
   {
-  //  return $this->hasMany(Alumno::class, 'Responsable1');
+    //  return $this->hasMany(Alumno::class, 'Responsable1');
     return $this->hasMany(Alumno::class, 'Responsable1')->where('fecha_baja', null);
   }
 
   public function alumnosPorR2()
   {
-  //  return $this->hasMany(Alumno::class, 'Responsable2');
+    //  return $this->hasMany(Alumno::class, 'Responsable2');
     return $this->hasMany(Alumno::class, 'Responsable2')->where('fecha_baja', null);
   }
 
@@ -68,15 +71,14 @@ class Responsable extends Model
     // Doble acceso a la DB NO ME GUSTA
     if ($web_user == null) {
       // No se esto de crearlo pero podria ser
-      EureFunctions::crearUsuarioResponsable
-      (
-        $this->usuarioAutoInscripcion,
-        $this->Nombre,
-        $this->Apellido,
-        '',
-        $this->id,
-        $this->passwordAutoInscripcion
-      );
+      EureFunctions::crearUsuarioResponsable(
+          $this->usuarioAutoInscripcion,
+          $this->Nombre,
+          $this->Apellido,
+          '',
+          $this->id,
+          $this->passwordAutoInscripcion
+        );
     }
 
     return $web_user;
@@ -108,24 +110,24 @@ class Responsable extends Model
   {
     // https://stackoverflow.com/questions/60411513/why-hasmanythrough-from-eloquent-documentation-not-work
 
-    $ComRaw= $this->hasManyThrough(Comunicacion::class, ComunicacionDestinatario::class,
-      'Cod_Responsable', 'id', 'id', 'comunicacion_id');
+    $ComRaw = $this->hasManyThrough(
+      Comunicacion::class,
+      ComunicacionDestinatario::class,
+      'Cod_Responsable',
+      'id',
+      'id',
+      'comunicacion_id'
+    );
 
     //   'Cod_Responsable', 'id', 'Cod_Responsable', 'comunicacion_id');
     if ($soloSinLeer)
-      $ComRaw= $ComRaw->whereNull('fhLeido');
+      $ComRaw = $ComRaw->whereNull('fhLeido');
 
     if ($alumno != null)
-      $ComRaw= $ComRaw->where('Cod_Alumno', '=', $alumno->id);
+      $ComRaw = $ComRaw->where('Cod_Alumno', '=', $alumno->id);
 
-//     aca queda todo planteado. Evidentemente hasta el return no se ejecuta el query
+    //     aca queda todo planteado. Evidentemente hasta el return no se ejecuta el query
 
     return $ComRaw->orderBy('web_comunicaciones.id', 'desc');;
   }
-
-
-
-
-
-
 }

@@ -25,7 +25,7 @@
         </span>
         <br />
         <small class="text-danger">
-          {{ $bloqueo1Informe['mensaje'] }}
+          {{ $bloqueoBoletin['mensaje'] }}
         </small>
       @endif
       <br /><br />
