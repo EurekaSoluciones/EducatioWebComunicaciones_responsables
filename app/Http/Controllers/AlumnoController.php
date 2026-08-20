@@ -126,7 +126,7 @@ class AlumnoController extends Controller
       'message' => 'Foto de perfil actualizada',
     ]);
   }
-  
+
   public function createAdjunto(Alumno $alumno)
   {
     // Control de si realmente este docente tiene asuntos con este alumno
@@ -189,5 +189,21 @@ class AlumnoController extends Controller
       // Aquí puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje de error
       // o registrar el error en algún lugar para su posterior revisión
     }
+  }
+
+  public function rematriculacion(Alumno $alumno)
+  {
+    // Obtengo el Responsable
+
+    $responsable = EureFunctions::getLoggedResponsableAttribute();
+
+    // Ahora vemos si este responsable deberia ver a este alumno o no
+    if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
+      abort(403, 'Acceso no permitido');
+
+
+    //  dd($responsable);
+
+    return view('alumnos.rematriculaciones.form', compact('alumno'));
   }
 }

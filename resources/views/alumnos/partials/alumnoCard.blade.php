@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="col-sm-5">
+      <div class="col-sm-5 d-flex flex-column">
         {{--          {{url('assets/images/usuarios/avatares/minami04.jpg')}}--}}
 
         <table>
@@ -114,6 +114,13 @@
           </tr>
         </table>
 
+        @if ($mostrarBotonRematriculacion ?? false)
+          <div class="d-flex justify-content-center mt-auto pt-4">
+            <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
+              <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+            </a>
+          </div>
+        @endif
 
       </div>
     </div>
