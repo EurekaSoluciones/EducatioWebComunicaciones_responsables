@@ -32,7 +32,6 @@
             </small>
         @endif
     </div>
-
 @stop
 
 @section('css')
