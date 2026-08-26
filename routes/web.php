@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
     Route::get('/alumnos/{alumno}/adjunto/create', [AlumnoController::class, 'createAdjunto'])->name('alumnos.adjunto.create')->middleware('auth');
     Route::post('/alumnos/{alumno}/adjunto/store', [AlumnoController::class, 'storeAdjunto'])->name('alumnos.adjunto.store')->middleware('auth');
     Route::get('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'rematriculacion'])->name('alumnos.rematriculacion')->middleware('auth');
+    Route::post('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'guardarRematriculacion'])->name('alumnos.rematriculacion.guardar')->middleware('auth');
 
 
     Route::post('/upload-image', [AdjuntoController::class, 'fileStore']);

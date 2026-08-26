@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class AlumnoController extends Controller
@@ -201,9 +203,151 @@ class AlumnoController extends Controller
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
       abort(403, 'Acceso no permitido');
 
+    $rematriculacion = collect(DB::select(
+      'EXEC SP_WEB_DatosAlumno_Rematriculacion ?',
+      [$alumno->id]
+    ))->first();
 
-    //  dd($responsable);
+    $cursos = DB::select(
+      'EXEC dbo.SP_WEB_DatosAlumno_RematriculacionCursos @codAlumno = ?',
+      [$alumno->id]
+    );
 
-    return view('alumnos.rematriculaciones.form', compact('alumno'));
+    $convenios = DB::select('EXEC dbo.SP_WEB_DatosAlumno_RematriculacionConvenios');
+
+    $ciudades = DB::table('Ciudad')->get();
+
+    // dd($ciudades);
+
+    return view('alumnos.rematriculaciones.form', compact('alumno', 'rematriculacion', 'cursos', 'convenios', 'ciudades'));
+  }
+
+  public function guardarRematriculacion(Request $request, Alumno $alumno)
+  {
+    $responsable = EureFunctions::getLoggedResponsableAttribute();
+
+    if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno)) {
+      abort(403, 'Acceso no permitido');
+    }
+
+    $sql = 'EXEC dbo.SP_WEB_DatosAlumno_RematriculacionInsert 
+      @codAlumno = ?,
+      @Domicilio = ?,
+      @Telefono = ?,
+      @email = ?,
+      @CodCiudad = ?,
+      @nopermitefoto = ?,
+      @R1Nombre = ?,
+      @R1Apellido = ?,
+      @R1Vinculo = ?,
+      @R1DNI = ?,
+      @R1Domicilio = ?,
+      @R1Telefono = ?,
+      @R1Celular = ?,
+      @R1Email = ?, 
+      @R1CodCiudad = ?,
+      @R1Ocupacion = ?,
+      @R2Nombre = ?,
+      @R2Apellido = ?,
+      @R2Vinculo = ?,
+      @R2DNI = ?,
+      @R2Domicilio = ?,
+      @R2Telefono = ?, 
+      @R2Celular = ?,
+      @R2Email = ?,
+      @R2CodCiudad = ?,
+      @R2Ocupacion = ?,
+      @RNombre = ?,
+      @RApellido = ?, 
+      @RDNI = ?,
+      @RDomicilio = ?,
+      @RTelefono = ?,
+      @RCelular = ?,
+      @REmail = ?,
+      @RCodCiudad = ?,
+      @Convenio = ?,
+      @NombreTitularConvenio = ?,
+      @Colegio = ?, 
+      @GradoColegio = ?,
+      @TurnoColegio = ?,
+      @TieneFamiliaDirecto = ?, 
+      @TieneFamiliaDirectoQuienes = ?,
+      @CursoNuevo = ?,
+      @Observaciones = ?,
+      @tieneNecesidadEspecial = ?';
+
+    $parametros = [
+      $alumno->id,
+      $request->Domicilio,
+      $request->Telefono,
+      $request->email,
+      $request->CodCiudad,
+      $request->nopermitefoto,
+      $request->R1Nombre,
+      $request->R1Apellido,
+      $request->R1Vinculo,
+      $request->R1DNI,
+      $request->R1Domicilio,
+      $request->R1Telefono,
+      $request->R1Celular,
+      $request->R1Email,
+      $request->R1CodCiudad,
+      $request->R1Ocupacion,
+      $request->R2Nombre,
+      $request->R2Apellido,
+      $request->R2Vinculo,
+      $request->R2DNI,
+      $request->R2Domicilio,
+      $request->R2Telefono,
+      $request->R2Celular,
+      $request->R2Email,
+      $request->R2CodCiudad,
+      $request->R2Ocupacion,
+      $request->RNombre,
+      $request->RApellido,
+      $request->RDNI,
+      $request->RDomicilio,
+      $request->RTelefono,
+      $request->RCelular,
+      $request->REmail,
+      $request->RCodCiudad,
+      $request->Convenio,
+      $request->NombreTitularConvenio,
+      $request->Colegio,
+      $request->GradoColegio,
+      $request->TurnoColegio,
+      $request->TieneFamiliaDirecto,
+      $request->TieneFamiliaDirectoQuienes,
+      $request->CursoNuevo,
+      $request->Observaciones,
+      $request->tieneNecesidadEspecial
+    ];
+
+    try {
+      DB::statement($sql, $parametros);
+      return redirect()
+        ->route('home')
+        ->with('resultadoRematriculacion', [
+          'alumnoId' => (string) $alumno->id,
+          'mensaje' => 'La reinscripción fue guardada correctamente.',
+        ]);
+    } catch (\Throwable $e) {
+      // El error técnico queda registrado para nosotros
+      Log::error('Error al guardar rematriculación', [
+        'alumno_id' => $alumno->id,
+        'error' => $e->getMessage(),
+        'exception' => get_class($e),
+      ]);
+
+      // Al usuario le mostramos un mensaje entendible
+      return redirect()
+        ->back()
+        ->withInput()
+        ->with('resultadoRematriculacion', [
+          'alumnoId' => (string) $alumno->id,
+          'mensaje' => 'No fue posible guardar la reinscripción. Por favor, intente nuevamente.',
+          'tipo' => 'error',
+        ]);
+    }
   }
 }
