@@ -52,7 +52,6 @@ class InformeController extends Controller
 
       default:
         return 'Visualizador de informes estandar - DEFAULT SWITCH';
-
     }
   }
 
@@ -465,7 +464,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Informe_MEDIA.rpt', 'Informe_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -473,7 +471,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
   public function descargarDUCO2(Alumno $alumno)
@@ -510,7 +507,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Informe_MEDIA2.rpt', 'Informe_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -518,7 +514,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
   public function descargarExamenFinal(Alumno $alumno)
@@ -555,7 +550,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Informe_Final.rpt', 'Informe_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -563,7 +557,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
   public function descargarCertificado(Alumno $alumno)
@@ -600,7 +593,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Certificado.rpt', 'Informe_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -608,7 +600,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
   public function informeConceptual(Alumno $alumno)
@@ -645,7 +636,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Informe_MEDIA.rpt', 'Informe_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -653,7 +643,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
   public function descargarBoletin(Alumno $alumno)
@@ -690,7 +679,6 @@ class InformeController extends Controller
       case NivelesEnum::Secundario->value:
         $resultado = EureFunctions::obtenerPDF('Boletin_MEDIA.rpt', 'Boletin_', '', $rptParams);
         break;
-
     }
 
     if (!$resultado->RequestsStatusOK) {
@@ -698,7 +686,6 @@ class InformeController extends Controller
     }
 
     return redirect()->away($resultado->pdf_URL);
-
   }
 
 
@@ -737,5 +724,51 @@ class InformeController extends Controller
     $rptLink = EureFunctions::obtenerPDF($rptFN, $prefix, '', $rptParams);
 
     return $rptLink;
+  }
+
+  public function indexDocumentos(Alumno $alumno)
+  {
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno)) {
+      abort(403, 'No permitido');
+    }
+    $informes = EducatioCommFunctions::Documentos_Obtener($alumno);
+    return view('informes.generico', compact('alumno', 'informes'));
+  }
+
+  public function descargarDocumento(Alumno $alumno, int $idDoc)
+  {
+    // Validacion que no estén boludeando con las urls
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno)) {
+      abort(403, 'No permitido');
+    }
+
+    $informes = EducatioCommFunctions::Documentos_Obtener($alumno);
+    $informe = collect($informes)->firstWhere('id_doc', $idDoc);
+    if (!$informe) {
+      abort(404, 'Documento inexistente');
+    }
+
+    if (!$informe->habilitado) {
+      abort(403, $informe->mensaje);
+    }
+    $rptParams =
+      [
+        [
+          'nombre' => '@CodAlumno',
+          'valor' => $alumno->Cod_Alumno,
+        ],
+        [
+          'nombre' => '@anioLectivo',
+          'valor' => EureFunctions::al(),
+        ],
+      ];
+
+    $resultado = EureFunctions::obtenerPDF($informe->reporte, $informe->prefijo, '', $rptParams);
+
+    if (!$resultado->RequestsStatusOK) {
+      abort(400, $resultado->RequestsStatusObs);
+    }
+
+    return redirect()->away($resultado->pdf_URL);
   }
 }

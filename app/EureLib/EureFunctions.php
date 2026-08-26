@@ -227,7 +227,7 @@ class EureFunctions
       $event->menu->addIn($alumnoKey,
         [
           'text' => EducatioCommFunctions::MENU_leyenda_Boletin(),
-          'url' => route('informes.indexA', $alumno),
+          'url' => route('informes.indexDocumentos', $alumno),
           'icon' => 'fas fa-book-open',
           'color' => 'red',
           'classes' => 'ml-2',
