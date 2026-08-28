@@ -732,6 +732,7 @@ class InformeController extends Controller
       abort(403, 'No permitido');
     }
     $informes = EducatioCommFunctions::Documentos_Obtener($alumno);
+    // dd($informes); 
     return view('informes.generico', compact('alumno', 'informes'));
   }
 
@@ -751,6 +752,19 @@ class InformeController extends Controller
     if (!$informe->habilitado) {
       abort(403, $informe->mensaje);
     }
+
+    $linkExterno = trim((string) $informe->mensaje);
+    if ($linkExterno !== '') {
+      $esUrlValida = filter_var($linkExterno, FILTER_VALIDATE_URL) !== false;
+      $esHttp = in_array(strtolower((string) parse_url($linkExterno, PHP_URL_SCHEME)), ['http', 'https'], true);
+
+      if (!$esUrlValida || !$esHttp) {
+        abort(400, 'El enlace asociado al documento no es válido');
+      }
+
+      return redirect()->away($linkExterno);
+    }
+
     $rptParams =
       [
         [
