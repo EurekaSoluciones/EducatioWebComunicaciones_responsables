@@ -759,7 +759,8 @@ class InformeController extends Controller
       $esHttp = in_array(strtolower((string) parse_url($linkExterno, PHP_URL_SCHEME)), ['http', 'https'], true);
 
       if (!$esUrlValida || !$esHttp) {
-        abort(400, 'El enlace asociado al documento no es válido');
+        return redirect()->route('informes.indexDocumentos', ['alumno' => $alumno])
+          ->with('mensajeDocumento', $linkExterno);
       }
 
       return redirect()->away($linkExterno);

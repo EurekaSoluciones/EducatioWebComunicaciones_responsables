@@ -17,6 +17,12 @@
         </div>
 
         <div class="card-body">
+            @if (session()->has('mensajeDocumento'))
+                <div class="alert alert-info" role="alert">
+                    {{ session('mensajeDocumento') }}
+                </div>
+            @endif
+
             @foreach ($informes as $informe)
                 @if ($informe->habilitado)
                     <a
