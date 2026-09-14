@@ -12,25 +12,26 @@ class EducatioCommFunctions
 {
   public static function MENU_leyenda_Boletin()
   {
-    switch (EureFunctions::cliente_id()) {
-      case 'rainbow':
-        return 'Informes';
+    return 'Documentacion'; 
+    // switch (EureFunctions::cliente_id()) {
+    //   case 'rainbow':
+    //     return 'Informes';
 
-      case 'belgrano':
-        return 'Informes / Boletín';
+    //   case 'belgrano':
+    //     return 'Informes / Boletín';
 
-      case 'amancay':
-        return 'Informe Pedagógico';
+    //   case 'amancay':
+    //     return 'Informe Pedagógico';
 
-      case 'culturalnqn':
-        return 'Boletines / Certificados ';
+    //   case 'culturalnqn':
+    //     return 'Boletines / Certificados ';
 
-      case 'culturalcentenario':
-        return 'Boletines / Certificados ';
+    //   case 'culturalcentenario':
+    //     return 'Boletines / Certificados ';
 
-      default:
-        return 'Informes / DUCO';
-    }
+    //   default:
+    //     return 'Informes / DUCO';
+    // }
   }
 
   public static function MENU_leyenda_cuentaCorriente()
@@ -103,7 +104,6 @@ class EducatioCommFunctions
           if ($item->Fecha_Venc < $proximoVencimiento) {
             $proximoVencimiento = $item->Fecha_Venc;
           }
-
         } elseif ($verdaderoVencimiento < $hoy) {
           //Vencido, se paso el mes y todo
           $deudaVencida += $item->Saldo;
@@ -112,7 +112,6 @@ class EducatioCommFunctions
     }
 
     return $ccItems;
-
   }
 
   // public static function CC_Obtener(Alumno $alumno, &$venceEsteMes, &$venceHoy, &$deudaVencida, &$proximoVencimiento)
@@ -245,7 +244,6 @@ class EducatioCommFunctions
   public static function pagosOnline()
   {
     return self::pagosTic() || self::mercadoPago();
-
   }
 
   public static function Pagos_Obtener(Alumno $alumno, $fDesde, $fHasta)
@@ -351,10 +349,10 @@ class EducatioCommFunctions
       ],
       'external_reference' => $externalReference,
       'back_urls' => [
-        'success' => $baseUrl.route('pagos.indexA', ['alumno' => $alumno->id], false),
+        'success' => $baseUrl . route('pagos.indexA', ['alumno' => $alumno->id], false),
       ],
       'auto_return' => 'approved',
-      'notification_url' => $baseUrl.'/api/tercerizados-cobranza/mp/notificacion-pago',
+      'notification_url' => $baseUrl . '/api/tercerizados-cobranza/mp/notificacion-pago',
     ];
 
     $http = Http::withToken(EureFunctions::MP_ObtenerAccessToken());
@@ -374,7 +372,7 @@ class EducatioCommFunctions
         ]
       );
 
-      throw new \Exception('Error al crear preferencia de MercadoPago: '.$response->status());
+      throw new \Exception('Error al crear preferencia de MercadoPago: ' . $response->status());
     }
 
     $data = $response->json();
@@ -444,7 +442,7 @@ class EducatioCommFunctions
   public static function MP_ObtenerPagoPorId($id): array
   {
     $http = Http::withHeaders([
-      'Authorization' => 'Bearer '.EureFunctions::MP_ObtenerAccessToken(),
+      'Authorization' => 'Bearer ' . EureFunctions::MP_ObtenerAccessToken(),
       'Accept' => 'application/json',
     ]);
 
@@ -460,7 +458,7 @@ class EducatioCommFunctions
         throw new \RuntimeException("Pago no encontrado ID {$id}", 404);
       }
 
-      throw new \RuntimeException('Fallo al consultar pago: '.$response->body(), $response->status());
+      throw new \RuntimeException('Fallo al consultar pago: ' . $response->body(), $response->status());
     }
 
     return $response->json();
@@ -514,21 +512,21 @@ class EducatioCommFunctions
         [$alumno->Cod_Alumno, $alumno->DNI, now()->format('YmdHisv'), str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT)]
       );
 
-    $nurl = config('app.url').'/api/tercerizados-cobranza/ptic/notificacion-pago';
-    $backURL = config('app.url').'/alumno/'.$alumno->Cod_Alumno;
+    $nurl = config('app.url') . '/api/tercerizados-cobranza/ptic/notificacion-pago';
+    $backURL = config('app.url') . '/alumno/' . $alumno->Cod_Alumno;
     $RL = EureFunctions::getLoggedResponsableAttribute();
     $email = EureFunctions::primerEmailValido($RL->Email);
 
     $ip_Details = [[
       'external_reference' => $alumno->Cod_Alumno,
       'concept_id' => 1,
-      'concept_description' => '('.$alumno->DNI.') '.$alumno->Apellido.', '.$alumno->Nombre,
+      'concept_description' => '(' . $alumno->DNI . ') ' . $alumno->Apellido . ', ' . $alumno->Nombre,
       'amount' => $importe,
     ]];
 
     $ip_Payer =
       [
-        'name' => $alumno->Nombre.' '.$alumno->Apellido,
+        'name' => $alumno->Nombre . ' ' . $alumno->Apellido,
         'email' => $email,
         'identification' => [
           'type' => 'DNI_ARG',
@@ -540,8 +538,8 @@ class EducatioCommFunctions
     $pIntencionPago = [
       'currency_id' => 'ARS',
       'external_transaction_id' => $external_transaction_id,
-      'due_date' => now()->format('Y-m-d').'T00:00:00-0300',
-      'last_due_date' => now()->addDay()->format('Y-m-d').'T00:00:00-0300',
+      'due_date' => now()->format('Y-m-d') . 'T00:00:00-0300',
+      'last_due_date' => now()->addDay()->format('Y-m-d') . 'T00:00:00-0300',
       'notification_url' => $nurl, // URL de notificación
       'ip_details' => $ip_Details, // Detalles de la intencion de pago
       'nurl' => $nurl, // URL de notificación
@@ -564,7 +562,7 @@ class EducatioCommFunctions
       return $response->json(); // ← Devuelve los datos como el link de pago
     }
 
-    throw new \Exception('Error al crear intención de pago: '.$response->status().' - '.$response->body());
+    throw new \Exception('Error al crear intención de pago: ' . $response->status() . ' - ' . $response->body());
   }
 
   public static function PTIC_ImputarPago(
@@ -594,7 +592,6 @@ class EducatioCommFunctions
         'message' => 'Pago imputado correctamente',
         'ptic_id' => $ptic_id,
       ], 200);
-
     } catch (\Exception $e) {
       EureFunctions::PTIC_PostLog('ERROR', json_encode([
         'nota' => 'en PTIC_ImputarPago',

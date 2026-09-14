@@ -16,6 +16,12 @@ class EureAuthController extends Controller
 {
   public function login()
   {
+    $cliente = EureFunctions::cliente_id();
+    
+    if ($cliente == "culturalnqn" || $cliente == "culturalcentenario") {
+      return view('auth.loginCultural');
+    }
+
     return view('auth.login');
   }
 
@@ -32,14 +38,13 @@ class EureAuthController extends Controller
       'password' => ['required']
     ]);
 
-//    dd($credentials);
+    //    dd($credentials);
 
-//    $B= Auth::attempt($credentials);
+    //    $B= Auth::attempt($credentials);
 
     $B = Auth::attempt(['login' => $request->login, 'password' => $request->password, 'tipo' => 'Responsable']);
 
-    if ($B)
-    {
+    if ($B) {
       $request->session()->regenerate();
 
       return redirect()->intended('/');
@@ -49,7 +54,6 @@ class EureAuthController extends Controller
     return back()->withErrors([
       'credentials' => 'El nombre de Usuario o contraseña es incorrecto.',
     ])->withInput();
-
   }
 
   public function password()
@@ -96,12 +100,11 @@ class EureAuthController extends Controller
     ]);
 
     // Intentamos autenticar al usuario
-    if (Auth::attempt(['login' => $request->login, 'password' => $request->password]))
-    {
+    if (Auth::attempt(['login' => $request->login, 'password' => $request->password])) {
       // Si la autenticación es exitosa, obtenemos al usuario y generamos un token
       $user = Auth::user();
 
-      if($user->tipo != 'Responsable') {
+      if ($user->tipo != 'Responsable') {
         return response()->json([
           'message' => 'Invalid user type'
         ], 401);
@@ -178,12 +181,10 @@ class EureAuthController extends Controller
     }
 
     return response()->json(['message' => 'Contraseña actualizada correctamente'], 200);
-
-
   }
 
-//    return back()->withErrors([
-//      'credentials' => 'No nos coincide el usuario con la contraseña.',
-//    ])->onlyInput('email');
+  //    return back()->withErrors([
+  //      'credentials' => 'No nos coincide el usuario con la contraseña.',
+  //    ])->onlyInput('email');
 
 }

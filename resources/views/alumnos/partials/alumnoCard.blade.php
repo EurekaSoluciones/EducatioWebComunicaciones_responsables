@@ -34,7 +34,7 @@
                 class="fas fa-money-check-alt text-xl {{$alumno->textColorNWConOffset(3)}}"></i></a>&nbsp;&nbsp;&nbsp;
 {{--            <a href="{{route('notas.indexA', $alumno),}}"><i--}}
 {{--                class="fas fa-book-open text-xl {{$alumno->textColorNWConOffset(4)}}"></i></a>&nbsp;&nbsp;&nbsp;--}}
-            <a href="{{route('informes.indexA', $alumno),}}">
+            <a href="{{route('informes.indexDocumentos', $alumno),}}">
               <i class="fas fa-book-open text-xl {{$alumno->textColorNWConOffset(5)}}"></i>
             </a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('asistencias.indexA', $alumno),}}"><i
