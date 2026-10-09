@@ -509,13 +509,24 @@
 
                             <div class="alert alert-light border mb-0">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="aceptaReglamento"
-                                        name="aceptaReglamento" value="1" @checked((bool) old('aceptaReglamento', false))>
+                                    <input type="checkbox"
+                                        class="custom-control-input @error('aceptaReglamento') is-invalid @enderror"
+                                        id="aceptaReglamento" name="aceptaReglamento" value="1" required
+                                        @checked((bool) old('aceptaReglamento', false))>
                                     <label class="custom-control-label" for="aceptaReglamento">
                                         Leí y acepto el
-                                        <a href="#" class="text-primary font-weight-bold"
-                                            title="Enlace al reglamento pendiente de definir">reglamento</a>.
+                                        <a href="https://drive.google.com/file/d/1D0035MtrDbo0kND5VQ57T1gcugPT_F9e/view"
+                                            class="text-primary font-weight-bold" target="_blank"
+                                            rel="noopener noreferrer">reglamento</a>.
+                                        <span class="text-danger">*</span>
                                     </label>
+                                    <span class="invalid-feedback">
+                                        @error('aceptaReglamento')
+                                            {{ $message }}
+                                        @else
+                                            Debés aceptar el reglamento para confirmar la reinscripción.
+                                        @enderror
+                                    </span>
                                 </div>
                             </div>
 

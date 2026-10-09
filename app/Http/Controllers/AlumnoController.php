@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use App\Models\Alumno;
 use App\Models\Responsable;
@@ -203,6 +204,12 @@ class AlumnoController extends Controller
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno))
       abort(403, 'Acceso no permitido');
 
+    $estadoRematriculacion = EducatioCommFunctions::MensajeBloqueoRematriculacion($alumno);
+
+    if (!$estadoRematriculacion['periodoActivo'] || !$estadoRematriculacion['habilitaBoton']) {
+      abort(403, $estadoRematriculacion['mensaje'] ?: 'La reinscripción no está disponible.');
+    }
+
     $rematriculacion = collect(DB::select(
       'EXEC SP_WEB_DatosAlumno_Rematriculacion ?',
       [$alumno->id]
@@ -229,6 +236,19 @@ class AlumnoController extends Controller
     if (!EureFunctions::esResponsableDeAlumno($responsable, $alumno)) {
       abort(403, 'Acceso no permitido');
     }
+
+    $estadoRematriculacion = EducatioCommFunctions::MensajeBloqueoRematriculacion($alumno);
+
+    if (!$estadoRematriculacion['periodoActivo'] || !$estadoRematriculacion['habilitaBoton']) {
+      abort(403, $estadoRematriculacion['mensaje'] ?: 'La reinscripción no está disponible.');
+    }
+
+    $request->validate([
+      'aceptaReglamento' => ['required', 'accepted'],
+    ], [
+      'aceptaReglamento.required' => 'Debés aceptar el reglamento para confirmar la reinscripción.',
+      'aceptaReglamento.accepted' => 'Debés aceptar el reglamento para confirmar la reinscripción.',
+    ]);
 
     $sql = 'EXEC dbo.SP_WEB_DatosAlumno_RematriculacionInsert 
       @codAlumno = ?,

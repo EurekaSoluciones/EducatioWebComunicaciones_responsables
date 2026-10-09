@@ -87,6 +87,7 @@
         @include('alumnos.partials.alumnoCard', [
           'alumno' => $alumno,
           'mostrarBotonRematriculacion' => true,
+          'estadoRematriculacion' => $estadosRematriculacion->get((string) $alumno->id),
         ])
       </div>
       <div class="col-lg-1"></div>

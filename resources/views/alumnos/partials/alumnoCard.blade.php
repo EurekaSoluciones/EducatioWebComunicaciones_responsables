@@ -114,20 +114,20 @@
           </tr>
         </table>
 
-        @if ($mostrarBotonRematriculacion ?? false)
-          <div class="d-flex justify-content-center mt-auto pt-4">
-            @php $resultadoRematriculacion = session('resultadoRematriculacion'); @endphp
-            @if (
-              is_array($resultadoRematriculacion)
-              && (string) data_get($resultadoRematriculacion, 'alumnoId') === (string) $alumno->id
-            )
-              <div class="alert alert-success mb-0 text-center" role="status">
-                <i class="fas fa-check-circle mr-2"></i>{{ data_get($resultadoRematriculacion, 'mensaje') }}
-              </div>
-            @else
+        @if (($mostrarBotonRematriculacion ?? false) && data_get($estadoRematriculacion, 'periodoActivo', false))
+          <div class="mt-auto pt-4 text-center">
+            @if (data_get($estadoRematriculacion, 'habilitaBoton', false))
               <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
                 <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
               </a>
+            @else
+              <button type="button" class="btn btn-info btn-lg" disabled>
+                <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+              </button>
+            @endif
+
+            @if (filled(data_get($estadoRematriculacion, 'mensaje')))
+              <p class="text-muted mt-2 mb-0">{{ data_get($estadoRematriculacion, 'mensaje') }}</p>
             @endif
           </div>
         @endif

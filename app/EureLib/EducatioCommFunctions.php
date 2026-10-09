@@ -193,6 +193,20 @@ class EducatioCommFunctions
     ];
   }
 
+  public static function MensajeBloqueoRematriculacion(Alumno $alumno): array
+  {
+    $resultado = DB::select(
+      'EXEC SP_WEB_MensajeBloqueoRematriculacion ?',
+      [$alumno->id]
+    );
+
+    return [
+      'periodoActivo' => isset($resultado[0]) && (bool) $resultado[0]->PeriodoActivo,
+      'habilitaBoton' => isset($resultado[0]) && (bool) $resultado[0]->HabilitaBoton,
+      'mensaje' => $resultado[0]->Mensaje ?? '',
+    ];
+  }
+
   public static function MensajeBloqueo1Informe(Alumno $alumno): array
   {
     $resultado = DB::select(
