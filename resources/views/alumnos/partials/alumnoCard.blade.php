@@ -114,19 +114,27 @@
           </tr>
         </table>
 
-        @if (($mostrarBotonRematriculacion ?? false) && data_get($estadoRematriculacion, 'periodoActivo', false))
+        @php
+          $resultadoRematriculacion = session('resultadoRematriculacion');
+          $resultadoDeEsteAlumno = (string) data_get($resultadoRematriculacion, 'alumnoId') === (string) $alumno->id;
+        @endphp
+        @if (($mostrarBotonRematriculacion ?? false) && ($resultadoDeEsteAlumno || data_get($estadoRematriculacion, 'periodoActivo', false)))
           <div class="mt-auto pt-4 text-center">
-            @if (data_get($estadoRematriculacion, 'habilitaBoton', false))
+            @if ($resultadoDeEsteAlumno && data_get($resultadoRematriculacion, 'tipo') !== 'error')
+              <div class="alert alert-success mb-0" role="status">
+                {{ data_get($resultadoRematriculacion, 'mensaje') }}
+              </div>
+            @elseif (data_get($estadoRematriculacion, 'habilitaBoton', false))
               <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
                 <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
               </a>
-            @else
+            @elseif (!filled(data_get($estadoRematriculacion, 'mensaje')))
               <button type="button" class="btn btn-info btn-lg" disabled>
                 <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
               </button>
             @endif
 
-            @if (filled(data_get($estadoRematriculacion, 'mensaje')))
+            @if (!$resultadoDeEsteAlumno && filled(data_get($estadoRematriculacion, 'mensaje')))
               <p class="text-muted mt-2 mb-0">{{ data_get($estadoRematriculacion, 'mensaje') }}</p>
             @endif
           </div>

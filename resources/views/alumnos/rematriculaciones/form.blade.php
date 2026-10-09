@@ -126,6 +126,13 @@
                             </div>
                         @endif
 
+                        @if (data_get(session('resultadoRematriculacion'), 'tipo') === 'error'
+                            && (string) data_get(session('resultadoRematriculacion'), 'alumnoId') === (string) $alumno->id)
+                            <div class="alert alert-danger" role="alert">
+                                <i class="icon fas fa-ban"></i>{{ data_get(session('resultadoRematriculacion'), 'mensaje') }}
+                            </div>
+                        @endif
+
                         <form id="formRematriculacion" method="POST"
                             action="{{ route('alumnos.rematriculacion.guardar', $alumno) }}" novalidate>
                             @csrf

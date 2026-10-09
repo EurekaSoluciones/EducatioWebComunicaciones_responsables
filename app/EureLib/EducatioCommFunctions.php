@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class EducatioCommFunctions
 {
@@ -194,15 +195,31 @@ class EducatioCommFunctions
 
   public static function MensajeBloqueoRematriculacion(Alumno $alumno): array
   {
+    if (!in_array(EureFunctions::cliente_id(), ['culturalnqn', 'culturalcentenario'], true)) {
+      return [
+        'periodoActivo' => false,
+        'habilitaBoton' => false,
+        'mensaje' => '',
+      ];
+    }
+
     $resultado = DB::select(
       'EXEC SP_WEB_MensajeBloqueoRematriculacion ?',
       [$alumno->id]
     );
 
+    $estado = array_change_key_case((array) ($resultado[0] ?? []), CASE_LOWER);
+
+    if (!array_key_exists('periodoactivo', $estado) || !array_key_exists('habilitaboton', $estado)) {
+      Log::warning('Respuesta inesperada del estado de rematriculación', [
+        'columnas' => array_keys($estado),
+      ]);
+    }
+
     return [
-      'periodoActivo' => isset($resultado[0]) && (bool) $resultado[0]->PeriodoActivo,
-      'habilitaBoton' => isset($resultado[0]) && (bool) $resultado[0]->HabilitaBoton,
-      'mensaje' => $resultado[0]->Mensaje ?? '',
+      'periodoActivo' => (bool) ($estado['periodoactivo'] ?? false),
+      'habilitaBoton' => (bool) ($estado['habilitaboton'] ?? false),
+      'mensaje' => $estado['mensaje'] ?? '',
     ];
   }
 
