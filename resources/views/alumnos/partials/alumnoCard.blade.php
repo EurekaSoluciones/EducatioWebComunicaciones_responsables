@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="col-sm-5">
+      <div class="col-sm-5 d-flex flex-column">
         {{--          {{url('assets/images/usuarios/avatares/minami04.jpg')}}--}}
 
         <table>
@@ -114,6 +114,23 @@
           </tr>
         </table>
 
+        @if (($mostrarBotonRematriculacion ?? false) && data_get($estadoRematriculacion, 'periodoActivo', false))
+          <div class="mt-auto pt-4 text-center">
+            @if (data_get($estadoRematriculacion, 'habilitaBoton', false))
+              <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
+                <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+              </a>
+            @else
+              <button type="button" class="btn btn-info btn-lg" disabled>
+                <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+              </button>
+            @endif
+
+            @if (filled(data_get($estadoRematriculacion, 'mensaje')))
+              <p class="text-muted mt-2 mb-0">{{ data_get($estadoRematriculacion, 'mensaje') }}</p>
+            @endif
+          </div>
+        @endif
 
       </div>
     </div>
