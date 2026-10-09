@@ -187,13 +187,13 @@ return [
   |
   */
 
-  'classes_body' => '',
-  'classes_brand' => 'bg-lightblue elevation-2',
+  'classes_body' => \App\EureLib\EureFunctions::cliente_id() === 'isi' ? 'cliente-isi' : '',
+  'classes_brand' => \App\EureLib\EureFunctions::cliente_id() === 'isi' ? 'elevation-2' : 'bg-lightblue elevation-2',
   'classes_brand_text' => '',
   'classes_content_wrapper' => '',
   'classes_content_header' => '',
   'classes_content' => '',
-  'classes_sidebar' => 'sidebar-light-primary elevation-4',
+  'classes_sidebar' => \App\EureLib\EureFunctions::cliente_id() === 'isi' ? 'sidebar-light-dark elevation-4' : 'sidebar-light-primary elevation-4',
   'classes_sidebar_nav' => '',
   'classes_topnav' => 'navbar-light',
   'classes_topnav_nav' => 'navbar-expand',
@@ -386,6 +386,16 @@ return [
   */
 
   'plugins' => [
+    'IsiTheme' => [
+      'active' => \App\EureLib\EureFunctions::cliente_id() === 'isi',
+      'files' => [
+        [
+          'type' => 'css',
+          'asset' => true,
+          'location' => 'css/isi-theme.css',
+        ],
+      ],
+    ],
     'Datatables' => [
       'active' => true,
       'files' => [

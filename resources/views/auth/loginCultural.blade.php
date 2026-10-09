@@ -44,6 +44,15 @@
             box-shadow: none;
         }
 
+        .cliente-isi {
+            color: #333333;
+        }
+
+        .cliente-isi .form-control:focus {
+            border-color: #8e111c;
+            box-shadow: 0 0 0 0.2rem rgb(142 17 28 / 25%);
+        }
+
         .cliente-isi .btn-login:hover,
         .cliente-isi .btn-login:active {
             background-color: #701017;
