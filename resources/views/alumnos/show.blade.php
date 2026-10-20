@@ -12,6 +12,7 @@
 
 @section('content')
 
+    <div class="alumno-ficha">
     @include('alumnos.partials.alumnoCard', compact('alumno'))
 
 
@@ -19,7 +20,7 @@
     <div class="row">
         <div class=" col-md-6">
 
-            <div class="card card-info">
+            <div class="card card-info alumno-seccion">
                 <div class="card-header"><a href="#">
                         <h4 class="card-title"><i class="fas fa-paper-plane"></i> Últimas Comunicaciones</h4>
                     </a>
@@ -90,10 +91,10 @@
 
         <div class=" col-md-6">
 
-            <div class="card card-info">
+            <div class="card card-info alumno-seccion">
                 <div class="card-header container-fluid d-flex align-items-center">
                     <h4 class="card-title"><i class="fas fa-paper-plane"></i> Legajo</h4>
-                    <a href="{{ route('alumnos.adjunto.create', $alumno->id) }}" class="btn btn-primary ml-auto mr-2">
+                    <a href="{{ route('alumnos.adjunto.create', $alumno->id) }}" class="btn btn-primary alumno-nuevo-adjunto ml-auto mr-2">
                         Nuevo adjunto
                     </a>
                 </div>
@@ -125,6 +126,8 @@
 
             </div>
         </div>
+    </div>
+    </div>
 
     @stop
 

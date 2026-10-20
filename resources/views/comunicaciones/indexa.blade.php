@@ -20,7 +20,7 @@
 
 @section('content')
 
-  <div class="card card-info ml-2 mr-2">
+  <div class="card card-info comunicaciones-filtros ml-2 mr-2">
 
     <div class="card-header">
       <h3 class="card-title">Filtros</h3>

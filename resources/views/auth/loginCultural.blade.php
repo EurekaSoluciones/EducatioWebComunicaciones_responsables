@@ -93,7 +93,7 @@
                                                         <small class="text-danger">{{ $errors->first('login') }}</small>
                                                     @endif
                                                     <span class="text-muted font-italic">El usuario es el DNI de
-                                                        los responsables</span>
+                                                        los responsables sin puntos</span>
                                                 </div>
 
                                                 <div class="mb-2">

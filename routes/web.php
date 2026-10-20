@@ -87,7 +87,6 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
     Route::get('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'rematriculacion'])->name('alumnos.rematriculacion')->middleware('auth');
     Route::post('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'guardarRematriculacion'])->name('alumnos.rematriculacion.guardar')->middleware('auth');
 
-
     Route::post('/upload-image', [AdjuntoController::class, 'fileStore']);
 
     Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [ComunicacionController::class, 'show'])->name('comunicaciones.show');

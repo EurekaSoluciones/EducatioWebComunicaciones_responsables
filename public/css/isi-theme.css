@@ -37,13 +37,23 @@
   border-color: var(--isi-primary-hover);
 }
 
-.cliente-isi a,
 .cliente-isi .text-primary,
 .cliente-isi .text-info,
-.cliente-isi .page-link,
 .cliente-isi .nav-pills .nav-link.active,
 .cliente-isi .nav-pills .show > .nav-link {
   color: var(--isi-primary);
+}
+
+.cliente-isi a,
+.cliente-isi .page-link {
+  color: #007bff;
+}
+
+.cliente-isi a:where(:not(.btn, .nav-link, .brand-link, .dropdown-item, .page-link)):hover,
+.cliente-isi a:where(:not(.btn, .nav-link, .brand-link, .dropdown-item, .page-link)):focus,
+.cliente-isi .page-item:where(:not(.active, .disabled)) .page-link:hover,
+.cliente-isi .page-item:where(:not(.active, .disabled)) .page-link:focus {
+  color: #0056b3;
 }
 
 .cliente-isi .border-primary,
@@ -68,19 +78,37 @@
 }
 
 .cliente-isi .sidebar-dark-primary,
-.cliente-isi .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link.active,
-.cliente-isi .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link:hover,
 .cliente-isi .navbar-dark {
   background-color: var(--isi-secondary);
 }
 
-.cliente-isi .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link.active,
-.cliente-isi .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link:hover {
-  color: #fff;
+/* El color sigue el estado del desplegable, incluso si contiene la ruta activa. */
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item:not(.menu-open) > .nav-link:not(.isi-alumno) {
+  color: var(--isi-secondary);
+  background-color: #fff;
 }
 
-.cliente-isi .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link.active {
-  border-left: 3px solid var(--isi-primary);
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item.menu-open > .nav-link {
+  color: #fff;
+  background-color: var(--isi-secondary);
+}
+
+/* Todos los alumnos mantienen el mismo color, abiertos o cerrados. */
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item > .nav-link.isi-alumno {
+  color: #fff;
+  background-color: var(--isi-primary);
+}
+
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item:not(.menu-open) > .nav-link:not(.isi-alumno):hover {
+  background-color: #ededed;
+}
+
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item.menu-open > .nav-link:hover {
+  background-color: #262626;
+}
+
+.cliente-isi .sidebar-light-dark .nav-sidebar .nav-item > .nav-link.isi-alumno:hover {
+  background-color: var(--isi-primary-hover);
 }
 
 .cliente-isi .brand-link:hover,
@@ -98,4 +126,53 @@
 .cliente-isi .custom-control-input-primary:checked ~ .custom-control-label::before {
   background-color: var(--isi-primary);
   border-color: var(--isi-primary);
+}
+
+.cliente-isi .alumno-seccion > .card-header,
+.cliente-isi .comunicaciones-filtros > .card-header {
+  color: #fff;
+  background-color: var(--isi-primary);
+}
+
+.cliente-isi .alumno-seccion > .card-header > a:not(.btn) {
+  color: #fff;
+}
+
+.cliente-isi .alumno-seccion .btn.alumno-nuevo-adjunto,
+.cliente-isi .comunicaciones-filtros .btn.btn-primary {
+  color: var(--isi-secondary);
+  background-color: #f29f05;
+  border-color: #f29f05;
+}
+
+.cliente-isi .alumno-seccion .btn.alumno-nuevo-adjunto:hover,
+.cliente-isi .alumno-seccion .btn.alumno-nuevo-adjunto:focus,
+.cliente-isi .alumno-seccion .btn.alumno-nuevo-adjunto:active,
+.cliente-isi .comunicaciones-filtros .btn.btn-primary:hover,
+.cliente-isi .comunicaciones-filtros .btn.btn-primary:focus,
+.cliente-isi .comunicaciones-filtros .btn.btn-primary:active {
+  background-color: #d98e04;
+  border-color: #d98e04;
+}
+
+.cliente-isi .comunicaciones-filtros .btn.btn-secondary {
+  color: #000;
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+}
+
+.cliente-isi .comunicaciones-filtros .btn.btn-secondary:hover,
+.cliente-isi .comunicaciones-filtros .btn.btn-secondary:focus,
+.cliente-isi .comunicaciones-filtros .btn.btn-secondary:active {
+  background-color: #d3d7db;
+  border-color: #d3d7db;
+}
+
+.cliente-isi .card.card-outline.comunicacion-destinatario {
+  border-top-color: #f29f05;
+}
+
+.cliente-isi .widget-user-header.perfil-alumno-nombre {
+  color: #000;
+  background-color: #f29f05;
 }
