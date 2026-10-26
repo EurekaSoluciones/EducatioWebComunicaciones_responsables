@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="col-9 justify-content-center align-items-center ">
-                                <div class="card {{ $alumno->grupo->card }} card-outline  ">
+                                <div class="card {{ $alumno->grupo->card }} card-outline comunicacion-destinatario">
                                     <div class="card-header">
                                         <h4>Para</h4>
 

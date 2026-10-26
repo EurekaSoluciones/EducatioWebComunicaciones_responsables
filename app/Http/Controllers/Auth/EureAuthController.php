@@ -18,8 +18,12 @@ class EureAuthController extends Controller
   {
     $cliente = EureFunctions::cliente_id();
     
-    if ($cliente == "culturalnqn" || $cliente == "culturalcentenario") {
-      return view('auth.loginCultural');
+    if (in_array($cliente, ['culturalnqn', 'culturalcentenario', 'isi'], true)) {
+      $loginBackground = $cliente === 'isi'
+        ? EureFunctions::cliente_path_resources() . 'institucional/LoginBackground.jpeg'
+        : 'assets/images/fondoLoginCultural.png';
+
+      return view('auth.loginCultural', compact('loginBackground', 'cliente'));
     }
 
     return view('auth.login');

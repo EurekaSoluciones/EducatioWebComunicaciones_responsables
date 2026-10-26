@@ -18,7 +18,7 @@
         }
 
         body {
-            background-image: url("{{ asset('assets/images/fondoLoginCultural.png') }}");
+            background-image: url("{{ asset($loginBackground) }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,10 +36,32 @@
             border-color: #b58ad8;
             color: #ffffff;
         }
+
+        .cliente-isi .btn-login,
+        .cliente-isi .btn-login:focus {
+            background-color: #8e111c;
+            border-color: #8e111c;
+            box-shadow: none;
+        }
+
+        .cliente-isi {
+            color: #333333;
+        }
+
+        .cliente-isi .form-control:focus {
+            border-color: #8e111c;
+            box-shadow: 0 0 0 0.2rem rgb(142 17 28 / 25%);
+        }
+
+        .cliente-isi .btn-login:hover,
+        .cliente-isi .btn-login:active {
+            background-color: #701017;
+            border-color: #701017;
+        }
     </style>
 </head>
 
-<body>
+<body class="{{ $cliente === 'isi' ? 'cliente-isi' : '' }}">
     <div class="account-pages">
         <div class="container">
             <div class="row justify-content-center">
@@ -71,7 +93,7 @@
                                                         <small class="text-danger">{{ $errors->first('login') }}</small>
                                                     @endif
                                                     <span class="text-muted font-italic">El usuario es el DNI de
-                                                        los responsables</span>
+                                                        los responsables sin puntos</span>
                                                 </div>
 
                                                 <div class="mb-2">
@@ -91,7 +113,7 @@
 
 
                                                 <div class="mt-2 text-center">
-                                                    <button class="btn btn-login btn-primary w-100" type="submit">Ingresar
+                                                    <button class="btn btn-login w-100" type="submit">Ingresar
                                                     </button>
                                                     @if ($errors->has('credentials'))
                                                         <p class="text-danger font-weight-bold">

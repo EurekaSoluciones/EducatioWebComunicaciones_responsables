@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EureLib\EducatioCommFunctions;
 use App\EureLib\EureFunctions;
 use Illuminate\Http\Request;
 use mysql_xdevapi\CrudOperationBindable;
@@ -26,6 +27,12 @@ class HomeController extends Controller
         return redirect()->route('carteleras.show', $carteleraG);
     }
 
-    return view('home.index', compact('responsable', 'carteleraG'));
+    $estadosRematriculacion = $responsable->alumnos->mapWithKeys(function ($alumno) {
+      return [
+        (string) $alumno->id => EducatioCommFunctions::MensajeBloqueoRematriculacion($alumno),
+      ];
+    });
+
+    return view('home.index', compact('responsable', 'carteleraG', 'estadosRematriculacion'));
   }
 }

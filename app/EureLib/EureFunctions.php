@@ -122,7 +122,7 @@ class EureFunctions
           //'route' => 'dummy3',
           'icon' => 'fas fa-user',
           'key' => $alumnoKey,
-          'classes' => 'ml-1 ' . $alumno->bg,
+          'classes' => 'ml-1 ' . (self::cliente_id() === 'isi' ? 'isi-alumno' : $alumno->bg),
           'label' => $labelTotalCommsMasRespuestas,
           'label_color' => $labelColorSuma,
         ]);

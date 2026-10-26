@@ -84,7 +84,11 @@
       <div class="col-lg-1"></div>
       <div class="col-12 col-lg-10">
 
-        @include('alumnos.partials.alumnoCard', compact('alumno'))
+        @include('alumnos.partials.alumnoCard', [
+          'alumno' => $alumno,
+          'mostrarBotonRematriculacion' => true,
+          'estadoRematriculacion' => $estadosRematriculacion->get((string) $alumno->id),
+        ])
       </div>
       <div class="col-lg-1"></div>
     @endforeach

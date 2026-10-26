@@ -55,7 +55,7 @@
                                 @endif
 
                                 <div class="card card-widget widget-user">
-                                    <div class="widget-user-header {{ $alumno->BG }}">
+                                    <div class="widget-user-header {{ \App\EureLib\EureFunctions::cliente_id() === 'isi' ? 'perfil-alumno-nombre' : $alumno->BG }}">
                                         <h3 class="widget-user-username textColorSegunBG">{{ $alumno->nombreYApellido }}
                                         </h3>
                                     </div>
