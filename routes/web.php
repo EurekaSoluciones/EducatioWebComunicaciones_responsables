@@ -39,7 +39,7 @@ Route::get('/hello-world', [DummyController::class, 'hello_world']);
 Route::get('/avatar/initials', [AvatarController::class, 'initials'])->name('avatar.initials');
 
 Route::get('/pi', function () {
-    $deadline = CarbonImmutable::create(2026, 4, 27, 14, 0, 0, 'America/Argentina/Buenos_Aires');
+    $deadline = CarbonImmutable::create(2026, 11, 02, 23, 0, 0, 'America/Argentina/Buenos_Aires');
 
     if (now('America/Argentina/Buenos_Aires')->greaterThanOrEqualTo($deadline)) {
         abort(404);
