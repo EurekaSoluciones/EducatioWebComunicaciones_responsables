@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-      Carbon::setlocale(config('app.locale'));
+        Carbon::setlocale(config('app.locale'));
+        AuthenticateSession::redirectUsing(fn (Request $request) => $request->expectsJson() ? null : route('login'));
         //
 
     }
