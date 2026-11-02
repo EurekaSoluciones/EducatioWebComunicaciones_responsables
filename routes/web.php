@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\AdjuntoController;
 use App\Http\Controllers\AlumnoController;
-use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\Auth\EureAuthController;
 use App\Http\Controllers\CarteleraController;
@@ -30,10 +29,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth')->name('home');;
-
 Route::get('/hello-world', [DummyController::class, 'hello_world']);
 
 Route::get('/avatar/initials', [AvatarController::class, 'initials'])->name('avatar.initials');
@@ -55,62 +50,91 @@ Route::get('/pi', function () {
 
 
 // RutaS de autenticación
-Route::get('/login', [EureAuthController::class, 'login'])->name('login');
+Route::get('/login', [EureAuthController::class, 'login'])
+    ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('login');
 Route::get('/logout', [EureAuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [EureAuthController::class, 'logout'])->name('logout');
 
 
 Route::post('/authenticate', [EureAuthController::class, 'authenticate'])->name('authenticate');
 
+Route::get('/demo/eureka', \App\Http\Controllers\EurekaDemoController::class)
+    ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)
+    ->name('demo.eureka');
+
+Route::get('/demo/eureka/alternativa', [\App\Http\Controllers\EurekaDemoController::class, 'alternative'])
+    ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)
+    ->name('demo.eureka.alternative');
+
 Route::group(['middleware' => ['auth', 'auth.session']], function () {
 
-    Route::get('/', [HomeController::class, 'index']);
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
+    Route::get('/home', [HomeController::class, 'index'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('home');
+    Route::get('/familia/notificaciones', \App\Http\Controllers\FamilyNotificationController::class)
+        ->name('family.notifications');
+    Route::get('/familia/comunicaciones/{alumno}/estados/{kind}', \App\Http\Controllers\FamilyCommunicationStatusController::class)
+        ->whereIn('kind', ['received', 'sent'])->name('family.communications.status');
 
-    Route::get('/password', [EureAuthController::class, 'password'])->name('auth.password');
+    Route::get('/password', [\App\Http\Controllers\FamilyResponsibleController::class, 'password'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('auth.password');
     Route::post('/usuarios/password/update', [EureAuthController::class, 'passwordUpdate'])->name('auth.password.update');
 
     Route::get('notifications/show', [NotificationController::class, 'show'])->name('notificationes.show');
     Route::get('notifications/get', [NotificationController::class, 'get'])->name('notificationes.get');
 
 
-    Route::get('/resp/logged', [ResponsableController::class, 'showLogged'])->name('responsables.showLogged');
-    Route::get('/resp/{responsable}', [ResponsableController::class, 'show'])->name('responsables.show');
-    Route::get('/resp/{responsable}/edit', [ResponsableController::class, 'edit'])->name('responsables.edit');
-    Route::post('/resp/{user}/edit', [ResponsableController::class, 'update'])->name('responsables.update');
+    Route::get('/resp/logged', [\App\Http\Controllers\FamilyResponsibleController::class, 'showLogged'])->name('responsables.showLogged');
+    Route::get('/resp/{responsable}', [\App\Http\Controllers\FamilyResponsibleController::class, 'show'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('responsables.show');
+    Route::get('/resp/{responsable}/edit', [\App\Http\Controllers\FamilyResponsibleController::class, 'edit'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('responsables.edit');
+    Route::post('/resp/{user}/edit', [\App\Http\Controllers\FamilyResponsibleController::class, 'update'])->name('responsables.update');
 
-    Route::get('/alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumnos.show')->middleware('auth');
-    Route::get('/alumno/{alumno}/editPic', [AlumnoController::class, 'editPic'])->name('alumnos.editPic');
-    Route::patch('/alumno/{alumno}/editPic', [AlumnoController::class, 'updatePic'])->name('alumnos.updatePic');
-    Route::get('/alumnos/{alumno}/adjunto/create', [AlumnoController::class, 'createAdjunto'])->name('alumnos.adjunto.create')->middleware('auth');
-    Route::post('/alumnos/{alumno}/adjunto/store', [AlumnoController::class, 'storeAdjunto'])->name('alumnos.adjunto.store')->middleware('auth');
+    Route::get('/alumno/{alumno}', \App\Http\Controllers\StudentProfileController::class)
+        ->name('alumnos.show')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
+    Route::get('/alumno/{alumno}/editPic', [\App\Http\Controllers\StudentPhotoController::class, 'edit'])
+        ->name('alumnos.editPic')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
+    Route::patch('/alumno/{alumno}/editPic', [\App\Http\Controllers\StudentPhotoController::class, 'update'])->name('alumnos.updatePic');
+    Route::get('/alumnos/{alumno}/adjunto/create', [\App\Http\Controllers\FamilyDocumentsController::class, 'create'])
+        ->name('alumnos.adjunto.create')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
+    Route::post('/alumnos/{alumno}/adjunto/store', [\App\Http\Controllers\FamilyDocumentsController::class, 'store'])->name('alumnos.adjunto.store');
     Route::get('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'rematriculacion'])->name('alumnos.rematriculacion')->middleware('auth');
     Route::post('/alumno/{alumno}/rematriculacion', [AlumnoController::class, 'guardarRematriculacion'])->name('alumnos.rematriculacion.guardar')->middleware('auth');
 
     Route::post('/upload-image', [AdjuntoController::class, 'fileStore']);
 
-    Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [ComunicacionController::class, 'show'])->name('comunicaciones.show');
-    Route::post('/comunicaciones/{comunicacion}/alumno/{alumno}/respuestaAdjunto', [ComunicacionController::class, 'storeAdjuntoEnRespuesta'])->name('comunicaciones.show.respuestaAdjunto.store');
-    Route::get('/comunicaciones/{alumno}', [ComunicacionController::class, 'indexA'])->name('comunicaciones.indexA');
-    Route::post('/comunicaciones/{alumno}/filtrado', [ComunicacionController::class, 'indexAFiltered'])->name('comunicaciones.indexAFiltered');
-    Route::post('comunicaciones/{comunicaciondestinatario}/respuestalibre', [ComunicacionController::class, 'storeRespuestaLibre'])->name('comunicaciones.respuestas.libres.store');
-    Route::post('comunicaciones/{comunicaciondestinatario}/respuestafija', [ComunicacionController::class, 'storeRespuestaFija'])->name('comunicaciones.respuestas.fijas.store');
+    Route::get('/comunicaciones/{comunicacion}/alumno/{alumno}', [\App\Http\Controllers\FamilyReceivedDetailController::class, 'show'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.show');
+    Route::get('/comunicaciones/{alumno}', [\App\Http\Controllers\FamilyReceivedController::class, 'index'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.indexA');
+    Route::post('/comunicaciones/{alumno}/filtrado', [\App\Http\Controllers\FamilyReceivedController::class, 'legacyFilters'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.indexAFiltered');
+    Route::post('comunicaciones/{comunicaciondestinatario}/respuestalibre', [\App\Http\Controllers\FamilyReceivedDetailController::class, 'free'])->name('comunicaciones.respuestas.libres.store');
+    Route::post('comunicaciones/{comunicaciondestinatario}/respuestafija', [\App\Http\Controllers\FamilyReceivedDetailController::class, 'fixed'])->name('comunicaciones.respuestas.fijas.store');
+    Route::post('comunicaciones/{comunicaciondestinatario}/respuesta/adjuntos', [\App\Http\Controllers\FamilyReceivedDetailController::class, 'upload'])->name('family.received.reply.upload');
+    Route::delete('comunicaciones/{comunicaciondestinatario}/respuesta/adjuntos/{adjunto}', [\App\Http\Controllers\FamilyReceivedDetailController::class, 'removeUpload'])->name('family.received.reply.upload.remove');
 
-    Route::get('/comunicaciones/e/{alumno}', [ComunicacionEController::class, 'indexA'])->name('comunicaciones.e.indexA');
-    Route::get('/comunicaciones/e/show/{comunicacione}', [ComunicacionEController::class, 'show'])->name('comunicaciones.e.show');
-    Route::get('/comunicaciones/e/{alumno}/create', [ComunicacionEController::class, 'createA'])->name('comunicaciones.e.create');
-    Route::post('/comunicaciones/e/{alumno}/store', [ComunicacionEController::class, 'store'])->name('comunicaciones.e.store');
+    Route::get('/comunicaciones/e/{alumno}', [\App\Http\Controllers\FamilySentController::class, 'index'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.e.indexA');
+    Route::get('/comunicaciones/e/show/{comunicacione}', [\App\Http\Controllers\FamilySentController::class, 'show'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.e.show');
+    Route::get('/comunicaciones/e/{alumno}/create', [\App\Http\Controllers\FamilyComposeController::class, 'create'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('comunicaciones.e.create');
+    Route::post('/comunicaciones/e/{alumno}/store', [\App\Http\Controllers\FamilyComposeController::class, 'store'])->name('comunicaciones.e.store');
+    Route::post('/comunicaciones/e/{alumno}/adjuntos', [\App\Http\Controllers\FamilyComposeController::class, 'upload'])->name('family.compose.upload');
+    Route::delete('/comunicaciones/e/{alumno}/adjuntos/{adjunto}', [\App\Http\Controllers\FamilyComposeController::class, 'removeUpload']);
 
-    Route::post('/uploads/comunicaciones/e/imagenes', [AdjuntoController::class, 'storeImagenComunicacione']);
-    Route::post('/uploads/comunicaciones/e/adjuntos', [AdjuntoController::class, 'storeAdjuntoComunicacione'])->name('uploads.comunicaciones.e.adjuntos.store');
-    Route::post('/uploads/comunicaciones/respuestas/adjuntos', [AdjuntoController::class, 'storeAdjuntoRespuesta'])->name('uploads.comunicaciones.respuestas.adjuntos.store')->middleware('auth');
     Route::post('/uploads/adjuntos/e/delete/', [AdjuntoController::class, 'destroyAdjunto'])->name('uploads.adjuntos.delete');
-    Route::post('/uploads/alumno/adjuntos', [AdjuntoController::class, 'storeAdjuntoAlumno'])->name('uploads.alumno.adjuntos.store')->middleware('auth');
-    Route::post('/uploads/adjuntos/{entity}', [AdjuntoController::class, 'storeAdjunto'])->name('uploads.adjuntos.store')->middleware('auth');
-    Route::get('/pagos/{alumno}', [CuentaCorrienteController::class, 'pagosA'])->name('pagos.indexA');
+    // The student legajo is uploaded atomically through alumnos.adjunto.store.
+    // Retire the unscoped legacy web upload routes; mobile endpoints stay separate.
+    Route::get('/pagos/{alumno}', [\App\Http\Controllers\FamilyFinanceController::class, 'payments'])
+        ->name('pagos.indexA')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
     Route::get('/pagos/{cod_recibo}/descargar', [CuentaCorrienteController::class, 'descargarPago'])->name('pagos.descargar');
 
-    Route::get('/cc/{alumno}', [CuentaCorrienteController::class, 'indexA'])->name('cc.indexA');
+    Route::get('/cc/{alumno}', [\App\Http\Controllers\FamilyFinanceController::class, 'index'])
+        ->name('cc.indexA')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
     Route::post('/cc/pagar', [CuentaCorrienteController::class, 'pagar'])->name('cc.pagar');
 
     // Notas lo sacamos
@@ -122,18 +146,22 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
     Route::get('/informes/{alumno}/examenfinal', [InformeController::class, 'descargarExamenFinal'])->name('informes.descargarExamenFinal');
     Route::get('/informes/{alumno}/certificado', [InformeController::class, 'descargarCertificado'])->name('informes.descargarCertificado');
 
-    Route::get('/informes/{alumno}/documentos', [InformeController::class, 'indexDocumentos'])->name('informes.indexDocumentos');
+    Route::get('/informes/{alumno}/documentos', [\App\Http\Controllers\FamilyDocumentsController::class, 'index'])
+        ->name('informes.indexDocumentos')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
     Route::get('/informes/{alumno}/documentos/{idDoc}', [InformeController::class, 'descargarDocumento'])->name('informes.descargarDocumento');
 
     Route::get('/informes/{alumno}/informeConceptual', [InformeController::class, 'informeConceptual'])->name('informes.conceptual.descargar');
     Route::get('/informes/{alumno}/boletin', [InformeController::class, 'descargarBoletin'])->name('informes.descargarBoletin');
 
 
-    Route::get('/carteleras/GENERAL', [CarteleraController::class, 'show_cartelera_general_st'])->name('carteleras.general.show');
-    Route::get('/carteleras/{cartelera}', [CarteleraController::class, 'show'])->name('carteleras.show');
+    Route::get('/carteleras/GENERAL', [\App\Http\Controllers\FamilyBoardController::class, 'general'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('carteleras.general.show');
+    Route::get('/carteleras/{cartelera}', [\App\Http\Controllers\FamilyBoardController::class, 'show'])
+        ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('carteleras.show');
 
 
-    Route::get('/asistencias/{alumno}', [AsistenciaController::class, 'indexA'])->name('asistencias.indexA');
+    Route::get('/asistencias/{alumno}', [\App\Http\Controllers\FamilyAttendanceController::class, 'index'])
+        ->name('asistencias.indexA')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
 });
 
 

@@ -155,7 +155,7 @@ class EureFunctions
       $event->menu->addIn('ComunicacionesA_' . $alumno->id,
         [
           'text' => "Recibidas",
-          'url' => route('comunicaciones.indexA', $alumno),
+          'url' => \App\Support\FamilyPortal::receivedUrl($alumno),
           'icon' => 'fas fa-arrow-down',
           'color' => 'red',
           'classes' => 'ml-3',

@@ -1,0 +1,6785 @@
+[
+    {
+        "id": "1f604",
+        "category": 0,
+        "unicode": "😄",
+        "aliases": [
+            "smile"
+        ]
+    },
+    {
+        "id": "1f603",
+        "category": 0,
+        "unicode": "😃",
+        "aliases": [
+            "smiley"
+        ]
+    },
+    {
+        "id": "1f600",
+        "category": 0,
+        "unicode": "😀",
+        "aliases": [
+            "grinning"
+        ]
+    },
+    {
+        "id": "1f60a",
+        "category": 0,
+        "unicode": "😊",
+        "aliases": [
+            "blush"
+        ]
+    },
+    {
+        "id": "263a",
+        "category": 0,
+        "unicode": "☺",
+        "aliases": [
+            "relaxed"
+        ]
+    },
+    {
+        "id": "1f609",
+        "category": 0,
+        "unicode": "😉",
+        "aliases": [
+            "wink"
+        ]
+    },
+    {
+        "id": "1f60d",
+        "category": 0,
+        "unicode": "😍",
+        "aliases": [
+            "heart_eyes"
+        ]
+    },
+    {
+        "id": "1f618",
+        "category": 0,
+        "unicode": "😘",
+        "aliases": [
+            "kissing_heart"
+        ]
+    },
+    {
+        "id": "1f61a",
+        "category": 0,
+        "unicode": "😚",
+        "aliases": [
+            "kissing_closed_eyes"
+        ]
+    },
+    {
+        "id": "1f617",
+        "category": 0,
+        "unicode": "😗",
+        "aliases": [
+            "kissing"
+        ]
+    },
+    {
+        "id": "1f619",
+        "category": 0,
+        "unicode": "😙",
+        "aliases": [
+            "kissing_smiling_eyes"
+        ]
+    },
+    {
+        "id": "1f61c",
+        "category": 0,
+        "unicode": "😜",
+        "aliases": [
+            "stuck_out_tongue_winking_eye"
+        ]
+    },
+    {
+        "id": "1f61d",
+        "category": 0,
+        "unicode": "😝",
+        "aliases": [
+            "stuck_out_tongue_closed_eyes"
+        ]
+    },
+    {
+        "id": "1f61b",
+        "category": 0,
+        "unicode": "😛",
+        "aliases": [
+            "stuck_out_tongue"
+        ]
+    },
+    {
+        "id": "1f633",
+        "category": 0,
+        "unicode": "😳",
+        "aliases": [
+            "flushed"
+        ]
+    },
+    {
+        "id": "1f601",
+        "category": 0,
+        "unicode": "😁",
+        "aliases": [
+            "grin"
+        ]
+    },
+    {
+        "id": "1f614",
+        "category": 0,
+        "unicode": "😔",
+        "aliases": [
+            "pensive"
+        ]
+    },
+    {
+        "id": "1f60c",
+        "category": 0,
+        "unicode": "😌",
+        "aliases": [
+            "relieved"
+        ]
+    },
+    {
+        "id": "1f612",
+        "category": 0,
+        "unicode": "😒",
+        "aliases": [
+            "unamused"
+        ]
+    },
+    {
+        "id": "1f61e",
+        "category": 0,
+        "unicode": "😞",
+        "aliases": [
+            "disappointed"
+        ]
+    },
+    {
+        "id": "1f623",
+        "category": 0,
+        "unicode": "😣",
+        "aliases": [
+            "persevere"
+        ]
+    },
+    {
+        "id": "1f622",
+        "category": 0,
+        "unicode": "😢",
+        "aliases": [
+            "cry"
+        ]
+    },
+    {
+        "id": "1f602",
+        "category": 0,
+        "unicode": "😂",
+        "aliases": [
+            "joy"
+        ]
+    },
+    {
+        "id": "1f62d",
+        "category": 0,
+        "unicode": "😭",
+        "aliases": [
+            "sob"
+        ]
+    },
+    {
+        "id": "1f62a",
+        "category": 0,
+        "unicode": "😪",
+        "aliases": [
+            "sleepy"
+        ]
+    },
+    {
+        "id": "1f625",
+        "category": 0,
+        "unicode": "😥",
+        "aliases": [
+            "disappointed_relieved"
+        ]
+    },
+    {
+        "id": "1f630",
+        "category": 0,
+        "unicode": "😰",
+        "aliases": [
+            "cold_sweat"
+        ]
+    },
+    {
+        "id": "1f605",
+        "category": 0,
+        "unicode": "😅",
+        "aliases": [
+            "sweat_smile"
+        ]
+    },
+    {
+        "id": "1f613",
+        "category": 0,
+        "unicode": "😓",
+        "aliases": [
+            "sweat"
+        ]
+    },
+    {
+        "id": "1f629",
+        "category": 0,
+        "unicode": "😩",
+        "aliases": [
+            "weary"
+        ]
+    },
+    {
+        "id": "1f62b",
+        "category": 0,
+        "unicode": "😫",
+        "aliases": [
+            "tired_face"
+        ]
+    },
+    {
+        "id": "1f628",
+        "category": 0,
+        "unicode": "😨",
+        "aliases": [
+            "fearful"
+        ]
+    },
+    {
+        "id": "1f631",
+        "category": 0,
+        "unicode": "😱",
+        "aliases": [
+            "scream"
+        ]
+    },
+    {
+        "id": "1f620",
+        "category": 0,
+        "unicode": "😠",
+        "aliases": [
+            "angry"
+        ]
+    },
+    {
+        "id": "1f621",
+        "category": 0,
+        "unicode": "😡",
+        "aliases": [
+            "rage"
+        ]
+    },
+    {
+        "id": "1f624",
+        "category": 0,
+        "unicode": "😤",
+        "aliases": [
+            "triumph"
+        ]
+    },
+    {
+        "id": "1f616",
+        "category": 0,
+        "unicode": "😖",
+        "aliases": [
+            "confounded"
+        ]
+    },
+    {
+        "id": "1f606",
+        "category": 0,
+        "unicode": "😆",
+        "aliases": [
+            "satisfied"
+        ]
+    },
+    {
+        "id": "1f60b",
+        "category": 0,
+        "unicode": "😋",
+        "aliases": [
+            "yum"
+        ]
+    },
+    {
+        "id": "1f637",
+        "category": 0,
+        "unicode": "😷",
+        "aliases": [
+            "mask"
+        ]
+    },
+    {
+        "id": "1f60e",
+        "category": 0,
+        "unicode": "😎",
+        "aliases": [
+            "sunglasses"
+        ]
+    },
+    {
+        "id": "1f634",
+        "category": 0,
+        "unicode": "😴",
+        "aliases": [
+            "sleeping"
+        ]
+    },
+    {
+        "id": "1f635",
+        "category": 0,
+        "unicode": "😵",
+        "aliases": [
+            "dizzy_face"
+        ]
+    },
+    {
+        "id": "1f632",
+        "category": 0,
+        "unicode": "😲",
+        "aliases": [
+            "astonished"
+        ]
+    },
+    {
+        "id": "1f61f",
+        "category": 0,
+        "unicode": "😟",
+        "aliases": [
+            "worried"
+        ]
+    },
+    {
+        "id": "1f626",
+        "category": 0,
+        "unicode": "😦",
+        "aliases": [
+            "frowning"
+        ]
+    },
+    {
+        "id": "1f627",
+        "category": 0,
+        "unicode": "😧",
+        "aliases": [
+            "anguished"
+        ]
+    },
+    {
+        "id": "1f608",
+        "category": 0,
+        "unicode": "😈",
+        "aliases": [
+            "smiling_imp"
+        ]
+    },
+    {
+        "id": "1f47f",
+        "category": 0,
+        "unicode": "👿",
+        "aliases": [
+            "imp"
+        ]
+    },
+    {
+        "id": "1f62e",
+        "category": 0,
+        "unicode": "😮",
+        "aliases": [
+            "open_mouth"
+        ]
+    },
+    {
+        "id": "1f62c",
+        "category": 0,
+        "unicode": "😬",
+        "aliases": [
+            "grimacing"
+        ]
+    },
+    {
+        "id": "1f610",
+        "category": 0,
+        "unicode": "😐",
+        "aliases": [
+            "neutral_face"
+        ]
+    },
+    {
+        "id": "1f615",
+        "category": 0,
+        "unicode": "😕",
+        "aliases": [
+            "confused"
+        ]
+    },
+    {
+        "id": "1f62f",
+        "category": 0,
+        "unicode": "😯",
+        "aliases": [
+            "hushed"
+        ]
+    },
+    {
+        "id": "1f636",
+        "category": 0,
+        "unicode": "😶",
+        "aliases": [
+            "no_mouth"
+        ]
+    },
+    {
+        "id": "1f607",
+        "category": 0,
+        "unicode": "😇",
+        "aliases": [
+            "innocent"
+        ]
+    },
+    {
+        "id": "1f60f",
+        "category": 0,
+        "unicode": "😏",
+        "aliases": [
+            "smirk"
+        ]
+    },
+    {
+        "id": "1f611",
+        "category": 0,
+        "unicode": "😑",
+        "aliases": [
+            "expressionless"
+        ]
+    },
+    {
+        "id": "1f472",
+        "category": 0,
+        "unicode": "👲",
+        "aliases": [
+            "man_with_gua_pi_mao"
+        ]
+    },
+    {
+        "id": "1f473",
+        "category": 0,
+        "unicode": "👳",
+        "aliases": [
+            "man_with_turban"
+        ]
+    },
+    {
+        "id": "1f46e",
+        "category": 0,
+        "unicode": "👮",
+        "aliases": [
+            "cop"
+        ]
+    },
+    {
+        "id": "1f477",
+        "category": 0,
+        "unicode": "👷",
+        "aliases": [
+            "construction_worker"
+        ]
+    },
+    {
+        "id": "1f482",
+        "category": 0,
+        "unicode": "💂",
+        "aliases": [
+            "guardsman"
+        ]
+    },
+    {
+        "id": "1f476",
+        "category": 0,
+        "unicode": "👶",
+        "aliases": [
+            "baby"
+        ]
+    },
+    {
+        "id": "1f466",
+        "category": 0,
+        "unicode": "👦",
+        "aliases": [
+            "boy"
+        ]
+    },
+    {
+        "id": "1f467",
+        "category": 0,
+        "unicode": "👧",
+        "aliases": [
+            "girl"
+        ]
+    },
+    {
+        "id": "1f468",
+        "category": 0,
+        "unicode": "👨",
+        "aliases": [
+            "man"
+        ]
+    },
+    {
+        "id": "1f469",
+        "category": 0,
+        "unicode": "👩",
+        "aliases": [
+            "woman"
+        ]
+    },
+    {
+        "id": "1f474",
+        "category": 0,
+        "unicode": "👴",
+        "aliases": [
+            "older_man"
+        ]
+    },
+    {
+        "id": "1f475",
+        "category": 0,
+        "unicode": "👵",
+        "aliases": [
+            "older_woman"
+        ]
+    },
+    {
+        "id": "1f471",
+        "category": 0,
+        "unicode": "👱",
+        "aliases": [
+            "person_with_blond_hair"
+        ]
+    },
+    {
+        "id": "1f47c",
+        "category": 0,
+        "unicode": "👼",
+        "aliases": [
+            "angel"
+        ]
+    },
+    {
+        "id": "1f478",
+        "category": 0,
+        "unicode": "👸",
+        "aliases": [
+            "princess"
+        ]
+    },
+    {
+        "id": "1f63a",
+        "category": 0,
+        "unicode": "😺",
+        "aliases": [
+            "smiley_cat"
+        ]
+    },
+    {
+        "id": "1f638",
+        "category": 0,
+        "unicode": "😸",
+        "aliases": [
+            "smile_cat"
+        ]
+    },
+    {
+        "id": "1f63b",
+        "category": 0,
+        "unicode": "😻",
+        "aliases": [
+            "heart_eyes_cat"
+        ]
+    },
+    {
+        "id": "1f63d",
+        "category": 0,
+        "unicode": "😽",
+        "aliases": [
+            "kissing_cat"
+        ]
+    },
+    {
+        "id": "1f63c",
+        "category": 0,
+        "unicode": "😼",
+        "aliases": [
+            "smirk_cat"
+        ]
+    },
+    {
+        "id": "1f640",
+        "category": 0,
+        "unicode": "🙀",
+        "aliases": [
+            "scream_cat"
+        ]
+    },
+    {
+        "id": "1f63f",
+        "category": 0,
+        "unicode": "😿",
+        "aliases": [
+            "crying_cat_face"
+        ]
+    },
+    {
+        "id": "1f639",
+        "category": 0,
+        "unicode": "😹",
+        "aliases": [
+            "joy_cat"
+        ]
+    },
+    {
+        "id": "1f63e",
+        "category": 0,
+        "unicode": "😾",
+        "aliases": [
+            "pouting_cat"
+        ]
+    },
+    {
+        "id": "1f479",
+        "category": 0,
+        "unicode": "👹",
+        "aliases": [
+            "japanese_ogre"
+        ]
+    },
+    {
+        "id": "1f47a",
+        "category": 0,
+        "unicode": "👺",
+        "aliases": [
+            "japanese_goblin"
+        ]
+    },
+    {
+        "id": "1f648",
+        "category": 0,
+        "unicode": "🙈",
+        "aliases": [
+            "see_no_evil"
+        ]
+    },
+    {
+        "id": "1f649",
+        "category": 0,
+        "unicode": "🙉",
+        "aliases": [
+            "hear_no_evil"
+        ]
+    },
+    {
+        "id": "1f64a",
+        "category": 0,
+        "unicode": "🙊",
+        "aliases": [
+            "speak_no_evil"
+        ]
+    },
+    {
+        "id": "1f480",
+        "category": 0,
+        "unicode": "💀",
+        "aliases": [
+            "skull"
+        ]
+    },
+    {
+        "id": "1f47d",
+        "category": 0,
+        "unicode": "👽",
+        "aliases": [
+            "alien"
+        ]
+    },
+    {
+        "id": "1f4a9",
+        "category": 0,
+        "unicode": "💩",
+        "aliases": [
+            "hankey",
+            "poop",
+            "shit"
+        ]
+    },
+    {
+        "id": "1f525",
+        "category": 0,
+        "unicode": "🔥",
+        "aliases": [
+            "fire"
+        ]
+    },
+    {
+        "id": "2728",
+        "category": 0,
+        "unicode": "✨",
+        "aliases": [
+            "sparkles"
+        ]
+    },
+    {
+        "id": "1f31f",
+        "category": 0,
+        "unicode": "🌟",
+        "aliases": [
+            "star2"
+        ]
+    },
+    {
+        "id": "1f4ab",
+        "category": 0,
+        "unicode": "💫",
+        "aliases": [
+            "dizzy"
+        ]
+    },
+    {
+        "id": "1f4a5",
+        "category": 0,
+        "unicode": "💥",
+        "aliases": [
+            "boom",
+            "collision"
+        ]
+    },
+    {
+        "id": "1f4a2",
+        "category": 0,
+        "unicode": "💢",
+        "aliases": [
+            "anger"
+        ]
+    },
+    {
+        "id": "1f4a6",
+        "category": 0,
+        "unicode": "💦",
+        "aliases": [
+            "sweat_drops"
+        ]
+    },
+    {
+        "id": "1f4a7",
+        "category": 0,
+        "unicode": "💧",
+        "aliases": [
+            "droplet"
+        ]
+    },
+    {
+        "id": "1f4a4",
+        "category": 0,
+        "unicode": "💤",
+        "aliases": [
+            "zzz"
+        ]
+    },
+    {
+        "id": "1f4a8",
+        "category": 0,
+        "unicode": "💨",
+        "aliases": [
+            "dash"
+        ]
+    },
+    {
+        "id": "1f442",
+        "category": 0,
+        "unicode": "👂",
+        "aliases": [
+            "ear"
+        ]
+    },
+    {
+        "id": "1f440",
+        "category": 0,
+        "unicode": "👀",
+        "aliases": [
+            "eyes"
+        ]
+    },
+    {
+        "id": "1f443",
+        "category": 0,
+        "unicode": "👃",
+        "aliases": [
+            "nose"
+        ]
+    },
+    {
+        "id": "1f445",
+        "category": 0,
+        "unicode": "👅",
+        "aliases": [
+            "tongue"
+        ]
+    },
+    {
+        "id": "1f444",
+        "category": 0,
+        "unicode": "👄",
+        "aliases": [
+            "lips"
+        ]
+    },
+    {
+        "id": "1f44d",
+        "category": 0,
+        "unicode": "👍",
+        "aliases": [
+            "+1",
+            "thumbsup"
+        ]
+    },
+    {
+        "id": "1f44e",
+        "category": 0,
+        "unicode": "👎",
+        "aliases": [
+            "-1",
+            "thumbsdown"
+        ]
+    },
+    {
+        "id": "1f44c",
+        "category": 0,
+        "unicode": "👌",
+        "aliases": [
+            "ok_hand"
+        ]
+    },
+    {
+        "id": "1f44a",
+        "category": 0,
+        "unicode": "👊",
+        "aliases": [
+            "facepunch",
+            "punch"
+        ]
+    },
+    {
+        "id": "270a",
+        "category": 0,
+        "unicode": "✊",
+        "aliases": [
+            "fist"
+        ]
+    },
+    {
+        "id": "270c",
+        "category": 0,
+        "unicode": "✌",
+        "aliases": [
+            "v"
+        ]
+    },
+    {
+        "id": "1f44b",
+        "category": 0,
+        "unicode": "👋",
+        "aliases": [
+            "wave"
+        ]
+    },
+    {
+        "id": "270b",
+        "category": 0,
+        "unicode": "✋",
+        "aliases": [
+            "hand",
+            "raised_hand"
+        ]
+    },
+    {
+        "id": "1f450",
+        "category": 0,
+        "unicode": "👐",
+        "aliases": [
+            "open_hands"
+        ]
+    },
+    {
+        "id": "1f446",
+        "category": 0,
+        "unicode": "👆",
+        "aliases": [
+            "point_up_2"
+        ]
+    },
+    {
+        "id": "1f447",
+        "category": 0,
+        "unicode": "👇",
+        "aliases": [
+            "point_down"
+        ]
+    },
+    {
+        "id": "1f449",
+        "category": 0,
+        "unicode": "👉",
+        "aliases": [
+            "point_right"
+        ]
+    },
+    {
+        "id": "1f448",
+        "category": 0,
+        "unicode": "👈",
+        "aliases": [
+            "point_left"
+        ]
+    },
+    {
+        "id": "1f64c",
+        "category": 0,
+        "unicode": "🙌",
+        "aliases": [
+            "raised_hands"
+        ]
+    },
+    {
+        "id": "1f64f",
+        "category": 0,
+        "unicode": "🙏",
+        "aliases": [
+            "pray"
+        ]
+    },
+    {
+        "id": "261d",
+        "category": 0,
+        "unicode": "☝",
+        "aliases": [
+            "point_up"
+        ]
+    },
+    {
+        "id": "1f44f",
+        "category": 0,
+        "unicode": "👏",
+        "aliases": [
+            "clap"
+        ]
+    },
+    {
+        "id": "1f4aa",
+        "category": 0,
+        "unicode": "💪",
+        "aliases": [
+            "muscle"
+        ]
+    },
+    {
+        "id": "1f6b6",
+        "category": 0,
+        "unicode": "🚶",
+        "aliases": [
+            "walking"
+        ]
+    },
+    {
+        "id": "1f3c3",
+        "category": 0,
+        "unicode": "🏃",
+        "aliases": [
+            "runner",
+            "running"
+        ]
+    },
+    {
+        "id": "1f483",
+        "category": 0,
+        "unicode": "💃",
+        "aliases": [
+            "dancer"
+        ]
+    },
+    {
+        "id": "1f46b",
+        "category": 0,
+        "unicode": "👫",
+        "aliases": [
+            "couple"
+        ]
+    },
+    {
+        "id": "1f46a",
+        "category": 0,
+        "unicode": "👪",
+        "aliases": [
+            "family"
+        ]
+    },
+    {
+        "id": "1f46c",
+        "category": 0,
+        "unicode": "👬",
+        "aliases": [
+            "two_men_holding_hands"
+        ]
+    },
+    {
+        "id": "1f46d",
+        "category": 0,
+        "unicode": "👭",
+        "aliases": [
+            "two_women_holding_hands"
+        ]
+    },
+    {
+        "id": "1f48f",
+        "category": 0,
+        "unicode": "💏",
+        "aliases": [
+            "couplekiss"
+        ]
+    },
+    {
+        "id": "1f491",
+        "category": 0,
+        "unicode": "💑",
+        "aliases": [
+            "couple_with_heart"
+        ]
+    },
+    {
+        "id": "1f46f",
+        "category": 0,
+        "unicode": "👯",
+        "aliases": [
+            "dancers"
+        ]
+    },
+    {
+        "id": "1f646",
+        "category": 0,
+        "unicode": "🙆",
+        "aliases": [
+            "ok_woman"
+        ]
+    },
+    {
+        "id": "1f645",
+        "category": 0,
+        "unicode": "🙅",
+        "aliases": [
+            "no_good"
+        ]
+    },
+    {
+        "id": "1f481",
+        "category": 0,
+        "unicode": "💁",
+        "aliases": [
+            "information_desk_person"
+        ]
+    },
+    {
+        "id": "1f64b",
+        "category": 0,
+        "unicode": "🙋",
+        "aliases": [
+            "raising_hand"
+        ]
+    },
+    {
+        "id": "1f486",
+        "category": 0,
+        "unicode": "💆",
+        "aliases": [
+            "massage"
+        ]
+    },
+    {
+        "id": "1f487",
+        "category": 0,
+        "unicode": "💇",
+        "aliases": [
+            "haircut"
+        ]
+    },
+    {
+        "id": "1f485",
+        "category": 0,
+        "unicode": "💅",
+        "aliases": [
+            "nail_care"
+        ]
+    },
+    {
+        "id": "1f470",
+        "category": 0,
+        "unicode": "👰",
+        "aliases": [
+            "bride_with_veil"
+        ]
+    },
+    {
+        "id": "1f64e",
+        "category": 0,
+        "unicode": "🙎",
+        "aliases": [
+            "person_with_pouting_face"
+        ]
+    },
+    {
+        "id": "1f64d",
+        "category": 0,
+        "unicode": "🙍",
+        "aliases": [
+            "person_frowning"
+        ]
+    },
+    {
+        "id": "1f647",
+        "category": 0,
+        "unicode": "🙇",
+        "aliases": [
+            "bow"
+        ]
+    },
+    {
+        "id": "1f3a9",
+        "category": 0,
+        "unicode": "🎩",
+        "aliases": [
+            "tophat"
+        ]
+    },
+    {
+        "id": "1f451",
+        "category": 0,
+        "unicode": "👑",
+        "aliases": [
+            "crown"
+        ]
+    },
+    {
+        "id": "1f452",
+        "category": 0,
+        "unicode": "👒",
+        "aliases": [
+            "womans_hat"
+        ]
+    },
+    {
+        "id": "1f45f",
+        "category": 0,
+        "unicode": "👟",
+        "aliases": [
+            "athletic_shoe"
+        ]
+    },
+    {
+        "id": "1f45e",
+        "category": 0,
+        "unicode": "👞",
+        "aliases": [
+            "mans_shoe",
+            "shoe"
+        ]
+    },
+    {
+        "id": "1f461",
+        "category": 0,
+        "unicode": "👡",
+        "aliases": [
+            "sandal"
+        ]
+    },
+    {
+        "id": "1f460",
+        "category": 0,
+        "unicode": "👠",
+        "aliases": [
+            "high_heel"
+        ]
+    },
+    {
+        "id": "1f462",
+        "category": 0,
+        "unicode": "👢",
+        "aliases": [
+            "boot"
+        ]
+    },
+    {
+        "id": "1f455",
+        "category": 0,
+        "unicode": "👕",
+        "aliases": [
+            "shirt",
+            "tshirt"
+        ]
+    },
+    {
+        "id": "1f454",
+        "category": 0,
+        "unicode": "👔",
+        "aliases": [
+            "necktie"
+        ]
+    },
+    {
+        "id": "1f45a",
+        "category": 0,
+        "unicode": "👚",
+        "aliases": [
+            "womans_clothes"
+        ]
+    },
+    {
+        "id": "1f457",
+        "category": 0,
+        "unicode": "👗",
+        "aliases": [
+            "dress"
+        ]
+    },
+    {
+        "id": "1f3bd",
+        "category": 0,
+        "unicode": "🎽",
+        "aliases": [
+            "running_shirt_with_sash"
+        ]
+    },
+    {
+        "id": "1f456",
+        "category": 0,
+        "unicode": "👖",
+        "aliases": [
+            "jeans"
+        ]
+    },
+    {
+        "id": "1f458",
+        "category": 0,
+        "unicode": "👘",
+        "aliases": [
+            "kimono"
+        ]
+    },
+    {
+        "id": "1f459",
+        "category": 0,
+        "unicode": "👙",
+        "aliases": [
+            "bikini"
+        ]
+    },
+    {
+        "id": "1f4bc",
+        "category": 0,
+        "unicode": "💼",
+        "aliases": [
+            "briefcase"
+        ]
+    },
+    {
+        "id": "1f45c",
+        "category": 0,
+        "unicode": "👜",
+        "aliases": [
+            "handbag"
+        ]
+    },
+    {
+        "id": "1f45d",
+        "category": 0,
+        "unicode": "👝",
+        "aliases": [
+            "pouch"
+        ]
+    },
+    {
+        "id": "1f45b",
+        "category": 0,
+        "unicode": "👛",
+        "aliases": [
+            "purse"
+        ]
+    },
+    {
+        "id": "1f453",
+        "category": 0,
+        "unicode": "👓",
+        "aliases": [
+            "eyeglasses"
+        ]
+    },
+    {
+        "id": "1f380",
+        "category": 0,
+        "unicode": "🎀",
+        "aliases": [
+            "ribbon"
+        ]
+    },
+    {
+        "id": "1f302",
+        "category": 0,
+        "unicode": "🌂",
+        "aliases": [
+            "closed_umbrella"
+        ]
+    },
+    {
+        "id": "1f484",
+        "category": 0,
+        "unicode": "💄",
+        "aliases": [
+            "lipstick"
+        ]
+    },
+    {
+        "id": "1f49b",
+        "category": 0,
+        "unicode": "💛",
+        "aliases": [
+            "yellow_heart"
+        ]
+    },
+    {
+        "id": "1f499",
+        "category": 0,
+        "unicode": "💙",
+        "aliases": [
+            "blue_heart"
+        ]
+    },
+    {
+        "id": "1f49c",
+        "category": 0,
+        "unicode": "💜",
+        "aliases": [
+            "purple_heart"
+        ]
+    },
+    {
+        "id": "1f49a",
+        "category": 0,
+        "unicode": "💚",
+        "aliases": [
+            "green_heart"
+        ]
+    },
+    {
+        "id": "2764",
+        "category": 0,
+        "unicode": "❤",
+        "aliases": [
+            "heart"
+        ]
+    },
+    {
+        "id": "1f494",
+        "category": 0,
+        "unicode": "💔",
+        "aliases": [
+            "broken_heart"
+        ]
+    },
+    {
+        "id": "1f497",
+        "category": 0,
+        "unicode": "💗",
+        "aliases": [
+            "heartpulse"
+        ]
+    },
+    {
+        "id": "1f493",
+        "category": 0,
+        "unicode": "💓",
+        "aliases": [
+            "heartbeat"
+        ]
+    },
+    {
+        "id": "1f495",
+        "category": 0,
+        "unicode": "💕",
+        "aliases": [
+            "two_hearts"
+        ]
+    },
+    {
+        "id": "1f496",
+        "category": 0,
+        "unicode": "💖",
+        "aliases": [
+            "sparkling_heart"
+        ]
+    },
+    {
+        "id": "1f49e",
+        "category": 0,
+        "unicode": "💞",
+        "aliases": [
+            "revolving_hearts"
+        ]
+    },
+    {
+        "id": "1f498",
+        "category": 0,
+        "unicode": "💘",
+        "aliases": [
+            "cupid"
+        ]
+    },
+    {
+        "id": "1f48c",
+        "category": 0,
+        "unicode": "💌",
+        "aliases": [
+            "love_letter"
+        ]
+    },
+    {
+        "id": "1f48b",
+        "category": 0,
+        "unicode": "💋",
+        "aliases": [
+            "kiss"
+        ]
+    },
+    {
+        "id": "1f48d",
+        "category": 0,
+        "unicode": "💍",
+        "aliases": [
+            "ring"
+        ]
+    },
+    {
+        "id": "1f48e",
+        "category": 0,
+        "unicode": "💎",
+        "aliases": [
+            "gem"
+        ]
+    },
+    {
+        "id": "1f464",
+        "category": 0,
+        "unicode": "👤",
+        "aliases": [
+            "bust_in_silhouette"
+        ]
+    },
+    {
+        "id": "1f465",
+        "category": 0,
+        "unicode": "👥",
+        "aliases": [
+            "busts_in_silhouette"
+        ]
+    },
+    {
+        "id": "1f4ac",
+        "category": 0,
+        "unicode": "💬",
+        "aliases": [
+            "speech_balloon"
+        ]
+    },
+    {
+        "id": "1f463",
+        "category": 0,
+        "unicode": "👣",
+        "aliases": [
+            "footprints"
+        ]
+    },
+    {
+        "id": "1f4ad",
+        "category": 0,
+        "unicode": "💭",
+        "aliases": [
+            "thought_balloon"
+        ]
+    },
+    {
+        "id": "1f436",
+        "category": 1,
+        "unicode": "🐶",
+        "aliases": [
+            "dog"
+        ]
+    },
+    {
+        "id": "1f43a",
+        "category": 1,
+        "unicode": "🐺",
+        "aliases": [
+            "wolf"
+        ]
+    },
+    {
+        "id": "1f431",
+        "category": 1,
+        "unicode": "🐱",
+        "aliases": [
+            "cat"
+        ]
+    },
+    {
+        "id": "1f42d",
+        "category": 1,
+        "unicode": "🐭",
+        "aliases": [
+            "mouse"
+        ]
+    },
+    {
+        "id": "1f439",
+        "category": 1,
+        "unicode": "🐹",
+        "aliases": [
+            "hamster"
+        ]
+    },
+    {
+        "id": "1f430",
+        "category": 1,
+        "unicode": "🐰",
+        "aliases": [
+            "rabbit"
+        ]
+    },
+    {
+        "id": "1f438",
+        "category": 1,
+        "unicode": "🐸",
+        "aliases": [
+            "frog"
+        ]
+    },
+    {
+        "id": "1f42f",
+        "category": 1,
+        "unicode": "🐯",
+        "aliases": [
+            "tiger"
+        ]
+    },
+    {
+        "id": "1f428",
+        "category": 1,
+        "unicode": "🐨",
+        "aliases": [
+            "koala"
+        ]
+    },
+    {
+        "id": "1f43b",
+        "category": 1,
+        "unicode": "🐻",
+        "aliases": [
+            "bear"
+        ]
+    },
+    {
+        "id": "1f437",
+        "category": 1,
+        "unicode": "🐷",
+        "aliases": [
+            "pig"
+        ]
+    },
+    {
+        "id": "1f43d",
+        "category": 1,
+        "unicode": "🐽",
+        "aliases": [
+            "pig_nose"
+        ]
+    },
+    {
+        "id": "1f42e",
+        "category": 1,
+        "unicode": "🐮",
+        "aliases": [
+            "cow"
+        ]
+    },
+    {
+        "id": "1f417",
+        "category": 1,
+        "unicode": "🐗",
+        "aliases": [
+            "boar"
+        ]
+    },
+    {
+        "id": "1f435",
+        "category": 1,
+        "unicode": "🐵",
+        "aliases": [
+            "monkey_face"
+        ]
+    },
+    {
+        "id": "1f412",
+        "category": 1,
+        "unicode": "🐒",
+        "aliases": [
+            "monkey"
+        ]
+    },
+    {
+        "id": "1f434",
+        "category": 1,
+        "unicode": "🐴",
+        "aliases": [
+            "horse"
+        ]
+    },
+    {
+        "id": "1f411",
+        "category": 1,
+        "unicode": "🐑",
+        "aliases": [
+            "sheep"
+        ]
+    },
+    {
+        "id": "1f418",
+        "category": 1,
+        "unicode": "🐘",
+        "aliases": [
+            "elephant"
+        ]
+    },
+    {
+        "id": "1f43c",
+        "category": 1,
+        "unicode": "🐼",
+        "aliases": [
+            "panda_face"
+        ]
+    },
+    {
+        "id": "1f427",
+        "category": 1,
+        "unicode": "🐧",
+        "aliases": [
+            "penguin"
+        ]
+    },
+    {
+        "id": "1f426",
+        "category": 1,
+        "unicode": "🐦",
+        "aliases": [
+            "bird"
+        ]
+    },
+    {
+        "id": "1f424",
+        "category": 1,
+        "unicode": "🐤",
+        "aliases": [
+            "baby_chick"
+        ]
+    },
+    {
+        "id": "1f425",
+        "category": 1,
+        "unicode": "🐥",
+        "aliases": [
+            "hatched_chick"
+        ]
+    },
+    {
+        "id": "1f423",
+        "category": 1,
+        "unicode": "🐣",
+        "aliases": [
+            "hatching_chick"
+        ]
+    },
+    {
+        "id": "1f414",
+        "category": 1,
+        "unicode": "🐔",
+        "aliases": [
+            "chicken"
+        ]
+    },
+    {
+        "id": "1f40d",
+        "category": 1,
+        "unicode": "🐍",
+        "aliases": [
+            "snake"
+        ]
+    },
+    {
+        "id": "1f422",
+        "category": 1,
+        "unicode": "🐢",
+        "aliases": [
+            "turtle"
+        ]
+    },
+    {
+        "id": "1f41b",
+        "category": 1,
+        "unicode": "🐛",
+        "aliases": [
+            "bug"
+        ]
+    },
+    {
+        "id": "1f41d",
+        "category": 1,
+        "unicode": "🐝",
+        "aliases": [
+            "bee",
+            "honeybee"
+        ]
+    },
+    {
+        "id": "1f41c",
+        "category": 1,
+        "unicode": "🐜",
+        "aliases": [
+            "ant"
+        ]
+    },
+    {
+        "id": "1f41e",
+        "category": 1,
+        "unicode": "🐞",
+        "aliases": [
+            "beetle"
+        ]
+    },
+    {
+        "id": "1f40c",
+        "category": 1,
+        "unicode": "🐌",
+        "aliases": [
+            "snail"
+        ]
+    },
+    {
+        "id": "1f419",
+        "category": 1,
+        "unicode": "🐙",
+        "aliases": [
+            "octopus"
+        ]
+    },
+    {
+        "id": "1f41a",
+        "category": 1,
+        "unicode": "🐚",
+        "aliases": [
+            "shell"
+        ]
+    },
+    {
+        "id": "1f420",
+        "category": 1,
+        "unicode": "🐠",
+        "aliases": [
+            "tropical_fish"
+        ]
+    },
+    {
+        "id": "1f41f",
+        "category": 1,
+        "unicode": "🐟",
+        "aliases": [
+            "fish"
+        ]
+    },
+    {
+        "id": "1f42c",
+        "category": 1,
+        "unicode": "🐬",
+        "aliases": [
+            "dolphin",
+            "flipper"
+        ]
+    },
+    {
+        "id": "1f433",
+        "category": 1,
+        "unicode": "🐳",
+        "aliases": [
+            "whale"
+        ]
+    },
+    {
+        "id": "1f40b",
+        "category": 1,
+        "unicode": "🐋",
+        "aliases": [
+            "whale2"
+        ]
+    },
+    {
+        "id": "1f404",
+        "category": 1,
+        "unicode": "🐄",
+        "aliases": [
+            "cow2"
+        ]
+    },
+    {
+        "id": "1f40f",
+        "category": 1,
+        "unicode": "🐏",
+        "aliases": [
+            "ram"
+        ]
+    },
+    {
+        "id": "1f400",
+        "category": 1,
+        "unicode": "🐀",
+        "aliases": [
+            "rat"
+        ]
+    },
+    {
+        "id": "1f403",
+        "category": 1,
+        "unicode": "🐃",
+        "aliases": [
+            "water_buffalo"
+        ]
+    },
+    {
+        "id": "1f405",
+        "category": 1,
+        "unicode": "🐅",
+        "aliases": [
+            "tiger2"
+        ]
+    },
+    {
+        "id": "1f407",
+        "category": 1,
+        "unicode": "🐇",
+        "aliases": [
+            "rabbit2"
+        ]
+    },
+    {
+        "id": "1f409",
+        "category": 1,
+        "unicode": "🐉",
+        "aliases": [
+            "dragon"
+        ]
+    },
+    {
+        "id": "1f40e",
+        "category": 1,
+        "unicode": "🐎",
+        "aliases": [
+            "racehorse"
+        ]
+    },
+    {
+        "id": "1f410",
+        "category": 1,
+        "unicode": "🐐",
+        "aliases": [
+            "goat"
+        ]
+    },
+    {
+        "id": "1f413",
+        "category": 1,
+        "unicode": "🐓",
+        "aliases": [
+            "rooster"
+        ]
+    },
+    {
+        "id": "1f415",
+        "category": 1,
+        "unicode": "🐕",
+        "aliases": [
+            "dog2"
+        ]
+    },
+    {
+        "id": "1f416",
+        "category": 1,
+        "unicode": "🐖",
+        "aliases": [
+            "pig2"
+        ]
+    },
+    {
+        "id": "1f401",
+        "category": 1,
+        "unicode": "🐁",
+        "aliases": [
+            "mouse2"
+        ]
+    },
+    {
+        "id": "1f402",
+        "category": 1,
+        "unicode": "🐂",
+        "aliases": [
+            "ox"
+        ]
+    },
+    {
+        "id": "1f432",
+        "category": 1,
+        "unicode": "🐲",
+        "aliases": [
+            "dragon_face"
+        ]
+    },
+    {
+        "id": "1f421",
+        "category": 1,
+        "unicode": "🐡",
+        "aliases": [
+            "blowfish"
+        ]
+    },
+    {
+        "id": "1f40a",
+        "category": 1,
+        "unicode": "🐊",
+        "aliases": [
+            "crocodile"
+        ]
+    },
+    {
+        "id": "1f42b",
+        "category": 1,
+        "unicode": "🐫",
+        "aliases": [
+            "camel"
+        ]
+    },
+    {
+        "id": "1f42a",
+        "category": 1,
+        "unicode": "🐪",
+        "aliases": [
+            "dromedary_camel"
+        ]
+    },
+    {
+        "id": "1f406",
+        "category": 1,
+        "unicode": "🐆",
+        "aliases": [
+            "leopard"
+        ]
+    },
+    {
+        "id": "1f408",
+        "category": 1,
+        "unicode": "🐈",
+        "aliases": [
+            "cat2"
+        ]
+    },
+    {
+        "id": "1f429",
+        "category": 1,
+        "unicode": "🐩",
+        "aliases": [
+            "poodle"
+        ]
+    },
+    {
+        "id": "1f43e",
+        "category": 1,
+        "unicode": "🐾",
+        "aliases": [
+            "feet",
+            "paw_prints"
+        ]
+    },
+    {
+        "id": "1f490",
+        "category": 1,
+        "unicode": "💐",
+        "aliases": [
+            "bouquet"
+        ]
+    },
+    {
+        "id": "1f338",
+        "category": 1,
+        "unicode": "🌸",
+        "aliases": [
+            "cherry_blossom"
+        ]
+    },
+    {
+        "id": "1f337",
+        "category": 1,
+        "unicode": "🌷",
+        "aliases": [
+            "tulip"
+        ]
+    },
+    {
+        "id": "1f340",
+        "category": 1,
+        "unicode": "🍀",
+        "aliases": [
+            "four_leaf_clover"
+        ]
+    },
+    {
+        "id": "1f339",
+        "category": 1,
+        "unicode": "🌹",
+        "aliases": [
+            "rose"
+        ]
+    },
+    {
+        "id": "1f33b",
+        "category": 1,
+        "unicode": "🌻",
+        "aliases": [
+            "sunflower"
+        ]
+    },
+    {
+        "id": "1f33a",
+        "category": 1,
+        "unicode": "🌺",
+        "aliases": [
+            "hibiscus"
+        ]
+    },
+    {
+        "id": "1f341",
+        "category": 1,
+        "unicode": "🍁",
+        "aliases": [
+            "maple_leaf"
+        ]
+    },
+    {
+        "id": "1f343",
+        "category": 1,
+        "unicode": "🍃",
+        "aliases": [
+            "leaves"
+        ]
+    },
+    {
+        "id": "1f342",
+        "category": 1,
+        "unicode": "🍂",
+        "aliases": [
+            "fallen_leaf"
+        ]
+    },
+    {
+        "id": "1f33f",
+        "category": 1,
+        "unicode": "🌿",
+        "aliases": [
+            "herb"
+        ]
+    },
+    {
+        "id": "1f33e",
+        "category": 1,
+        "unicode": "🌾",
+        "aliases": [
+            "ear_of_rice"
+        ]
+    },
+    {
+        "id": "1f344",
+        "category": 1,
+        "unicode": "🍄",
+        "aliases": [
+            "mushroom"
+        ]
+    },
+    {
+        "id": "1f335",
+        "category": 1,
+        "unicode": "🌵",
+        "aliases": [
+            "cactus"
+        ]
+    },
+    {
+        "id": "1f334",
+        "category": 1,
+        "unicode": "🌴",
+        "aliases": [
+            "palm_tree"
+        ]
+    },
+    {
+        "id": "1f332",
+        "category": 1,
+        "unicode": "🌲",
+        "aliases": [
+            "evergreen_tree"
+        ]
+    },
+    {
+        "id": "1f333",
+        "category": 1,
+        "unicode": "🌳",
+        "aliases": [
+            "deciduous_tree"
+        ]
+    },
+    {
+        "id": "1f330",
+        "category": 1,
+        "unicode": "🌰",
+        "aliases": [
+            "chestnut"
+        ]
+    },
+    {
+        "id": "1f331",
+        "category": 1,
+        "unicode": "🌱",
+        "aliases": [
+            "seedling"
+        ]
+    },
+    {
+        "id": "1f33c",
+        "category": 1,
+        "unicode": "🌼",
+        "aliases": [
+            "blossom"
+        ]
+    },
+    {
+        "id": "1f310",
+        "category": 1,
+        "unicode": "🌐",
+        "aliases": [
+            "globe_with_meridians"
+        ]
+    },
+    {
+        "id": "1f31e",
+        "category": 1,
+        "unicode": "🌞",
+        "aliases": [
+            "sun_with_face"
+        ]
+    },
+    {
+        "id": "1f31d",
+        "category": 1,
+        "unicode": "🌝",
+        "aliases": [
+            "full_moon_with_face"
+        ]
+    },
+    {
+        "id": "1f31a",
+        "category": 1,
+        "unicode": "🌚",
+        "aliases": [
+            "new_moon_with_face"
+        ]
+    },
+    {
+        "id": "1f311",
+        "category": 1,
+        "unicode": "🌑",
+        "aliases": [
+            "new_moon"
+        ]
+    },
+    {
+        "id": "1f312",
+        "category": 1,
+        "unicode": "🌒",
+        "aliases": [
+            "waxing_crescent_moon"
+        ]
+    },
+    {
+        "id": "1f313",
+        "category": 1,
+        "unicode": "🌓",
+        "aliases": [
+            "first_quarter_moon"
+        ]
+    },
+    {
+        "id": "1f314",
+        "category": 1,
+        "unicode": "🌔",
+        "aliases": [
+            "moon",
+            "waxing_gibbous_moon"
+        ]
+    },
+    {
+        "id": "1f315",
+        "category": 1,
+        "unicode": "🌕",
+        "aliases": [
+            "full_moon"
+        ]
+    },
+    {
+        "id": "1f316",
+        "category": 1,
+        "unicode": "🌖",
+        "aliases": [
+            "waning_gibbous_moon"
+        ]
+    },
+    {
+        "id": "1f317",
+        "category": 1,
+        "unicode": "🌗",
+        "aliases": [
+            "last_quarter_moon"
+        ]
+    },
+    {
+        "id": "1f318",
+        "category": 1,
+        "unicode": "🌘",
+        "aliases": [
+            "waning_crescent_moon"
+        ]
+    },
+    {
+        "id": "1f31c",
+        "category": 1,
+        "unicode": "🌜",
+        "aliases": [
+            "last_quarter_moon_with_face"
+        ]
+    },
+    {
+        "id": "1f31b",
+        "category": 1,
+        "unicode": "🌛",
+        "aliases": [
+            "first_quarter_moon_with_face"
+        ]
+    },
+    {
+        "id": "1f319",
+        "category": 1,
+        "unicode": "🌙",
+        "aliases": [
+            "crescent_moon"
+        ]
+    },
+    {
+        "id": "1f30d",
+        "category": 1,
+        "unicode": "🌍",
+        "aliases": [
+            "earth_africa"
+        ]
+    },
+    {
+        "id": "1f30e",
+        "category": 1,
+        "unicode": "🌎",
+        "aliases": [
+            "earth_americas"
+        ]
+    },
+    {
+        "id": "1f30f",
+        "category": 1,
+        "unicode": "🌏",
+        "aliases": [
+            "earth_asia"
+        ]
+    },
+    {
+        "id": "1f30b",
+        "category": 1,
+        "unicode": "🌋",
+        "aliases": [
+            "volcano"
+        ]
+    },
+    {
+        "id": "1f30c",
+        "category": 1,
+        "unicode": "🌌",
+        "aliases": [
+            "milky_way"
+        ]
+    },
+    {
+        "id": "1f320",
+        "category": 1,
+        "unicode": "🌠",
+        "aliases": [
+            "stars"
+        ]
+    },
+    {
+        "id": "2b50",
+        "category": 1,
+        "unicode": "⭐",
+        "aliases": [
+            "star"
+        ]
+    },
+    {
+        "id": "2600",
+        "category": 1,
+        "unicode": "☀",
+        "aliases": [
+            "sunny"
+        ]
+    },
+    {
+        "id": "26c5",
+        "category": 1,
+        "unicode": "⛅",
+        "aliases": [
+            "partly_sunny"
+        ]
+    },
+    {
+        "id": "2601",
+        "category": 1,
+        "unicode": "☁",
+        "aliases": [
+            "cloud"
+        ]
+    },
+    {
+        "id": "26a1",
+        "category": 1,
+        "unicode": "⚡",
+        "aliases": [
+            "zap"
+        ]
+    },
+    {
+        "id": "2614",
+        "category": 1,
+        "unicode": "☔",
+        "aliases": [
+            "umbrella"
+        ]
+    },
+    {
+        "id": "2744",
+        "category": 1,
+        "unicode": "❄",
+        "aliases": [
+            "snowflake"
+        ]
+    },
+    {
+        "id": "26c4",
+        "category": 1,
+        "unicode": "⛄",
+        "aliases": [
+            "snowman"
+        ]
+    },
+    {
+        "id": "1f300",
+        "category": 1,
+        "unicode": "🌀",
+        "aliases": [
+            "cyclone"
+        ]
+    },
+    {
+        "id": "1f301",
+        "category": 1,
+        "unicode": "🌁",
+        "aliases": [
+            "foggy"
+        ]
+    },
+    {
+        "id": "1f308",
+        "category": 1,
+        "unicode": "🌈",
+        "aliases": [
+            "rainbow"
+        ]
+    },
+    {
+        "id": "1f30a",
+        "category": 1,
+        "unicode": "🌊",
+        "aliases": [
+            "ocean"
+        ]
+    },
+    {
+        "id": "1f38d",
+        "category": 2,
+        "unicode": "🎍",
+        "aliases": [
+            "bamboo"
+        ]
+    },
+    {
+        "id": "1f49d",
+        "category": 2,
+        "unicode": "💝",
+        "aliases": [
+            "gift_heart"
+        ]
+    },
+    {
+        "id": "1f38e",
+        "category": 2,
+        "unicode": "🎎",
+        "aliases": [
+            "dolls"
+        ]
+    },
+    {
+        "id": "1f392",
+        "category": 2,
+        "unicode": "🎒",
+        "aliases": [
+            "school_satchel"
+        ]
+    },
+    {
+        "id": "1f393",
+        "category": 2,
+        "unicode": "🎓",
+        "aliases": [
+            "mortar_board"
+        ]
+    },
+    {
+        "id": "1f38f",
+        "category": 2,
+        "unicode": "🎏",
+        "aliases": [
+            "flags"
+        ]
+    },
+    {
+        "id": "1f386",
+        "category": 2,
+        "unicode": "🎆",
+        "aliases": [
+            "fireworks"
+        ]
+    },
+    {
+        "id": "1f387",
+        "category": 2,
+        "unicode": "🎇",
+        "aliases": [
+            "sparkler"
+        ]
+    },
+    {
+        "id": "1f390",
+        "category": 2,
+        "unicode": "🎐",
+        "aliases": [
+            "wind_chime"
+        ]
+    },
+    {
+        "id": "1f391",
+        "category": 2,
+        "unicode": "🎑",
+        "aliases": [
+            "rice_scene"
+        ]
+    },
+    {
+        "id": "1f383",
+        "category": 2,
+        "unicode": "🎃",
+        "aliases": [
+            "jack_o_lantern"
+        ]
+    },
+    {
+        "id": "1f47b",
+        "category": 2,
+        "unicode": "👻",
+        "aliases": [
+            "ghost"
+        ]
+    },
+    {
+        "id": "1f385",
+        "category": 2,
+        "unicode": "🎅",
+        "aliases": [
+            "santa"
+        ]
+    },
+    {
+        "id": "1f384",
+        "category": 2,
+        "unicode": "🎄",
+        "aliases": [
+            "christmas_tree"
+        ]
+    },
+    {
+        "id": "1f381",
+        "category": 2,
+        "unicode": "🎁",
+        "aliases": [
+            "gift"
+        ]
+    },
+    {
+        "id": "1f38b",
+        "category": 2,
+        "unicode": "🎋",
+        "aliases": [
+            "tanabata_tree"
+        ]
+    },
+    {
+        "id": "1f389",
+        "category": 2,
+        "unicode": "🎉",
+        "aliases": [
+            "tada"
+        ]
+    },
+    {
+        "id": "1f38a",
+        "category": 2,
+        "unicode": "🎊",
+        "aliases": [
+            "confetti_ball"
+        ]
+    },
+    {
+        "id": "1f388",
+        "category": 2,
+        "unicode": "🎈",
+        "aliases": [
+            "balloon"
+        ]
+    },
+    {
+        "id": "1f38c",
+        "category": 2,
+        "unicode": "🎌",
+        "aliases": [
+            "crossed_flags"
+        ]
+    },
+    {
+        "id": "1f52e",
+        "category": 2,
+        "unicode": "🔮",
+        "aliases": [
+            "crystal_ball"
+        ]
+    },
+    {
+        "id": "1f3a5",
+        "category": 2,
+        "unicode": "🎥",
+        "aliases": [
+            "movie_camera"
+        ]
+    },
+    {
+        "id": "1f4f7",
+        "category": 2,
+        "unicode": "📷",
+        "aliases": [
+            "camera"
+        ]
+    },
+    {
+        "id": "1f4f9",
+        "category": 2,
+        "unicode": "📹",
+        "aliases": [
+            "video_camera"
+        ]
+    },
+    {
+        "id": "1f4fc",
+        "category": 2,
+        "unicode": "📼",
+        "aliases": [
+            "vhs"
+        ]
+    },
+    {
+        "id": "1f4bf",
+        "category": 2,
+        "unicode": "💿",
+        "aliases": [
+            "cd"
+        ]
+    },
+    {
+        "id": "1f4c0",
+        "category": 2,
+        "unicode": "📀",
+        "aliases": [
+            "dvd"
+        ]
+    },
+    {
+        "id": "1f4bd",
+        "category": 2,
+        "unicode": "💽",
+        "aliases": [
+            "minidisc"
+        ]
+    },
+    {
+        "id": "1f4be",
+        "category": 2,
+        "unicode": "💾",
+        "aliases": [
+            "floppy_disk"
+        ]
+    },
+    {
+        "id": "1f4bb",
+        "category": 2,
+        "unicode": "💻",
+        "aliases": [
+            "computer"
+        ]
+    },
+    {
+        "id": "1f4f1",
+        "category": 2,
+        "unicode": "📱",
+        "aliases": [
+            "iphone"
+        ]
+    },
+    {
+        "id": "260e",
+        "category": 2,
+        "unicode": "☎",
+        "aliases": [
+            "phone",
+            "telephone"
+        ]
+    },
+    {
+        "id": "1f4de",
+        "category": 2,
+        "unicode": "📞",
+        "aliases": [
+            "telephone_receiver"
+        ]
+    },
+    {
+        "id": "1f4df",
+        "category": 2,
+        "unicode": "📟",
+        "aliases": [
+            "pager"
+        ]
+    },
+    {
+        "id": "1f4e0",
+        "category": 2,
+        "unicode": "📠",
+        "aliases": [
+            "fax"
+        ]
+    },
+    {
+        "id": "1f4e1",
+        "category": 2,
+        "unicode": "📡",
+        "aliases": [
+            "satellite"
+        ]
+    },
+    {
+        "id": "1f4fa",
+        "category": 2,
+        "unicode": "📺",
+        "aliases": [
+            "tv"
+        ]
+    },
+    {
+        "id": "1f4fb",
+        "category": 2,
+        "unicode": "📻",
+        "aliases": [
+            "radio"
+        ]
+    },
+    {
+        "id": "1f50a",
+        "category": 2,
+        "unicode": "🔊",
+        "aliases": [
+            "loud_sound"
+        ]
+    },
+    {
+        "id": "1f509",
+        "category": 2,
+        "unicode": "🔉",
+        "aliases": [
+            "sound"
+        ]
+    },
+    {
+        "id": "1f508",
+        "category": 2,
+        "unicode": "🔉",
+        "aliases": [
+            "speaker"
+        ]
+    },
+    {
+        "id": "1f507",
+        "category": 2,
+        "unicode": "🔇",
+        "aliases": [
+            "mute"
+        ]
+    },
+    {
+        "id": "1f514",
+        "category": 2,
+        "unicode": "🔔",
+        "aliases": [
+            "bell"
+        ]
+    },
+    {
+        "id": "1f515",
+        "category": 2,
+        "unicode": "🔕",
+        "aliases": [
+            "no_bell"
+        ]
+    },
+    {
+        "id": "1f4e3",
+        "category": 2,
+        "unicode": "📣",
+        "aliases": [
+            "mega"
+        ]
+    },
+    {
+        "id": "1f4e2",
+        "category": 2,
+        "unicode": "📢",
+        "aliases": [
+            "loudspeaker"
+        ]
+    },
+    {
+        "id": "23f3",
+        "category": 2,
+        "unicode": "⏳",
+        "aliases": [
+            "hourglass_flowing_sand"
+        ]
+    },
+    {
+        "id": "231b",
+        "category": 2,
+        "unicode": "⌛",
+        "aliases": [
+            "hourglass"
+        ]
+    },
+    {
+        "id": "23f0",
+        "category": 2,
+        "unicode": "⏰",
+        "aliases": [
+            "alarm_clock"
+        ]
+    },
+    {
+        "id": "231a",
+        "category": 2,
+        "unicode": "⌚",
+        "aliases": [
+            "watch"
+        ]
+    },
+    {
+        "id": "1f513",
+        "category": 2,
+        "unicode": "🔓",
+        "aliases": [
+            "unlock"
+        ]
+    },
+    {
+        "id": "1f512",
+        "category": 2,
+        "unicode": "🔒",
+        "aliases": [
+            "lock"
+        ]
+    },
+    {
+        "id": "1f50f",
+        "category": 2,
+        "unicode": "🔏",
+        "aliases": [
+            "lock_with_ink_pen"
+        ]
+    },
+    {
+        "id": "1f510",
+        "category": 2,
+        "unicode": "🔐",
+        "aliases": [
+            "closed_lock_with_key"
+        ]
+    },
+    {
+        "id": "1f511",
+        "category": 2,
+        "unicode": "🔑",
+        "aliases": [
+            "key"
+        ]
+    },
+    {
+        "id": "1f50e",
+        "category": 2,
+        "unicode": "🔎",
+        "aliases": [
+            "mag_right"
+        ]
+    },
+    {
+        "id": "1f4a1",
+        "category": 2,
+        "unicode": "💡",
+        "aliases": [
+            "bulb"
+        ]
+    },
+    {
+        "id": "1f526",
+        "category": 2,
+        "unicode": "🔦",
+        "aliases": [
+            "flashlight"
+        ]
+    },
+    {
+        "id": "1f506",
+        "category": 2,
+        "unicode": "🔆",
+        "aliases": [
+            "high_brightness"
+        ]
+    },
+    {
+        "id": "1f505",
+        "category": 2,
+        "unicode": "🔅",
+        "aliases": [
+            "low_brightness"
+        ]
+    },
+    {
+        "id": "1f50c",
+        "category": 2,
+        "unicode": "🔌",
+        "aliases": [
+            "electric_plug"
+        ]
+    },
+    {
+        "id": "1f50b",
+        "category": 2,
+        "unicode": "🔋",
+        "aliases": [
+            "battery"
+        ]
+    },
+    {
+        "id": "1f50d",
+        "category": 2,
+        "unicode": "🔍",
+        "aliases": [
+            "mag"
+        ]
+    },
+    {
+        "id": "1f6c0",
+        "category": 2,
+        "unicode": "🛀",
+        "aliases": [
+            "bath"
+        ]
+    },
+    {
+        "id": "1f6c1",
+        "category": 2,
+        "unicode": "🛁",
+        "aliases": [
+            "bathtub"
+        ]
+    },
+    {
+        "id": "1f6bf",
+        "category": 2,
+        "unicode": "🚿",
+        "aliases": [
+            "shower"
+        ]
+    },
+    {
+        "id": "1f6bd",
+        "category": 2,
+        "unicode": "🚽",
+        "aliases": [
+            "toilet"
+        ]
+    },
+    {
+        "id": "1f527",
+        "category": 2,
+        "unicode": "🔧",
+        "aliases": [
+            "wrench"
+        ]
+    },
+    {
+        "id": "1f529",
+        "category": 2,
+        "unicode": "🔩",
+        "aliases": [
+            "nut_and_bolt"
+        ]
+    },
+    {
+        "id": "1f528",
+        "category": 2,
+        "unicode": "🔨",
+        "aliases": [
+            "hammer"
+        ]
+    },
+    {
+        "id": "1f6aa",
+        "category": 2,
+        "unicode": "🚪",
+        "aliases": [
+            "door"
+        ]
+    },
+    {
+        "id": "1f6ac",
+        "category": 2,
+        "unicode": "🚬",
+        "aliases": [
+            "smoking"
+        ]
+    },
+    {
+        "id": "1f4a3",
+        "category": 2,
+        "unicode": "💣",
+        "aliases": [
+            "bomb"
+        ]
+    },
+    {
+        "id": "1f52b",
+        "category": 2,
+        "unicode": "🔫",
+        "aliases": [
+            "gun"
+        ]
+    },
+    {
+        "id": "1f52a",
+        "category": 2,
+        "unicode": "🔪",
+        "aliases": [
+            "hocho"
+        ]
+    },
+    {
+        "id": "1f48a",
+        "category": 2,
+        "unicode": "💊",
+        "aliases": [
+            "pill"
+        ]
+    },
+    {
+        "id": "1f489",
+        "category": 2,
+        "unicode": "💉",
+        "aliases": [
+            "syringe"
+        ]
+    },
+    {
+        "id": "1f4b0",
+        "category": 2,
+        "unicode": "💰",
+        "aliases": [
+            "moneybag"
+        ]
+    },
+    {
+        "id": "1f4b4",
+        "category": 2,
+        "unicode": "💴",
+        "aliases": [
+            "yen"
+        ]
+    },
+    {
+        "id": "1f4b5",
+        "category": 2,
+        "unicode": "💵",
+        "aliases": [
+            "dollar"
+        ]
+    },
+    {
+        "id": "1f4b7",
+        "category": 2,
+        "unicode": "💷",
+        "aliases": [
+            "pound"
+        ]
+    },
+    {
+        "id": "1f4b6",
+        "category": 2,
+        "unicode": "💶",
+        "aliases": [
+            "euro"
+        ]
+    },
+    {
+        "id": "1f4b3",
+        "category": 2,
+        "unicode": "💳",
+        "aliases": [
+            "credit_card"
+        ]
+    },
+    {
+        "id": "1f4b8",
+        "category": 2,
+        "unicode": "💸",
+        "aliases": [
+            "money_with_wings"
+        ]
+    },
+    {
+        "id": "1f4f2",
+        "category": 2,
+        "unicode": "📲",
+        "aliases": [
+            "calling"
+        ]
+    },
+    {
+        "id": "1f4e7",
+        "category": 2,
+        "unicode": "📧",
+        "aliases": [
+            "e-mail"
+        ]
+    },
+    {
+        "id": "1f4e5",
+        "category": 2,
+        "unicode": "📥",
+        "aliases": [
+            "inbox_tray"
+        ]
+    },
+    {
+        "id": "1f4e4",
+        "category": 2,
+        "unicode": "📤",
+        "aliases": [
+            "outbox_tray"
+        ]
+    },
+    {
+        "id": "2709",
+        "category": 2,
+        "unicode": "✉",
+        "aliases": [
+            "email",
+            "envelope"
+        ]
+    },
+    {
+        "id": "1f4e9",
+        "category": 2,
+        "unicode": "📩",
+        "aliases": [
+            "envelope_with_arrow"
+        ]
+    },
+    {
+        "id": "1f4e8",
+        "category": 2,
+        "unicode": "📨",
+        "aliases": [
+            "incoming_envelope"
+        ]
+    },
+    {
+        "id": "1f4ef",
+        "category": 2,
+        "unicode": "📯",
+        "aliases": [
+            "postal_horn"
+        ]
+    },
+    {
+        "id": "1f4eb",
+        "category": 2,
+        "unicode": "📫",
+        "aliases": [
+            "mailbox"
+        ]
+    },
+    {
+        "id": "1f4ea",
+        "category": 2,
+        "unicode": "📪",
+        "aliases": [
+            "mailbox_closed"
+        ]
+    },
+    {
+        "id": "1f4ec",
+        "category": 2,
+        "unicode": "📬",
+        "aliases": [
+            "mailbox_with_mail"
+        ]
+    },
+    {
+        "id": "1f4ed",
+        "category": 2,
+        "unicode": "📭",
+        "aliases": [
+            "mailbox_with_no_mail"
+        ]
+    },
+    {
+        "id": "1f4ee",
+        "category": 2,
+        "unicode": "📮",
+        "aliases": [
+            "postbox"
+        ]
+    },
+    {
+        "id": "1f4e6",
+        "category": 2,
+        "unicode": "📦",
+        "aliases": [
+            "package"
+        ]
+    },
+    {
+        "id": "1f4dd",
+        "category": 2,
+        "unicode": "📝",
+        "aliases": [
+            "memo",
+            "pencil"
+        ]
+    },
+    {
+        "id": "1f4c4",
+        "category": 2,
+        "unicode": "📄",
+        "aliases": [
+            "page_facing_up"
+        ]
+    },
+    {
+        "id": "1f4c3",
+        "category": 2,
+        "unicode": "📃",
+        "aliases": [
+            "page_with_curl"
+        ]
+    },
+    {
+        "id": "1f4d1",
+        "category": 2,
+        "unicode": "📑",
+        "aliases": [
+            "bookmark_tabs"
+        ]
+    },
+    {
+        "id": "1f4ca",
+        "category": 2,
+        "unicode": "📊",
+        "aliases": [
+            "bar_chart"
+        ]
+    },
+    {
+        "id": "1f4c8",
+        "category": 2,
+        "unicode": "📈",
+        "aliases": [
+            "chart_with_upwards_trend"
+        ]
+    },
+    {
+        "id": "1f4c9",
+        "category": 2,
+        "unicode": "📉",
+        "aliases": [
+            "chart_with_downwards_trend"
+        ]
+    },
+    {
+        "id": "1f4dc",
+        "category": 2,
+        "unicode": "📜",
+        "aliases": [
+            "scroll"
+        ]
+    },
+    {
+        "id": "1f4cb",
+        "category": 2,
+        "unicode": "📋",
+        "aliases": [
+            "clipboard"
+        ]
+    },
+    {
+        "id": "1f4c5",
+        "category": 2,
+        "unicode": "📅",
+        "aliases": [
+            "date"
+        ]
+    },
+    {
+        "id": "1f4c6",
+        "category": 2,
+        "unicode": "📆",
+        "aliases": [
+            "calendar"
+        ]
+    },
+    {
+        "id": "1f4c7",
+        "category": 2,
+        "unicode": "📇",
+        "aliases": [
+            "card_index"
+        ]
+    },
+    {
+        "id": "1f4c1",
+        "category": 2,
+        "unicode": "📁",
+        "aliases": [
+            "file_folder"
+        ]
+    },
+    {
+        "id": "1f4c2",
+        "category": 2,
+        "unicode": "📂",
+        "aliases": [
+            "open_file_folder"
+        ]
+    },
+    {
+        "id": "2702",
+        "category": 2,
+        "unicode": "✂",
+        "aliases": [
+            "scissors"
+        ]
+    },
+    {
+        "id": "1f4cc",
+        "category": 2,
+        "unicode": "📌",
+        "aliases": [
+            "pushpin"
+        ]
+    },
+    {
+        "id": "1f4ce",
+        "category": 2,
+        "unicode": "📎",
+        "aliases": [
+            "paperclip"
+        ]
+    },
+    {
+        "id": "2712",
+        "category": 2,
+        "unicode": "✒",
+        "aliases": [
+            "black_nib"
+        ]
+    },
+    {
+        "id": "270f",
+        "category": 2,
+        "unicode": "✏",
+        "aliases": [
+            "pencil2"
+        ]
+    },
+    {
+        "id": "1f4cf",
+        "category": 2,
+        "unicode": "📏",
+        "aliases": [
+            "straight_ruler"
+        ]
+    },
+    {
+        "id": "1f4d0",
+        "category": 2,
+        "unicode": "📐",
+        "aliases": [
+            "triangular_ruler"
+        ]
+    },
+    {
+        "id": "1f4d5",
+        "category": 2,
+        "unicode": "📕",
+        "aliases": [
+            "closed_book"
+        ]
+    },
+    {
+        "id": "1f4d7",
+        "category": 2,
+        "unicode": "📗",
+        "aliases": [
+            "green_book"
+        ]
+    },
+    {
+        "id": "1f4d8",
+        "category": 2,
+        "unicode": "📘",
+        "aliases": [
+            "blue_book"
+        ]
+    },
+    {
+        "id": "1f4d9",
+        "category": 2,
+        "unicode": "📙",
+        "aliases": [
+            "orange_book"
+        ]
+    },
+    {
+        "id": "1f4d3",
+        "category": 2,
+        "unicode": "📓",
+        "aliases": [
+            "notebook"
+        ]
+    },
+    {
+        "id": "1f4d4",
+        "category": 2,
+        "unicode": "📔",
+        "aliases": [
+            "notebook_with_decorative_cover"
+        ]
+    },
+    {
+        "id": "1f4d2",
+        "category": 2,
+        "unicode": "📒",
+        "aliases": [
+            "ledger"
+        ]
+    },
+    {
+        "id": "1f4da",
+        "category": 2,
+        "unicode": "📚",
+        "aliases": [
+            "books"
+        ]
+    },
+    {
+        "id": "1f4d6",
+        "category": 2,
+        "unicode": "📖",
+        "aliases": [
+            "book",
+            "open_book"
+        ]
+    },
+    {
+        "id": "1f516",
+        "category": 2,
+        "unicode": "🔖",
+        "aliases": [
+            "bookmark"
+        ]
+    },
+    {
+        "id": "1f4db",
+        "category": 2,
+        "unicode": "📛",
+        "aliases": [
+            "name_badge"
+        ]
+    },
+    {
+        "id": "1f52c",
+        "category": 2,
+        "unicode": "🔬",
+        "aliases": [
+            "microscope"
+        ]
+    },
+    {
+        "id": "1f52d",
+        "category": 2,
+        "unicode": "🔭",
+        "aliases": [
+            "telescope"
+        ]
+    },
+    {
+        "id": "1f4f0",
+        "category": 2,
+        "unicode": "📰",
+        "aliases": [
+            "newspaper"
+        ]
+    },
+    {
+        "id": "1f3a8",
+        "category": 2,
+        "unicode": "🎨",
+        "aliases": [
+            "art"
+        ]
+    },
+    {
+        "id": "1f3ac",
+        "category": 2,
+        "unicode": "🎬",
+        "aliases": [
+            "clapper"
+        ]
+    },
+    {
+        "id": "1f3a4",
+        "category": 2,
+        "unicode": "🎤",
+        "aliases": [
+            "microphone"
+        ]
+    },
+    {
+        "id": "1f3a7",
+        "category": 2,
+        "unicode": "🎧",
+        "aliases": [
+            "headphones"
+        ]
+    },
+    {
+        "id": "1f3bc",
+        "category": 2,
+        "unicode": "🎼",
+        "aliases": [
+            "musical_score"
+        ]
+    },
+    {
+        "id": "1f3b5",
+        "category": 2,
+        "unicode": "🎵",
+        "aliases": [
+            "musical_note"
+        ]
+    },
+    {
+        "id": "1f3b6",
+        "category": 2,
+        "unicode": "🎶",
+        "aliases": [
+            "notes"
+        ]
+    },
+    {
+        "id": "1f3b9",
+        "category": 2,
+        "unicode": "🎹",
+        "aliases": [
+            "musical_keyboard"
+        ]
+    },
+    {
+        "id": "1f3bb",
+        "category": 2,
+        "unicode": "🎻",
+        "aliases": [
+            "violin"
+        ]
+    },
+    {
+        "id": "1f3ba",
+        "category": 2,
+        "unicode": "🎺",
+        "aliases": [
+            "trumpet"
+        ]
+    },
+    {
+        "id": "1f3b7",
+        "category": 2,
+        "unicode": "🎷",
+        "aliases": [
+            "saxophone"
+        ]
+    },
+    {
+        "id": "1f3b8",
+        "category": 2,
+        "unicode": "🎸",
+        "aliases": [
+            "guitar"
+        ]
+    },
+    {
+        "id": "1f47e",
+        "category": 2,
+        "unicode": "👾",
+        "aliases": [
+            "space_invader"
+        ]
+    },
+    {
+        "id": "1f3ae",
+        "category": 2,
+        "unicode": "🎮",
+        "aliases": [
+            "video_game"
+        ]
+    },
+    {
+        "id": "1f0cf",
+        "category": 2,
+        "unicode": "🃏",
+        "aliases": [
+            "black_joker"
+        ]
+    },
+    {
+        "id": "1f3b4",
+        "category": 2,
+        "unicode": "🎴",
+        "aliases": [
+            "flower_playing_cards"
+        ]
+    },
+    {
+        "id": "1f004",
+        "category": 2,
+        "unicode": "🀄",
+        "aliases": [
+            "mahjong"
+        ]
+    },
+    {
+        "id": "1f3b2",
+        "category": 2,
+        "unicode": "🎲",
+        "aliases": [
+            "game_die"
+        ]
+    },
+    {
+        "id": "1f3af",
+        "category": 2,
+        "unicode": "🎯",
+        "aliases": [
+            "dart"
+        ]
+    },
+    {
+        "id": "1f3c8",
+        "category": 2,
+        "unicode": "🏈",
+        "aliases": [
+            "football"
+        ]
+    },
+    {
+        "id": "1f3c0",
+        "category": 2,
+        "unicode": "🏀",
+        "aliases": [
+            "basketball"
+        ]
+    },
+    {
+        "id": "26bd",
+        "category": 2,
+        "unicode": "⚽",
+        "aliases": [
+            "soccer"
+        ]
+    },
+    {
+        "id": "26be",
+        "category": 2,
+        "unicode": "⚾",
+        "aliases": [
+            "baseball"
+        ]
+    },
+    {
+        "id": "1f3be",
+        "category": 2,
+        "unicode": "🎾",
+        "aliases": [
+            "tennis"
+        ]
+    },
+    {
+        "id": "1f3b1",
+        "category": 2,
+        "unicode": "🎱",
+        "aliases": [
+            "8ball"
+        ]
+    },
+    {
+        "id": "1f3c9",
+        "category": 2,
+        "unicode": "🏉",
+        "aliases": [
+            "rugby_football"
+        ]
+    },
+    {
+        "id": "1f3b3",
+        "category": 2,
+        "unicode": "🎳",
+        "aliases": [
+            "bowling"
+        ]
+    },
+    {
+        "id": "26f3",
+        "category": 2,
+        "unicode": "⛳",
+        "aliases": [
+            "golf"
+        ]
+    },
+    {
+        "id": "1f6b5",
+        "category": 2,
+        "unicode": "🚵",
+        "aliases": [
+            "mountain_bicyclist"
+        ]
+    },
+    {
+        "id": "1f6b4",
+        "category": 2,
+        "unicode": "🚴",
+        "aliases": [
+            "bicyclist"
+        ]
+    },
+    {
+        "id": "1f3c1",
+        "category": 2,
+        "unicode": "🏁",
+        "aliases": [
+            "checkered_flag"
+        ]
+    },
+    {
+        "id": "1f3c7",
+        "category": 2,
+        "unicode": "🏇",
+        "aliases": [
+            "horse_racing"
+        ]
+    },
+    {
+        "id": "1f3c6",
+        "category": 2,
+        "unicode": "🏆",
+        "aliases": [
+            "trophy"
+        ]
+    },
+    {
+        "id": "1f3bf",
+        "category": 2,
+        "unicode": "🎿",
+        "aliases": [
+            "ski"
+        ]
+    },
+    {
+        "id": "1f3c2",
+        "category": 2,
+        "unicode": "🏂",
+        "aliases": [
+            "snowboarder"
+        ]
+    },
+    {
+        "id": "1f3ca",
+        "category": 2,
+        "unicode": "🏊",
+        "aliases": [
+            "swimmer"
+        ]
+    },
+    {
+        "id": "1f3c4",
+        "category": 2,
+        "unicode": "🏄",
+        "aliases": [
+            "surfer"
+        ]
+    },
+    {
+        "id": "1f3a3",
+        "category": 2,
+        "unicode": "🎣",
+        "aliases": [
+            "fishing_pole_and_fish"
+        ]
+    },
+    {
+        "id": "2615",
+        "category": 2,
+        "unicode": "☕",
+        "aliases": [
+            "coffee"
+        ]
+    },
+    {
+        "id": "1f375",
+        "category": 2,
+        "unicode": "🍵",
+        "aliases": [
+            "tea"
+        ]
+    },
+    {
+        "id": "1f376",
+        "category": 2,
+        "unicode": "🍶",
+        "aliases": [
+            "sake"
+        ]
+    },
+    {
+        "id": "1f37c",
+        "category": 2,
+        "unicode": "🍼",
+        "aliases": [
+            "baby_bottle"
+        ]
+    },
+    {
+        "id": "1f37a",
+        "category": 2,
+        "unicode": "🍺",
+        "aliases": [
+            "beer"
+        ]
+    },
+    {
+        "id": "1f37b",
+        "category": 2,
+        "unicode": "🍻",
+        "aliases": [
+            "beers"
+        ]
+    },
+    {
+        "id": "1f378",
+        "category": 2,
+        "unicode": "🍸",
+        "aliases": [
+            "cocktail"
+        ]
+    },
+    {
+        "id": "1f379",
+        "category": 2,
+        "unicode": "🍹",
+        "aliases": [
+            "tropical_drink"
+        ]
+    },
+    {
+        "id": "1f377",
+        "category": 2,
+        "unicode": "🍷",
+        "aliases": [
+            "wine_glass"
+        ]
+    },
+    {
+        "id": "1f374",
+        "category": 2,
+        "unicode": "🍴",
+        "aliases": [
+            "fork_and_knife"
+        ]
+    },
+    {
+        "id": "1f355",
+        "category": 2,
+        "unicode": "🍕",
+        "aliases": [
+            "pizza"
+        ]
+    },
+    {
+        "id": "1f354",
+        "category": 2,
+        "unicode": "🍔",
+        "aliases": [
+            "hamburger"
+        ]
+    },
+    {
+        "id": "1f35f",
+        "category": 2,
+        "unicode": "🍟",
+        "aliases": [
+            "fries"
+        ]
+    },
+    {
+        "id": "1f357",
+        "category": 2,
+        "unicode": "🍗",
+        "aliases": [
+            "poultry_leg"
+        ]
+    },
+    {
+        "id": "1f356",
+        "category": 2,
+        "unicode": "🍖",
+        "aliases": [
+            "meat_on_bone"
+        ]
+    },
+    {
+        "id": "1f35d",
+        "category": 2,
+        "unicode": "🍝",
+        "aliases": [
+            "spaghetti"
+        ]
+    },
+    {
+        "id": "1f35b",
+        "category": 2,
+        "unicode": "🍛",
+        "aliases": [
+            "curry"
+        ]
+    },
+    {
+        "id": "1f364",
+        "category": 2,
+        "unicode": "🍤",
+        "aliases": [
+            "fried_shrimp"
+        ]
+    },
+    {
+        "id": "1f371",
+        "category": 2,
+        "unicode": "🍱",
+        "aliases": [
+            "bento"
+        ]
+    },
+    {
+        "id": "1f363",
+        "category": 2,
+        "unicode": "🍣",
+        "aliases": [
+            "sushi"
+        ]
+    },
+    {
+        "id": "1f365",
+        "category": 2,
+        "unicode": "🍥",
+        "aliases": [
+            "fish_cake"
+        ]
+    },
+    {
+        "id": "1f359",
+        "category": 2,
+        "unicode": "🍙",
+        "aliases": [
+            "rice_ball"
+        ]
+    },
+    {
+        "id": "1f358",
+        "category": 2,
+        "unicode": "🍘",
+        "aliases": [
+            "rice_cracker"
+        ]
+    },
+    {
+        "id": "1f35a",
+        "category": 2,
+        "unicode": "🍚",
+        "aliases": [
+            "rice"
+        ]
+    },
+    {
+        "id": "1f35c",
+        "category": 2,
+        "unicode": "🍜",
+        "aliases": [
+            "ramen"
+        ]
+    },
+    {
+        "id": "1f372",
+        "category": 2,
+        "unicode": "🍲",
+        "aliases": [
+            "stew"
+        ]
+    },
+    {
+        "id": "1f362",
+        "category": 2,
+        "unicode": "🍢",
+        "aliases": [
+            "oden"
+        ]
+    },
+    {
+        "id": "1f361",
+        "category": 2,
+        "unicode": "🍡",
+        "aliases": [
+            "dango"
+        ]
+    },
+    {
+        "id": "1f373",
+        "category": 2,
+        "unicode": "🍳",
+        "aliases": [
+            "egg"
+        ]
+    },
+    {
+        "id": "1f35e",
+        "category": 2,
+        "unicode": "🍞",
+        "aliases": [
+            "bread"
+        ]
+    },
+    {
+        "id": "1f369",
+        "category": 2,
+        "unicode": "🍩",
+        "aliases": [
+            "doughnut"
+        ]
+    },
+    {
+        "id": "1f36e",
+        "category": 2,
+        "unicode": "🍮",
+        "aliases": [
+            "custard"
+        ]
+    },
+    {
+        "id": "1f366",
+        "category": 2,
+        "unicode": "🍦",
+        "aliases": [
+            "icecream"
+        ]
+    },
+    {
+        "id": "1f368",
+        "category": 2,
+        "unicode": "🍨",
+        "aliases": [
+            "ice_cream"
+        ]
+    },
+    {
+        "id": "1f367",
+        "category": 2,
+        "unicode": "🍧",
+        "aliases": [
+            "shaved_ice"
+        ]
+    },
+    {
+        "id": "1f382",
+        "category": 2,
+        "unicode": "🎂",
+        "aliases": [
+            "birthday"
+        ]
+    },
+    {
+        "id": "1f370",
+        "category": 2,
+        "unicode": "🍰",
+        "aliases": [
+            "cake"
+        ]
+    },
+    {
+        "id": "1f36a",
+        "category": 2,
+        "unicode": "🍪",
+        "aliases": [
+            "cookie"
+        ]
+    },
+    {
+        "id": "1f36b",
+        "category": 2,
+        "unicode": "🍫",
+        "aliases": [
+            "chocolate_bar"
+        ]
+    },
+    {
+        "id": "1f36c",
+        "category": 2,
+        "unicode": "🍬",
+        "aliases": [
+            "candy"
+        ]
+    },
+    {
+        "id": "1f36d",
+        "category": 2,
+        "unicode": "🍭",
+        "aliases": [
+            "lollipop"
+        ]
+    },
+    {
+        "id": "1f36f",
+        "category": 2,
+        "unicode": "🍯",
+        "aliases": [
+            "honey_pot"
+        ]
+    },
+    {
+        "id": "1f34e",
+        "category": 2,
+        "unicode": "🍎",
+        "aliases": [
+            "apple"
+        ]
+    },
+    {
+        "id": "1f34f",
+        "category": 2,
+        "unicode": "🍏",
+        "aliases": [
+            "green_apple"
+        ]
+    },
+    {
+        "id": "1f34a",
+        "category": 2,
+        "unicode": "🍊",
+        "aliases": [
+            "tangerine"
+        ]
+    },
+    {
+        "id": "1f34b",
+        "category": 2,
+        "unicode": "🍋",
+        "aliases": [
+            "lemon"
+        ]
+    },
+    {
+        "id": "1f352",
+        "category": 2,
+        "unicode": "🍒",
+        "aliases": [
+            "cherries"
+        ]
+    },
+    {
+        "id": "1f347",
+        "category": 2,
+        "unicode": "🍇",
+        "aliases": [
+            "grapes"
+        ]
+    },
+    {
+        "id": "1f349",
+        "category": 2,
+        "unicode": "🍉",
+        "aliases": [
+            "watermelon"
+        ]
+    },
+    {
+        "id": "1f353",
+        "category": 2,
+        "unicode": "🍓",
+        "aliases": [
+            "strawberry"
+        ]
+    },
+    {
+        "id": "1f351",
+        "category": 2,
+        "unicode": "🍑",
+        "aliases": [
+            "peach"
+        ]
+    },
+    {
+        "id": "1f348",
+        "category": 2,
+        "unicode": "🍈",
+        "aliases": [
+            "melon"
+        ]
+    },
+    {
+        "id": "1f34c",
+        "category": 2,
+        "unicode": "🍌",
+        "aliases": [
+            "banana"
+        ]
+    },
+    {
+        "id": "1f350",
+        "category": 2,
+        "unicode": "🍐",
+        "aliases": [
+            "pear"
+        ]
+    },
+    {
+        "id": "1f34d",
+        "category": 2,
+        "unicode": "🍍",
+        "aliases": [
+            "pineapple"
+        ]
+    },
+    {
+        "id": "1f360",
+        "category": 2,
+        "unicode": "🍠",
+        "aliases": [
+            "sweet_potato"
+        ]
+    },
+    {
+        "id": "1f346",
+        "category": 2,
+        "unicode": "🍆",
+        "aliases": [
+            "eggplant"
+        ]
+    },
+    {
+        "id": "1f345",
+        "category": 2,
+        "unicode": "🍅",
+        "aliases": [
+            "tomato"
+        ]
+    },
+    {
+        "id": "1f33d",
+        "category": 2,
+        "unicode": "🌽",
+        "aliases": [
+            "corn"
+        ]
+    },
+    {
+        "id": "1f3e0",
+        "category": 3,
+        "unicode": "🏠",
+        "aliases": [
+            "house"
+        ]
+    },
+    {
+        "id": "1f3e1",
+        "category": 3,
+        "unicode": "🏡",
+        "aliases": [
+            "house_with_garden"
+        ]
+    },
+    {
+        "id": "1f3eb",
+        "category": 3,
+        "unicode": "🏫",
+        "aliases": [
+            "school"
+        ]
+    },
+    {
+        "id": "1f3e2",
+        "category": 3,
+        "unicode": "🏢",
+        "aliases": [
+            "office"
+        ]
+    },
+    {
+        "id": "1f3e3",
+        "category": 3,
+        "unicode": "🏣",
+        "aliases": [
+            "post_office"
+        ]
+    },
+    {
+        "id": "1f3e5",
+        "category": 3,
+        "unicode": "🏥",
+        "aliases": [
+            "hospital"
+        ]
+    },
+    {
+        "id": "1f3e6",
+        "category": 3,
+        "unicode": "🏦",
+        "aliases": [
+            "bank"
+        ]
+    },
+    {
+        "id": "1f3ea",
+        "category": 3,
+        "unicode": "🏪",
+        "aliases": [
+            "convenience_store"
+        ]
+    },
+    {
+        "id": "1f3e9",
+        "category": 3,
+        "unicode": "🏩",
+        "aliases": [
+            "love_hotel"
+        ]
+    },
+    {
+        "id": "1f3e8",
+        "category": 3,
+        "unicode": "🏨",
+        "aliases": [
+            "hotel"
+        ]
+    },
+    {
+        "id": "1f492",
+        "category": 3,
+        "unicode": "💒",
+        "aliases": [
+            "wedding"
+        ]
+    },
+    {
+        "id": "26ea",
+        "category": 3,
+        "unicode": "⛪",
+        "aliases": [
+            "church"
+        ]
+    },
+    {
+        "id": "1f3ec",
+        "category": 3,
+        "unicode": "🏬",
+        "aliases": [
+            "department_store"
+        ]
+    },
+    {
+        "id": "1f3e4",
+        "category": 3,
+        "unicode": "🏤",
+        "aliases": [
+            "european_post_office"
+        ]
+    },
+    {
+        "id": "1f307",
+        "category": 3,
+        "unicode": "🌇",
+        "aliases": [
+            "city_sunrise"
+        ]
+    },
+    {
+        "id": "1f306",
+        "category": 3,
+        "unicode": "🌆",
+        "aliases": [
+            "city_sunset"
+        ]
+    },
+    {
+        "id": "1f3ef",
+        "category": 3,
+        "unicode": "🏯",
+        "aliases": [
+            "japanese_castle"
+        ]
+    },
+    {
+        "id": "1f3f0",
+        "category": 3,
+        "unicode": "🏰",
+        "aliases": [
+            "european_castle"
+        ]
+    },
+    {
+        "id": "26fa",
+        "category": 3,
+        "unicode": "⛺",
+        "aliases": [
+            "tent"
+        ]
+    },
+    {
+        "id": "1f3ed",
+        "category": 3,
+        "unicode": "🏭",
+        "aliases": [
+            "factory"
+        ]
+    },
+    {
+        "id": "1f5fc",
+        "category": 3,
+        "unicode": "🗼",
+        "aliases": [
+            "tokyo_tower"
+        ]
+    },
+    {
+        "id": "1f5fe",
+        "category": 3,
+        "unicode": "🗾",
+        "aliases": [
+            "japan"
+        ]
+    },
+    {
+        "id": "1f5fb",
+        "category": 3,
+        "unicode": "🗻",
+        "aliases": [
+            "mount_fuji"
+        ]
+    },
+    {
+        "id": "1f304",
+        "category": 3,
+        "unicode": "🌄",
+        "aliases": [
+            "sunrise_over_mountains"
+        ]
+    },
+    {
+        "id": "1f305",
+        "category": 3,
+        "unicode": "🌅",
+        "aliases": [
+            "sunrise"
+        ]
+    },
+    {
+        "id": "1f303",
+        "category": 3,
+        "unicode": "🌃",
+        "aliases": [
+            "night_with_stars"
+        ]
+    },
+    {
+        "id": "1f5fd",
+        "category": 3,
+        "unicode": "🗽",
+        "aliases": [
+            "statue_of_liberty"
+        ]
+    },
+    {
+        "id": "1f309",
+        "category": 3,
+        "unicode": "🌉",
+        "aliases": [
+            "bridge_at_night"
+        ]
+    },
+    {
+        "id": "1f3a0",
+        "category": 3,
+        "unicode": "🎠",
+        "aliases": [
+            "carousel_horse"
+        ]
+    },
+    {
+        "id": "1f3a1",
+        "category": 3,
+        "unicode": "🎡",
+        "aliases": [
+            "ferris_wheel"
+        ]
+    },
+    {
+        "id": "26f2",
+        "category": 3,
+        "unicode": "⛲",
+        "aliases": [
+            "fountain"
+        ]
+    },
+    {
+        "id": "1f3a2",
+        "category": 3,
+        "unicode": "🎢",
+        "aliases": [
+            "roller_coaster"
+        ]
+    },
+    {
+        "id": "1f6a2",
+        "category": 3,
+        "unicode": "🚢",
+        "aliases": [
+            "ship"
+        ]
+    },
+    {
+        "id": "26f5",
+        "category": 3,
+        "unicode": "⛵",
+        "aliases": [
+            "boat",
+            "sailboat"
+        ]
+    },
+    {
+        "id": "1f6a4",
+        "category": 3,
+        "unicode": "🚤",
+        "aliases": [
+            "speedboat"
+        ]
+    },
+    {
+        "id": "1f6a3",
+        "category": 3,
+        "unicode": "🚣",
+        "aliases": [
+            "rowboat"
+        ]
+    },
+    {
+        "id": "2693",
+        "category": 3,
+        "unicode": "⚓",
+        "aliases": [
+            "anchor"
+        ]
+    },
+    {
+        "id": "1f680",
+        "category": 3,
+        "unicode": "🚀",
+        "aliases": [
+            "rocket"
+        ]
+    },
+    {
+        "id": "2708",
+        "category": 3,
+        "unicode": "✈",
+        "aliases": [
+            "airplane"
+        ]
+    },
+    {
+        "id": "1f4ba",
+        "category": 3,
+        "unicode": "💺",
+        "aliases": [
+            "seat"
+        ]
+    },
+    {
+        "id": "1f681",
+        "category": 3,
+        "unicode": "🚁",
+        "aliases": [
+            "helicopter"
+        ]
+    },
+    {
+        "id": "1f682",
+        "category": 3,
+        "unicode": "🚂",
+        "aliases": [
+            "steam_locomotive"
+        ]
+    },
+    {
+        "id": "1f68a",
+        "category": 3,
+        "unicode": "🚊",
+        "aliases": [
+            "tram"
+        ]
+    },
+    {
+        "id": "1f689",
+        "category": 3,
+        "unicode": "🚉",
+        "aliases": [
+            "station"
+        ]
+    },
+    {
+        "id": "1f69e",
+        "category": 3,
+        "unicode": "🚞",
+        "aliases": [
+            "mountain_railway"
+        ]
+    },
+    {
+        "id": "1f686",
+        "category": 3,
+        "unicode": "🚆",
+        "aliases": [
+            "train2"
+        ]
+    },
+    {
+        "id": "1f684",
+        "category": 3,
+        "unicode": "🚄",
+        "aliases": [
+            "bullettrain_side"
+        ]
+    },
+    {
+        "id": "1f685",
+        "category": 3,
+        "unicode": "🚅",
+        "aliases": [
+            "bullettrain_front"
+        ]
+    },
+    {
+        "id": "1f688",
+        "category": 3,
+        "unicode": "🚈",
+        "aliases": [
+            "light_rail"
+        ]
+    },
+    {
+        "id": "1f687",
+        "category": 3,
+        "unicode": "🚇",
+        "aliases": [
+            "metro"
+        ]
+    },
+    {
+        "id": "1f69d",
+        "category": 3,
+        "unicode": "🚝",
+        "aliases": [
+            "monorail"
+        ]
+    },
+    {
+        "id": "1f683",
+        "category": 3,
+        "unicode": "🚃",
+        "aliases": [
+            "railway_car"
+        ]
+    },
+    {
+        "id": "1f68b",
+        "category": 3,
+        "unicode": "🚋",
+        "aliases": [
+            "train"
+        ]
+    },
+    {
+        "id": "1f68e",
+        "category": 3,
+        "unicode": "🚎",
+        "aliases": [
+            "trolleybus"
+        ]
+    },
+    {
+        "id": "1f68c",
+        "category": 3,
+        "unicode": "🚌",
+        "aliases": [
+            "bus"
+        ]
+    },
+    {
+        "id": "1f68d",
+        "category": 3,
+        "unicode": "🚍",
+        "aliases": [
+            "oncoming_bus"
+        ]
+    },
+    {
+        "id": "1f699",
+        "category": 3,
+        "unicode": "🚙",
+        "aliases": [
+            "blue_car"
+        ]
+    },
+    {
+        "id": "1f698",
+        "category": 3,
+        "unicode": "🚘",
+        "aliases": [
+            "oncoming_automobile"
+        ]
+    },
+    {
+        "id": "1f697",
+        "category": 3,
+        "unicode": "🚗",
+        "aliases": [
+            "car",
+            "red_car"
+        ]
+    },
+    {
+        "id": "1f695",
+        "category": 3,
+        "unicode": "🚕",
+        "aliases": [
+            "taxi"
+        ]
+    },
+    {
+        "id": "1f696",
+        "category": 3,
+        "unicode": "🚖",
+        "aliases": [
+            "oncoming_taxi"
+        ]
+    },
+    {
+        "id": "1f69b",
+        "category": 3,
+        "unicode": "🚛",
+        "aliases": [
+            "articulated_lorry"
+        ]
+    },
+    {
+        "id": "1f69a",
+        "category": 3,
+        "unicode": "🚚",
+        "aliases": [
+            "truck"
+        ]
+    },
+    {
+        "id": "1f6a8",
+        "category": 3,
+        "unicode": "🚨",
+        "aliases": [
+            "rotating_light"
+        ]
+    },
+    {
+        "id": "1f693",
+        "category": 3,
+        "unicode": "🚓",
+        "aliases": [
+            "police_car"
+        ]
+    },
+    {
+        "id": "1f694",
+        "category": 3,
+        "unicode": "🚔",
+        "aliases": [
+            "oncoming_police_car"
+        ]
+    },
+    {
+        "id": "1f692",
+        "category": 3,
+        "unicode": "🚒",
+        "aliases": [
+            "fire_engine"
+        ]
+    },
+    {
+        "id": "1f691",
+        "category": 3,
+        "unicode": "🚑",
+        "aliases": [
+            "ambulance"
+        ]
+    },
+    {
+        "id": "1f690",
+        "category": 3,
+        "unicode": "🚐",
+        "aliases": [
+            "minibus"
+        ]
+    },
+    {
+        "id": "1f6b2",
+        "category": 3,
+        "unicode": "🚲",
+        "aliases": [
+            "bike"
+        ]
+    },
+    {
+        "id": "1f6a1",
+        "category": 3,
+        "unicode": "🚡",
+        "aliases": [
+            "aerial_tramway"
+        ]
+    },
+    {
+        "id": "1f69f",
+        "category": 3,
+        "unicode": "🚟",
+        "aliases": [
+            "suspension_railway"
+        ]
+    },
+    {
+        "id": "1f6a0",
+        "category": 3,
+        "unicode": "🚠",
+        "aliases": [
+            "mountain_cableway"
+        ]
+    },
+    {
+        "id": "1f69c",
+        "category": 3,
+        "unicode": "🚜",
+        "aliases": [
+            "tractor"
+        ]
+    },
+    {
+        "id": "1f488",
+        "category": 3,
+        "unicode": "💈",
+        "aliases": [
+            "barber"
+        ]
+    },
+    {
+        "id": "1f68f",
+        "category": 3,
+        "unicode": "🚏",
+        "aliases": [
+            "busstop"
+        ]
+    },
+    {
+        "id": "1f3ab",
+        "category": 3,
+        "unicode": "🎫",
+        "aliases": [
+            "ticket"
+        ]
+    },
+    {
+        "id": "1f6a6",
+        "category": 3,
+        "unicode": "🚦",
+        "aliases": [
+            "vertical_traffic_light"
+        ]
+    },
+    {
+        "id": "1f6a5",
+        "category": 3,
+        "unicode": "🚥",
+        "aliases": [
+            "traffic_light"
+        ]
+    },
+    {
+        "id": "26a0",
+        "category": 3,
+        "unicode": "⚠",
+        "aliases": [
+            "warning"
+        ]
+    },
+    {
+        "id": "1f6a7",
+        "category": 3,
+        "unicode": "🚧",
+        "aliases": [
+            "construction"
+        ]
+    },
+    {
+        "id": "1f530",
+        "category": 3,
+        "unicode": "🔰",
+        "aliases": [
+            "beginner"
+        ]
+    },
+    {
+        "id": "26fd",
+        "category": 3,
+        "unicode": "⛽",
+        "aliases": [
+            "fuelpump"
+        ]
+    },
+    {
+        "id": "1f3ee",
+        "category": 3,
+        "unicode": "🏮",
+        "aliases": [
+            "izakaya_lantern",
+            "lantern"
+        ]
+    },
+    {
+        "id": "1f3b0",
+        "category": 3,
+        "unicode": "🎰",
+        "aliases": [
+            "slot_machine"
+        ]
+    },
+    {
+        "id": "2668",
+        "category": 3,
+        "unicode": "♨",
+        "aliases": [
+            "hotsprings"
+        ]
+    },
+    {
+        "id": "1f5ff",
+        "category": 3,
+        "unicode": "🗿",
+        "aliases": [
+            "moyai"
+        ]
+    },
+    {
+        "id": "1f3aa",
+        "category": 3,
+        "unicode": "🎪",
+        "aliases": [
+            "circus_tent"
+        ]
+    },
+    {
+        "id": "1f3ad",
+        "category": 3,
+        "unicode": "🎭",
+        "aliases": [
+            "performing_arts"
+        ]
+    },
+    {
+        "id": "1f4cd",
+        "category": 3,
+        "unicode": "📍",
+        "aliases": [
+            "round_pushpin"
+        ]
+    },
+    {
+        "id": "1f6a9",
+        "category": 3,
+        "unicode": "🚩",
+        "aliases": [
+            "triangular_flag_on_post"
+        ]
+    },
+    {
+        "id": "1f1ef-1f1f5",
+        "category": 3,
+        "unicode": "🇯🇵",
+        "aliases": [
+            "jp"
+        ]
+    },
+    {
+        "id": "1f1f0-1f1f7",
+        "category": 3,
+        "unicode": "🇰🇷",
+        "aliases": [
+            "kr"
+        ]
+    },
+    {
+        "id": "1f1e9-1f1ea",
+        "category": 3,
+        "unicode": "🇩🇪",
+        "aliases": [
+            "de"
+        ]
+    },
+    {
+        "id": "1f1e8-1f1f3",
+        "category": 3,
+        "unicode": "🇨🇳",
+        "aliases": [
+            "cn"
+        ]
+    },
+    {
+        "id": "1f1fa-1f1f8",
+        "category": 3,
+        "unicode": "🇺🇸",
+        "aliases": [
+            "us"
+        ]
+    },
+    {
+        "id": "1f1eb-1f1f7",
+        "category": 3,
+        "unicode": "🇫🇷",
+        "aliases": [
+            "fr"
+        ]
+    },
+    {
+        "id": "1f1ea-1f1f8",
+        "category": 3,
+        "unicode": "🇪🇸",
+        "aliases": [
+            "es"
+        ]
+    },
+    {
+        "id": "1f1ee-1f1f9",
+        "category": 3,
+        "unicode": "🇮🇹",
+        "aliases": [
+            "it"
+        ]
+    },
+    {
+        "id": "1f1f7-1f1fa",
+        "category": 3,
+        "unicode": "🇷🇺",
+        "aliases": [
+            "ru"
+        ]
+    },
+    {
+        "id": "1f1ec-1f1e7",
+        "category": 3,
+        "unicode": "🇬🇧",
+        "aliases": [
+            "gb",
+            "uk"
+        ]
+    },
+    {
+        "id": "0031",
+        "category": 4,
+        "unicode": "1⃣",
+        "aliases": [
+            "one"
+        ]
+    },
+    {
+        "id": "0032",
+        "category": 4,
+        "unicode": "2⃣",
+        "aliases": [
+            "two"
+        ]
+    },
+    {
+        "id": "0033",
+        "category": 4,
+        "unicode": "3⃣",
+        "aliases": [
+            "three"
+        ]
+    },
+    {
+        "id": "0034",
+        "category": 4,
+        "unicode": "4⃣",
+        "aliases": [
+            "four"
+        ]
+    },
+    {
+        "id": "0035",
+        "category": 4,
+        "unicode": "5⃣",
+        "aliases": [
+            "five"
+        ]
+    },
+    {
+        "id": "0036",
+        "category": 4,
+        "unicode": "6⃣",
+        "aliases": [
+            "six"
+        ]
+    },
+    {
+        "id": "0037",
+        "category": 4,
+        "unicode": "7⃣",
+        "aliases": [
+            "seven"
+        ]
+    },
+    {
+        "id": "0038",
+        "category": 4,
+        "unicode": "8⃣",
+        "aliases": [
+            "eight"
+        ]
+    },
+    {
+        "id": "0039",
+        "category": 4,
+        "unicode": "9⃣",
+        "aliases": [
+            "nine"
+        ]
+    },
+    {
+        "id": "0030",
+        "category": 4,
+        "unicode": "0⃣",
+        "aliases": [
+            "zero"
+        ]
+    },
+    {
+        "id": "1f51f",
+        "category": 4,
+        "unicode": "🔟",
+        "aliases": [
+            "keycap_ten"
+        ]
+    },
+    {
+        "id": "1f522",
+        "category": 4,
+        "unicode": "🔢",
+        "aliases": [
+            "1234"
+        ]
+    },
+    {
+        "id": "0023",
+        "category": 4,
+        "unicode": "#⃣",
+        "aliases": [
+            "hash"
+        ]
+    },
+    {
+        "id": "1f523",
+        "category": 4,
+        "unicode": "🔣",
+        "aliases": [
+            "symbols"
+        ]
+    },
+    {
+        "id": "2b06",
+        "category": 4,
+        "unicode": "⬆",
+        "aliases": [
+            "arrow_up"
+        ]
+    },
+    {
+        "id": "2b07",
+        "category": 4,
+        "unicode": "⬇",
+        "aliases": [
+            "arrow_down"
+        ]
+    },
+    {
+        "id": "2b05",
+        "category": 4,
+        "unicode": "⬅",
+        "aliases": [
+            "arrow_left"
+        ]
+    },
+    {
+        "id": "27a1",
+        "category": 4,
+        "unicode": "➡",
+        "aliases": [
+            "arrow_right"
+        ]
+    },
+    {
+        "id": "1f520",
+        "category": 4,
+        "unicode": "🔠",
+        "aliases": [
+            "capital_abcd"
+        ]
+    },
+    {
+        "id": "1f521",
+        "category": 4,
+        "unicode": "🔡",
+        "aliases": [
+            "abcd"
+        ]
+    },
+    {
+        "id": "1f524",
+        "category": 4,
+        "unicode": "🔤",
+        "aliases": [
+            "abc"
+        ]
+    },
+    {
+        "id": "2197",
+        "category": 4,
+        "unicode": "↗",
+        "aliases": [
+            "arrow_upper_right"
+        ]
+    },
+    {
+        "id": "2196",
+        "category": 4,
+        "unicode": "↖",
+        "aliases": [
+            "arrow_upper_left"
+        ]
+    },
+    {
+        "id": "2198",
+        "category": 4,
+        "unicode": "↘",
+        "aliases": [
+            "arrow_lower_right"
+        ]
+    },
+    {
+        "id": "2199",
+        "category": 4,
+        "unicode": "↙",
+        "aliases": [
+            "arrow_lower_left"
+        ]
+    },
+    {
+        "id": "2194",
+        "category": 4,
+        "unicode": "↔",
+        "aliases": [
+            "left_right_arrow"
+        ]
+    },
+    {
+        "id": "2195",
+        "category": 4,
+        "unicode": "↕",
+        "aliases": [
+            "arrow_up_down"
+        ]
+    },
+    {
+        "id": "1f504",
+        "category": 4,
+        "unicode": "🔄",
+        "aliases": [
+            "arrows_counterclockwise"
+        ]
+    },
+    {
+        "id": "25c0",
+        "category": 4,
+        "unicode": "◀",
+        "aliases": [
+            "arrow_backward"
+        ]
+    },
+    {
+        "id": "25b6",
+        "category": 4,
+        "unicode": "▶",
+        "aliases": [
+            "arrow_forward"
+        ]
+    },
+    {
+        "id": "1f53c",
+        "category": 4,
+        "unicode": "🔼",
+        "aliases": [
+            "arrow_up_small"
+        ]
+    },
+    {
+        "id": "1f53d",
+        "category": 4,
+        "unicode": "🔽",
+        "aliases": [
+            "arrow_down_small"
+        ]
+    },
+    {
+        "id": "21a9",
+        "category": 4,
+        "unicode": "↩",
+        "aliases": [
+            "leftwards_arrow_with_hook"
+        ]
+    },
+    {
+        "id": "21aa",
+        "category": 4,
+        "unicode": "↪",
+        "aliases": [
+            "arrow_right_hook"
+        ]
+    },
+    {
+        "id": "2139",
+        "category": 4,
+        "unicode": "ℹ",
+        "aliases": [
+            "information_source"
+        ]
+    },
+    {
+        "id": "23ea",
+        "category": 4,
+        "unicode": "⏪",
+        "aliases": [
+            "rewind"
+        ]
+    },
+    {
+        "id": "23e9",
+        "category": 4,
+        "unicode": "⏩",
+        "aliases": [
+            "fast_forward"
+        ]
+    },
+    {
+        "id": "23eb",
+        "category": 4,
+        "unicode": "⏫",
+        "aliases": [
+            "arrow_double_up"
+        ]
+    },
+    {
+        "id": "23ec",
+        "category": 4,
+        "unicode": "⏬",
+        "aliases": [
+            "arrow_double_down"
+        ]
+    },
+    {
+        "id": "2935",
+        "category": 4,
+        "unicode": "⤵",
+        "aliases": [
+            "arrow_heading_down"
+        ]
+    },
+    {
+        "id": "2934",
+        "category": 4,
+        "unicode": "⤴",
+        "aliases": [
+            "arrow_heading_up"
+        ]
+    },
+    {
+        "id": "1f197",
+        "category": 4,
+        "unicode": "🆗",
+        "aliases": [
+            "ok"
+        ]
+    },
+    {
+        "id": "1f500",
+        "category": 4,
+        "unicode": "🔀",
+        "aliases": [
+            "twisted_rightwards_arrows"
+        ]
+    },
+    {
+        "id": "1f501",
+        "category": 4,
+        "unicode": "🔁",
+        "aliases": [
+            "repeat"
+        ]
+    },
+    {
+        "id": "1f502",
+        "category": 4,
+        "unicode": "🔂",
+        "aliases": [
+            "repeat_one"
+        ]
+    },
+    {
+        "id": "1f195",
+        "category": 4,
+        "unicode": "🆕",
+        "aliases": [
+            "new"
+        ]
+    },
+    {
+        "id": "1f199",
+        "category": 4,
+        "unicode": "🆙",
+        "aliases": [
+            "up"
+        ]
+    },
+    {
+        "id": "1f192",
+        "category": 4,
+        "unicode": "🆒",
+        "aliases": [
+            "cool"
+        ]
+    },
+    {
+        "id": "1f193",
+        "category": 4,
+        "unicode": "🆓",
+        "aliases": [
+            "free"
+        ]
+    },
+    {
+        "id": "1f196",
+        "category": 4,
+        "unicode": "🆖",
+        "aliases": [
+            "ng"
+        ]
+    },
+    {
+        "id": "1f4f6",
+        "category": 4,
+        "unicode": "📶",
+        "aliases": [
+            "signal_strength"
+        ]
+    },
+    {
+        "id": "1f3a6",
+        "category": 4,
+        "unicode": "🎦",
+        "aliases": [
+            "cinema"
+        ]
+    },
+    {
+        "id": "1f201",
+        "category": 4,
+        "unicode": "🈁",
+        "aliases": [
+            "koko"
+        ]
+    },
+    {
+        "id": "1f22f",
+        "category": 4,
+        "unicode": "🈯",
+        "aliases": [
+            "u6307"
+        ]
+    },
+    {
+        "id": "1f233",
+        "category": 4,
+        "unicode": "🈳",
+        "aliases": [
+            "u7a7a"
+        ]
+    },
+    {
+        "id": "1f235",
+        "category": 4,
+        "unicode": "🈵",
+        "aliases": [
+            "u6e80"
+        ]
+    },
+    {
+        "id": "1f234",
+        "category": 4,
+        "unicode": "🈴",
+        "aliases": [
+            "u5408"
+        ]
+    },
+    {
+        "id": "1f232",
+        "category": 4,
+        "unicode": "🈲",
+        "aliases": [
+            "u7981"
+        ]
+    },
+    {
+        "id": "1f250",
+        "category": 4,
+        "unicode": "🉐",
+        "aliases": [
+            "ideograph_advantage"
+        ]
+    },
+    {
+        "id": "1f239",
+        "category": 4,
+        "unicode": "🈹",
+        "aliases": [
+            "u5272"
+        ]
+    },
+    {
+        "id": "1f23a",
+        "category": 4,
+        "unicode": "🈺",
+        "aliases": [
+            "u55b6"
+        ]
+    },
+    {
+        "id": "1f236",
+        "category": 4,
+        "unicode": "🈶",
+        "aliases": [
+            "u6709"
+        ]
+    },
+    {
+        "id": "1f21a",
+        "category": 4,
+        "unicode": "🈚",
+        "aliases": [
+            "u7121"
+        ]
+    },
+    {
+        "id": "1f6bb",
+        "category": 4,
+        "unicode": "🚻",
+        "aliases": [
+            "restroom"
+        ]
+    },
+    {
+        "id": "1f6b9",
+        "category": 4,
+        "unicode": "🚹",
+        "aliases": [
+            "mens"
+        ]
+    },
+    {
+        "id": "1f6ba",
+        "category": 4,
+        "unicode": "🚺",
+        "aliases": [
+            "womens"
+        ]
+    },
+    {
+        "id": "1f6bc",
+        "category": 4,
+        "unicode": "🚼",
+        "aliases": [
+            "baby_symbol"
+        ]
+    },
+    {
+        "id": "1f6be",
+        "category": 4,
+        "unicode": "🚾",
+        "aliases": [
+            "wc"
+        ]
+    },
+    {
+        "id": "1f6b0",
+        "category": 4,
+        "unicode": "🚰",
+        "aliases": [
+            "potable_water"
+        ]
+    },
+    {
+        "id": "1f6ae",
+        "category": 4,
+        "unicode": "🚮",
+        "aliases": [
+            "put_litter_in_its_place"
+        ]
+    },
+    {
+        "id": "1f17f",
+        "category": 4,
+        "unicode": "🅿",
+        "aliases": [
+            "parking"
+        ]
+    },
+    {
+        "id": "267f",
+        "category": 4,
+        "unicode": "♿",
+        "aliases": [
+            "wheelchair"
+        ]
+    },
+    {
+        "id": "1f6ad",
+        "category": 4,
+        "unicode": "🚭",
+        "aliases": [
+            "no_smoking"
+        ]
+    },
+    {
+        "id": "1f237",
+        "category": 4,
+        "unicode": "🈷",
+        "aliases": [
+            "u6708"
+        ]
+    },
+    {
+        "id": "1f238",
+        "category": 4,
+        "unicode": "🈸",
+        "aliases": [
+            "u7533"
+        ]
+    },
+    {
+        "id": "1f202",
+        "category": 4,
+        "unicode": "🈂",
+        "aliases": [
+            "sa"
+        ]
+    },
+    {
+        "id": "24c2",
+        "category": 4,
+        "unicode": "Ⓜ",
+        "aliases": [
+            "m"
+        ]
+    },
+    {
+        "id": "1f6c2",
+        "category": 4,
+        "unicode": "🛂",
+        "aliases": [
+            "passport_control"
+        ]
+    },
+    {
+        "id": "1f6c4",
+        "category": 4,
+        "unicode": "🛄",
+        "aliases": [
+            "baggage_claim"
+        ]
+    },
+    {
+        "id": "1f6c5",
+        "category": 4,
+        "unicode": "🛅",
+        "aliases": [
+            "left_luggage"
+        ]
+    },
+    {
+        "id": "1f6c3",
+        "category": 4,
+        "unicode": "🛃",
+        "aliases": [
+            "customs"
+        ]
+    },
+    {
+        "id": "1f251",
+        "category": 4,
+        "unicode": "🉑",
+        "aliases": [
+            "accept"
+        ]
+    },
+    {
+        "id": "3299",
+        "category": 4,
+        "unicode": "㊙",
+        "aliases": [
+            "secret"
+        ]
+    },
+    {
+        "id": "3297",
+        "category": 4,
+        "unicode": "㊗",
+        "aliases": [
+            "congratulations"
+        ]
+    },
+    {
+        "id": "1f191",
+        "category": 4,
+        "unicode": "🆑",
+        "aliases": [
+            "cl"
+        ]
+    },
+    {
+        "id": "1f198",
+        "category": 4,
+        "unicode": "🆘",
+        "aliases": [
+            "sos"
+        ]
+    },
+    {
+        "id": "1f194",
+        "category": 4,
+        "unicode": "🆔",
+        "aliases": [
+            "id"
+        ]
+    },
+    {
+        "id": "1f6ab",
+        "category": 4,
+        "unicode": "🚫",
+        "aliases": [
+            "no_entry_sign"
+        ]
+    },
+    {
+        "id": "1f51e",
+        "category": 4,
+        "unicode": "🔞",
+        "aliases": [
+            "underage"
+        ]
+    },
+    {
+        "id": "1f4f5",
+        "category": 4,
+        "unicode": "📵",
+        "aliases": [
+            "no_mobile_phones"
+        ]
+    },
+    {
+        "id": "1f6af",
+        "category": 4,
+        "unicode": "🚯",
+        "aliases": [
+            "do_not_litter"
+        ]
+    },
+    {
+        "id": "1f6b1",
+        "category": 4,
+        "unicode": "🚱",
+        "aliases": [
+            "non-potable_water"
+        ]
+    },
+    {
+        "id": "1f6b3",
+        "category": 4,
+        "unicode": "🚳",
+        "aliases": [
+            "no_bicycles"
+        ]
+    },
+    {
+        "id": "1f6b7",
+        "category": 4,
+        "unicode": "🚷",
+        "aliases": [
+            "no_pedestrians"
+        ]
+    },
+    {
+        "id": "1f6b8",
+        "category": 4,
+        "unicode": "🚸",
+        "aliases": [
+            "children_crossing"
+        ]
+    },
+    {
+        "id": "26d4",
+        "category": 4,
+        "unicode": "⛔",
+        "aliases": [
+            "no_entry"
+        ]
+    },
+    {
+        "id": "2733",
+        "category": 4,
+        "unicode": "✳",
+        "aliases": [
+            "eight_spoked_asterisk"
+        ]
+    },
+    {
+        "id": "2747",
+        "category": 4,
+        "unicode": "❇",
+        "aliases": [
+            "sparkle"
+        ]
+    },
+    {
+        "id": "274e",
+        "category": 4,
+        "unicode": "❎",
+        "aliases": [
+            "negative_squared_cross_mark"
+        ]
+    },
+    {
+        "id": "2705",
+        "category": 4,
+        "unicode": "✅",
+        "aliases": [
+            "white_check_mark"
+        ]
+    },
+    {
+        "id": "2734",
+        "category": 4,
+        "unicode": "✴",
+        "aliases": [
+            "eight_pointed_black_star"
+        ]
+    },
+    {
+        "id": "1f49f",
+        "category": 4,
+        "unicode": "💟",
+        "aliases": [
+            "heart_decoration"
+        ]
+    },
+    {
+        "id": "1f19a",
+        "category": 4,
+        "unicode": "🆚",
+        "aliases": [
+            "vs"
+        ]
+    },
+    {
+        "id": "1f4f3",
+        "category": 4,
+        "unicode": "📳",
+        "aliases": [
+            "vibration_mode"
+        ]
+    },
+    {
+        "id": "1f4f4",
+        "category": 4,
+        "unicode": "📴",
+        "aliases": [
+            "mobile_phone_off"
+        ]
+    },
+    {
+        "id": "1f170",
+        "category": 4,
+        "unicode": "🅰",
+        "aliases": [
+            "a"
+        ]
+    },
+    {
+        "id": "1f171",
+        "category": 4,
+        "unicode": "🅱",
+        "aliases": [
+            "b"
+        ]
+    },
+    {
+        "id": "1f18e",
+        "category": 4,
+        "unicode": "🆎",
+        "aliases": [
+            "ab"
+        ]
+    },
+    {
+        "id": "1f17e",
+        "category": 4,
+        "unicode": "🅾",
+        "aliases": [
+            "o2"
+        ]
+    },
+    {
+        "id": "1f4a0",
+        "category": 4,
+        "unicode": "💠",
+        "aliases": [
+            "diamond_shape_with_a_dot_inside"
+        ]
+    },
+    {
+        "id": "27bf",
+        "category": 4,
+        "unicode": "➿",
+        "aliases": [
+            "loop"
+        ]
+    },
+    {
+        "id": "267b",
+        "category": 4,
+        "unicode": "♻",
+        "aliases": [
+            "recycle"
+        ]
+    },
+    {
+        "id": "2648",
+        "category": 4,
+        "unicode": "♈",
+        "aliases": [
+            "aries"
+        ]
+    },
+    {
+        "id": "2649",
+        "category": 4,
+        "unicode": "♉",
+        "aliases": [
+            "taurus"
+        ]
+    },
+    {
+        "id": "264a",
+        "category": 4,
+        "unicode": "♊",
+        "aliases": [
+            "gemini"
+        ]
+    },
+    {
+        "id": "264b",
+        "category": 4,
+        "unicode": "♋",
+        "aliases": [
+            "cancer"
+        ]
+    },
+    {
+        "id": "264c",
+        "category": 4,
+        "unicode": "♌",
+        "aliases": [
+            "leo"
+        ]
+    },
+    {
+        "id": "264d",
+        "category": 4,
+        "unicode": "♍",
+        "aliases": [
+            "virgo"
+        ]
+    },
+    {
+        "id": "264e",
+        "category": 4,
+        "unicode": "♎",
+        "aliases": [
+            "libra"
+        ]
+    },
+    {
+        "id": "264f",
+        "category": 4,
+        "unicode": "♏",
+        "aliases": [
+            "scorpius"
+        ]
+    },
+    {
+        "id": "2650",
+        "category": 4,
+        "unicode": "♐",
+        "aliases": [
+            "sagittarius"
+        ]
+    },
+    {
+        "id": "2651",
+        "category": 4,
+        "unicode": "♑",
+        "aliases": [
+            "capricorn"
+        ]
+    },
+    {
+        "id": "2652",
+        "category": 4,
+        "unicode": "♒",
+        "aliases": [
+            "aquarius"
+        ]
+    },
+    {
+        "id": "2653",
+        "category": 4,
+        "unicode": "♓",
+        "aliases": [
+            "pisces"
+        ]
+    },
+    {
+        "id": "26ce",
+        "category": 4,
+        "unicode": "⛎",
+        "aliases": [
+            "ophiuchus"
+        ]
+    },
+    {
+        "id": "1f52f",
+        "category": 4,
+        "unicode": "🔯",
+        "aliases": [
+            "six_pointed_star"
+        ]
+    },
+    {
+        "id": "1f3e7",
+        "category": 4,
+        "unicode": "🏧",
+        "aliases": [
+            "atm"
+        ]
+    },
+    {
+        "id": "1f4b9",
+        "category": 4,
+        "unicode": "💹",
+        "aliases": [
+            "chart"
+        ]
+    },
+    {
+        "id": "1f4b2",
+        "category": 4,
+        "unicode": "💲",
+        "aliases": [
+            "heavy_dollar_sign"
+        ]
+    },
+    {
+        "id": "1f4b1",
+        "category": 4,
+        "unicode": "💱",
+        "aliases": [
+            "currency_exchange"
+        ]
+    },
+    {
+        "id": "00a9",
+        "category": 4,
+        "unicode": "©",
+        "aliases": [
+            "copyright"
+        ]
+    },
+    {
+        "id": "00ae",
+        "category": 4,
+        "unicode": "®",
+        "aliases": [
+            "registered"
+        ]
+    },
+    {
+        "id": "2122",
+        "category": 4,
+        "unicode": "™",
+        "aliases": [
+            "tm"
+        ]
+    },
+    {
+        "id": "274c",
+        "category": 4,
+        "unicode": "❌",
+        "aliases": [
+            "x"
+        ]
+    },
+    {
+        "id": "203c",
+        "category": 4,
+        "unicode": "‼",
+        "aliases": [
+            "bangbang"
+        ]
+    },
+    {
+        "id": "2049",
+        "category": 4,
+        "unicode": "⁉",
+        "aliases": [
+            "interrobang"
+        ]
+    },
+    {
+        "id": "2757",
+        "category": 4,
+        "unicode": "❗",
+        "aliases": [
+            "exclamation",
+            "heavy_exclamation_mark"
+        ]
+    },
+    {
+        "id": "2753",
+        "category": 4,
+        "unicode": "❓",
+        "aliases": [
+            "question"
+        ]
+    },
+    {
+        "id": "2755",
+        "category": 4,
+        "unicode": "❕",
+        "aliases": [
+            "grey_exclamation"
+        ]
+    },
+    {
+        "id": "2754",
+        "category": 4,
+        "unicode": "❔",
+        "aliases": [
+            "grey_question"
+        ]
+    },
+    {
+        "id": "2b55",
+        "category": 4,
+        "unicode": "⭕",
+        "aliases": [
+            "o"
+        ]
+    },
+    {
+        "id": "1f51d",
+        "category": 4,
+        "unicode": "🔝",
+        "aliases": [
+            "top"
+        ]
+    },
+    {
+        "id": "1f51a",
+        "category": 4,
+        "unicode": "🔚",
+        "aliases": [
+            "end"
+        ]
+    },
+    {
+        "id": "1f519",
+        "category": 4,
+        "unicode": "🔙",
+        "aliases": [
+            "back"
+        ]
+    },
+    {
+        "id": "1f51b",
+        "category": 4,
+        "unicode": "🔛",
+        "aliases": [
+            "on"
+        ]
+    },
+    {
+        "id": "1f51c",
+        "category": 4,
+        "unicode": "🔜",
+        "aliases": [
+            "soon"
+        ]
+    },
+    {
+        "id": "1f503",
+        "category": 4,
+        "unicode": "🔃",
+        "aliases": [
+            "arrows_clockwise"
+        ]
+    },
+    {
+        "id": "1f55b",
+        "category": 4,
+        "unicode": "🕛",
+        "aliases": [
+            "clock12"
+        ]
+    },
+    {
+        "id": "1f567",
+        "category": 4,
+        "unicode": "🕧",
+        "aliases": [
+            "clock1230"
+        ]
+    },
+    {
+        "id": "1f550",
+        "category": 4,
+        "unicode": "🕐",
+        "aliases": [
+            "clock1"
+        ]
+    },
+    {
+        "id": "1f55c",
+        "category": 4,
+        "unicode": "🕜",
+        "aliases": [
+            "clock130"
+        ]
+    },
+    {
+        "id": "1f551",
+        "category": 4,
+        "unicode": "🕑",
+        "aliases": [
+            "clock2"
+        ]
+    },
+    {
+        "id": "1f55d",
+        "category": 4,
+        "unicode": "🕝",
+        "aliases": [
+            "clock230"
+        ]
+    },
+    {
+        "id": "1f552",
+        "category": 4,
+        "unicode": "🕒",
+        "aliases": [
+            "clock3"
+        ]
+    },
+    {
+        "id": "1f55e",
+        "category": 4,
+        "unicode": "🕞",
+        "aliases": [
+            "clock330"
+        ]
+    },
+    {
+        "id": "1f553",
+        "category": 4,
+        "unicode": "🕓",
+        "aliases": [
+            "clock4"
+        ]
+    },
+    {
+        "id": "1f55f",
+        "category": 4,
+        "unicode": "🕟",
+        "aliases": [
+            "clock430"
+        ]
+    },
+    {
+        "id": "1f554",
+        "category": 4,
+        "unicode": "🕔",
+        "aliases": [
+            "clock5"
+        ]
+    },
+    {
+        "id": "1f560",
+        "category": 4,
+        "unicode": "🕠",
+        "aliases": [
+            "clock530"
+        ]
+    },
+    {
+        "id": "1f555",
+        "category": 4,
+        "unicode": "🕕",
+        "aliases": [
+            "clock6"
+        ]
+    },
+    {
+        "id": "1f556",
+        "category": 4,
+        "unicode": "🕖",
+        "aliases": [
+            "clock7"
+        ]
+    },
+    {
+        "id": "1f557",
+        "category": 4,
+        "unicode": "🕗",
+        "aliases": [
+            "clock8"
+        ]
+    },
+    {
+        "id": "1f558",
+        "category": 4,
+        "unicode": "🕘",
+        "aliases": [
+            "clock9"
+        ]
+    },
+    {
+        "id": "1f559",
+        "category": 4,
+        "unicode": "🕙",
+        "aliases": [
+            "clock10"
+        ]
+    },
+    {
+        "id": "1f55a",
+        "category": 4,
+        "unicode": "🕚",
+        "aliases": [
+            "clock11"
+        ]
+    },
+    {
+        "id": "1f561",
+        "category": 4,
+        "unicode": "🕡",
+        "aliases": [
+            "clock630"
+        ]
+    },
+    {
+        "id": "1f562",
+        "category": 4,
+        "unicode": "🕢",
+        "aliases": [
+            "clock730"
+        ]
+    },
+    {
+        "id": "1f563",
+        "category": 4,
+        "unicode": "🕣",
+        "aliases": [
+            "clock830"
+        ]
+    },
+    {
+        "id": "1f564",
+        "category": 4,
+        "unicode": "🕤",
+        "aliases": [
+            "clock930"
+        ]
+    },
+    {
+        "id": "1f565",
+        "category": 4,
+        "unicode": "🕥",
+        "aliases": [
+            "clock1030"
+        ]
+    },
+    {
+        "id": "1f566",
+        "category": 4,
+        "unicode": "🕦",
+        "aliases": [
+            "clock1130"
+        ]
+    },
+    {
+        "id": "2716",
+        "category": 4,
+        "unicode": "✖",
+        "aliases": [
+            "heavy_multiplication_x"
+        ]
+    },
+    {
+        "id": "2795",
+        "category": 4,
+        "unicode": "➕",
+        "aliases": [
+            "heavy_plus_sign"
+        ]
+    },
+    {
+        "id": "2796",
+        "category": 4,
+        "unicode": "➖",
+        "aliases": [
+            "heavy_minus_sign"
+        ]
+    },
+    {
+        "id": "2797",
+        "category": 4,
+        "unicode": "➗",
+        "aliases": [
+            "heavy_division_sign"
+        ]
+    },
+    {
+        "id": "2660",
+        "category": 4,
+        "unicode": "♠",
+        "aliases": [
+            "spades"
+        ]
+    },
+    {
+        "id": "2665",
+        "category": 4,
+        "unicode": "♥",
+        "aliases": [
+            "hearts"
+        ]
+    },
+    {
+        "id": "2663",
+        "category": 4,
+        "unicode": "♣",
+        "aliases": [
+            "clubs"
+        ]
+    },
+    {
+        "id": "2666",
+        "category": 4,
+        "unicode": "♦",
+        "aliases": [
+            "diamonds"
+        ]
+    },
+    {
+        "id": "1f4ae",
+        "category": 4,
+        "unicode": "💮",
+        "aliases": [
+            "white_flower"
+        ]
+    },
+    {
+        "id": "1f4af",
+        "category": 4,
+        "unicode": "💯",
+        "aliases": [
+            "100"
+        ]
+    },
+    {
+        "id": "2714",
+        "category": 4,
+        "unicode": "✔",
+        "aliases": [
+            "heavy_check_mark"
+        ]
+    },
+    {
+        "id": "2611",
+        "category": 4,
+        "unicode": "☑",
+        "aliases": [
+            "ballot_box_with_check"
+        ]
+    },
+    {
+        "id": "1f518",
+        "category": 4,
+        "unicode": "🔘",
+        "aliases": [
+            "radio_button"
+        ]
+    },
+    {
+        "id": "1f517",
+        "category": 4,
+        "unicode": "🔗",
+        "aliases": [
+            "link"
+        ]
+    },
+    {
+        "id": "27b0",
+        "category": 4,
+        "unicode": "➰",
+        "aliases": [
+            "curly_loop"
+        ]
+    },
+    {
+        "id": "3030",
+        "category": 4,
+        "unicode": "〰",
+        "aliases": [
+            "wavy_dash"
+        ]
+    },
+    {
+        "id": "303d",
+        "category": 4,
+        "unicode": "〽",
+        "aliases": [
+            "part_alternation_mark"
+        ]
+    },
+    {
+        "id": "1f531",
+        "category": 4,
+        "unicode": "🔱",
+        "aliases": [
+            "trident"
+        ]
+    },
+    {
+        "id": "25fc",
+        "category": 4,
+        "unicode": "◼",
+        "aliases": [
+            "black_medium_square"
+        ]
+    },
+    {
+        "id": "25fb",
+        "category": 4,
+        "unicode": "◻",
+        "aliases": [
+            "white_medium_square"
+        ]
+    },
+    {
+        "id": "25fe",
+        "category": 4,
+        "unicode": "◾",
+        "aliases": [
+            "black_medium_small_square"
+        ]
+    },
+    {
+        "id": "25fd",
+        "category": 4,
+        "unicode": "◽",
+        "aliases": [
+            "white_medium_small_square"
+        ]
+    },
+    {
+        "id": "25aa",
+        "category": 4,
+        "unicode": "▪",
+        "aliases": [
+            "black_small_square"
+        ]
+    },
+    {
+        "id": "25ab",
+        "category": 4,
+        "unicode": "▫",
+        "aliases": [
+            "white_small_square"
+        ]
+    },
+    {
+        "id": "1f53a",
+        "category": 4,
+        "unicode": "🔺",
+        "aliases": [
+            "small_red_triangle"
+        ]
+    },
+    {
+        "id": "1f532",
+        "category": 4,
+        "unicode": "🔲",
+        "aliases": [
+            "black_square_button"
+        ]
+    },
+    {
+        "id": "1f533",
+        "category": 4,
+        "unicode": "🔳",
+        "aliases": [
+            "white_square_button"
+        ]
+    },
+    {
+        "id": "26ab",
+        "category": 4,
+        "unicode": "⚫",
+        "aliases": [
+            "black_circle"
+        ]
+    },
+    {
+        "id": "26aa",
+        "category": 4,
+        "unicode": "⚪",
+        "aliases": [
+            "white_circle"
+        ]
+    },
+    {
+        "id": "1f534",
+        "category": 4,
+        "unicode": "🔴",
+        "aliases": [
+            "red_circle"
+        ]
+    },
+    {
+        "id": "1f535",
+        "category": 4,
+        "unicode": "🔵",
+        "aliases": [
+            "large_blue_circle"
+        ]
+    },
+    {
+        "id": "1f53b",
+        "category": 4,
+        "unicode": "🔻",
+        "aliases": [
+            "small_red_triangle_down"
+        ]
+    },
+    {
+        "id": "2b1c",
+        "category": 4,
+        "unicode": "⬜",
+        "aliases": [
+            "white_large_square"
+        ]
+    },
+    {
+        "id": "2b1b",
+        "category": 4,
+        "unicode": "⬛",
+        "aliases": [
+            "black_large_square"
+        ]
+    },
+    {
+        "id": "1f536",
+        "category": 4,
+        "unicode": "🔶",
+        "aliases": [
+            "large_orange_diamond"
+        ]
+    },
+    {
+        "id": "1f537",
+        "category": 4,
+        "unicode": "🔷",
+        "aliases": [
+            "large_blue_diamond"
+        ]
+    },
+    {
+        "id": "1f538",
+        "category": 4,
+        "unicode": "🔸",
+        "aliases": [
+            "small_orange_diamond"
+        ]
+    },
+    {
+        "id": "1f539",
+        "category": 4,
+        "unicode": "🔹",
+        "aliases": [
+            "small_blue_diamond"
+        ]
+    }
+]

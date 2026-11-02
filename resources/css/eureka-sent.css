@@ -1,0 +1,32 @@
+.sent-list-heading { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; }
+.sent-heading-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+.sent-heading-title .received-summary { margin-left: 0; padding: 4px 8px; font-size: 11px; }
+.sent-create-link { text-decoration: none; gap: 8px; align-self: start; }
+.received-table .sent-status-cell { width: 164px; }
+.sent-message-state { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 3px 0; }
+.sent-detail-heading { align-items: flex-start; }
+.sent-detail-heading h1 { overflow-wrap: anywhere; }
+.sent-detail-heading > a:last-child { margin-left: auto; text-decoration: none; }
+.sent-participants { margin: 18px 0; display: flex; flex-wrap: wrap; gap: 20px 48px; }
+.sent-person { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-width: 0; }
+.sent-person > div, .sent-person .received-sender-text { display: flex; flex-direction: column; gap: 3px; }
+.sent-person small { color: var(--eure-muted); font-size: 12px; }
+.sent-person strong { color: var(--eure-text); font-size: 14px; white-space: normal; }
+.sent-person .eure-avatar { width: 44px; height: 44px; }
+.sent-read-state { color: var(--eure-muted); font-size: 12px; }
+.sent-message-body, .sent-reply { margin-bottom: 18px; }
+.sent-message-date { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--eure-muted); margin-bottom: 12px; }
+.sent-reply-text { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--eure-text); font-size: 15px; line-height: 1.7; margin: 0; }
+.sent-empty-reply { color: var(--eure-muted); font-size: 13px; }
+.sent-attachments ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.sent-attachments a { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--eure-border); border-radius: 6px; text-decoration: none; color: var(--eure-text); font-size: 13px; }
+.sent-attachments a span { min-width: 0; overflow-wrap: anywhere; flex: 1; }
+.sent-attachments a svg { flex-shrink: 0; color: var(--eure-primary-text); }
+.family-sent a:focus-visible, .family-sent button:focus-visible { outline: 2px solid var(--eure-ring); outline-offset: 3px; }
+@media (max-width: 700px) {
+    .sent-list-heading { grid-template-columns: 44px minmax(0, 1fr); }
+    .sent-create-link { grid-column: 2; justify-self: start; }
+    .sent-detail-heading > a:last-child { margin-left: 56px; }
+    .sent-participants { flex-direction: column; gap: 20px; }
+    .sent-attachments ul { grid-template-columns: minmax(0, 1fr); }
+}

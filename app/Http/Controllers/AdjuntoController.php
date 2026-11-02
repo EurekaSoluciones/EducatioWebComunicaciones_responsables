@@ -33,6 +33,11 @@ class AdjuntoController extends Controller
     $filename =  $request->get('filename');
     $tempId =  $request->get('tempId');
 
+    // React drafts are removed only through their student/session-authorized route.
+    // Student legajo files are no longer removed through the legacy endpoint either.
+    $file = Adjunto::where('filename', $filename)->where('tempId', $tempId)->firstOrFail();
+    abort_if(in_array($file->entity, ['comunicacione', 'comunicacione_imagen', 'comunicacione_envio', 'alumno']), 403);
+
     // Si no hago esto pueden forgear el nombre de un archivo y borrar
     Adjunto::where('filename', $filename)->where('tempId', $tempId)->delete();
 

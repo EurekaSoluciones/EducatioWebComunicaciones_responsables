@@ -2,37 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\EureLib\EducatioCommFunctions;
-use App\EureLib\EureFunctions;
+use App\Support\EurekaTheme;
+use App\Support\FamilyPortal;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use mysql_xdevapi\CrudOperationBindable;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
-    //
-  public function index()
-  {
-    $responsable = EureFunctions::getLoggedResponsableAttribute();
-
-    $carteleraG = EureFunctions::getCarteleraGeneral();
-
-
-    if ($carteleraG != null)
+    public function index(Request $request, FamilyPortal $portal, EurekaTheme $themes): Response|RedirectResponse
     {
-      if
-      (
-        $responsable->web_user->fh_visualizacion_cartelera_general == null ||
-        $responsable->web_user->fh_visualizacion_cartelera_general < $carteleraG->updated_at
-      )
-        return redirect()->route('carteleras.show', $carteleraG);
+        $user = $request->user();
+        $responsable = $portal->responsable($user);
+        $board = $portal->generalBoard();
+        if ($portal->mustReadBoard($user, $board)) {
+            return redirect()->route('carteleras.show', $board);
+        }
+
+        $result = $request->session()->get('resultadoRematriculacion');
+        $theme = $themes->current();
+        $logoPath = "assets/C/{$theme['clientId']}/institucional/Logo.png";
+
+        return Inertia::render('family/Home', [
+            'portal' => $portal->home($user, $responsable, $board),
+            'boardPreviews' => $portal->boardPreviews(),
+            'theme' => $theme,
+            'institution' => config('eureka.institution'),
+            'institutionLogoUrl' => is_file(public_path($logoPath)) ? asset($logoPath) : null,
+            'homeUrl' => route('home'),
+            'logoutUrl' => route('logout'),
+            'notificationsUrl' => route('family.notifications'),
+            'loginUrl' => route('login'),
+            'csrfToken' => csrf_token(),
+            'enrollmentResult' => is_array($result) ? [
+                'studentId' => (string) ($result['alumnoId'] ?? ''),
+                'type' => $result['tipo'] ?? '',
+                'message' => $result['mensaje'] ?? '',
+            ] : null,
+        ]);
     }
-
-    $estadosRematriculacion = $responsable->alumnos->mapWithKeys(function ($alumno) {
-      return [
-        (string) $alumno->id => EducatioCommFunctions::MensajeBloqueoRematriculacion($alumno),
-      ];
-    });
-
-    return view('home.index', compact('responsable', 'carteleraG', 'estadosRematriculacion'));
-  }
 }

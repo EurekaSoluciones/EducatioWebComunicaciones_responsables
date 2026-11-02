@@ -1,0 +1,55 @@
+.family-profile .family-student-nav a[aria-current] { background: var(--eure-sidebar-active); color: var(--eure-sidebar-active-text); font-weight: 650; }
+.student-profile-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 8px 0 24px; }
+.student-profile-heading h1 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.25; overflow-wrap: anywhere; }
+.student-profile-heading > a, .student-profile-more, .student-profile-photo a { display: inline-flex; align-items: center; gap: 7px; color: var(--eure-primary-text); text-decoration: none; font-size: 13px; min-height: 40px; }
+.student-profile-heading > a { flex-shrink: 0; }
+.student-profile-heading a:hover, .student-profile-more:hover, .student-profile-photo a:hover { text-decoration: underline; }
+.student-profile-feedback { margin-bottom: 20px; }
+.student-profile-top { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr); gap: 20px; align-items: start; margin-bottom: 20px; }
+.student-profile-bottom { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.student-profile-identity { display: flex; align-items: flex-start; gap: 24px; }
+.student-profile-photo { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.student-profile-photo .eure-avatar { width: 112px; height: 112px; font-size: 34px; }
+.student-profile-identity dl { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; flex: 1; }
+.student-profile-identity dt { color: var(--eure-muted); font-size: 12px; margin-bottom: 3px; }
+.student-profile-identity dd { font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.student-profile-actions { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--eure-border); padding-top: 16px; margin-top: 16px; }
+.student-profile-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 8px 10px; border: 1px solid var(--eure-border); border-radius: 6px; font-size: 12px; text-decoration: none; }
+.student-profile-actions a:hover { background: var(--eure-primary); color: var(--eure-on-primary); border-color: var(--eure-primary); }
+.student-profile-actions a > span { font-size: 10px; font-weight: 650; }
+.student-profile-guardians, .student-profile-messages, .student-profile-files { list-style: none; padding: 0; margin: 0; }
+.student-profile-guardians li + li, .student-profile-messages li + li, .student-profile-files li + li { border-top: 1px solid var(--eure-border); }
+.student-profile-guardians a, .student-profile-message-row, .student-profile-files a { display: flex; align-items: center; gap: 12px; padding: 14px 4px; min-width: 0; text-decoration: none; }
+.student-profile-guardians a:hover, .student-profile-message-row:hover, .student-profile-files a:hover { background: var(--eure-surface-muted); }
+.student-profile-guardians a > div, .student-profile-message-row > div, .student-profile-files a > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.student-profile-message-row { position: relative; }
+.student-profile-message-subject { display: block; text-decoration: none; }
+.student-profile-message-subject::after { content: ''; position: absolute; inset: 0; }
+.student-profile-message-subject:focus-visible { outline: none; }
+.student-profile-message-subject:focus-visible::after { outline: 2px solid var(--eure-ring); outline-offset: -2px; }
+.student-profile-message-meta .eureui-human-date { position: relative; z-index: 1; flex-shrink: 0; font-size: 11px; }
+.student-profile-guardians strong, .student-profile-messages strong, .student-profile-files strong { display: block; font-size: 14px; line-height: 1.45; }
+.student-profile-guardians a > div > span, .student-profile-files a > div > span { display: block; font-size: 12px; color: var(--eure-muted); margin-top: 3px; }
+.student-profile-messages .eure-avatar { width: 48px; height: 48px; font-size: 18px; }
+.student-profile-messages strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.student-profile-message-meta { display: flex; align-items: center; gap: 8px; margin-top: 5px; min-width: 0; white-space: nowrap; }
+.student-profile-sender { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--eure-muted); font-size: 12px; }
+.student-profile-message-meta .student-profile-unread { flex-shrink: 0; }
+.student-profile-unread { background: var(--eure-primary); color: var(--eure-on-primary); padding: 2px 7px; border-radius: 5px; font-size: 10px; font-weight: 650; }
+.student-profile-message-row:not(.is-unread) strong { font-weight: 500; }
+.student-profile-messages .is-unread strong { color: var(--eure-primary-text); }
+.student-profile-more { margin-top: 12px; }
+.student-profile-files a > svg { color: var(--eure-primary-text); flex-shrink: 0; }
+.student-profile-guardians a > svg, .student-profile-message-row > svg { color: var(--eure-muted); flex-shrink: 0; }
+.student-profile-upload { text-decoration: none; margin-bottom: 12px; font-size: 13px; }
+.student-profile-empty { color: var(--eure-muted); font-size: 14px; line-height: 1.65; padding: 12px 0; }
+@media (max-width: 1150px) {
+    .student-profile-top { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+    .student-profile-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .student-profile-bottom { grid-template-columns: minmax(0, 1fr); }
+    .student-profile-identity { gap: 16px; }
+    .student-profile-identity dl { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .student-profile-photo .eure-avatar { width: 90px; height: 90px; font-size: 28px; }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Ilustración de Tomás, personaje ficticio">
+  <rect width="120" height="120" rx="60" fill="#dce6df"/>
+  <path d="M18 120c2-23 17-37 42-37s40 14 42 37" fill="#527b6d"/>
+  <path d="M51 77h18v15c-5 7-13 7-18 0" fill="#d99d79"/>
+  <ellipse cx="60" cy="57" rx="27" ry="31" fill="#edbc96"/>
+  <path d="M32 59c-6-28 7-43 27-43 11 0 17 5 20 11 11 0 15 10 10 32l-7-16c-17 4-25-4-30-9-5 11-13 13-20 14" fill="#654537"/>
+  <circle cx="50" cy="59" r="2" fill="#45332f"/><circle cx="70" cy="59" r="2" fill="#45332f"/>
+  <path d="M54 72q6 5 12 0" stroke="#a25a52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M46 91q14 12 28 0" stroke="#e7ede3" stroke-width="5" fill="none"/>
+</svg>

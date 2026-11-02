@@ -68,7 +68,13 @@ class EducatioCommFunctions
     $hoy = EureFunctions::hoy();
     $hasta = EureFunctions::ultimoDiaMes()->addMonth();
 
-    $ccItems = DB::select('exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = ?', [$alumno->id, null, $hasta]);
+    // Explicit ODBC format: independent of LANGUAGE/DATEFORMAT, including compatibility 100.
+    // Keep the legacy cutoff and let smalldatetime round it exactly as before.
+    $ccItems = DB::select(
+      'DECLARE @EureFechaHasta smalldatetime; SET @EureFechaHasta = CONVERT(smalldatetime, ?, 121); '
+      . 'exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = @EureFechaHasta;',
+      [$hasta->format('Y-m-d H:i:s.v'), $alumno->id, null]
+    );
 
     $ccItems = array_map(function ($fila) {
       $fila->Fecha_Venc = EureFunctions::toCarbonDateFromYmd($fila->Fecha_Venc);

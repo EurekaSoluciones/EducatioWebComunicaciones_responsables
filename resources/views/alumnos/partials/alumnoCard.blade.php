@@ -24,7 +24,7 @@
           <div class="mt-1  p-2" style="border-radius: 10px;background-color: #ECEEED">
 
 
-            <a href="{{route('comunicaciones.indexA', $alumno),}}"><i
+            <a href="{{\App\Support\FamilyPortal::receivedUrl($alumno)}}"><i
                 class="fas fa-paper-plane text-xl {{$alumno->textColorNWConOffset(0)}}"></i></a>&nbsp;&nbsp;&nbsp;
             <a href="{{route('comunicaciones.e.indexA', $alumno),}}"><i
                 class="fas fas fa-arrow-up text-xl {{$alumno->textColorNWConOffset(1)}}"></i></a>&nbsp;&nbsp;&nbsp;
@@ -97,14 +97,14 @@
                 {{--          {{url('assets/images/usuarios/avatares/minami04.jpg')}}--}}
 
                 @if($hmCommSinLeer == 0)
-                  <a href="{{route('comunicaciones.indexA', $alumno)}}"> No hay comunicaciones sin leer</a>
+                  <a href="{{\App\Support\FamilyPortal::receivedUrl($alumno)}}"> No hay comunicaciones sin leer</a>
                 @else
                   @if($hmCommSinLeer == 1)
-                    <a href="{{route('comunicaciones.indexA', $alumno)}}"> <strong> <i
+                    <a href="{{\App\Support\FamilyPortal::receivedUrl($alumno)}}"> <strong> <i
                           class="fas fa-paper-plane"></i> {{$hmCommSinLeer}} comunicación sin
                         leer</strong></a>
                   @else
-                    <a href="{{route('comunicaciones.indexA', $alumno)}}"> <strong> <i
+                    <a href="{{\App\Support\FamilyPortal::receivedUrl($alumno)}}"> <strong> <i
                           class="fas fa-paper-plane"></i> {{$hmCommSinLeer}} comunicaciones sin
                         leer</strong></a>
                   @endif

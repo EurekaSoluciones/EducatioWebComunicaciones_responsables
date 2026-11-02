@@ -1,0 +1,75 @@
+/* EureUI controls ported from Pranzo. Equivalent rules for its utility classes;
+   aliases preserve the source token names without duplicating client palettes. */
+.eureui-card { min-width: 0; border: 1px solid var(--eure-border); border-radius: 8px; background: var(--eure-surface); padding: 16px; box-shadow: var(--eure-shadow-soft); }
+.eureui-card-header { margin: -16px -16px 16px; padding: 8px 16px; border-radius: 8px 8px 0 0; border-bottom: 1px solid var(--eure-border); background: var(--eure-surface-muted); }
+.eureui-card-header h2 { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: var(--eure-text); }
+.eureui-card-header h2 > svg { flex-shrink: 0; color: var(--eure-primary-text); }
+.eureui-card-header p { margin-top: 4px; color: var(--eure-muted); font-size: 14px; }
+.eureui-card-plain { box-shadow: none; }
+.eureui-card-plain .eureui-card-header { margin: 0 0 16px; padding: 0; border: 0; background: transparent; }
+.eureui-alert { display: flex; align-items: flex-start; gap: 12px; border: 1px solid currentColor; border-radius: 8px; padding: 12px 16px; }
+.eureui-alert > svg { flex-shrink: 0; margin-top: 2px; }
+.eureui-alert > p { flex: 1; font-size: 14px; font-weight: 500; }
+.eureui-alert > button { border: 0; background: transparent; color: inherit; padding: 4px; }
+.eureui-alert-success { background: var(--eure-success-soft); color: var(--eure-success); }
+.eureui-alert-error { background: var(--eure-danger-soft); color: var(--eure-danger); }
+.eureui-alert-warning { background: var(--eure-warning-soft); color: var(--eure-warning); }
+.eureui-alert-info { background: var(--eure-info-soft); color: var(--eure-info); }
+.eureui-human-date { display: inline-block; border: 0; padding: 3px 0; background: transparent; color: var(--eure-primary-text); font: inherit; line-height: inherit; cursor: pointer; white-space: nowrap; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.eureui-human-date:hover { text-decoration-thickness: 2px; }
+.eureui-human-date:focus-visible { outline: 2px solid var(--eure-ring); outline-offset: 3px; border-radius: 2px; }
+.eure-app {
+    --eure-primary-strong: var(--eure-primary-hover);
+    --eure-sub: var(--eure-muted);
+    --eure-bg: var(--eure-surface-muted);
+    --eure-error: var(--eure-danger);
+    --eure-error-border: var(--eure-danger);
+}
+.eureui-input-wrapper { position: relative; width: 100%; }
+.eureui-input {
+    width: 100%; min-height: 40px; border: 1px solid var(--eure-border); border-radius: 6px;
+    padding: 8px 12px; font-size: 14px; line-height: 20px;
+    color: var(--eure-text); background: var(--eure-surface); transition: border-color .15s, box-shadow .15s;
+}
+.eureui-input::placeholder { color: var(--eure-sub); }
+.eure-app .eureui-input:focus, .eure-app .eureui-input:focus-visible {
+    outline: none; border-color: var(--eure-primary); box-shadow: 0 0 0 2px var(--eure-primary);
+}
+.eureui-input-invalid { border-color: var(--eure-error-border); padding-right: 36px; }
+.eure-app .eureui-input-invalid:focus, .eure-app .eureui-input-invalid:focus-visible {
+    border-color: var(--eure-error-border); box-shadow: 0 0 0 2px var(--eure-error);
+}
+.eureui-input:disabled { cursor: not-allowed; opacity: .5; }
+.eureui-input-error { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); color: var(--eure-error); pointer-events: none; }
+.eureui-input-group { min-width: 0; }
+.eureui-input-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.eureui-label { display: block; font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: .025em; color: var(--eure-text); }
+.eure-app .eureui-field-error { margin-top: 4px; font-size: 12px; font-weight: 500; color: var(--eure-error); }
+.eure-app .eureui-helper { margin-top: 4px; font-size: 12px; font-style: italic; color: var(--eure-sub); }
+.eureui-button-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 40px; padding: 8px 16px; border: 0; border-radius: 8px; font-size: 14px; font-weight: 500;
+    color: var(--eure-on-primary); background: var(--eure-primary); transition: background-color .15s;
+}
+.eureui-button-primary:hover:not(:disabled) { background: var(--eure-primary-strong); }
+.eureui-button-primary:disabled { cursor: not-allowed; opacity: .5; }
+.eureui-button-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 36px; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--eure-border); background: var(--eure-surface); color: var(--eure-text); font-size: 14px; font-weight: 500; }
+.eureui-button-secondary:hover:not(:disabled) { background: var(--eure-accent); color: var(--eure-on-accent); }
+.eureui-button-secondary:disabled { cursor: not-allowed; opacity: .5; }
+.eureui-button-secondary:focus-visible, .eureui-button-primary:focus-visible { outline: 2px solid var(--eure-ring); outline-offset: 3px; }
+.eureui-cropper-workspace { height: 340px; background: var(--eure-surface-muted); overflow: hidden; border-radius: 8px; }
+.eureui-cropper-workspace > img { display: block; max-width: 100%; max-height: 100%; }
+.eureui-cropper-workspace:focus-visible { outline: 2px solid var(--eure-ring); outline-offset: 3px; }
+.eureui-cropper .cropper-view-box { outline-color: var(--eure-primary); }
+.eureui-cropper .cropper-line, .eureui-cropper .cropper-point { background: var(--eure-primary); }
+.eureui-cropper .cropper-modal { background: var(--eure-overlay); }
+.eureui-cropper-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.eureui-cropper-controls button { min-height: 42px; }
+.eureui-cropper-preview { display: flex; align-items: center; gap: 16px; }
+.eureui-cropper-preview > img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; }
+.eureui-cropper-preview strong { font-size: 14px; }
+.eureui-cropper-preview p, .eureui-cropper > p { font-size: 12px; color: var(--eure-muted); margin-top: 4px; }
+@media (max-width: 600px) { .eureui-cropper-workspace { height: 280px; } }
+.eureui-password-toggle { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; padding: 4px; border: 0; border-radius: 4px; background: transparent; color: var(--eure-sub); font-size: 12px; }
+.eureui-password-toggle:hover { color: var(--eure-text); }
+@media (max-width: 760px) { .eureui-input { font-size: 16px; } }

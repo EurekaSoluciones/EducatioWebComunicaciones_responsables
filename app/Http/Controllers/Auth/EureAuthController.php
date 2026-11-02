@@ -5,33 +5,49 @@ namespace App\Http\Controllers\Auth;
 use App\EureLib\EureFunctions;
 use App\Http\Controllers\Controller;
 use App\Models\ExpoToken;
+use App\Support\EurekaTheme;
+use App\Support\FamilyPortal;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class EureAuthController extends Controller
 {
-  public function login()
+  public function login(Request $request, EurekaTheme $themes)
   {
-    $cliente = EureFunctions::cliente_id();
-    
-    if (in_array($cliente, ['culturalnqn', 'culturalcentenario', 'isi'], true)) {
-      $loginBackground = $cliente === 'isi'
-        ? EureFunctions::cliente_path_resources() . 'institucional/LoginBackground.jpeg'
-        : 'assets/images/fondoLoginCultural.png';
-
-      return view('auth.loginCultural', compact('loginBackground', 'cliente'));
+    if ($request->user()) {
+      return redirect()->route('home');
     }
 
-    return view('auth.login');
+    $theme = $themes->current();
+    $client = $theme['clientId'];
+    $logo = "assets/C/{$client}/institucional/LoginLogo.png";
+    $background = match ($client) {
+      'ifesnqn' => "assets/C/{$client}/institucional/LoginCarrusel03.jpg",
+      'culturalnqn', 'culturalcentenario' => 'assets/images/fondoLoginCultural.png',
+      default => "assets/C/{$client}/institucional/LoginBackground.jpeg",
+    };
+
+    return Inertia::render('auth/Login', [
+      'theme' => $theme,
+      'institution' => config('eureka.institution'),
+      'logoUrl' => is_file(public_path($logo)) ? asset($logo) : null,
+      'backgroundUrl' => is_file(public_path($background)) ? asset($background) : null,
+      'authenticateUrl' => route('authenticate'),
+      'csrfToken' => csrf_token(),
+      'oldLogin' => $request->old('login', ''),
+    ]);
   }
 
-  public function logout()
+  public function logout(Request $request)
   {
     Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
     return redirect('login'); // Redirige a la página de inicio u otra página deseada después del cierre de sesión
   }
 
@@ -57,31 +73,33 @@ class EureAuthController extends Controller
     //
     return back()->withErrors([
       'credentials' => 'El nombre de Usuario o contraseña es incorrecto.',
-    ])->withInput();
+    ])->withInput($request->only('login'));
   }
 
-  public function password()
+  public function passwordUpdate(Request $request, FamilyPortal $portal)
   {
-    return view('auth.password');
-  }
-
-  public function passwordUpdate(Request $request)
-  {
-    // Validación de datos
+    $responsable = $portal->responsable($request->user());
+    // Keep the web password policy; never flash passwords back into the session.
     $validator = Validator::make($request->all(), [
-      'currentPassword' => 'required',
-      'newPassword' => 'required', // Puedes ajustar la longitud mínima según tus requisitos
-      'confirmPassword' => 'required|same:newPassword',
+      'currentPassword' => 'required|string',
+      'newPassword' => 'required|string',
+      'confirmPassword' => 'required|string|same:newPassword',
+    ], [
+      'currentPassword.required' => 'Ingresá tu contraseña actual.',
+      'newPassword.required' => 'Ingresá la nueva contraseña.',
+      'confirmPassword.required' => 'Repetí la nueva contraseña.',
+      'confirmPassword.same' => 'Las contraseñas nuevas no coinciden.',
+      '*.string' => 'Ingresá una contraseña válida.',
     ]);
 
     // Si la validación falla, redirige de nuevo al formulario con los errores
     if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator)->withInput();
+      return redirect()->route('auth.password')->withErrors($validator);
     }
 
     // Validar la contraseña actual
     if (!Hash::check($request->currentPassword, auth()->user()->password)) {
-      return redirect()->back()->withErrors(['currentPassword' => 'La contraseña actual no es correcta'])->withInput();
+      return redirect()->route('auth.password')->withErrors(['currentPassword' => 'La contraseña actual no es correcta.']);
     }
 
     // Si la validación es exitosa, actualiza la contraseña en la base de datos
@@ -92,7 +110,7 @@ class EureAuthController extends Controller
     Auth::logoutOtherDevices($request->newPassword);
 
     // Redirige a la página de éxito o donde sea necesario
-    return redirect()->route('home')->with('success', '¡Contraseña cambiada con éxito!');
+    return redirect()->route('responsables.show', $responsable)->with('success', '¡Contraseña cambiada con éxito!');
   }
 
   public function api_login(Request $request)

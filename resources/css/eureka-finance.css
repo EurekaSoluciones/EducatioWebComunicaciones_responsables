@@ -1,0 +1,29 @@
+.finance-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.finance-heading .eure-avatar { width: 72px; height: 72px; }.finance-heading h1 { margin: 0 0 5px; font-size: 23px; }
+.finance-heading p { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; font-size: 13px; }.finance-heading p span { color: var(--eure-muted); }
+.finance-back { display: flex; align-items: center; gap: 7px; margin-left: auto; color: var(--eure-primary-text); font-size: 12px; }
+.finance-tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--eure-border); margin-bottom: 18px; }
+.finance-tabs a { padding: 0 2px 10px; font-size: 13px; color: var(--eure-muted); text-decoration: none; border-bottom: 2px solid transparent; }
+.finance-tabs a[aria-current] { color: var(--eure-primary-text); border-color: var(--eure-primary); font-weight: 650; }
+.family-finance .pranzo-main > .eureui-card, .family-finance .pranzo-main > .eureui-alert { margin-bottom: 18px; }
+.finance-summary dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+.finance-summary dl > div { padding: 0 22px; border-left: 1px solid var(--eure-border); }.finance-summary dl > div:first-child { padding-left: 0; border: 0; }
+.finance-summary dt { font-size: 12px; color: var(--eure-muted); }.finance-summary dd { margin: 5px 0; font-size: clamp(20px, 1.8vw, 28px); font-weight: 700; font-variant-numeric: tabular-nums; }
+.finance-summary p { margin: 5px 0 0; font-size: 11px; color: var(--eure-muted); }.finance-summary .has-due dd { color: var(--eure-warning); }.finance-summary .has-overdue dd { color: var(--eure-danger); }
+.finance-table { min-width: 830px; }.finance-table td { padding: 11px 9px; }.finance-table th { padding-left: 9px; padding-right: 9px; }
+.finance-table .finance-reference { width: 75px; color: var(--eure-muted); }.finance-table .finance-installment { width: 68px; text-align: center; }
+.finance-table .finance-date { width: 124px; }.finance-table .finance-money { width: 135px; text-align: right; font-variant-numeric: tabular-nums; }
+.finance-table .finance-description { white-space: normal; overflow-wrap: anywhere; }.finance-table .finance-status { width: 120px; text-align: center; }
+.finance-state { display: inline-flex; border-radius: 5px; padding: 3px 7px; font-size: 11px; background: var(--eure-surface-muted); color: var(--eure-muted); }
+.finance-state.is-paid { background: var(--eure-success-soft); color: var(--eure-success); }.finance-state.is-overdue { background: var(--eure-danger-soft); color: var(--eure-danger); }.finance-state.is-today { background: var(--eure-warning-soft); color: var(--eure-warning); }.finance-state.is-month { background: var(--eure-info-soft); color: var(--eure-info); }
+.finance-table .finance-receipt { width: 180px; white-space: normal; overflow-wrap: anywhere; }.finance-table .finance-payment-date { width: 165px; }.finance-table .finance-download-cell { width: 85px; text-align: center; }
+.finance-receipt a, .finance-download { color: var(--eure-primary-text); text-underline-offset: 3px; }.finance-download { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; }
+.finance-search-note { font-size: 12px; color: var(--eure-muted); margin-bottom: 12px; }
+.finance-payment { max-width: 780px; margin-left: auto; }.finance-payment form { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 16px; }.finance-payment .eureui-input-group { flex: 1; min-width: 220px; }.finance-payment input:not([type=hidden]) { font-size: 19px; font-variant-numeric: tabular-nums; }
+.finance-payment-methods { display: flex; gap: 10px; flex-wrap: wrap; align-self: center; }.finance-payment-methods button { font-size: 12px; }.finance-payment-methods img { max-width: 65px; height: 24px; object-fit: contain; }
+.finance-payment-progress { font-size: 12px; color: var(--eure-muted); width: 100%; }
+@media (max-width: 700px) {
+    .finance-heading { flex-wrap: wrap; }.finance-heading .eure-avatar { width: 58px; height: 58px; }.finance-heading h1 { font-size: 20px; }.finance-back { width: 100%; margin-left: 0; }
+    .finance-summary dl { grid-template-columns: 1fr; gap: 12px; }.finance-summary dl > div { border: 0; border-top: 1px solid var(--eure-border); padding: 12px 0 0; }.finance-summary dl > div:first-child { padding: 0; }.finance-summary dd { font-size: 24px; }
+    .finance-payment { max-width: none; }.finance-payment-methods { width: 100%; }
+}

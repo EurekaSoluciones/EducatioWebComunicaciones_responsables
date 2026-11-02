@@ -1,0 +1,26 @@
+.attendance-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.attendance-heading .eure-avatar { width: 72px; height: 72px; }
+.attendance-heading h1 { margin: 0 0 5px; font-size: 23px; }
+.attendance-heading p { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; font-size: 13px; }
+.attendance-heading p span { color: var(--eure-muted); }
+.attendance-back { display: flex; align-items: center; gap: 7px; margin-left: auto; color: var(--eure-primary-text); font-size: 12px; }
+.family-attendance .attendance-summary, .family-attendance .pranzo-main > .eureui-alert { margin-bottom: 18px; }
+.attendance-summary dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+.attendance-summary dl > div { padding: 0 22px; border-left: 1px solid var(--eure-border); }
+.attendance-summary dl > div:first-child { padding-left: 0; border-left: 0; }
+.attendance-summary dt { color: var(--eure-muted); font-size: 12px; }
+.attendance-summary dd { margin: 4px 0 0; color: var(--eure-primary-text); font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.attendance-summary > p { margin: 12px 0 0; font-size: 11px; color: var(--eure-muted); }
+.attendance-table .attendance-date { width: 122px; }
+.attendance-table .attendance-type { width: 26%; }
+.attendance-table .attendance-weight { width: 86px; text-align: center; font-variant-numeric: tabular-nums; }
+.attendance-table td { padding: 11px 10px; white-space: normal; overflow-wrap: anywhere; }
+.attendance-table td.attendance-date { white-space: nowrap; }
+.attendance-table .attendance-notes { white-space: pre-wrap; }
+.attendance-search-note { margin-bottom: 12px; font-size: 12px; color: var(--eure-muted); }
+@media (max-width: 700px) {
+    .attendance-heading { flex-wrap: wrap; }.attendance-heading h1 { font-size: 20px; }.attendance-heading .eure-avatar { width: 58px; height: 58px; }
+    .attendance-back { width: 100%; margin-left: 0; }
+    .attendance-summary dl > div { padding: 0 10px; }.attendance-summary dt { font-size: 11px; }.attendance-summary dd { font-size: 24px; }
+    .attendance-table { min-width: 540px; }
+}

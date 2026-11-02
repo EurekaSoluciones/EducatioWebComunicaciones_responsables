@@ -1,12 +1,31 @@
 {
     "private": true,
+    "type": "module",
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "dev:all": "concurrently --kill-others --names=laravel,vite \"php artisan serve\" \"npm run dev\"",
+        "build": "vite build",
+        "types:check": "tsc --noEmit",
+        "test:dates": "node tests/js/human-date.test.mjs"
+    },
+    "dependencies": {
+        "@inertiajs/react": "^3.0.0",
+        "lucide-react": "^0.475.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
     },
     "devDependencies": {
+        "@types/node": "^22.13.5",
+        "@types/react": "^19.2.0",
+        "@types/react-dom": "^19.2.0",
+        "@vitejs/plugin-react": "^5.2.0",
         "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
-        "vite": "^4.0.0"
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^3.0.0",
+        "typescript": "^5.7.2",
+        "vite": "^8.0.0"
     }
 }
