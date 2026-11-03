@@ -62,7 +62,6 @@ export default function FamilyNotifications({ data, students, error, refresh }: 
                     {item.replies > 0 && <a href={student.links.sent}><Send size={15} />{item.replies} respuestas sin leer</a>}
                 </div></li>;
             })}</ul>
-            {count > 0 && <div className="notification-footer"><small>Las comunicaciones se marcan al abrirlas. Una comunicación puede corresponder a más de un alumno.</small></div>}
         </div>
     </>;
 }

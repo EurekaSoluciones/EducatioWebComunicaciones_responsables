@@ -12,7 +12,7 @@ export default function FamilyNavigation({ portal, institution, institutionLogoU
     const links = selected ? [
         { label: 'Comunicaciones recibidas', icon: Inbox, href: selected.links.received, count: counts?.received },
         { label: 'Enviadas y respuestas', icon: Send, href: selected.links.sent, count: counts?.replies },
-        { label: 'Ficha del alumno', icon: UserRound, href: selected.links.profile },
+        { label: 'Ficha del estudiante', icon: UserRound, href: selected.links.profile },
         { label: portal.labels.documents, icon: FileText, href: selected.links.documents },
         { label: 'Inasistencias', icon: CalendarDays, href: selected.links.attendance },
         { label: portal.labels.account, icon: Wallet, href: selected.links.account },

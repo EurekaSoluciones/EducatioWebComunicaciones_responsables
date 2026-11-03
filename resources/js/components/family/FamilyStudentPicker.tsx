@@ -38,7 +38,7 @@ export default function FamilyStudentPicker({ selected, students, notifications,
     }, [open, position]);
 
     return <div className="family-student-selector">
-        <span className="family-student-picker-label" id={`${id}-label`}>Consultar por alumno</span>
+        <span className="family-student-picker-label" id={`${id}-label`}>Consultar por estudiante</span>
         <button ref={trigger} type="button" className="family-student-picker-trigger" popoverTarget={id}
             aria-haspopup="dialog" aria-expanded={open} aria-controls={id}
             aria-label={`Cambiar alumno. Seleccionado: ${selected.name}`} onClick={position}>

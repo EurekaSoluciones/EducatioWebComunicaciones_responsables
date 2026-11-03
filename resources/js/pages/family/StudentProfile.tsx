@@ -38,7 +38,7 @@ export default function StudentProfile(props: ProfileProps) {
         header={<nav className="eure-breadcrumb" aria-label="Ruta de navegación"><a href={homeUrl}>Inicio</a><ChevronRight size={14} /><span>Alumnos</span><ChevronRight size={14} /><strong aria-current="page">Ficha</strong></nav>}
         actions={<><FamilyNotifications data={notifications} students={portal.students} error={error} refresh={refresh} /><a className="pranzo-header-avatar" href={portal.user.profileUrl} aria-label="Ver mi perfil"><EureAvatar name={portal.user.name} src={portal.user.avatar ?? undefined} /></a></>}>
         <Head title={`Ficha · ${student.name}`} />
-        <div className="student-profile-heading"><div><p className="eyebrow">Ficha del alumno</p><h1>{student.name}</h1></div><a href={homeUrl}><ArrowLeft size={17} />Volver al inicio</a></div>
+        <div className="student-profile-heading"><div><p className="eyebrow">Ficha del estudiante</p><h1>{student.name}</h1></div><a href={homeUrl}><ArrowLeft size={17} />Volver al inicio</a></div>
         {profile.success && <EureAlert type="success" message={profile.success} className="student-profile-feedback" />}
         {error && <div className="family-home-error" role="status">No pudimos actualizar los pendientes. Mostramos el último dato recibido. <button type="button" onClick={refresh}>Reintentar</button></div>}
         <div className="student-profile-top">

@@ -26,7 +26,7 @@ export default function Home(props: HomeProps) {
         {error && <div className="family-home-error" role="status">Los pendientes no se pudieron actualizar. Mostramos el último dato recibido. <button type="button" onClick={refresh}>Reintentar</button></div>}
         <div className="family-home-grid">
             <section className="family-students" id="alumnos" aria-labelledby="students-title">
-                <div className="family-section-heading"><div><h2 id="students-title">Tus alumnos</h2><p>{pending ? 'Consultá las novedades y lo que queda por leer.' : 'Sus datos y accesos, siempre a mano.'}</p></div><span>{portal.students.length}</span></div>
+                <div className="family-section-heading"><div><h2 id="students-title">Estudiantes a tu cargo</h2><p>{pending ? 'Consultá las novedades y lo que queda por leer.' : 'Sus datos y accesos, siempre a mano.'}</p></div><span>{portal.students.length}</span></div>
                 {portal.students.length === 0 && <EureAlert title="Todavía no hay alumnos vinculados">Si esperabas ver un alumno, comunicate con la institución para revisar la vinculación.</EureAlert>}
                 {portal.students.map((student) => {
                     const counts = notifications.byStudent.find((item) => item.studentId === student.id);
