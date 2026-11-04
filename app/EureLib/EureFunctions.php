@@ -459,15 +459,14 @@ class EureFunctions
 
   public static function obtenerPDF($rptFN, $fnPrefix, $fnMiddleInsert, $rptParams)
   {
-    // Incluir el alumno y un sufijo corto para reducir colisiones en el proveedor.
+    // Enviar el codigo del alumno; la API agrega el sufijo aleatorio.
     foreach ($rptParams as $param) {
       if (strcasecmp(ltrim($param['nombre'], '@'), 'CodAlumno') === 0) {
         $codigoAlumno = preg_replace('/[^A-Za-z0-9_-]/', '_', (string) $param['valor']);
-        $fnMiddleInsert .= $codigoAlumno . '_';
+        $fnMiddleInsert = str_pad($codigoAlumno, 6, '0', STR_PAD_LEFT);
         break;
       }
     }
-    $fnMiddleInsert .= random_int(100, 999) . '_';
 
     $url = getenv('EURE_PDF_PROVIDER_URL');
 

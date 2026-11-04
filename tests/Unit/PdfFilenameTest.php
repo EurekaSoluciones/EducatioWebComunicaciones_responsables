@@ -13,7 +13,7 @@ class PdfFilenameTest extends TestCase
      * @runInSeparateProcess
      * @preserveGlobalState disabled
      */
-    public function test_pdf_requests_include_student_code_and_a_three_digit_suffix(): void
+    public function test_pdf_requests_send_only_student_code_as_middle_insert(): void
     {
         $payloads = [];
         $client = Mockery::mock('overload:GuzzleHttp\\Client');
@@ -25,22 +25,18 @@ class PdfFilenameTest extends TestCase
         );
 
         try {
-            foreach (['1234', '5678', '1234'] as $codigo) {
-                $result = EureFunctions::obtenerPDF('Boletin.rpt', 'Boletin_', 'previo_', [
+            foreach (['1', '5678', '123456'] as $codigo) {
+                $result = EureFunctions::obtenerPDF('Boletin.rpt', 'Boletin_', '', [
                     ['nombre' => '@CodAlumno', 'valor' => $codigo],
                 ]);
                 $this->assertTrue($result->RequestsStatusOK);
+                $this->assertSame('https://example.test/boletin.pdf', $result->pdf_URL);
             }
 
             $names = array_column($payloads, 'fnMiddleInsert');
-            $this->assertStringStartsWith('previo_1234_', $names[0]);
-            $this->assertStringStartsWith('previo_5678_', $names[1]);
-            $this->assertStringStartsWith('previo_1234_', $names[2]);
-            foreach ($names as $name) {
-                $this->assertMatchesRegularExpression('/^previo_(1234|5678)_[1-9][0-9]{2}_$/', $name);
-            }
+            $this->assertSame(['000001', '005678', '123456'], $names);
             $this->assertSame('Boletin_', $payloads[0]['fnPrefix']);
-            $this->assertSame('1234', $payloads[0]['rptParams'][0]['valor']);
+            $this->assertSame('1', $payloads[0]['rptParams'][0]['valor']);
         } finally {
             Mockery::close();
         }
