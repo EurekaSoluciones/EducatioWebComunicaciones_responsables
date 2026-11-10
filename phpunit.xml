@@ -34,6 +34,7 @@
         <env name="QUEUE_CONNECTION" value="sync" force="true"/>
         <env name="SESSION_DRIVER" value="array" force="true"/>
         <env name="EURE_CLIENTE_ID" value="isi" force="true"/>
+        <env name="EURE_SUPERVIELLE_WEBHOOK_ENABLED" value="false" force="true"/>
         <env name="EURE_CLIENTE_LEYENDA" value="Institución de prueba" force="true"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
     </php>

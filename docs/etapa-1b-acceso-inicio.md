@@ -76,3 +76,11 @@ Los módulos pendientes se abren con enlaces HTML normales. Allí todavía se ve
 Con `composer run dev` activo, abrir `http://localhost:8003/login` e ingresar con la cuenta habitual. Revisar el cambio de alumno y sus enlaces, fotos, contador y cartelera, tanto en escritorio como en celular. Si corresponde una cartelera obligatoria, se mostrará antes del inicio, como hasta ahora. Comprobar también un acceso incorrecto y la salida.
 
 Después del feedback de esta entrega, continuar con el editor y el tratamiento de imágenes previstos en la etapa 2.
+
+## Aviso discreto de saldo vencido — 9 de noviembre de 2026
+
+El acceso a cuenta corriente de cada alumno en la home muestra únicamente un triángulo amarillo cuando su saldo vencido neto es positivo, sin leyenda adicional visible. El tooltip «Hay saldo vencido en esta cuenta. Entrá para consultar el detalle.» aparece al pasar el mouse o con foco de teclado y se cierra con Escape. Se conserva la navegación del enlace, también dentro de «Más opciones» en pantallas pequeñas.
+
+La home consulta en segundo plano `GET /familia/saldos-vencidos`, con sesión de responsable y respuesta sin caché. Solo devuelve identificador y presencia de saldo vencido para alumnos activos vinculados. Reutiliza `CC_Obtener`, incluidas las reglas de fin de mes y compensación de saldos; no expone importes ni modifica datos. Si la consulta falla, no se inventa un aviso de deuda ni un estado «al día». No se cambiaron contratos móviles ni vistas `appshow`.
+
+Verificación aislada: 6 pruebas PHP y 95 comprobaciones aprobadas, TypeScript y Pint aprobados. El build se intentó pero el entorno bloqueó un proceso con `spawn EPERM`; queda ejecutarlo desde la terminal del usuario. No se validó visualmente en navegador ni contra SQL Server real.

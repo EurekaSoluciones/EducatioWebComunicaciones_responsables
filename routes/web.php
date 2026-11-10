@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
         ->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('home');
     Route::get('/familia/notificaciones', \App\Http\Controllers\FamilyNotificationController::class)
         ->name('family.notifications');
+    Route::get('/familia/saldos-vencidos', \App\Http\Controllers\FamilyOverdueController::class)
+        ->name('family.overdue');
     Route::get('/familia/comunicaciones/{alumno}/estados/{kind}', \App\Http\Controllers\FamilyCommunicationStatusController::class)
         ->whereIn('kind', ['received', 'sent'])->name('family.communications.status');
 
@@ -136,6 +138,12 @@ Route::group(['middleware' => ['auth', 'auth.session']], function () {
     Route::get('/cc/{alumno}', [\App\Http\Controllers\FamilyFinanceController::class, 'index'])
         ->name('cc.indexA')->middleware(\App\Http\Middleware\HandleEurekaRequests::class);
     Route::post('/cc/pagar', [CuentaCorrienteController::class, 'pagar'])->name('cc.pagar');
+    Route::post('/cc/supervielle/preparar', [\App\Http\Controllers\FamilySupervielleController::class, 'prepare'])
+        ->name('family.supervielle.prepare');
+    Route::get('/cc/supervielle/{attempt}', [\App\Http\Controllers\FamilySupervielleController::class, 'confirmation'])
+        ->whereUuid('attempt')->middleware(\App\Http\Middleware\HandleEurekaRequests::class)->name('family.supervielle.show');
+    Route::post('/cc/supervielle/{attempt}', [\App\Http\Controllers\FamilySupervielleController::class, 'publish'])
+        ->whereUuid('attempt')->name('family.supervielle.publish');
 
     // Notas lo sacamos
     // Route::get('/notas/{alumno}', [NotaController::class, 'indexA'])->name('notas.indexA');

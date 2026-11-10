@@ -1,18 +1,38 @@
 import { Head } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, CalendarDays, Camera, Check, ChevronDown, ChevronRight, ClipboardCheck, FileText, Inbox, Send, Users, Wallet } from 'lucide-react';
 import { EureAlert, EureAvatar, EureBadge, EureCard } from '../../components/eureka';
 import FamilyNavigation from '../../components/family/FamilyNavigation';
+import FamilyAccountShortcut from '../../components/family/FamilyAccountShortcut';
 import FamilyBoardPreviews from '../../components/family/FamilyBoardPreviews';
 import FamilyNotifications, { useFamilyNotifications } from '../../components/family/FamilyNotifications';
 import type { HomeProps } from '../../components/family/types';
 import useSelectedStudent from '../../components/family/useSelectedStudent';
 import EurekaFrame from '../../layouts/EurekaFrame';
 
-export default function Home(props: HomeProps) {
+export default function Home(props: HomeProps & { overdueBalancesUrl: string }) {
     const { portal, theme, institution, homeUrl, enrollmentResult } = props;
     const { selected, select } = useSelectedStudent(portal.students, `family-student:${theme.clientId}:${portal.user.id}`);
     const { data: notifications, error, refresh } = useFamilyNotifications(portal.notifications, props.notificationsUrl, props.loginUrl);
     const pending = notifications.received + notifications.replies;
+    const [overdueStudents, setOverdueStudents] = useState<string[]>([]);
+    const hasStudents = portal.students.length > 0;
+    useEffect(() => {
+        setOverdueStudents([]);
+        if (!hasStudents) return;
+        const controller = new AbortController();
+        fetch(props.overdueBalancesUrl, { headers: { Accept: 'application/json' }, credentials: 'same-origin', cache: 'no-store', signal: controller.signal })
+            .then(async (response) => {
+                if (!response.ok) return;
+                const data: { students?: { studentId: string; hasOverdue: boolean }[] } = await response.json();
+                if (!controller.signal.aborted && Array.isArray(data.students)) {
+                    setOverdueStudents(data.students.filter((item) => item.hasOverdue === true).map((item) => item.studentId));
+                }
+            })
+            // An unavailable balance must not be presented as debt or as an account in good standing.
+            .catch(() => {});
+        return () => controller.abort();
+    }, [props.overdueBalancesUrl, portal.user.id, theme.clientId, hasStudents]);
 
     return <EurekaFrame theme={theme} className="family-portal family-home-current"
         sidebar={(close) => <FamilyNavigation {...props} selected={selected} onSelect={select} notifications={notifications} close={close} />}
@@ -36,7 +56,7 @@ export default function Home(props: HomeProps) {
                         <a href={student.links.profile}><Users size={17} aria-hidden="true" />Ficha</a>
                         <a href={student.links.documents}><FileText size={17} aria-hidden="true" />{portal.labels.documents}</a>
                         <a href={student.links.attendance}><CalendarDays size={17} aria-hidden="true" />Inasistencias</a>
-                        <a href={student.links.account}><Wallet size={17} aria-hidden="true" />{portal.labels.account}</a>
+                        <FamilyAccountShortcut href={student.links.account} label={portal.labels.account} hasOverdue={overdueStudents.includes(student.id)} />
                         <a href={student.links.payments}><Wallet size={17} aria-hidden="true" />{portal.labels.payments}</a>
                     </>;
                     return <EureCard key={student.id} title={student.name} className={`family-student-card ${selected?.id === student.id ? 'is-selected' : ''}`}

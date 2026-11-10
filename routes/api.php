@@ -78,6 +78,9 @@ Route::group(['middleware' => 'auth:sanctum'], function ()
 });
 
 // Recepción de notificaciones de organismos de pago
+Route::get('/tercerizados-cobranza/supervielle/notificacion-pago/{hash}', \App\Http\Controllers\SupervielleWebhookController::class)
+    ->name('supervielle.webhook');
+
 Route::post('/tercerizados-cobranza/ptic/logtest', [CuentaCorrienteController::class, 'api_tc_PTIC_logTest']);
 Route::post('/tercerizados-cobranza/ptic/notificacion-pago', [CuentaCorrienteController::class, 'api_tc_PTIC_notificacionPago']);
 

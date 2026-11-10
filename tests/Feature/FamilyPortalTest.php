@@ -20,10 +20,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
 use Tests\Support\InMemoryUserProvider;
+use Tests\Support\TestsSuperviellePayments;
 use Tests\TestCase;
 
 class FamilyPortalTest extends TestCase
 {
+    use TestsSuperviellePayments;
+
     private User $user;
 
     protected function setUp(): void
@@ -278,6 +281,40 @@ class FamilyPortalTest extends TestCase
             ->assertJsonCount(2, 'byStudent');
         $this->assertSame(0, DB::table('web_comunicaciones_destinatarios')->where('leido', true)->count());
         $this->assertSame(2, DB::table('web_comunicaciones_entrantes')->whereNull('fhRespuestaLeida')->count());
+    }
+
+    public function test_home_overdue_warning_uses_account_rules_and_only_related_active_students(): void
+    {
+        $this->actingAs($this->user);
+        $database = \Mockery::mock(DB::getFacadeRoot());
+        DB::swap($database);
+        $sql = 'DECLARE @EureFechaHasta smalldatetime; SET @EureFechaHasta = CONVERT(smalldatetime, ?, 121); exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = @EureFechaHasta;';
+        foreach ([11, 12] as $studentId) {
+            $database->shouldReceive('select')->with($sql, \Mockery::on(fn ($bindings) => $bindings[1] === $studentId))->twice()
+                ->andReturnUsing(fn () => array_map(fn ($row) => (object) [
+                    'Fecha_Venc' => $row[0], 'Saldo' => $row[1], 'Monto' => $row[1],
+                ], $studentId === 11
+                    ? [['2026-10-15', 100], ['2026-10-20', -20], ['2026-11-15', 50]]
+                    : [['2026-10-15', 100], ['2026-10-20', -100], ['2026-11-15', 50]]));
+        }
+        $this->travelTo(Carbon::parse('2026-10-31 12:00:00'));
+        $this->getJson(route('family.overdue'))->assertOk()
+            ->assertJsonPath('students.0.hasOverdue', false)->assertJsonPath('students.1.hasOverdue', false);
+        $this->travelTo(Carbon::parse('2026-11-01 12:00:00'));
+        $response = $this->getJson(route('family.overdue', ['alumno' => 14]))->assertOk()
+            ->assertExactJson(['students' => [
+                ['studentId' => '11', 'hasOverdue' => true],
+                ['studentId' => '12', 'hasOverdue' => false],
+            ]]);
+        $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
+    }
+
+    public function test_home_overdue_warning_requires_responsible_session(): void
+    {
+        $this->getJson(route('family.overdue'))->assertUnauthorized();
+        $this->actingAs($this->user);
+        $this->user->tipo = 'Profe';
+        $this->getJson(route('family.overdue'))->assertForbidden();
     }
 
     public function test_new_general_board_redirects_before_rendering_or_marking_it_seen(): void
@@ -914,6 +951,7 @@ class FamilyPortalTest extends TestCase
 
     public function test_finance_account_keeps_legacy_totals_states_and_query_window_without_writing(): void
     {
+        config(['eureka.client_id' => 'ifesnqn']);
         $this->travelTo(Carbon::parse('2026-10-15 12:00:00'));
         $this->actingAs($this->user);
         $entries = [
@@ -961,6 +999,7 @@ class FamilyPortalTest extends TestCase
 
     private function withFinancePaymentSettings(bool $tic, bool $mp, callable $callback): void
     {
+        $previousPayments = config('payments');
         $before = [];
         foreach (['EURE_PAGOS_TIC' => $tic, 'EURE_MERCADO_PAGO' => $mp] as $key => $enabled) {
             $before[$key] = [$_ENV[$key] ?? null, $_SERVER[$key] ?? null, getenv($key)];
@@ -968,8 +1007,10 @@ class FamilyPortalTest extends TestCase
             putenv($key.'='.($enabled ? 's' : 'n'));
         }
         try {
+            config(['payments' => require config_path('payments.php')]);
             $callback();
         } finally {
+            config(['payments' => $previousPayments]);
             foreach ($before as $key => [$env, $server, $process]) {
                 if ($env === null) {
                     unset($_ENV[$key]);
@@ -988,6 +1029,7 @@ class FamilyPortalTest extends TestCase
 
     public function test_finance_empty_account_only_offers_configured_payment_methods(): void
     {
+        config(['eureka.client_id' => 'ifesnqn']);
         $this->actingAs($this->user);
         $database = \Mockery::mock(DB::getFacadeRoot());
         DB::swap($database);
@@ -1040,6 +1082,7 @@ class FamilyPortalTest extends TestCase
 
     public function test_finance_payment_post_keeps_decimal_amount_and_existing_provider_dispatch_without_network(): void
     {
+        config(['eureka.client_id' => 'isi', 'payments.pagostic' => true, 'payments.mercadopago' => true]);
         $this->actingAs($this->user);
         $controller = $this->partialMock(CuentaCorrienteController::class);
         $student = \Mockery::on(fn ($alumno) => $alumno instanceof Alumno && $alumno->id === 11);

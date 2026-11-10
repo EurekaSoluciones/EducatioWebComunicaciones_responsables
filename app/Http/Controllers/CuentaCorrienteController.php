@@ -124,6 +124,13 @@ class CuentaCorrienteController extends Controller
 
   public function pagar(Request $request)
   {
+    // Web-only dispatch: each method follows its environment flag for every institution.
+    if ($request->input('metodo') === 'supervielle') {
+      return app(FamilySupervielleController::class)->prepare($request, app(\App\Support\FamilyPortal::class));
+    }
+    if (in_array($request->input('metodo'), ['pagostic', 'mercadopago'], true)) {
+      abort_unless(config('payments.'.$request->input('metodo')), 403, 'Este medio de pago está deshabilitado.');
+    }
     $importeRAW = $request->input('importe');
     $metodo = $request->input('metodo');
     $cod_alumno = $request->input('alumno');

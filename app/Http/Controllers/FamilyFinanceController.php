@@ -7,6 +7,7 @@ use App\EureLib\EureFunctions;
 use App\Models\Alumno;
 use App\Support\EurekaTheme;
 use App\Support\FamilyPortal;
+use App\Support\SupervielleClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Inertia\Inertia;
@@ -27,10 +28,13 @@ class FamilyFinanceController extends FamilySentController
         $items = EducatioCommFunctions::CC_Obtener($alumno, $month, $today, $overdue, $next);
         $now = EureFunctions::hoy();
         $methods = [];
-        if (EducatioCommFunctions::pagosTic()) {
+        if (SupervielleClient::enabled()) {
+            $methods[] = ['id' => 'supervielle', 'name' => 'Supervielle', 'logo' => null];
+        }
+        if (config('payments.pagostic')) {
             $methods[] = ['id' => 'pagostic', 'name' => 'PagosTIC', 'logo' => asset('assets/images/PTIC.png')];
         }
-        if (EducatioCommFunctions::mercadoPago()) {
+        if (config('payments.mercadopago')) {
             $methods[] = ['id' => 'mercadopago', 'name' => 'Mercado Pago', 'logo' => asset('assets/images/MP_ImagoTipo.png')];
         }
 
@@ -42,8 +46,10 @@ class FamilyFinanceController extends FamilySentController
                     : ($next > $now ? 'Tenés tiempo para pagar hasta el '.$next->format('d/m/Y') : 'Consultá los vencimientos en el detalle.'),
                 'payment' => [
                     'url' => route('cc.pagar'), 'methods' => $methods,
+                    'error' => $request->session()->get('errors')?->first('importe')
+                        ?: $request->session()->get('errors')?->first('metodo'),
                     // No currency symbol or grouping: the existing POST parser expects a decimal amount.
-                    'suggestedAmount' => number_format($month + $overdue + $today, 2, ',', ''),
+                    'suggestedAmount' => (string) $request->old('importe', number_format($month + $overdue + $today, 2, ',', '')),
                 ],
                 'rows' => collect($items)->values()->map(function ($item, $index) use ($now) {
                     $end = $item->Fecha_Venc->copy()->endOfMonth();

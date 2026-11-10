@@ -22,6 +22,13 @@
 .finance-payment { max-width: 780px; margin-left: auto; }.finance-payment form { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 16px; }.finance-payment .eureui-input-group { flex: 1; min-width: 220px; }.finance-payment input:not([type=hidden]) { font-size: 19px; font-variant-numeric: tabular-nums; }
 .finance-payment-methods { display: flex; gap: 10px; flex-wrap: wrap; align-self: center; }.finance-payment-methods button { font-size: 12px; }.finance-payment-methods img { max-width: 65px; height: 24px; object-fit: contain; }
 .finance-payment-progress { font-size: 12px; color: var(--eure-muted); width: 100%; }
+.finance-payment-confirm { max-width: 780px; margin-inline: auto; }
+.finance-payment-details { display: grid; gap: 18px; margin: 24px 0; }
+.finance-payment-details dt { color: var(--eure-muted); font-size: 13px; }
+.finance-payment-details dd { margin: 5px 0 0; font-weight: 600; }
+.finance-payment-details .finance-payment-amount { font-size: 28px; font-variant-numeric: tabular-nums; }
+.finance-payment-confirm p { font-size: 13px; }
+.finance-payment-confirm form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
 @media (max-width: 700px) {
     .finance-heading { flex-wrap: wrap; }.finance-heading .eure-avatar { width: 58px; height: 58px; }.finance-heading h1 { font-size: 20px; }.finance-back { width: 100%; margin-left: 0; }
     .finance-summary dl { grid-template-columns: 1fr; gap: 12px; }.finance-summary dl > div { border: 0; border-top: 1px solid var(--eure-border); padding: 12px 0 0; }.finance-summary dl > div:first-child { padding: 0; }.finance-summary dd { font-size: 24px; }

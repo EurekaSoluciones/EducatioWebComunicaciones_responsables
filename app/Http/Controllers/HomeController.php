@@ -33,6 +33,7 @@ class HomeController extends Controller
             'homeUrl' => route('home'),
             'logoutUrl' => route('logout'),
             'notificationsUrl' => route('family.notifications'),
+            'overdueBalancesUrl' => route('family.overdue'),
             'loginUrl' => route('login'),
             'csrfToken' => csrf_token(),
             'enrollmentResult' => is_array($result) ? [
