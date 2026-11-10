@@ -27,7 +27,7 @@ class EureAuthController extends Controller
     $client = $theme['clientId'];
     $logo = "assets/C/{$client}/institucional/LoginLogo.png";
     $background = match ($client) {
-      'ifesnqn' => "assets/C/{$client}/institucional/LoginCarrusel03.jpg",
+      'ifesnqn', 'ifesplottier' => "assets/C/{$client}/institucional/LoginCarrusel03.jpg",
       'culturalnqn', 'culturalcentenario' => 'assets/images/fondoLoginCultural.png',
       default => "assets/C/{$client}/institucional/LoginBackground.jpeg",
     };
