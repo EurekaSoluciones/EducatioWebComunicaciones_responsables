@@ -3,8 +3,9 @@
 return [
     // Web payment availability is controlled by the environment, not the institution name.
     'enabled' => strtoupper(trim((string) env('EURE_SUPERVIELLE', 'N'))) === 'S',
-    // Enable only after installing the ledger and completing the stored procedure adapter.
+    // Log-only reception needs no ledger or procedure. Processing still requires both.
     'webhook_enabled' => env('EURE_SUPERVIELLE_WEBHOOK_ENABLED', false),
+    'webhook_log_only' => env('EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY', false),
     'consult_scope' => env('EURE_SUPERVIELLE_CONSULT_SCOPE', 'boton-pago.consultar'),
     'token_url' => env('EURE_SUPERVIELLE_TOKEN_URL'),
     'publication_url' => env('EURE_SUPERVIELLE_PUBLICACION_URL'),

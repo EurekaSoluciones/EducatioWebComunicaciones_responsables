@@ -116,11 +116,11 @@ class FamilySupervielleController extends FamilySentController
             $data['state'] = 'publishing';
             $this->save($data);
             try {
-                if (config('supervielle.webhook_enabled')) {
+                if (config('supervielle.webhook_enabled') && ! config('supervielle.webhook_log_only')) {
                     app(SuperviellePublicationStore::class)->begin($data);
                 }
                 $result = $client->publish($data);
-                if (config('supervielle.webhook_enabled')) {
+                if (config('supervielle.webhook_enabled') && ! config('supervielle.webhook_log_only')) {
                     app(SuperviellePublicationStore::class)->complete($data['id'], $result['hash']);
                 }
             } catch (SupervielleException $exception) {

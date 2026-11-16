@@ -253,6 +253,19 @@ trait TestsSuperviellePayments
         $this->assertSame('publishing', Cache::get('supervielle:isi:attempt:'.basename($location))['state']);
     }
 
+    public function test_supervielle_log_only_webhook_does_not_require_ledger_for_publication(): void
+    {
+        $this->supervielleSettings();
+        config(['supervielle.webhook_enabled' => true, 'supervielle.webhook_log_only' => true]);
+        $url = $this->fakeSupervielleSuccess();
+        $location = $this->prepareSupervielle();
+        // No ledger tables exist; publication is simulated and sends no email/SMS.
+        $this->post($location)->assertRedirect($url);
+        Http::assertSentCount(2);
+        Http::assertSent(fn ($request) => $request->url() === 'https://bank.example/publication'
+            && ! isset($request['mail']) && ! isset($request['celular']));
+    }
+
     public function test_supervielle_lock_blocks_double_submission_before_any_network_call(): void
     {
         $this->supervielleSettings();

@@ -68,6 +68,56 @@ El formulario está separado en `FamilyOnlinePayment.tsx` para verificar su HTML
 
 ## Receptor de notificaciones: preparación sin activar
 
+### Modo solo log para pruebas (16 de noviembre)
+
+Se preparó una alternativa para recibir avisos reales del banco mientras se completa la imputación. El usuario solicitó publicarla para pruebas. **El agente no realizó el despliegue ni cambió el `.env` del servidor**. No hay cambios de frontend ni dependencias nuevas en este ajuste.
+
+Archivos de ejecución que deben llegar juntos al servidor mediante la publicación habitual:
+
+- `app/Http/Controllers/SupervielleWebhookController.php`
+- `app/Http/Controllers/FamilySupervielleController.php`
+- `config/supervielle.php`
+- `config/logging.php`
+
+En el `.env` del sitio ISI (`EURE_CLIENTE_ID=isi`):
+
+```dotenv
+EURE_SUPERVIELLE_WEBHOOK_ENABLED=true
+EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY=true
+```
+
+Después de publicar esos archivos y editar el `.env`, ejecutar desde la raíz de la aplicación del servidor:
+
+```sh
+php artisan config:cache
+```
+
+No ejecutar migraciones para este modo. El botón sigue gobernado por `EURE_SUPERVIELLE`; recibir avisos no lo habilita. Si se generan publicaciones desde el botón con este modo activo, tampoco se accede a las tablas nuevas. Se conserva la omisión de `mail` y `celular`.
+
+URL a registrar con Supervielle, método GET:
+
+```text
+https://colegioisi.educatio.ar/api/tercerizados-cobranza/supervielle/notificacion-pago/{{hash}}
+```
+
+Se comprueba el formato UUID del hash, pero **no su existencia en nuestra base ni la autenticidad del emisor o del pago**. Se registra como aviso no verificado. El receptor responde 200 solo después de escribir: `status=success`, mensaje de recepción para pruebas y `receipt_id` para correlacionar respuesta y log. Cada repetición se registra con un nuevo identificador de recepción. Si no puede escribir, responde 503. Hash inválido devuelve 400, receptor desactivado 503 y cliente distinto de ISI 404. HEAD no registra pagos. Se conserva la política sin caché y el límite API existente.
+
+Archivo diario: `storage/logs/supervielle-webhook-AAAA-MM-DD.log`, retención 60 días. El usuario de PHP debe poder escribir en `storage/logs`; conservar estos logs si las pruebas se extienden. Contenido: fecha con zona horaria, `receipt_id`, método GET, cliente ISI, hash, modo `log_only`, `payment_verified=false` y `payment_posted=false`. No se guardan tokens, cookies, query strings ni cuerpos arbitrarios. No se envían datos al banco ni se ejecutan procedimientos. En un servidor con shell POSIX, se pueden seguir las llamadas con:
+
+```sh
+tail -f storage/logs/supervielle-webhook-*.log
+```
+
+Una prueba manual de recepción, después de publicar y habilitar este modo, puede usar un UUID ficticio conocido; **solo confirma conectividad y escritura del log**, no una entrega auténtica del banco:
+
+```sh
+curl -i 'https://colegioisi.educatio.ar/api/tercerizados-cobranza/supervielle/notificacion-pago/11111111-1111-4111-8111-111111111111'
+```
+
+El 200 confirma recepción, no cobro ni imputación. Los avisos reconocidos durante estas pruebas no se reprocesan automáticamente al cambiar de modo; el banco puede dejar de reintentarlos. Para imputarlos después habrá que consultar sus hashes/rendiciones y conciliarlos. No cambiar `EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY` a `false` hasta instalar las tablas y conectar/verificar el stored procedure. La sección siguiente describe ese procesamiento futuro.
+
+Validación local del modo solo log: 39 pruebas de Supervielle, 427 comprobaciones aprobadas; Pint de los archivos revisados y sintaxis de logging aprobados. Se comprobó escritura real del archivo diario con hashes ficticios, llamadas repetidas, fallo de escritura (503), ausencia de SQL y HTTP saliente en recepción, filtrado de secretos y publicación simulada sin tablas en modo solo log. No se llamó al endpoint publicado ni al banco; no se ejecutó un despliegue.
+
 Contrato del manual suministrado: página 12 (consulta del estado), 16 (estados y medios), 17–18 (callback GET, hash y respuesta 200). Ruta preparada:
 
 ```text

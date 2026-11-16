@@ -11,7 +11,7 @@ use Throwable;
 
 class SupervielleWebhookController extends Controller
 {
-    public function __invoke(Request $request, string $hash, SupervielleWebhookProcessor $processor): JsonResponse
+    public function __invoke(Request $request, string $hash): JsonResponse
     {
         // Laravel also matches HEAD for GET routes: never process a probe as a payment notification.
         if (! $request->isMethod('GET')) {
@@ -27,7 +27,28 @@ class SupervielleWebhookController extends Controller
             return $this->reply(['status' => 'error', 'message' => 'Hash inválido.'], 400);
         }
         try {
-            if (! $processor->process($hash)) {
+            if (config('supervielle.webhook_log_only')) {
+                $receiptId = (string) Str::uuid();
+                // This records delivery only. The callback's sender and payment have not been verified.
+                // Do not log query strings, cookies, authorization headers or arbitrary request bodies.
+                Log::channel('supervielle_webhook')->info('Aviso recibido; pago no verificado ni imputado', [
+                    'receipt_id' => $receiptId,
+                    'received_at' => now()->toIso8601String(),
+                    'mode' => 'log_only',
+                    'client' => 'isi',
+                    'method' => 'GET',
+                    'hash' => strtolower($hash),
+                    'payment_verified' => false,
+                    'payment_posted' => false,
+                ]);
+
+                return $this->reply([
+                    'status' => 'success',
+                    'message' => 'Notificación recibida para pruebas. Sin imputación de pago.',
+                    'receipt_id' => $receiptId,
+                ], 200);
+            }
+            if (! app(SupervielleWebhookProcessor::class)->process($hash)) {
                 return $this->reply(['status' => 'error', 'message' => 'Publicación no registrada.'], 400);
             }
 

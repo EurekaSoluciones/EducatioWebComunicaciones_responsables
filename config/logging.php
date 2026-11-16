@@ -51,6 +51,14 @@ return [
     */
 
     'channels' => [
+        'supervielle_webhook' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/supervielle-webhook.log'),
+            'level' => 'info',
+            'days' => 60,
+            'locking' => true,
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
