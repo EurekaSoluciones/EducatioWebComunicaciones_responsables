@@ -26,3 +26,9 @@ Homestead.json
 
 # Intercambio de archivos con el asistente: capturas y material de trabajo, fuera del repositorio.
 /iaexchange/
+
+# Material temporal local (incluye migraciones para trasladar al módulo docentes).
+/temp/
+
+# Notas locales de sesiones con asistentes de IA.
+IAS.txt
