@@ -57,6 +57,12 @@ return [
             'level' => 'info',
             'days' => 60,
             'locking' => true,
+            'formatter' => \Monolog\Formatter\LineFormatter::class,
+            'formatter_with' => [
+                'format' => "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n".str_repeat('-', 80)."\n",
+                'dateFormat' => 'Y-m-d H:i:s',
+                'ignoreEmptyContextAndExtra' => true,
+            ],
         ],
 
         'stack' => [
