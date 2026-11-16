@@ -114,7 +114,7 @@
           </tr>
         </table>
 
-        @if (($mostrarBotonRematriculacion ?? false) && (data_get($estadoRematriculacion, 'periodoActivo', false) || data_get($estadoRematriculacion, 'habilitaPDF', false) || filled(data_get($estadoRematriculacion, 'mensajePDF'))))
+        @if (($mostrarBotonRematriculacion ?? false) && data_get($estadoRematriculacion, 'periodoActivo', false))
           <div class="mt-auto pt-4 text-center">
             <div class="d-flex justify-content-center align-items-center">
               @if (data_get($estadoRematriculacion, 'periodoActivo', false))
@@ -134,6 +134,12 @@
                    aria-label="Descargar comprobante de reinscripción">
                   <i class="fas fa-file-pdf" aria-hidden="true"></i>
                 </a>
+              @else
+                <button type="button" class="btn btn-info btn-lg ml-2" disabled
+                        title="Descargar comprobante de reinscripción"
+                        aria-label="Descargar comprobante de reinscripción">
+                  <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                </button>
               @endif
             </div>
 

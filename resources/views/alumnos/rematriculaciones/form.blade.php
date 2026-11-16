@@ -47,15 +47,11 @@
         $datosConvenio = fn($convenio) => collect((array) $convenio)->mapWithKeys(
             fn($dato, $campo) => [$normalizarCampo($campo) => $dato],
         );
-        $convenioId = fn($convenio) => $datosConvenio($convenio)->get(
-            'codconvenio',
-            $datosConvenio($convenio)->get('codigo', $datosConvenio($convenio)->get('id')),
-        );
         $convenioTexto = fn($convenio) => $datosConvenio($convenio)->get(
             'convenio',
             $datosConvenio($convenio)->get(
                 'descripcion',
-                $datosConvenio($convenio)->get('nombre', $convenioId($convenio)),
+                $datosConvenio($convenio)->get('nombre'),
             ),
         );
 
@@ -400,10 +396,9 @@
                                                 <option value="">Seleccionar</option>
                                                 @foreach ($convenios as $convenio)
                                                     @php
-                                                        $opcionConvenioId = $convenioId($convenio);
                                                         $opcionConvenioTexto = $convenioTexto($convenio);
                                                     @endphp
-                                                    <option value="{{ $opcionConvenioId }}" @selected(trim((string) $valor('Convenio')) === trim((string) $opcionConvenioId))>
+                                                    <option value="{{ $opcionConvenioTexto }}" @selected(trim((string) $valor('Convenio')) === trim((string) $opcionConvenioTexto))>
                                                         {{ $opcionConvenioTexto }}</option>
                                                 @endforeach
                                             </select>
