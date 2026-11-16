@@ -228,7 +228,7 @@ trait TestsSuperviellePayments
     public function test_supervielle_webhook_mode_persists_publication_before_redirecting(): void
     {
         $this->supervielleSettings();
-        (require database_path('migrations/2026_11_04_000001_create_supervielle_ledger.php'))->up();
+        SupervielleTestSchema::create();
         config(['supervielle.webhook_enabled' => true]);
         $url = $this->fakeSupervielleSuccess();
         $location = $this->prepareSupervielle();

@@ -8,6 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
+use Tests\Support\SupervielleTestSchema;
 use Tests\TestCase;
 
 class SupervielleWebhookTest extends TestCase
@@ -19,7 +20,7 @@ class SupervielleWebhookTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        (require database_path('migrations/2026_11_04_000001_create_supervielle_ledger.php'))->up();
+        SupervielleTestSchema::create();
         Schema::create('fake_receipts', function (Blueprint $table) {
             $table->string('payment_id')->primary();
             $table->string('student_id');

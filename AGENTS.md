@@ -16,6 +16,8 @@ Ampliación autorizada el 11 de noviembre de 2026: preparar la identidad visual 
 
 ## Recordatorio al retomar Supervielle
 
+Las migraciones de base de datos se gestionan en el módulo docentes. No agregar migraciones desplegables en este repositorio. La migración pendiente de Supervielle se conserva localmente en `temp/migrations/`, excluido de Git, para trasladarla a docentes. Las pruebas mantienen únicamente un esquema aislado de SQLite en memoria en `tests/Support` y no dependen de archivos temporales.
+
 Actualización autorizada el 16 de noviembre de 2026: preparar un modo de recepción de webhook para pruebas en ISI, con `EURE_SUPERVIELLE_WEBHOOK_ENABLED=true` y `EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY=true`. Este modo registra el hash recibido y responde 200 después de escribir el log; no consulta al banco, no requiere migraciones ni stored procedure, no imputa ni verifica pagos y no envía emails/SMS. La activación del botón es independiente. El usuario realizará la publicación y la configuración del servidor; las restricciones de la sesión impiden al agente desplegar. Mantener el procesamiento contable desactivado hasta completar el procedimiento y las tablas.
 
 Actualización autorizada el 9 de noviembre de 2026: la disponibilidad de botones de pago web depende exclusivamente de `EURE_MERCADO_PAGO`, `EURE_PAGOS_TIC` y `EURE_SUPERVIELLE` (`S`/`N`), sin selección fija por cliente. Pueden coexistir varios medios. Para preparar ISI sin botones, mantener los tres en `N` en su entorno. Esto reemplaza la selección exclusiva por colegio; no habilita el webhook, despliegues ni cobros reales.
