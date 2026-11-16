@@ -114,28 +114,34 @@
           </tr>
         </table>
 
-        @php
-          $resultadoRematriculacion = session('resultadoRematriculacion');
-          $resultadoDeEsteAlumno = (string) data_get($resultadoRematriculacion, 'alumnoId') === (string) $alumno->id;
-        @endphp
-        @if (($mostrarBotonRematriculacion ?? false) && ($resultadoDeEsteAlumno || data_get($estadoRematriculacion, 'periodoActivo', false)))
+        @if (($mostrarBotonRematriculacion ?? false) && (data_get($estadoRematriculacion, 'periodoActivo', false) || data_get($estadoRematriculacion, 'habilitaPDF', false) || filled(data_get($estadoRematriculacion, 'mensajePDF'))))
           <div class="mt-auto pt-4 text-center">
-            @if ($resultadoDeEsteAlumno && data_get($resultadoRematriculacion, 'tipo') !== 'error')
-              <div class="alert alert-success mb-0" role="status">
-                {{ data_get($resultadoRematriculacion, 'mensaje') }}
-              </div>
-            @elseif (data_get($estadoRematriculacion, 'habilitaBoton', false))
-              <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
-                <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
-              </a>
-            @elseif (!filled(data_get($estadoRematriculacion, 'mensaje')))
-              <button type="button" class="btn btn-info btn-lg" disabled>
-                <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
-              </button>
-            @endif
+            <div class="d-flex justify-content-center align-items-center">
+              @if (data_get($estadoRematriculacion, 'periodoActivo', false))
+                @if (data_get($estadoRematriculacion, 'habilitaBoton', false))
+                  <a href="{{ route('alumnos.rematriculacion', $alumno) }}" class="btn btn-info btn-lg">
+                    <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+                  </a>
+                @else
+                  <button type="button" class="btn btn-info btn-lg" disabled>
+                    <i class="fas fa-clipboard-check mr-2"></i>Completar reinscripción
+                  </button>
+                @endif
+              @endif
+              @if (data_get($estadoRematriculacion, 'habilitaPDF', false))
+                <a href="{{ route('alumnos.rematriculacion.pdf', $alumno) }}" class="btn btn-info btn-rematriculacion-pdf btn-lg ml-2"
+                   target="_blank" rel="noopener" title="Descargar comprobante de reinscripción"
+                   aria-label="Descargar comprobante de reinscripción">
+                  <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                </a>
+              @endif
+            </div>
 
-            @if (!$resultadoDeEsteAlumno && filled(data_get($estadoRematriculacion, 'mensaje')))
+            @if (data_get($estadoRematriculacion, 'periodoActivo', false) && filled(data_get($estadoRematriculacion, 'mensaje')))
               <p class="text-muted mt-2 mb-0">{{ data_get($estadoRematriculacion, 'mensaje') }}</p>
+            @endif
+            @if (filled(data_get($estadoRematriculacion, 'mensajePDF')))
+              <p class="text-muted mt-2 mb-0">{{ data_get($estadoRematriculacion, 'mensajePDF') }}</p>
             @endif
           </div>
         @endif

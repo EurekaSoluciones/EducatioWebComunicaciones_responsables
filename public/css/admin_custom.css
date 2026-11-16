@@ -1,4 +1,11 @@
 
+.btn.btn-rematriculacion-pdf:hover,
+.btn.btn-rematriculacion-pdf:focus-visible {
+  color: #17a2b8;
+  background-color: #fff;
+  border-color: #17a2b8;
+}
+
 .ComunicacionAsuntoSinLeer
 {
   font-weight: bold;

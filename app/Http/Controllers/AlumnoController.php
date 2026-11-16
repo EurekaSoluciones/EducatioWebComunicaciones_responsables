@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\Rule;
 
 
 class AlumnoController extends Controller
@@ -194,6 +195,29 @@ class AlumnoController extends Controller
     }
   }
 
+  public function descargarRematriculacion(Alumno $alumno)
+  {
+    if (!EureFunctions::esUsuarioLogueadoEsResponsableDeAlumno($alumno)) {
+      abort(403, 'Acceso no permitido');
+    }
+
+    $estado = EducatioCommFunctions::MensajeBloqueoRematriculacion($alumno);
+
+    if (!($estado['habilitaPDF'] ?? false)) {
+      abort(403, ($estado['mensajePDF'] ?? '') ?: 'El comprobante de reinscripción no está disponible.');
+    }
+
+    $resultado = EureFunctions::obtenerPDF('MatriculaRematriculacion.rpt', 'Rematriculacion_', '', [
+      ['nombre' => '@CodAlumno', 'valor' => $alumno->Cod_Alumno],
+    ]);
+
+    if (!$resultado->RequestsStatusOK) {
+      abort(400, $resultado->RequestsStatusObs);
+    }
+
+    return redirect()->away($resultado->pdf_URL);
+  }
+
   public function rematriculacion(Alumno $alumno)
   {
     // Obtengo el Responsable
@@ -226,7 +250,14 @@ class AlumnoController extends Controller
 
     // dd($ciudades);
 
-    return view('alumnos.rematriculaciones.form', compact('alumno', 'rematriculacion', 'cursos', 'convenios', 'ciudades'));
+    $necesidadesEspeciales = DB::table('dbo.Tipo_NecesidadesEspeciales')
+      ->whereNull('fecha_baja')
+      ->orderBy('descripcion')
+      ->get()
+      ->sortBy(fn ($tipo) => mb_strtolower(trim($tipo->descripcion)) === 'otra' ? 1 : 0)
+      ->values();
+
+    return view('alumnos.rematriculaciones.form', compact('alumno', 'rematriculacion', 'cursos', 'convenios', 'ciudades', 'necesidadesEspeciales'));
   }
 
   public function guardarRematriculacion(Request $request, Alumno $alumno)
@@ -243,14 +274,43 @@ class AlumnoController extends Controller
       abort(403, $estadoRematriculacion['mensaje'] ?: 'La reinscripción no está disponible.');
     }
 
-    $request->validate([
+    $necesidadesEspeciales = DB::table('dbo.Tipo_NecesidadesEspeciales')
+      ->whereNull('fecha_baja')
+      ->get();
+    $codigosOtra = $necesidadesEspeciales
+      ->filter(fn ($tipo) => mb_strtolower(trim($tipo->descripcion)) === 'otra')
+      ->pluck('Cod_NecesidadEspecial')->map(fn ($codigo) => (string) $codigo)->all();
+    $seleccionaOtra = $request->boolean('tieneNecesidadEspecial')
+      && is_array($request->input('necesidadesEspeciales'))
+      && collect($request->input('necesidadesEspeciales'))->contains(
+        fn ($codigo) => is_scalar($codigo) && in_array((string) $codigo, $codigosOtra, true)
+      );
+
+    $datos = $request->validate([
+      'CursoNuevo' => ['required'],
       'aceptaReglamento' => ['required', 'accepted'],
+      'tieneNecesidadEspecial' => ['required', 'boolean'],
+      'necesidadesEspeciales' => [Rule::excludeIf(!$request->boolean('tieneNecesidadEspecial')), 'required', 'array', 'min:1'],
+      'necesidadesEspeciales.*' => ['integer', 'distinct', Rule::in($necesidadesEspeciales->pluck('Cod_NecesidadEspecial')->all())],
+      'descripcion_otra' => [Rule::excludeIf(!$seleccionaOtra), 'required', 'string', 'max:500'],
     ], [
+      'CursoNuevo.required' => 'Debés seleccionar un curso para confirmar la reinscripción.',
       'aceptaReglamento.required' => 'Debés aceptar el reglamento para confirmar la reinscripción.',
       'aceptaReglamento.accepted' => 'Debés aceptar el reglamento para confirmar la reinscripción.',
+      'necesidadesEspeciales.array' => 'La selección de necesidades especiales no es válida.',
+      'necesidadesEspeciales.required' => 'Debés seleccionar al menos una opción al marcar que requiere apoyos particulares.',
+      'necesidadesEspeciales.min' => 'Debés seleccionar al menos una opción.',
+      'necesidadesEspeciales.*.integer' => 'La necesidad especial seleccionada no es válida.',
+      'necesidadesEspeciales.*.distinct' => 'No se puede seleccionar dos veces la misma necesidad especial.',
+      'necesidadesEspeciales.*.in' => 'Una de las necesidades especiales seleccionadas ya no está disponible.',
+      'descripcion_otra.string' => 'La explicación de Otra debe ser un texto.',
+      'descripcion_otra.required' => 'Debés especificar la necesidad al seleccionar Otra.',
+      'descripcion_otra.max' => 'La explicación de Otra no puede superar los 500 caracteres.',
     ]);
 
-    $sql = 'EXEC dbo.SP_WEB_DatosAlumno_RematriculacionInsert 
+    $sql = 'SET NOCOUNT ON;
+      DECLARE @codigoRematriculacion INT = NULL;
+      EXEC dbo.SP_WEB_DatosAlumno_RematriculacionInsert
       @codAlumno = ?,
       @Domicilio = ?,
       @Telefono = ?,
@@ -294,7 +354,9 @@ class AlumnoController extends Controller
       @TieneFamiliaDirectoQuienes = ?,
       @CursoNuevo = ?,
       @Observaciones = ?,
-      @tieneNecesidadEspecial = ?';
+      @tieneNecesidadEspecial = ?,
+      @codigoRematriculacion = @codigoRematriculacion OUTPUT;
+      SELECT @codigoRematriculacion AS Cod_Rematriculacion;';
 
     $parametros = [
       $alumno->id,
@@ -344,13 +406,30 @@ class AlumnoController extends Controller
     ];
 
     try {
-      DB::statement($sql, $parametros);
-      return redirect()
-        ->route('home')
-        ->with('resultadoRematriculacion', [
-          'alumnoId' => (string) $alumno->id,
-          'mensaje' => 'La reinscripción fue guardada correctamente.',
-        ]);
+      DB::transaction(function () use ($sql, $parametros, $datos, $codigosOtra, $alumno) {
+        $resultado = DB::selectOne($sql, $parametros);
+        $codigo = filter_var($resultado->Cod_Rematriculacion ?? null, FILTER_VALIDATE_INT);
+
+        if (!$codigo || !DB::table('dbo.AlumnosRematriculacion')
+          ->where('Codigo', $codigo)->where('codAlumno', $alumno->id)->exists()) {
+          throw new \RuntimeException('El procedimiento debe devolver un Cod_Rematriculacion válido para el alumno.');
+        }
+
+        DB::table('dbo.AlumnosRematriculacion_NecesidadesEspeciales')
+          ->where('Cod_Rematriculacion', $codigo)->delete();
+
+        $filas = collect($datos['necesidadesEspeciales'] ?? [])->map(fn ($tipo) => [
+          'Cod_Rematriculacion' => $codigo,
+          'Cod_NecesidadEspecial' => (int) $tipo,
+          'descripcion_otra' => in_array((string) $tipo, $codigosOtra, true)
+            ? ($datos['descripcion_otra'] ?? null) : null,
+        ])->all();
+
+        if ($filas) {
+          DB::table('dbo.AlumnosRematriculacion_NecesidadesEspeciales')->insert($filas);
+        }
+      });
+      return redirect()->route('home');
     } catch (\Throwable $e) {
       // El error técnico queda registrado para nosotros
       Log::error('Error al guardar rematriculación', [

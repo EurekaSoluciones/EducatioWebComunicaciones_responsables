@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Reinscripción')
+@section('plugins.Select2', true)
 
 @section('content_header')
     <h1 class="ml-3">
@@ -87,6 +88,10 @@
         $noPermiteFoto = filter_var($valor('nopermitefoto', false), FILTER_VALIDATE_BOOLEAN);
         $tieneFamiliaDirecto = (bool) $valor('TieneFamiliaDirecto', false);
         $tieneNecesidadEspecial = (bool) $valor('tieneNecesidadEspecial', false);
+        $necesidadesSeleccionadas = array_map('strval', array_filter((array) old('necesidadesEspeciales', []), 'is_scalar'));
+        $seleccionaOtra = collect($necesidadesEspeciales)->contains(fn($tipo) =>
+            mb_strtolower(trim($tipo->descripcion)) === 'otra'
+            && in_array((string) $tipo->Cod_NecesidadEspecial, $necesidadesSeleccionadas, true));
     @endphp
 
     <div class="container-fluid">
@@ -232,14 +237,33 @@
                                                     id="tieneNecesidadEspecial" name="tieneNecesidadEspecial"
                                                     value="1" @checked($tieneNecesidadEspecial)>
                                                 <label class="custom-control-label" for="tieneNecesidadEspecial">
-                                                    El alumno tiene una necesidad especial.
+                                                    ¿Su hijo/a presenta alguna necesidad específica, condición o situación que pueda requerir apoyos particulares para su proceso de aprendizaje?
                                                 </label>
                                             </div>
-                                            <div id="necesidadEspecialPendiente"
-                                                class="alert alert-light border mt-3 mb-0"
+                                            <div id="necesidadEspecialDetalle"
+                                                class="mt-3"
                                                 @if (!$tieneNecesidadEspecial) style="display: none" @endif>
-                                                <i class="fas fa-info-circle text-info mr-1"></i>
-                                                Las opciones de acompañamiento se incorporarán en esta sección.
+                                                <label for="necesidadesEspeciales">Seleccione cuál o cuáles</label>
+                                                <select id="necesidadesEspeciales" name="necesidadesEspeciales[]"
+                                                    class="form-control" multiple @required($tieneNecesidadEspecial) @disabled(!$tieneNecesidadEspecial)>
+                                                    @foreach ($necesidadesEspeciales as $tipo)
+                                                        <option value="{{ $tipo->Cod_NecesidadEspecial }}"
+                                                            data-es-otra="{{ mb_strtolower(trim($tipo->descripcion)) === 'otra' ? '1' : '0' }}"
+                                                            @selected(in_array((string) $tipo->Cod_NecesidadEspecial, $necesidadesSeleccionadas, true))>
+                                                            {{ $tipo->descripcion }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <small class="form-text text-muted">Podés seleccionar más de una opción.</small>
+                                                <div id="descripcionOtraDetalle" class="mt-3"
+                                                    @if (!$seleccionaOtra) style="display: none" @endif>
+                                                    <label for="descripcion_otra">Especificar otra:</label>
+                                                    <textarea id="descripcion_otra" name="descripcion_otra" class="form-control"
+                                                        rows="3" maxlength="500"
+                                                        @required($tieneNecesidadEspecial && $seleccionaOtra)
+                                                        @disabled(!$tieneNecesidadEspecial || !$seleccionaOtra)>{{ old('descripcion_otra') }}</textarea>
+                                                    <small class="form-text text-muted">Máximo 500 caracteres.</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -370,9 +394,9 @@
                                             </div>
                                         @endforeach
                                         <div class="col-md-6 form-group">
-                                            <label for="Convenio">Convenio <span class="text-danger">*</span></label>
+                                            <label for="Convenio">Convenio</label>
                                             <select class="form-control @error('Convenio') is-invalid @enderror"
-                                                id="Convenio" name="Convenio" required>
+                                                id="Convenio" name="Convenio">
                                                 <option value="">Seleccionar</option>
                                                 @foreach ($convenios as $convenio)
                                                     @php
@@ -385,21 +409,16 @@
                                             </select>
                                             @error('Convenio')
                                                 <span class="invalid-feedback">{{ $message }}</span>
-                                            @else
-                                                <span class="invalid-feedback">Este campo es obligatorio.</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label for="NombreTitularConvenio">Nombre del titular del convenio <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="NombreTitularConvenio">Nombre del titular del convenio</label>
                                             <input type="text"
                                                 class="form-control @error('NombreTitularConvenio') is-invalid @enderror"
                                                 id="NombreTitularConvenio" name="NombreTitularConvenio" maxlength="150"
-                                                value="{{ $valor('NombreTitularConvenio') }}" required>
+                                                value="{{ $valor('NombreTitularConvenio') }}">
                                             @error('NombreTitularConvenio')
                                                 <span class="invalid-feedback">{{ $message }}</span>
-                                            @else
-                                                <span class="invalid-feedback">Este campo es obligatorio.</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -472,9 +491,9 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="CursoNuevo">Curso</label>
+                                                <label for="CursoNuevo">Curso <span class="text-danger">*</span></label>
                                                 <select class="form-control @error('CursoNuevo') is-invalid @enderror"
-                                                    id="CursoNuevo" name="CursoNuevo">
+                                                    id="CursoNuevo" name="CursoNuevo" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($cursos as $curso)
                                                         @php
@@ -498,6 +517,8 @@
                                                 </select>
                                                 @error('CursoNuevo')
                                                     <span class="invalid-feedback">{{ $message }}</span>
+                                                @else
+                                                    <span class="invalid-feedback">Debés seleccionar un curso para confirmar la reinscripción.</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group mb-0">
@@ -522,7 +543,7 @@
                                         @checked((bool) old('aceptaReglamento', false))>
                                     <label class="custom-control-label" for="aceptaReglamento">
                                         Leí y acepto el
-                                        <a href="https://drive.google.com/file/d/1D0035MtrDbo0kND5VQ57T1gcugPT_F9e/view"
+                                        <a href="https://drive.google.com/file/d/1D0035MtrDbo0kND5VQ57T1gcugPT_F9e/view?usp=sharing"
                                             class="text-primary font-weight-bold" target="_blank"
                                             rel="noopener noreferrer">reglamento</a>.
                                         <span class="text-danger">*</span>
@@ -573,7 +594,29 @@
             const familiaCheck = document.getElementById('TieneFamiliaDirecto');
             const familiaDetalle = document.getElementById('familiaDirectoDetalle');
             const necesidadCheck = document.getElementById('tieneNecesidadEspecial');
-            const necesidadDetalle = document.getElementById('necesidadEspecialPendiente');
+            const necesidadDetalle = document.getElementById('necesidadEspecialDetalle');
+            const necesidadesSelect = document.getElementById('necesidadesEspeciales');
+            const otraDetalle = document.getElementById('descripcionOtraDetalle');
+            const otraTexto = document.getElementById('descripcion_otra');
+            $(necesidadesSelect).select2({
+                theme: 'bootstrap4',
+                width: '100%',
+                placeholder: 'Seleccioná las opciones que correspondan',
+                closeOnSelect: true,
+                language: { noResults: () => 'No se encontraron opciones' }
+            });
+
+            function actualizarNecesidades() {
+                necesidadDetalle.style.display = necesidadCheck.checked ? '' : 'none';
+                necesidadesSelect.disabled = !necesidadCheck.checked;
+                necesidadesSelect.required = necesidadCheck.checked;
+                const seleccionaOtra = necesidadCheck.checked && Array.from(necesidadesSelect.selectedOptions)
+                    .some(opcion => opcion.dataset.esOtra === '1');
+                otraDetalle.style.display = seleccionaOtra ? '' : 'none';
+                otraTexto.disabled = !seleccionaOtra;
+                otraTexto.required = seleccionaOtra;
+            }
+            $(necesidadesSelect).on('change', actualizarNecesidades);
             const formulario = document.getElementById('formRematriculacion');
             const avisoFormularioIncompleto = document.getElementById('formularioIncompleto');
             const erroresFormulario = document.getElementById('erroresFormulario');
@@ -611,9 +654,8 @@
             familiaCheck.addEventListener('change', function() {
                 alternarDetalle(familiaCheck, familiaDetalle);
             });
-            necesidadCheck.addEventListener('change', function() {
-                alternarDetalle(necesidadCheck, necesidadDetalle);
-            });
+            necesidadCheck.addEventListener('change', actualizarNecesidades);
+            actualizarNecesidades();
             formulario.addEventListener('submit', function(event) {
                 actualizarObligatoriosResponsable2();
                 formulario.querySelectorAll('[required]').forEach(function(campo) {

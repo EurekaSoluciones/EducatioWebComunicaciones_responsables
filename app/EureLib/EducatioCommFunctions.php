@@ -200,6 +200,8 @@ class EducatioCommFunctions
         'periodoActivo' => false,
         'habilitaBoton' => false,
         'mensaje' => '',
+        'habilitaPDF' => false,
+        'mensajePDF' => '',
       ];
     }
 
@@ -220,6 +222,8 @@ class EducatioCommFunctions
       'periodoActivo' => (bool) ($estado['periodoactivo'] ?? false),
       'habilitaBoton' => (bool) ($estado['habilitaboton'] ?? false),
       'mensaje' => $estado['mensaje'] ?? '',
+      'habilitaPDF' => (bool) ($estado['habilitapdf'] ?? false),
+      'mensajePDF' => $estado['mensajepdf'] ?? '',
     ];
   }
 
