@@ -28,7 +28,7 @@ class FamilyFinanceController extends FamilySentController
         $items = EducatioCommFunctions::CC_Obtener($alumno, $month, $today, $overdue, $next);
         $now = EureFunctions::hoy();
         $methods = [];
-        if (SupervielleClient::enabled()) {
+        if (SupervielleClient::availableFor($request->user())) {
             $methods[] = ['id' => 'supervielle', 'name' => 'Supervielle', 'logo' => null];
         }
         if (config('payments.pagostic')) {

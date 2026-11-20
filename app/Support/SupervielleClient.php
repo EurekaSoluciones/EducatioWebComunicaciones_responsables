@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\User;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +14,20 @@ class SupervielleClient
     public static function enabled(): bool
     {
         return (bool) config('supervielle.enabled');
+    }
+
+    public static function availableFor(?User $user): bool
+    {
+        if (! self::enabled() || $user === null) {
+            return false;
+        }
+        if (! config('supervielle.test_mode')) {
+            return true;
+        }
+
+        $login = (string) $user->login;
+
+        return $login !== '' && in_array($login, config('supervielle.test_logins', []), true);
     }
 
     // Explicit CLI diagnostic: authenticate only, never publish a debt or return the token.

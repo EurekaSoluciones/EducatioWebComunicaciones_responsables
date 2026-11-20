@@ -3,6 +3,10 @@
 return [
     // Web payment availability is controlled by the environment, not the institution name.
     'enabled' => strtoupper(trim((string) env('EURE_SUPERVIELLE', 'N'))) === 'S',
+    'test_mode' => env('EURE_SUPERVIELLE_TEST_MODE', false),
+    'test_logins' => array_values(array_filter(array_map('trim', explode(',', (string) env(
+        'EURE_SUPERVIELLE_TEST_LOGINS', ''
+    ))), static fn (string $login): bool => $login !== '')),
     // Log-only reception needs no ledger or procedure. Processing still requires both.
     'webhook_enabled' => env('EURE_SUPERVIELLE_WEBHOOK_ENABLED', false),
     'webhook_log_only' => env('EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY', false),

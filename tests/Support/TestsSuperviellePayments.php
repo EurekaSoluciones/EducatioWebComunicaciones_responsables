@@ -92,6 +92,69 @@ trait TestsSuperviellePayments
         Http::assertNothingSent();
     }
 
+    public function test_supervielle_test_mode_filters_buttons_by_exact_login_without_changing_other_methods(): void
+    {
+        $this->supervielleSettings();
+        config(['supervielle.test_mode' => true, 'supervielle.test_logins' => ['29648818']]);
+        $database = \Mockery::mock(DB::getFacadeRoot());
+        DB::swap($database);
+        $database->shouldReceive('select')->with('DECLARE @EureFechaHasta smalldatetime; SET @EureFechaHasta = CONVERT(smalldatetime, ?, 121); exec SP_WEB_CTACTE @CodAlumno = ?, @FechaDesde = ?, @FechaHasta = @EureFechaHasta;', \Mockery::any())->times(6)->andReturn([]);
+        $this->withFinancePaymentSettings(true, true, function () {
+            foreach (['29648818', 'otro', '029648818', null] as $login) {
+                $this->user->login = $login;
+                $response = $this->inertiaHome('/cc/11')->assertOk();
+                $expected = $login === '29648818' ? ['supervielle', 'pagostic', 'mercadopago'] : ['pagostic', 'mercadopago'];
+                $this->assertSame($expected, array_column($response->json('props.account.payment.methods'), 'id'));
+                $this->assertStringNotContainsString('29648818', $response->getContent());
+            }
+            config(['supervielle.test_mode' => false]);
+            $response = $this->inertiaHome('/cc/11')->assertOk();
+            $this->assertSame(['supervielle', 'pagostic', 'mercadopago'], array_column($response->json('props.account.payment.methods'), 'id'));
+            config(['supervielle.enabled' => false]);
+            $response = $this->inertiaHome('/cc/11')->assertOk();
+            $this->assertSame(['pagostic', 'mercadopago'], array_column($response->json('props.account.payment.methods'), 'id'));
+        });
+        Http::assertNothingSent();
+    }
+
+    public function test_supervielle_test_mode_blocks_direct_urls_and_revokes_existing_attempts(): void
+    {
+        $this->supervielleSettings();
+        $this->user->login = '29648818';
+        config(['supervielle.test_mode' => true, 'supervielle.test_logins' => ['29648818']]);
+        $location = $this->prepareSupervielle();
+        foreach ([['otro'], []] as $allowed) {
+            config(['supervielle.test_logins' => $allowed]);
+            foreach (['cc.pagar', 'family.supervielle.prepare'] as $route) {
+                $this->post(route($route), [
+                    'alumno' => 11, 'importe' => '1234,50', 'metodo' => 'supervielle',
+                    // A supplied login cannot replace the authenticated identity.
+                    'login' => 'otro',
+                ])->assertForbidden();
+            }
+            $this->get($location)->assertForbidden();
+            $this->post($location)->assertForbidden();
+        }
+        Http::assertNothingSent();
+    }
+
+    public function test_supervielle_test_login_can_publish_without_email_or_sms(): void
+    {
+        $this->supervielleSettings();
+        $this->user->login = '29648818';
+        config(['supervielle.test_mode' => true, 'supervielle.test_logins' => ['29648818']]);
+        $url = $this->fakeSupervielleSuccess();
+        $response = $this->post(route('cc.pagar'), [
+            'alumno' => 11, 'importe' => '1234,50', 'metodo' => 'supervielle',
+        ])->assertRedirect();
+        $location = $response->headers->get('Location');
+        $this->inertiaHome($location)->assertOk()->assertJsonPath('props.payment.canContinue', true);
+        $this->post($location)->assertRedirect($url);
+        Http::assertSentCount(2);
+        Http::assertSent(fn ($request) => $request->url() === 'https://bank.example/publication'
+            && ! isset($request['mail']) && ! isset($request['celular']));
+    }
+
     public function test_disabling_supervielle_blocks_new_and_existing_payment_routes(): void
     {
         $this->supervielleSettings();

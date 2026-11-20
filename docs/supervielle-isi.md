@@ -2,7 +2,36 @@
 
 **Recordatorio para retomar: NO ENVIAR EL EMAIL.** Generar únicamente el enlace de pago; omitir `mail` y mantener `celular` omitido (sin SMS), aunque aparezcan en ejemplos de curl o en el C# anterior. Recordar esta decisión al usuario al retomar. El webhook de pagos no implica enviar correos a las familias.
 
-Selección actualizada el 9 de noviembre de 2026: los botones web se habilitan exclusivamente por `EURE_MERCADO_PAGO`, `EURE_PAGOS_TIC` y `EURE_SUPERVIELLE` (`S`/`N`), independientemente del colegio. Esto reemplaza la selección fija inicial de Supervielle para ISI. Pueden coexistir los tres. El receptor de notificaciones Supervielle continúa desactivado y pendiente de conectar al stored procedure de imputación.
+Los botones web se habilitan por `EURE_MERCADO_PAGO`, `EURE_PAGOS_TIC` y `EURE_SUPERVIELLE` (`S`/`N`), independientemente del colegio. Esto reemplaza la selección fija inicial de Supervielle para ISI. Pueden coexistir los tres. Supervielle admite además la restricción por login descrita abajo. El webhook permite recepción solo log; la imputación sigue pendiente de conectar al stored procedure.
+
+## Pruebas restringidas por login (20 de noviembre de 2026)
+
+Esta es la guía interna del circuito. Mantener aquí configuración, operación y límites; `AGENTS.md` contiene el recordatorio para futuras intervenciones. No guardar credenciales ni tokens en documentación versionada.
+
+Para probar sin mostrar Supervielle a las demás familias, agregar o reemplazar estas variables en el `.env` del sitio ISI:
+
+```dotenv
+EURE_SUPERVIELLE=S
+EURE_SUPERVIELLE_TEST_MODE=true
+EURE_SUPERVIELLE_TEST_LOGINS=29648818
+EURE_SUPERVIELLE_WEBHOOK_ENABLED=true
+EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY=true
+```
+
+El `.env` local y el bloque local ignorado `temp/supervielle-produccion.env` se prepararon con este acceso. El servidor debe configurarse por separado; esos archivos no viajan con Git. Después de publicar el código y cambiar el `.env` en el servidor, ejecutar `php artisan config:cache`. No se necesitan migraciones ni cambios de frontend para esta restricción.
+
+- `EURE_SUPERVIELLE=N` (o ausente) bloquea el botón y todas sus rutas, incluso para logins permitidos.
+- Con `TEST_MODE=true`, se compara exactamente el campo `login` del usuario autenticado con la lista. No es el ID interno, el código de responsable ni el email. Los espacios alrededor de cada entrada se descartan; se conservan ceros iniciales y mayúsculas/minúsculas. Para varios usuarios: `EURE_SUPERVIELLE_TEST_LOGINS="29648818,otro_login"`.
+- Una lista vacía bloquea a todos. El servidor verifica el permiso al preparar, abrir la confirmación y publicar, incluyendo `POST /cc/pagar`. Quitar un login también bloquea sus intentos existentes al actualizar la configuración.
+- Con `TEST_MODE=false` o ausente, Supervielle queda disponible para todos los responsables autorizados si `EURE_SUPERVIELLE=S`. `.env.example` propone modo restringido y lista vacía para una nueva instalación. Para habilitar a todas las familias, cambiar explícitamente a `false` cuando se decida.
+- Mercado Pago y PagosTIC conservan sus propios parámetros. La lista de logins no se envía al navegador ni cambia la autenticación, los permisos sobre alumnos o los contratos móviles.
+- El webhook no requiere sesión ni consulta esta lista. Con recepción solo log responde y registra avisos, sin verificar ni imputar cobros.
+
+**El modo de prueba restringe usuarios; no convierte la integración en un sandbox.** Las URLs y credenciales configuradas siguen determinando el ambiente del banco. Las publicaciones y los pagos pueden ser reales. Se siguen omitiendo `mail` y `celular` (sin email/SMS). Ocultar el botón o quitar un login no cancela enlaces que ya se hayan generado en el banco.
+
+Comprobación en el sitio una vez publicado: ingresar con `29648818` y verificar botón y confirmación; ingresar con otro login y verificar que no aparezca y que sus rutas directas devuelvan 403. La publicación se realiza recién al confirmar. Para comprobar recepción manual, usar el curl de la sección de webhook y buscar el `receipt_id` en `storage/logs/supervielle-webhook-AAAA-MM-DD.log`. Esa prueba confirma recepción y escritura, no una notificación auténtica del banco ni un pago. Mantener `WEBHOOK_LOG_ONLY=true` hasta completar tablas y procedimiento.
+
+Validación local de esta restricción: 44 pruebas y 559 comprobaciones aprobadas (Supervielle y combinaciones de medios); Pint aprobado. Incluye login exacto, ceros iniciales, lista vacía, revocación de intentos, rutas directas, otros medios, publicación simulada sin email/SMS y webhook sin sesión con lista vacía. SQLite en memoria y banco simulado/local; no hubo llamadas al banco ni despliegue.
 
 ## Recorrido
 
@@ -66,7 +95,7 @@ Revisión posterior: el campo oculto `metodo` se modificaba directamente pero co
 
 El formulario está separado en `FamilyOnlinePayment.tsx` para verificar su HTML con React sin iniciar sesiones reales ni acceder al banco. Las pruebas se ejecutan con `node tests/js/payment-form.test.mjs`. La revisión interactiva de Chrome no pudo realizarse porque Computer Use no recibió aprobación de acceso.
 
-## Receptor de notificaciones: preparación sin activar
+## Receptor de notificaciones
 
 ### Modo solo log para pruebas (16 de noviembre)
 
@@ -124,7 +153,7 @@ Contrato del manual suministrado: página 12 (consulta del estado), 16 (estados 
 GET /api/tercerizados-cobranza/supervielle/notificacion-pago/{hash}
 ```
 
-No requiere sesión familiar. Solo funciona para ISI, con `EURE_SUPERVIELLE_WEBHOOK_ENABLED=true`. Permanece desactivado por defecto; el `.env` activo no se cambió para habilitarlo. Es independiente del flag del botón: detener nuevas publicaciones no debe impedir procesar pagos anteriores. HEAD no procesa pagos. Todas las respuestas llevan `Cache-Control: no-store`; el alojamiento/CDN también debe excluir esta ruta de caché. Conserva el límite API existente de 60 solicitudes/minuto por IP, a revisar con el volumen y reintentos acordados con el banco.
+No requiere sesión familiar. Solo funciona para ISI, con `EURE_SUPERVIELLE_WEBHOOK_ENABLED=true`. Permanece desactivado por defecto; el entorno local está habilitado en modo solo log según la configuración de pruebas anterior. Es independiente del flag del botón y de la lista de logins: detener nuevas publicaciones no debe impedir recibir avisos de pagos anteriores. HEAD no procesa pagos. Todas las respuestas llevan `Cache-Control: no-store`; el alojamiento/CDN también debe excluir esta ruta de caché. Conserva el límite API existente de 60 solicitudes/minuto por IP, a revisar con el volumen y reintentos acordados con el banco.
 
 El receptor verifica que el hash esté registrado para el convenio activo. Después consulta `GET {publication_url}/{hash}/estado`, usando un token con `EURE_SUPERVIELLE_CONSULT_SCOPE=boton-pago.consultar`. No usa importes ni estados enviados por quien invoca el callback. Comprueba convenio, alumno, UUID e importe contra el registro propio. El manual no describe una firma del callback; la verificación efectiva del pago se realiza mediante consulta autenticada al banco. La configuración de la URL y cualquier autenticación adicional quedan pendientes de respuesta de Supervielle.
 

@@ -22,6 +22,7 @@ class SupervielleWebhookLogTest extends TestCase
         mkdir($this->directory);
         config([
             'eureka.client_id' => 'isi', 'supervielle.enabled' => false,
+            'supervielle.test_mode' => true, 'supervielle.test_logins' => [],
             'supervielle.webhook_enabled' => true, 'supervielle.webhook_log_only' => true,
             'logging.channels.supervielle_webhook.path' => $this->directory.'/supervielle-webhook.log',
         ]);

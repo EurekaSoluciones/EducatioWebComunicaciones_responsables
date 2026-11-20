@@ -25,7 +25,7 @@ class FamilySupervielleController extends FamilySentController
 
     public function prepare(Request $request, FamilyPortal $portal): RedirectResponse
     {
-        abort_unless(SupervielleClient::enabled(), 403);
+        abort_unless(SupervielleClient::availableFor($request->user()), 403);
         $data = $request->validate([
             'alumno' => ['required', 'integer'],
             'importe' => ['required', 'string', 'regex:/\A\d{1,10}(?:[.,]\d{1,2})?\z/'],
@@ -141,7 +141,7 @@ class FamilySupervielleController extends FamilySentController
 
     private function authorizedAttempt(Request $request, string $id, FamilyPortal $portal): array
     {
-        abort_unless(SupervielleClient::enabled(), 403);
+        abort_unless(SupervielleClient::availableFor($request->user()), 403);
         $data = Cache::get($this->key($id));
         abort_unless(is_array($data), 410, 'La solicitud ya no está disponible. Volvé a la cuenta corriente.');
         abort_unless($data['user_id'] === (string) $request->user()->id, 403);
