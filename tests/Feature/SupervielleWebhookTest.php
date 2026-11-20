@@ -28,6 +28,7 @@ class SupervielleWebhookTest extends TestCase
         });
         config([
             'eureka.client_id' => 'isi', 'supervielle.webhook_enabled' => true,
+            'logging.channels.supervielle_webhook.driver' => 'null',
             'supervielle.token_url' => 'https://bank.example/token',
             'supervielle.publication_url' => 'https://bank.example/publication',
             'supervielle.username' => 'fake-user', 'supervielle.password' => 'fake-password',

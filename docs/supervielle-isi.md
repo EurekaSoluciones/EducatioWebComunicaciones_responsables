@@ -104,6 +104,8 @@ Se preparó una alternativa para recibir avisos reales del banco mientras se com
 Archivos de ejecución que deben llegar juntos al servidor mediante la publicación habitual:
 
 - `app/Http/Controllers/SupervielleWebhookController.php`
+- `app/Support/SupervielleWebhookLog.php`
+- `routes/api.php`
 - `app/Http/Controllers/FamilySupervielleController.php`
 - `config/supervielle.php`
 - `config/logging.php`
@@ -119,6 +121,7 @@ Después de publicar esos archivos y editar el `.env`, ejecutar desde la raíz d
 
 ```sh
 php artisan config:cache
+php artisan route:cache
 ```
 
 No ejecutar migraciones para este modo. El botón sigue gobernado por `EURE_SUPERVIELLE`; recibir avisos no lo habilita. Si se generan publicaciones desde el botón con este modo activo, tampoco se accede a las tablas nuevas. Se conserva la omisión de `mail` y `celular`.
@@ -129,18 +132,22 @@ URL a registrar con Supervielle, método GET:
 https://colegioisi.educatio.ar/api/tercerizados-cobranza/supervielle/notificacion-pago/{{hash}}
 ```
 
-Se comprueba el formato UUID del hash, pero **no su existencia en nuestra base ni la autenticidad del emisor o del pago**. Se registra como aviso no verificado. El receptor responde 200 solo después de escribir: `status=success`, mensaje de recepción para pruebas y `receipt_id` para correlacionar respuesta y log. Cada repetición se registra con un nuevo identificador de recepción. Si no puede escribir, responde 503. Hash inválido devuelve 400, receptor desactivado 503 y cliente distinto de ISI 404. HEAD no registra pagos. Se conserva la política sin caché y el límite API existente.
+Actualización del 20 de noviembre: en modo solo log **no se exige UUID**. Se acepta GET con cualquier identificador, como `/una`, o sin identificador. No se comprueba su existencia ni la autenticidad del emisor o del pago. El receptor responde 200 solo después de escribir: `status=success`, mensaje de recepción para pruebas y `receipt_id` para correlacionar respuesta y log. Cada repetición se registra con un nuevo identificador. Si no puede escribir, responde 503. Receptor desactivado devuelve 503, cliente distinto de ISI 404 y métodos distintos de GET (incluido HEAD) 405; estos rechazos también quedan registrados. El procesamiento contable conserva la validación UUID (400 si falta o es inválido). Se conserva la política sin caché y el límite API existente.
 
-Archivo diario: `storage/logs/supervielle-webhook-AAAA-MM-DD.log`, retención 60 días. El usuario de PHP debe poder escribir en `storage/logs`; conservar estos logs si las pruebas se extienden. Contenido: fecha con zona horaria, `receipt_id`, método GET, cliente ISI, hash, modo `log_only`, `payment_verified=false` y `payment_posted=false`. No se guardan tokens, cookies, query strings ni cuerpos arbitrarios. No se envían datos al banco ni se ejecutan procedimientos. En un servidor con shell POSIX, se pueden seguir las llamadas con:
+Archivo diario: `storage/logs/supervielle-webhook-AAAA-MM-DD.log`, retención 60 días y separador de 80 guiones entre entradas. El usuario de PHP debe poder escribir en `storage/logs`. Contenido: fecha con zona horaria, `receipt_id`, método, cliente, identificador recibido (sin cambiar mayúsculas), IP, modo, resultado y estado HTTP previsto, `payment_verified=false` y `payment_posted=false`. También se registran User-Agent, Content-Type, Content-Length, parámetros de consulta y cuerpo JSON/formulario filtrados. Campos de credenciales, tokens, emails, celulares y tarjetas se reemplazan por `[REDACTED]`; los demás encabezados (incluidos Authorization y Cookie), archivos y cuerpos sin estructura se omiten. Se limitan consulta/cuerpo a 16 KiB para su registro, strings a 2048 caracteres y estructuras a 5 niveles y 50 entradas por nivel. Los valores recibidos son datos no confiables: no acreditan identidad del banco. En modo solo log no se envían datos al banco ni se ejecutan procedimientos. En procesamiento completo la entrada registra la llegada, antes de la consulta/imputación (`pending_processing`, sin estado HTTP final); no acredita el resultado contable.
+
+Este log cubre las solicitudes que llegan al controlador, incluso sus rechazos. Los rechazos previos de Nginx/Apache, WAF, tamaño máximo, CORS o middleware/límite API deben buscarse en los logs de esas capas; no se desactivan esas protecciones. En un servidor con shell POSIX, se pueden seguir las llamadas con:
 
 ```sh
 tail -f storage/logs/supervielle-webhook-*.log
 ```
 
-Una prueba manual de recepción, después de publicar y habilitar este modo, puede usar un UUID ficticio conocido; **solo confirma conectividad y escritura del log**, no una entrega auténtica del banco:
+Validación local de la ampliación del diagnóstico: 16 pruebas y 171 comprobaciones aprobadas. Incluye smoke sin UUID/sin hash, registro de rechazos, filtrado de datos sensibles, límites de cuerpo, fallo de escritura y regresión del procesamiento contable con banco simulado y SQLite en memoria. No se llamó al banco ni al sitio de producción.
+
+Una prueba manual de recepción, después de publicar y habilitar este modo, puede usar `/una`; **solo confirma conectividad y escritura del log**, no una entrega auténtica del banco:
 
 ```sh
-curl -i 'https://colegioisi.educatio.ar/api/tercerizados-cobranza/supervielle/notificacion-pago/11111111-1111-4111-8111-111111111111'
+curl -i 'https://colegioisi.educatio.ar/api/tercerizados-cobranza/supervielle/notificacion-pago/una'
 ```
 
 El 200 confirma recepción, no cobro ni imputación. Los avisos reconocidos durante estas pruebas no se reprocesan automáticamente al cambiar de modo; el banco puede dejar de reintentarlos. Para imputarlos después habrá que consultar sus hashes/rendiciones y conciliarlos. No cambiar `EURE_SUPERVIELLE_WEBHOOK_LOG_ONLY` a `false` hasta instalar las tablas y conectar/verificar el stored procedure. La sección siguiente describe ese procesamiento futuro.

@@ -70,15 +70,66 @@ class SupervielleWebhookLogTest extends TestCase
         Http::assertNothingSent();
     }
 
-    public function test_disabled_wrong_client_invalid_hash_and_head_do_not_log(): void
+    public function test_smoke_without_uuid_or_hash_is_logged_and_acknowledged(): void
     {
-        $this->getJson($this->endpoint('invalid'))->assertStatus(400);
+        foreach (['una', 'SMOKE-Test', ''] as $hash) {
+            $response = $this->getJson($this->endpoint($hash))->assertOk()->assertJsonPath('status', 'success');
+            $log = file_get_contents(glob($this->directory.'/supervielle-webhook-*.log')[0]);
+            $this->assertStringContainsString($response->json('receipt_id'), $log);
+            $this->assertStringContainsString('"hash":'.json_encode($hash === '' ? null : $hash), $log);
+        }
+        Http::assertNothingSent();
+    }
+
+    public function test_disabled_wrong_client_invalid_processing_hash_and_methods_are_logged(): void
+    {
         $this->head($this->endpoint())->assertStatus(405);
+        $this->postJson($this->endpoint(), ['evento' => 'prueba'])->assertStatus(405);
         config(['supervielle.webhook_enabled' => false]);
         $this->getJson($this->endpoint())->assertStatus(503);
         config(['supervielle.webhook_enabled' => true, 'eureka.client_id' => 'ifesnqn']);
         $this->getJson($this->endpoint())->assertNotFound();
-        $this->assertSame([], glob($this->directory.'/*'));
+        config(['eureka.client_id' => 'isi', 'supervielle.webhook_log_only' => false]);
+        $this->getJson($this->endpoint('invalid'))->assertStatus(400);
+        $log = file_get_contents(glob($this->directory.'/supervielle-webhook-*.log')[0]);
+        $this->assertSame(5, substr_count($log, '"receipt_id"'));
+        foreach ([405, 503, 404, 400] as $status) {
+            $this->assertStringContainsString('"http_status":'.$status, $log);
+        }
+        $this->assertStringContainsString('"method":"HEAD"', $log);
+        $this->assertStringContainsString('"method":"POST"', $log);
+        $this->assertStringContainsString('"evento":"prueba"', $log);
+        Http::assertNothingSent();
+    }
+
+    public function test_request_details_are_logged_with_sensitive_fields_redacted(): void
+    {
+        $this->withHeaders([
+            'Authorization' => 'Bearer PRIVATE_AUTH', 'Cookie' => 'PRIVATE_COOKIE',
+            'X-Api-Key' => 'PRIVATE_HEADER', 'User-Agent' => 'Supervielle-smoke',
+        ])->postJson($this->endpoint('una').'?evento=pago&api_key=PRIVATE_QUERY', [
+            'hash' => 'bank-reference', 'importe' => 10,
+            'nested' => ['access_token' => 'PRIVATE_TOKEN', 'password' => 'PRIVATE_PASSWORD',
+                'mail' => 'PRIVATE_MAIL', 'card_number' => 'PRIVATE_CARD', 'estado' => 'pendiente'],
+        ])->assertStatus(405);
+        $log = file_get_contents(glob($this->directory.'/supervielle-webhook-*.log')[0]);
+        foreach (['Supervielle-smoke', 'bank-reference', 'pendiente', '"evento":"pago"', '[REDACTED]', '"ip":'] as $value) {
+            $this->assertStringContainsString($value, $log);
+        }
+        $this->assertStringNotContainsString('PRIVATE_', $log);
+        $this->assertStringContainsString(str_repeat('-', 80), $log);
+        Http::assertNothingSent();
+    }
+
+    public function test_unstructured_and_oversized_bodies_are_omitted(): void
+    {
+        foreach (['PRIVATE_RAW_BODY', str_repeat('PRIVATE_RAW_BODY', 2000)] as $body) {
+            $this->call('POST', $this->endpoint('una'), [], [], [], ['CONTENT_TYPE' => 'text/plain'], $body)->assertStatus(405);
+        }
+        $log = file_get_contents(glob($this->directory.'/supervielle-webhook-*.log')[0]);
+        $this->assertStringNotContainsString('PRIVATE_RAW_BODY', $log);
+        $this->assertStringContainsString('[omitted: unstructured body]', $log);
+        $this->assertStringContainsString('[omitted: body exceeds 16 KiB]', $log);
         Http::assertNothingSent();
     }
 
