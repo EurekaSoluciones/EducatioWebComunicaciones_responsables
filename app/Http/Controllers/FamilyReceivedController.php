@@ -98,8 +98,10 @@ class FamilyReceivedController extends Controller
         $query->orderByDesc('id');
         // Only the opening of the body travels, so a long message (or an embedded image) never
         // weighs on the list. SQL Server needs the cast; SUBSTR covers SQLite and MySQL.
+        // With non-SC SQL Server collations, SUBSTRING counts UTF-16 units. If the last
+        // unit is a high surrogate, omit it so PDO never receives half of an emoji.
         $opening = $query->getConnection()->getDriverName() === 'sqlsrv'
-            ? 'SUBSTRING(CAST(msg AS NVARCHAR(MAX)), 1, 1000)'
+            ? 'SUBSTRING(CAST(msg AS NVARCHAR(MAX)), 1, CASE WHEN UNICODE(SUBSTRING(CAST(msg AS NVARCHAR(MAX)), 1000, 1)) BETWEEN 55296 AND 56319 THEN 999 ELSE 1000 END)'
             : 'SUBSTR(msg, 1, 1000)';
         $messages = $query->select(['id', 'asunto', 'usuario_id', 'tipo_id', 'created_at'])
             ->selectRaw("$opening as msg_opening")
